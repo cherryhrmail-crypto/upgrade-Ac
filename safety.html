@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safety First – UpGrade English</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0D1B2A;--royal:#1B4FD8;--gold:#F5C518;--teal:#00B4D8;--rose:#FF6B9D;--green:#27AE60;--orange:#FF8C42;--purple:#7B2FBE;--red:#E74C3C}
+body{font-family:'Nunito',sans-serif;background:var(--navy);min-height:100vh;color:white;overflow-x:hidden}
+.back-btn{position:fixed;top:18px;left:18px;z-index:999;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);color:white;padding:8px 18px;border-radius:30px;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;text-decoration:none;transition:.2s;backdrop-filter:blur(8px)}
+.back-btn:hover{background:var(--gold);color:var(--navy)}
+header{text-align:center;padding:70px 20px 30px;background:linear-gradient(135deg,#2e0a0a,var(--red))}
+header .badge{display:inline-block;background:var(--gold);color:var(--navy);font-family:'Fredoka One',cursive;font-size:.9rem;padding:4px 16px;border-radius:20px;margin-bottom:12px}
+header h1{font-family:'Fredoka One',cursive;font-size:3rem;color:var(--gold);text-shadow:0 4px 15px rgba(0,0,0,.3)}
+header p{color:rgba(255,255,255,.75);font-size:1.1rem;margin-top:8px}
+
+/* Category tabs */
+.cat-tabs{display:flex;justify-content:center;gap:10px;padding:28px 20px 0;flex-wrap:wrap}
+.cat-tab{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.2);color:white;padding:10px 22px;border-radius:30px;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;transition:.25s}
+.cat-tab.active,.cat-tab:hover{background:var(--red);border-color:var(--red);color:white;transform:translateY(-2px)}
+
+/* Safety cards */
+.safety-section{padding:28px 24px;max-width:1100px;margin:0 auto}
+.section-title{font-family:'Fredoka One',cursive;font-size:1.5rem;text-align:center;margin-bottom:20px;color:var(--gold)}
+.safety-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.safety-card{border-radius:20px;padding:20px 16px;cursor:pointer;transition:.3s;border:2px solid;position:relative;overflow:hidden}
+.safety-card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.3)}
+.safety-card .card-emoji{font-size:3rem;display:block;margin-bottom:10px}
+.safety-card .card-en{font-family:'Fredoka One',cursive;font-size:1.1rem;color:white;line-height:1.3}
+.safety-card .card-cn{font-size:.8rem;color:rgba(255,255,255,.6);margin-top:5px}
+.safety-card .card-tip{background:rgba(0,0,0,.2);border-radius:8px;padding:7px 10px;margin-top:10px;font-size:.82rem;line-height:1.4;color:rgba(255,255,255,.8)}
+.card-do{background:rgba(39,174,96,.15);border-color:rgba(39,174,96,.4)}
+.card-danger{background:rgba(231,76,60,.15);border-color:rgba(231,76,60,.4)}
+.card-remember{background:rgba(27,79,216,.2);border-color:rgba(27,79,216,.45)}
+
+/* Trusted adults -->
+.adults-section{padding:0 24px 36px;max-width:1000px;margin:0 auto}
+.adults-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.adult-card{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:18px;padding:18px 14px;text-align:center;cursor:pointer;transition:.25s}
+.adult-card:hover{transform:translateY(-3px);border-color:var(--gold);background:rgba(255,255,255,.12)}
+.adult-emoji{font-size:2.8rem;display:block;margin-bottom:8px}
+.adult-en{font-family:'Fredoka One',cursive;font-size:1.05rem;color:var(--gold)}
+.adult-cn{font-size:.78rem;color:rgba(255,255,255,.55);margin-top:3px}
+.adult-phrase{font-size:.8rem;color:var(--teal);margin-top:6px;font-style:italic}
+
+/* Emergency phrases -->
+.phrases-section{padding:0 24px 36px;max-width:1000px;margin:0 auto}
+.phrase-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.phrase-card{background:rgba(231,76,60,.12);border:2px solid rgba(231,76,60,.4);border-radius:18px;padding:18px;cursor:pointer;transition:.25s;display:flex;align-items:center;gap:14px}
+.phrase-card:hover{background:rgba(231,76,60,.25);transform:translateY(-2px)}
+.phrase-card .p-emoji{font-size:2.4rem;flex-shrink:0}
+.phrase-card .p-en{font-family:'Fredoka One',cursive;font-size:1.1rem;color:var(--gold)}
+.phrase-card .p-cn{font-size:.8rem;color:rgba(255,255,255,.55);margin-top:3px}
+
+/* Quiz game */
+.game-section{padding:0 24px 60px;max-width:900px;margin:0 auto}
+.game-box{background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.12);border-radius:24px;padding:30px}
+.game-box h2{font-family:'Fredoka One',cursive;font-size:1.6rem;color:var(--orange);margin-bottom:8px;text-align:center}
+.game-box p{color:rgba(255,255,255,.65);text-align:center;margin-bottom:22px}
+.q-box{background:rgba(255,255,255,.08);border-radius:16px;padding:22px;text-align:center;margin-bottom:18px}
+.q-emoji{font-size:3.5rem;display:block;margin-bottom:10px}
+.q-text{font-family:'Fredoka One',cursive;font-size:1.2rem;color:white}
+.q-hint{font-size:.85rem;color:rgba(255,255,255,.5);margin-top:6px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.opt{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.2);color:white;padding:14px 10px;border-radius:14px;font-family:'Fredoka One',cursive;font-size:.95rem;cursor:pointer;transition:.2s;line-height:1.3}
+.opt:hover{background:rgba(255,255,255,.18);transform:scale(1.02)}
+.opt.correct{background:rgba(39,174,96,.4);border-color:var(--green)}
+.opt.wrong{background:rgba(231,76,60,.35);border-color:var(--red)}
+.fb3{font-family:'Fredoka One',cursive;font-size:1.1rem;min-height:32px;color:var(--gold);text-align:center;margin-bottom:10px}
+.srow{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.08);border-radius:12px;padding:10px 18px}
+.srow span{font-family:'Fredoka One',cursive;font-size:1rem;color:var(--gold)}
+.nxt3{background:var(--royal);border:none;color:white;padding:10px 26px;border-radius:20px;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;transition:.2s}
+.nxt3:hover{background:var(--teal)}
+</style>
+</head>
+<body>
+
+<a class="back-btn" href="index.html">← Home</a>
+
+<header>
+  <div class="badge">UpGrade English</div>
+  <h1>🛡️ Safety First</h1>
+  <p>Stay safe, be smart, and know what to do!</p>
+</header>
+
+<!-- Category tabs -->
+<div class="cat-tabs">
+  <button class="cat-tab active" id="catRoad" onclick="showCat('road')">🚦 Road Safety</button>
+  <button class="cat-tab" id="catFire" onclick="showCat('fire')">🔥 Fire Safety</button>
+  <button class="cat-tab" id="catWater" onclick="showCat('water')">💧 Water Safety</button>
+  <button class="cat-tab" id="catStranger" onclick="showCat('stranger')">👤 Stranger Safety</button>
+</div>
+
+<!-- Safety Cards -->
+<div class="safety-section">
+  <div class="section-title" id="catTitle">🚦 Road Safety</div>
+  <div class="safety-grid" id="safetyGrid"></div>
+</div>
+
+<!-- Trusted Adults -->
+<div class="adults-section">
+  <div class="section-title" style="color:var(--teal)">🤗 Who Can Help You?</div>
+  <div class="adults-grid" id="adultsGrid"></div>
+</div>
+
+<!-- Emergency Phrases -->
+<div class="phrases-section">
+  <div class="section-title" style="color:var(--red)">🆘 Important Phrases</div>
+  <div class="phrase-cards" id="phraseCards"></div>
+</div>
+
+<!-- Quiz -->
+<div class="game-section">
+  <div class="game-box">
+    <h2>🎮 Safety Quiz</h2>
+    <p>What is the right thing to do? Choose wisely!</p>
+    <div class="q-box">
+      <span class="q-emoji" id="qEmoji">🤔</span>
+      <div class="q-text" id="qText">Loading…</div>
+      <div class="q-hint" id="qHint"></div>
+    </div>
+    <div class="opts" id="optsDiv"></div>
+    <div class="fb3" id="fb3"></div>
+    <div class="srow">
+      <span>⭐ Score: <span id="sc3">0</span></span>
+      <button class="nxt3" id="nxt3" onclick="nextQ3()" style="display:none">Next →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Safety Cards Data ──────────────────────────────────
+const safetyData = {
+  road: {
+    title: '🚦 Road Safety',
+    cards: [
+      {emoji:'🚦',en:'Always use a zebra crossing.',cn:'过马路要走斑马线。',type:'do',tip:'"Look left, look right, look left again!"'},
+      {emoji:'👀',en:'Look both ways before crossing.',cn:'过马路前两侧都要看。',type:'do',tip:'"Stop, look and listen!"'},
+      {emoji:'🚶',en:'Walk on the pavement, not the road.',cn:'走人行道，不走马路。',type:'do',tip:'"Stay safe on the pavement!"'},
+      {emoji:'🔴',en:'Stop at a red traffic light.',cn:'红灯停。',type:'do',tip:'"Red means stop!"'},
+      {emoji:'🟢',en:'Cross when the light is green.',cn:'绿灯行。',type:'do',tip:'"Green means go!"'},
+      {emoji:'🚳',en:"Don't run into the road.",cn:'不要跑到马路上。',type:'danger',tip:'"Never run out between cars!"'},
+    ]
+  },
+  fire: {
+    title: '🔥 Fire Safety',
+    cards: [
+      {emoji:'🚨',en:'If there is a fire, shout "FIRE!"',cn:'发现火灾大声喊"着火了！"',type:'do',tip:'"Shout loudly so everyone hears!"'},
+      {emoji:'🚪',en:'Leave the building quickly and calmly.',cn:'迅速冷静地离开建筑物。',type:'do',tip:'"Walk fast, do not run!"'},
+      {emoji:'⬇️',en:'Stay low if there is smoke.',cn:'有烟雾时保持低姿势。',type:'do',tip:'"Smoke goes up, clean air is low!"'},
+      {emoji:'🔥',en:"Don't touch matches or lighters.",cn:'不碰火柴或打火机。',type:'danger',tip:'"Fire is dangerous. Tell an adult!"'},
+      {emoji:'📍',en:'Know your fire exit.',cn:'记住安全出口的位置。',type:'remember',tip:'"Find the exit sign!"'},
+      {emoji:'📞',en:'Call 999 (UK emergency).',cn:'拨打999（英国急救电话）。',type:'remember',tip:'"999 is for fire, police and ambulance!"'},
+    ]
+  },
+  water: {
+    title: '💧 Water Safety',
+    cards: [
+      {emoji:'🏊',en:'Always swim with an adult near.',cn:'游泳时要有大人在旁边。',type:'do',tip:'"Never swim alone!"'},
+      {emoji:'🦺',en:'Wear a life jacket on a boat.',cn:'在船上穿救生衣。',type:'do',tip:'"Life jackets save lives!"'},
+      {emoji:'🚫',en:"Don't swim in rivers or lakes alone.",cn:'不要独自在河里或湖里游泳。',type:'danger',tip:'"Rivers can be very dangerous!"'},
+      {emoji:'⚠️',en:"Don't run near a swimming pool.",cn:'不要在游泳池边奔跑。',type:'danger',tip:'"Wet floors are very slippery!"'},
+      {emoji:'🙋',en:'Shout for help if in danger.',cn:'遇到危险大声呼救。',type:'do',tip:'"Shout: Help! Help!"'},
+      {emoji:'🌊',en:"Don't go near deep water alone.",cn:'不要单独靠近深水区。',type:'danger',tip:'"Deep water is not for playing!"'},
+    ]
+  },
+  stranger: {
+    title: '👤 Stranger Safety',
+    cards: [
+      {emoji:'🚶',en:"Never go anywhere with a stranger.",cn:'绝不跟陌生人去任何地方。',type:'danger',tip:'"A stranger is someone you do not know!"'},
+      {emoji:'📞',en:'Know your parent\'s phone number.',cn:'记住父母的电话号码。',type:'remember',tip:'"Memorise it by heart!"'},
+      {emoji:'🏃',en:"If scared, run to a safe place.",cn:'害怕时跑向安全的地方。',type:'do',tip:'"Run to a shop, teacher or police!"'},
+      {emoji:'🗣️',en:"Shout "NO! I don't know you!"",cn:'大声喊"不！我不认识你！"',type:'do',tip:'"Make a lot of noise!"'},
+      {emoji:'👮',en:'Find a police officer or a teacher.',cn:'找警察或老师寻求帮助。',type:'do',tip:'"They are here to help you!"'},
+      {emoji:'🚫',en:"Don't accept gifts from strangers.",cn:'不接受陌生人给的礼物。',type:'danger',tip:'"Say "No, thank you" and walk away!"'},
+    ]
+  }
+};
+
+const trustedAdults = [
+  {emoji:'👩‍🏫',en:'Teacher',cn:'老师',phrase:'"Please help me!"'},
+  {emoji:'👮',en:'Police Officer',cn:'警察',phrase:'"I need help, please!"'},
+  {emoji:'🧑‍⚕️',en:'Doctor / Nurse',cn:'医生/护士',phrase:'"I am hurt. Help!"'},
+  {emoji:'🧑‍🚒',en:'Firefighter',cn:'消防员',phrase:'"There is a fire!"'},
+  {emoji:'👨',en:'Parent / Guardian',cn:'父母/监护人',phrase:'"Mum! Dad! Help me!"'},
+  {emoji:'🛒',en:'Shop Assistant',cn:'商店员工',phrase:'"I am lost. Can you help?"'},
+];
+
+const emergencyPhrases = [
+  {emoji:'🆘',en:'Help! Help me, please!',cn:'救命！请帮帮我！'},
+  {emoji:'🚒',en:'Call 999!',cn:'拨打999！'},
+  {emoji:'😨',en:"I am scared. I need an adult.",cn:'我很害怕，我需要大人。'},
+  {emoji:'🔥',en:'Fire! Fire! Get out!',cn:'着火了！快出去！'},
+  {emoji:'😟',en:"I am lost. My name is _____.",cn:'我迷路了，我叫_____。'},
+  {emoji:'🤕',en:"I am hurt. Please get help.",cn:'我受伤了，请帮我叫人。'},
+];
+
+const quizQ = [
+  {emoji:'🚦',q:'The traffic light is red. What should you do?',hint:'红灯时你应该怎么做？',correct:'Stop and wait.',opts:['Stop and wait.','Run across quickly.','Look at your phone.','Cross anyway.']},
+  {emoji:'🔥',q:'You smell smoke in school. What do you do?',hint:'在学校闻到烟味，你怎么做？',correct:"Shout 'Fire!' and leave quickly.",opts:["Shout 'Fire!' and leave quickly.",'Go back to sleep.','Look for the fire.','Stay in the room.']},
+  {emoji:'🏊',q:'You want to swim in a river. What should you do first?',hint:'想在河里游泳，你首先要做什么？',correct:'Ask an adult for permission.',opts:['Ask an adult for permission.','Jump straight in.','Go alone.','Run to the river.']},
+  {emoji:'👤',q:'A stranger offers you sweets. What do you do?',hint:'陌生人给你糖，你怎么做？',correct:"Say no and walk away.",opts:["Say no and walk away.",'Take all the sweets.','Follow them.','Trust them.']},
+  {emoji:'📞',q:'There is an emergency. What number do you call in the UK?',hint:'英国的紧急求助电话是什么？',correct:'999',opts:['999','123','000','911']},
+  {emoji:'⬇️',q:'There is smoke in the corridor. You should:',hint:'走廊有烟，你应该：',correct:'Stay low and crawl to the exit.',opts:['Stay low and crawl to the exit.','Stand up and run.','Open all windows.','Go back to class.']},
+  {emoji:'🚶',q:'You feel lost and cannot find your parents. What do you do?',hint:'你找不到父母，迷路了，你怎么做？',correct:'Find a teacher or police officer.',opts:['Find a teacher or police officer.','Go home alone.','Talk to a stranger.','Cry and do nothing.']},
+];
+
+// ── Speech ────────────────────────────────────────────
+function speak(text){
+  if(!window.speechSynthesis)return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-GB';u.rate=0.8;u.pitch=1.05;
+  speechSynthesis.speak(u);
+}
+
+// ── Category Tabs ─────────────────────────────────────
+const catKeys=['road','fire','water','stranger'];
+const catIds=['catRoad','catFire','catWater','catStranger'];
+function showCat(key){
+  catIds.forEach((id,i)=>{
+    document.getElementById(id).classList.toggle('active', catKeys[i]===key);
+  });
+  renderSafety(key);
+}
+function renderSafety(key){
+  const d=safetyData[key];
+  document.getElementById('catTitle').textContent=d.title;
+  document.getElementById('safetyGrid').innerHTML=d.cards.map(c=>`
+    <div class="safety-card card-${c.type}" onclick="speak('${c.en.replace(/'/g,"\\'")}')">
+      <span class="card-emoji">${c.emoji}</span>
+      <div class="card-en">${c.en}</div>
+      <div class="card-cn">${c.cn}</div>
+      <div class="card-tip">💡 ${c.tip}</div>
+    </div>
+  `).join('');
+}
+
+// ── Adults & Phrases ──────────────────────────────────
+function renderAdults(){
+  document.getElementById('adultsGrid').innerHTML=trustedAdults.map(a=>`
+    <div class="adult-card" onclick="speak('${a.en}. ${a.phrase}')">
+      <span class="adult-emoji">${a.emoji}</span>
+      <div class="adult-en">${a.en}</div>
+      <div class="adult-cn">${a.cn}</div>
+      <div class="adult-phrase">${a.phrase}</div>
+    </div>
+  `).join('');
+}
+function renderPhrases(){
+  document.getElementById('phraseCards').innerHTML=emergencyPhrases.map(p=>`
+    <div class="phrase-card" onclick="speak('${p.en.replace(/'/g,"\\'")}')">
+      <div class="p-emoji">${p.emoji}</div>
+      <div>
+        <div class="p-en">${p.en}</div>
+        <div class="p-cn">${p.cn}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── Quiz ──────────────────────────────────────────────
+let qi=0,sc=0;
+function loadQ(){
+  const q=quizQ[qi%quizQ.length];
+  document.getElementById('qEmoji').textContent=q.emoji;
+  document.getElementById('qText').textContent=q.q;
+  document.getElementById('qHint').textContent=q.hint;
+  document.getElementById('fb3').textContent='';
+  document.getElementById('nxt3').style.display='none';
+  const opts=q.opts.sort(()=>Math.random()-.5);
+  document.getElementById('optsDiv').innerHTML=opts.map(o=>`
+    <button class="opt" onclick="checkQ(this,'${o.replace(/'/g,"\\'")}','${q.correct.replace(/'/g,"\\'")}')">
+      ${o}
+    </button>`).join('');
+}
+function checkQ(btn,chosen,correct){
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=null);
+  if(chosen===correct){
+    btn.classList.add('correct');sc++;
+    document.getElementById('sc3').textContent=sc;
+    document.getElementById('fb3').textContent='⭐ Brilliant! Stay safe!';
+    speak('Brilliant! Stay safe!');
+  }else{
+    btn.classList.add('wrong');
+    document.querySelectorAll('.opt').forEach(b=>{if(b.textContent.trim()===correct)b.classList.add('correct');});
+    document.getElementById('fb3').textContent='💪 Good try! The answer is: '+correct;
+    speak('Good try! The answer is: '+correct);
+  }
+  qi++;document.getElementById('nxt3').style.display='inline-block';
+}
+function nextQ3(){loadQ();}
+
+renderSafety('road');renderAdults();renderPhrases();loadQ();
+</script>
+</body>
+</html>

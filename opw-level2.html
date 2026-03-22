@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 2 - 辅音组合 | Oxford Phonics World</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-info h1 {
+            font-size: 2.2em;
+            color: #44A08D;
+            margin-bottom: 8px;
+        }
+        .header-info p {
+            color: #666;
+            font-size: 1.05em;
+        }
+        .header-badge {
+            background: linear-gradient(135deg, #4ECDC4, #44A08D);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .header-badge .level {
+            font-size: 1.5em;
+            font-weight: bold;
+            display: block;
+        }
+        .header-badge .desc {
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            gap: 10px;
+        }
+        .tab {
+            padding: 12px 25px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            color: #666;
+            border-radius: 8px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .tab.active {
+            background: linear-gradient(135deg, #4ECDC4, #44A08D);
+            color: white;
+            box-shadow: 0 4px 12px rgba(78, 205, 196, 0.4);
+        }
+        .tab:hover:not(.active) {
+            background: #f0f0f0;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            color: #2c3e50;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #4ECDC4;
+        }
+        .blend-section {
+            margin-bottom: 30px;
+        }
+        .blend-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #44A08D;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .blend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+        }
+        .blend-card {
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid #4ECDC4;
+        }
+        .blend-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.3);
+        }
+        .blend-card .blend {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #44A08D;
+            margin-bottom: 8px;
+        }
+        .blend-card .sound {
+            font-size: 1.1em;
+            color: #666;
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 4px 12px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        .blend-card .example {
+            color: #333;
+            font-size: 0.9em;
+        }
+        .word-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+        }
+        .word-card {
+            background: white;
+            border: 2px solid #4ECDC4;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .word-card:hover {
+            background: #4ECDC4;
+            color: white;
+            transform: scale(1.05);
+        }
+        .word-card .word {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .activity-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #4ECDC4;
+        }
+        .activity-card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .activity-card p {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .tips-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 5px solid #4CAF50;
+        }
+        .tips-box h3 {
+            color: #2E7D32;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .tips-list {
+            list-style: none;
+        }
+        .tips-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+            line-height: 1.6;
+        }
+        .tips-list li::before {
+            content: '💡';
+            position: absolute;
+            left: 0;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-info">
+                <h1>🔤 Level 2 - 辅音组合</h1>
+                <p>学习辅音组合发音，掌握连续拼读技巧</p>
+            </div>
+            <div class="header-badge">
+                <span class="level">Level 2</span>
+                <span class="desc">5.5岁 · 第2学期</span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('blends')">🔤 辅音组合</button>
+            <button class="tab" onclick="showTab('activities')">🎮 教学活动</button>
+            <button class="tab" onclick="showTab('words')">📖 词汇表</button>
+            <button class="tab" onclick="showTab('tips')">💡 教学提示</button>
+        </div>
+
+        <div id="blends" class="tab-content active">
+            <div class="card">
+                <h2>辅音组合分类学习</h2>
+                
+                <div class="blend-section">
+                    <div class="blend-title">📍 L-Blends（L组合）</div>
+                    <div class="blend-grid">
+                        <div class="blend-card" onclick="playSound('bl')">
+                            <div class="blend">bl</div>
+                            <div class="sound">/bl/</div>
+                            <div class="example">blue, black, block</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('cl')">
+                            <div class="blend">cl</div>
+                            <div class="sound">/kl/</div>
+                            <div class="example">clap, clock, clown</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('fl')">
+                            <div class="blend">fl</div>
+                            <div class="sound">/fl/</div>
+                            <div class="example">flag, fly, flower</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('gl')">
+                            <div class="blend">gl</div>
+                            <div class="sound">/gl/</div>
+                            <div class="example">glue, glass, globe</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('pl')">
+                            <div class="blend">pl</div>
+                            <div class="sound">/pl/</div>
+                            <div class="example">play, plane, plant</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('sl')">
+                            <div class="blend">sl</div>
+                            <div class="sound">/sl/</div>
+                            <div class="example">sled, slow, sleep</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blend-section">
+                    <div class="blend-title">📍 R-Blends（R组合）</div>
+                    <div class="blend-grid">
+                        <div class="blend-card" onclick="playSound('br')">
+                            <div class="blend">br</div>
+                            <div class="sound">/br/</div>
+                            <div class="example">brown, bread, broom</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('cr')">
+                            <div class="blend">cr</div>
+                            <div class="sound">/kr/</div>
+                            <div class="example">crow, crab, cry</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('dr')">
+                            <div class="blend">dr</div>
+                            <div class="sound">/dr/</div>
+                            <div class="example">draw, dress, drum</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('fr')">
+                            <div class="blend">fr</div>
+                            <div class="sound">/fr/</div>
+                            <div class="example">frog, fruit, from</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('gr')">
+                            <div class="blend">gr</div>
+                            <div class="sound">/gr/</div>
+                            <div class="example">green, grass, grape</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('pr')">
+                            <div class="blend">pr</div>
+                            <div class="sound">/pr/</div>
+                            <div class="example">prince, present, princess</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('tr')">
+                            <div class="blend">tr</div>
+                            <div class="sound">/tr/</div>
+                            <div class="example">tree, train, truck</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blend-section">
+                    <div class="blend-title">📍 S-Blends（S组合）</div>
+                    <div class="blend-grid">
+                        <div class="blend-card" onclick="playSound('sc')">
+                            <div class="blend">sc</div>
+                            <div class="sound">/sk/</div>
+                            <div class="example">scare, scar, scarf</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('sk')">
+                            <div class="blend">sk</div>
+                            <div class="sound">/sk/</div>
+                            <div class="example">skirt, skip, skate</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('sm')">
+                            <div class="blend">sm</div>
+                            <div class="sound">/sm/</div>
+                            <div class="example">smile, small, smell</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('sn')">
+                            <div class="blend">sn</div>
+                            <div class="sound">/sn/</div>
+                            <div class="example">snake, snow, snack</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('sp')">
+                            <div class="blend">sp</div>
+                            <div class="sound">/sp/</div>
+                            <div class="example">spider, spoon, spot</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('st')">
+                            <div class="blend">st</div>
+                            <div class="sound">/st/</div>
+                            <div class="example">star, stop, stone</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('sw')">
+                            <div class="blend">sw</div>
+                            <div class="sound">/sw/</div>
+                            <div class="example">sweet, swim, swing</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blend-section">
+                    <div class="blend-title">📍 Ending Blends（词尾组合）</div>
+                    <div class="blend-grid">
+                        <div class="blend-card" onclick="playSound('ct')">
+                            <div class="blend">-ct</div>
+                            <div class="sound">/kt/</div>
+                            <div class="example">cat, act, fact</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('ft')">
+                            <div class="blend">-ft</div>
+                            <div class="sound">/ft/</div>
+                            <div class="example">left, soft, gift</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('ld')">
+                            <div class="blend">-ld</div>
+                            <div class="sound">/ld/</div>
+                            <div class="example">cold, hold, wild</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('lt')">
+                            <div class="blend">-lt</div>
+                            <div class="sound">/lt/</div>
+                            <div class="example">belt, salt, melt</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('nd')">
+                            <div class="blend">-nd</div>
+                            <div class="sound">/nd/</div>
+                            <div class="example">hand, sand, land</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('nk')">
+                            <div class="blend">-nk</div>
+                            <div class="sound">/ŋk/</div>
+                            <div class="example">pink, sink, thank</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('nt')">
+                            <div class="blend">-nt</div>
+                            <div class="sound">/nt/</div>
+                            <div class="example">ant, tent, want</div>
+                        </div>
+                        <div class="blend-card" onclick="playSound('sk')">
+                            <div class="blend">-sk</div>
+                            <div class="sound">/sk/</div>
+                            <div class="example">desk, mask, risk</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="activities" class="tab-content">
+            <div class="card">
+                <h2>教学活动设计</h2>
+                <div class="activity-grid">
+                    <div class="activity-card">
+                        <h3>🎵 组合歌谣</h3>
+                        <p>编写辅音组合歌谣，配合节奏朗诵。例如：bl-bl-blue, cl-cl-clap, fl-fl-flag，帮助学生记忆组合发音。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🔊 连续拼读练习</h3>
+                        <p>教师示范辅音组合与元音的连续拼读，如 bl-a → bla，然后加入词尾：bla-ck → black。让学生模仿练习。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🃏 组合闪卡游戏</h3>
+                        <p>准备辅音组合闪卡，快速展示。学生大声读出组合发音，并说出一个包含该组合的单词。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🔍 单词分类挑战</h3>
+                        <p>将含有不同辅音组合的单词打乱，学生需要将它们分类到正确的组合类别中（如 bl、cl、fl 等）。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🎨 组合绘画创作</h3>
+                        <p>让学生用辅音组合绘制创意图片，如用 bl 画蓝色气球，用 tr 画火车，加深视觉记忆。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🎤 拼读接龙</h3>
+                        <p>学生轮流说出含有指定辅音组合的单词，不能重复，接不上的学生表演一个小节目。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="words" class="tab-content">
+            <div class="card">
+                <h2>Level 2 核心词汇表（约150词）</h2>
+                <div class="word-list" id="wordList"></div>
+            </div>
+        </div>
+
+        <div id="tips" class="tab-content">
+            <div class="card">
+                <h2>教学提示</h2>
+                <div class="tips-box">
+                    <h3>💡 辅音组合教学成功要点</h3>
+                    <ul class="tips-list">
+                        <li><strong>强调连续性：</strong>辅音组合要一气呵成，中间不能停顿，如 bl 不是一个音接一个音，而是一个连续的组合音。</li>
+                        <li><strong>多听多练：</strong>辅音组合需要大量听觉输入和口语练习，可以播放录音让学生跟读。</li>
+                        <li><strong>对比记忆：</strong>将相似的组合放在一起对比，如 br/dr、cl/gl，帮助学生区分。</li>
+                        <li><strong>情景教学：</strong>在真实语境中使用含有辅音组合的单词，加深理解。</li>
+                        <li><strong>渐进难度：</strong>先学简单的组合（如 bl、cl），再学较难的组合（如 scr、str）。</li>
+                        <li><strong>及时反馈：</strong>纠正学生的发音，特别是容易混淆的组合，如 tr/dr、bl/br。</li>
+                        <li><strong>趣味巩固：</strong>通过游戏、歌谣等方式巩固学习效果，避免枯燥。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="opw-overview.html" class="back-link">🏠 返回概览</a>
+        </div>
+    </div>
+
+    <script>
+        const words = [
+            'blue', 'black', 'block', 'blond', 'blink', 'bloom',
+            'clap', 'clock', 'clown', 'cloud', 'climb', 'class',
+            'flag', 'fly', 'flower', 'flame', 'float', 'floor',
+            'glue', 'glass', 'globe', 'glove', 'glad', 'glare',
+            'play', 'plane', 'plant', 'plate', 'plum', 'place',
+            'sled', 'slow', 'sleep', 'slip', 'slide', 'slate',
+            'brown', 'bread', 'broom', 'break', 'brick', 'brush',
+            'crow', 'crab', 'cry', 'crack', 'cream', 'crown',
+            'draw', 'dress', 'drum', 'dream', 'drink', 'drive',
+            'frog', 'fruit', 'from', 'front', 'fry', 'fresh',
+            'green', 'grass', 'grape', 'grow', 'grab', 'grand',
+            'prince', 'present', 'princess', 'pride', 'price', 'print',
+            'tree', 'train', 'truck', 'trick', 'trip', 'trust',
+            'scare', 'scarf', 'scale', 'scar', 'scout', 'score',
+            'skirt', 'skip', 'skate', 'skin', 'sky', 'skill',
+            'smile', 'small', 'smell', 'smart', 'smooth', 'smoke',
+            'snake', 'snow', 'snack', 'sneeze', 'snail', 'snap',
+            'spider', 'spoon', 'spot', 'spin', 'space', 'speed',
+            'star', 'stop', 'stone', 'stand', 'start', 'story',
+            'sweet', 'swim', 'swing', 'sweater', 'swan', 'swim',
+            'cat', 'act', 'fact', 'contact', 'compact', 'exact',
+            'left', 'soft', 'gift', 'lift', 'shift', 'drift',
+            'cold', 'hold', 'wild', 'fold', 'mold', 'gold',
+            'belt', 'salt', 'melt', 'felt', 'pelt', 'kilt',
+            'hand', 'sand', 'land', 'band', 'brand', 'stand',
+            'pink', 'sink', 'thank', 'bank', 'tank', 'rank',
+            'ant', 'tent', 'want', 'went', 'sent', 'spent',
+            'desk', 'mask', 'risk', 'task', 'disk', 'flask'
+        ];
+
+        // 生成词汇表
+        function generateWordList() {
+            const container = document.getElementById('wordList');
+            container.innerHTML = words.map(word => `
+                <div class="word-card" onclick="playSound('${word}')">
+                    <div class="word">${word}</div>
+                </div>
+            `).join('');
+        }
+
+        // 切换标签页
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // 播放发音
+        function playSound(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.8;
+                speechSynthesis.speak(utterance);
+            } else {
+                alert(`发音: ${text}`);
+            }
+        }
+
+        // 初始化
+        generateWordList();
+    </script>
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UpGrade English</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy: #0D1B2A;
+  --royal: #1B4FD8;
+  --gold:  #F5C518;
+  --teal:  #00B4D8;
+  --rose:  #FF6B9D;
+  --green: #27AE60;
+  --orange:#FF8C42;
+  --purple:#7B2FBE;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--navy);
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: white;
+}
+
+/* ===== ANIMATED BG GRID ===== */
+.bg-grid {
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridDrift 20s linear infinite;
+}
+@keyframes gridDrift { from{background-position:0 0;} to{background-position:60px 60px;} }
+
+/* Floating orbs */
+.orb {
+  position: fixed; border-radius: 50%;
+  filter: blur(80px); opacity: .18; z-index: 0;
+  animation: orbFloat ease-in-out infinite;
+}
+@keyframes orbFloat {
+  0%,100%{ transform: translateY(0) scale(1); }
+  50%    { transform: translateY(-40px) scale(1.1); }
+}
+
+/* ===== HEADER ===== */
+header {
+  position: relative; z-index: 10;
+  text-align: center;
+  padding: 56px 20px 24px;
+}
+
+.logo-wrap {
+  display: inline-flex; flex-direction: column;
+  align-items: center; gap: 6px;
+}
+
+/* Union Jack ribbon */
+.uj-ribbon {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,.06);
+  border: 1.5px solid rgba(255,255,255,.12);
+  border-radius: 30px;
+  padding: 5px 18px 5px 10px;
+  margin-bottom: 10px;
+}
+.uj-flag { font-size: 1.4rem; }
+.uj-text { font-size: .8rem; color: rgba(255,255,255,.5); letter-spacing: 1px; font-weight: 700; }
+
+.brand-name {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(3rem, 12vw, 6rem);
+  letter-spacing: -2px;
+  line-height: 1;
+  background: linear-gradient(135deg, #F5C518 0%, #FF8C42 40%, #FF6B9D 70%, #7B2FBE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 4px 24px rgba(245,197,24,.3));
+}
+
+.brand-tagline {
+  font-size: clamp(.85rem, 2.5vw, 1.1rem);
+  color: rgba(255,255,255,.55);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ===== NAV PILLS ===== */
+.nav-pills {
+  display: flex; justify-content: center; gap: 10px;
+  flex-wrap: wrap; margin: 20px auto;
+  padding: 0 16px; position: relative; z-index: 10;
+}
+.nav-pill {
+  background: rgba(255,255,255,.07);
+  border: 1.5px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.75);
+  font-family: 'Nunito', sans-serif; font-weight: 700;
+  font-size: .9rem; padding: 7px 18px; border-radius: 30px;
+  cursor: pointer; transition: all .2s; text-decoration: none;
+}
+.nav-pill:hover, .nav-pill.active {
+  background: var(--gold); color: var(--navy);
+  border-color: var(--gold); transform: scale(1.06);
+}
+
+/* ===== SECTION TITLES ===== */
+.section-label {
+  position: relative; z-index: 10;
+  text-align: center;
+  font-size: .78rem; font-weight: 900;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  margin: 32px 0 14px;
+}
+.section-label span {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  padding: 5px 20px; border-radius: 20px;
+}
+
+/* ===== CARD GRID ===== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 16px;
+  position: relative; z-index: 10;
+  max-width: 960px; margin: 0 auto;
+  padding: 0 20px;
+}
+
+.module-card {
+  border-radius: 22px;
+  padding: 24px 14px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .25s, box-shadow .25s;
+  text-decoration: none;
+  display: block;
+  position: relative; overflow: hidden;
+  border: 2px solid rgba(255,255,255,.08);
+}
+.module-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background .2s;
+  border-radius: 20px;
+}
+.module-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 20px 50px rgba(0,0,0,.5);
+}
+.module-card:hover::after { background: rgba(255,255,255,.06); }
+
+/* Card colours */
+.card-greet   { background: linear-gradient(135deg,#1B4FD8,#00B4D8); }
+.card-team    { background: linear-gradient(135deg,#7B2FBE,#FF6B9D); }
+.card-rules   { background: linear-gradient(135deg,#27AE60,#00B4D8); }
+.card-safety  { background: linear-gradient(135deg,#E74C3C,#FF8C42); }
+.card-abc     { background: linear-gradient(135deg,#FF6B9D,#FF8C42); }
+.card-numbers { background: linear-gradient(135deg,#1B4FD8,#7B2FBE); }
+.card-colors  { background: linear-gradient(135deg,#7B2FBE,#00B4D8); }
+.card-animals { background: linear-gradient(135deg,#27AE60,#F5C518); }
+.card-body    { background: linear-gradient(135deg,#00B4D8,#1B4FD8); }
+.card-food    { background: linear-gradient(135deg,#E74C3C,#FF6B9D); }
+.card-games   { background: linear-gradient(135deg,#F5C518,#FF8C42); }
+
+.card-icon   { font-size: 52px; display: block; margin-bottom: 10px; filter: drop-shadow(0 4px 8px rgba(0,0,0,.3)); animation: iconBounce 2.5s ease-in-out infinite; }
+.module-card:nth-child(2)  .card-icon { animation-delay: .2s; }
+.module-card:nth-child(3)  .card-icon { animation-delay: .4s; }
+.module-card:nth-child(4)  .card-icon { animation-delay: .6s; }
+.module-card:nth-child(5)  .card-icon { animation-delay: .8s; }
+.module-card:nth-child(6)  .card-icon { animation-delay:1.0s; }
+.module-card:nth-child(7)  .card-icon { animation-delay:1.2s; }
+.module-card:nth-child(8)  .card-icon { animation-delay:1.4s; }
+.module-card:nth-child(9)  .card-icon { animation-delay:1.6s; }
+.module-card:nth-child(10) .card-icon { animation-delay:1.8s; }
+@keyframes iconBounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+
+.card-en { font-family:'Fredoka One',cursive; font-size:1.25rem; color:white; display:block; text-shadow: 0 2px 6px rgba(0,0,0,.3); }
+.card-cn { font-size:.78rem; color:rgba(255,255,255,.65); margin-top:3px; }
+.card-tag {
+  display: inline-block; margin-top: 9px;
+  background: rgba(0,0,0,.25); color: rgba(255,255,255,.85);
+  font-size: .7rem; font-weight: 700;
+  padding: 3px 12px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.2);
+}
+
+/* ===== NEW BADGE ===== */
+.new-badge {
+  position: absolute; top: 10px; right: 10px;
+  background: var(--gold); color: var(--navy);
+  font-size: .65rem; font-weight: 900;
+  padding: 2px 9px; border-radius: 20px;
+  letter-spacing: 1px;
+}
+
+/* ===== SUPER GAMES BANNER ===== */
+.games-banner {
+  position: relative; z-index: 10;
+  max-width: 960px; margin: 24px auto 0;
+  padding: 0 20px 70px;
+}
+.games-banner a {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+  background: linear-gradient(90deg, #F5C518 0%, #FF8C42 50%, #FF6B9D 100%);
+  border-radius: 24px; padding: 26px 32px;
+  text-decoration: none;
+  box-shadow: 0 12px 40px rgba(245,197,24,.3);
+  transition: transform .25s, box-shadow .25s;
+}
+.games-banner a:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(245,197,24,.5);
+}
+.gb-text .gb-title {
+  font-family:'Fredoka One',cursive; font-size:1.7rem;
+  color: var(--navy); text-shadow: 0 1px 4px rgba(0,0,0,.1);
+}
+.gb-text .gb-sub { color: rgba(0,0,0,.5); font-size:.9rem; margin-top:3px; font-weight:700; }
+.gb-trophy { font-size:3.5rem; filter:drop-shadow(0 4px 10px rgba(0,0,0,.2)); }
+
+/* ===== FOOTER ===== */
+footer {
+  position: relative; z-index: 10;
+  text-align: center; padding: 20px;
+  color: rgba(255,255,255,.2); font-size: .8rem;
+}
+
+/* ===== WELCOME MODAL ===== */
+.welcome-overlay {
+  display: none; position: fixed; inset:0;
+  background: rgba(0,0,0,.7); z-index:9999;
+  justify-content: center; align-items: center;
+}
+.welcome-overlay.show { display:flex; }
+.welcome-box {
+  background: linear-gradient(135deg,#1B4FD8,#7B2FBE);
+  border: 3px solid var(--gold);
+  border-radius: 30px; padding: 40px 44px;
+  text-align: center; max-width: 420px; width:92%;
+  animation: popIn .45s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.4);opacity:0;} to{transform:scale(1);opacity:1;} }
+.wbox-flag   { font-size:3rem; margin-bottom:8px; }
+.wbox-title  { font-family:'Fredoka One',cursive; font-size:2.2rem; color:var(--gold); margin-bottom:6px; }
+.wbox-sub    { color:rgba(255,255,255,.7); font-size:1rem; line-height:1.6; margin-bottom:22px; }
+.wbox-start  {
+  background: var(--gold); border:none; border-radius:30px;
+  padding:13px 38px; font-family:'Nunito',sans-serif;
+  font-weight:900; font-size:1.1rem; color:var(--navy);
+  cursor:pointer; transition:transform .2s;
+}
+.wbox-start:hover { transform:scale(1.08); }
+
+@media(max-width:480px) {
+  .card-grid { grid-template-columns: repeat(2,1fr); gap:12px; }
+  .card-icon  { font-size:38px; }
+}
+</style>
+</head>
+<body>
+
+<!-- BG -->
+<div class="bg-grid"></div>
+<div class="orb" style="width:400px;height:400px;background:#1B4FD8;top:-100px;left:-100px;animation-duration:8s;"></div>
+<div class="orb" style="width:300px;height:300px;background:#7B2FBE;bottom:10%;right:-80px;animation-duration:11s;animation-delay:3s;"></div>
+<div class="orb" style="width:250px;height:250px;background:#F5C518;top:40%;left:40%;animation-duration:14s;animation-delay:6s;"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-wrap">
+    <div class="uj-ribbon">
+      <span class="uj-flag">🇬🇧</span>
+      <span class="uj-text">British English · 英式英语</span>
+    </div>
+    <div class="brand-name">UpGrade</div>
+    <div class="brand-tagline">English for Young Learners · Ages 0–5</div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav-pills">
+  <a class="nav-pill active" href="index.html">🏠 Home</a>
+  <a class="nav-pill" href="greetings.html">👋 Greetings</a>
+  <a class="nav-pill" href="team.html">👨‍👩‍👧‍👦 Our Team</a>
+  <a class="nav-pill" href="rules.html">📋 Class Rules</a>
+  <a class="nav-pill" href="safety.html">🦺 Safety</a>
+</nav>
+
+<!-- NEW MODULES -->
+<div class="section-label"><span>⭐ New Lessons · 新专题课程</span></div>
+<div class="card-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">
+
+  <a class="module-card card-greet" href="greetings.html">
+    <div class="new-badge">NEW</div>
+    <span class="card-icon">👋</span>
+    <span class="card-en">Greetings</span>
+    <div class="card-cn">问候打招呼</div>
+    <span class="card-tag">Hello · Good morning</span>
+  </a>
+
+  <a class="module-card card-team" href="team.html">
+    <div class="new-badge">NEW</div>
+    <span class="card-icon">👨‍👩‍👧‍👦</span>
+    <span class="card-en">Our Team</span>
+    <div class="card-cn">我们的团队</div>
+    <span class="card-tag">Friends · Together</span>
+  </a>
+
+  <a class="module-card card-rules" href="rules.html">
+    <div class="new-badge">NEW</div>
+    <span class="card-icon">📋</span>
+    <span class="card-en">Class Rules</span>
+    <div class="card-cn">课堂纪律</div>
+    <span class="card-tag">Listen · Respect</span>
+  </a>
+
+  <a class="module-card card-safety" href="safety.html">
+    <span class="card-icon">🦺</span>
+    <span class="card-en">Safety First</span>
+    <div class="card-cn">安全第一</div>
+    <span class="card-tag">4-5岁</span>
+  </a>
+
+  <a class="module-card card-safety" href="safety-extended.html" style="background: linear-gradient(135deg,#FF6B6B,#E74C3C);">
+    <div class="new-badge">NEW</div>
+    <span class="card-icon">🦺</span>
+    <span class="card-en">Safety Extended</span>
+    <div class="card-cn">安全教育扩展</div>
+    <span class="card-tag">4-12岁</span>
+  </a>
+
+</div>
+
+<!-- EXISTING MODULES -->
+<div class="section-label"><span>📚 Learning Modules · 学习模块</span></div>
+<div class="card-grid">
+
+  <a class="module-card card-abc" href="abc.html">
+    <span class="card-icon">🔤</span>
+    <span class="card-en">A B C</span>
+    <div class="card-cn">字母王国</div>
+    <span class="card-tag">26 Letters</span>
+  </a>
+
+  <a class="module-card card-numbers" href="numbers.html">
+    <span class="card-icon">🔢</span>
+    <span class="card-en">1 2 3</span>
+    <div class="card-cn">数字乐园</div>
+    <span class="card-tag">Numbers 1–10</span>
+  </a>
+
+  <a class="module-card card-colors" href="colors.html">
+    <span class="card-icon">🎨</span>
+    <span class="card-en">Colours</span>
+    <div class="card-cn">颜色世界</div>
+    <span class="card-tag">8 Colours</span>
+  </a>
+
+  <a class="module-card card-animals" href="animals.html">
+    <span class="card-icon">🦒</span>
+    <span class="card-en">Animals</span>
+    <div class="card-cn">动物王国</div>
+    <span class="card-tag">12 Animals</span>
+  </a>
+
+  <a class="module-card card-body" href="body.html">
+    <span class="card-icon">🙆</span>
+    <span class="card-en">My Body</span>
+    <div class="card-cn">我的身体</div>
+    <span class="card-tag">10 Body Parts</span>
+  </a>
+
+  <a class="module-card card-food" href="food.html">
+    <span class="card-icon">🍎</span>
+    <span class="card-en">Yummy!</span>
+    <div class="card-cn">美食世界</div>
+    <span class="card-tag">12 Foods</span>
+  </a>
+
+</div>
+
+<!-- GAMES BANNER -->
+<div class="games-banner">
+  <a href="games.html">
+    <div class="gb-text">
+      <div class="gb-title">🎮 Super Games!</div>
+      <div class="gb-sub">Bubble Pop · Memory · Spelling Bee · Knowledge Race</div>
+    </div>
+    <div class="gb-trophy">🏆</div>
+  </a>
+</div>
+
+<!-- OPW PHONICS BANNER -->
+<div class="games-banner" style="margin-top: 24px;">
+  <a href="opw-overview.html" style="background: linear-gradient(90deg, #FF6B6B 0%, #4ECDC4 50%, #667eea 100%);">
+    <div class="gb-text">
+      <div class="gb-title">🔤 Oxford Phonics World</div>
+      <div class="gb-sub">5册完整课程 · 110周系统学习 · 约1800个词汇</div>
+    </div>
+    <div class="gb-trophy">📚</div>
+  </a>
+</div>
+
+<!-- MATERIALS PREVIEW BANNER -->
+<div class="games-banner" style="margin-top: 24px;">
+  <a href="materials-preview.html" style="background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);">
+    <div class="gb-text">
+      <div class="gb-title">📚 教材预览中心</div>
+      <div class="gb-sub">20个教材页面 · 完整体系总览 · 一站式浏览</div>
+    </div>
+    <div class="gb-trophy">👁️</div>
+  </a>
+</div>
+
+<footer>UpGrade English · British English for Young Learners · 🇬🇧</footer>
+
+<!-- WELCOME MODAL -->
+<div class="welcome-overlay" id="welcomeOverlay">
+  <div class="welcome-box">
+    <div class="wbox-flag">🇬🇧</div>
+    <div class="wbox-title">Welcome to UpGrade!</div>
+    <div class="wbox-sub">
+      British English for young learners.<br>
+      英式英语启蒙课堂，专为 0–5 岁小朋友设计！
+    </div>
+    <button class="wbox-start" onclick="closeWelcome()">Let's Start! 出发吧！</button>
+  </div>
+</div>
+
+<script>
+// ---- British English speech ----
+function speak(text, rate=0.78, pitch=1.25) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-GB';
+  u.rate = rate;
+  u.pitch = pitch;
+  // Prefer British voice if available
+  const voices = window.speechSynthesis.getVoices();
+  const gbVoice = voices.find(v => v.lang === 'en-GB') ||
+                  voices.find(v => v.lang.startsWith('en-GB')) ||
+                  voices.find(v => v.name.toLowerCase().includes('british')) ||
+                  null;
+  if (gbVoice) u.voice = gbVoice;
+  window.speechSynthesis.speak(u);
+}
+
+// Load voices (needed on some browsers)
+window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+
+function closeWelcome() {
+  document.getElementById('welcomeOverlay').classList.remove('show');
+  speak("Welcome to UpGrade! Let's learn English together!", 0.75, 1.2);
+}
+
+window.addEventListener('load', () => {
+  // Show welcome modal
+  setTimeout(() => {
+    document.getElementById('welcomeOverlay').classList.add('show');
+  }, 400);
+});
+</script>
+</body>
+</html>

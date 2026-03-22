@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>教材预览中心 | UpGrade English + OPW Phonics</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+      padding: 40px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .header h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .header p {
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #ffd700;
+    }
+
+    .stat-label {
+      color: white;
+      font-size: 0.9em;
+    }
+
+    .section {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-title {
+      font-size: 2em;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #667eea;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-subtitle {
+      font-size: 1.1em;
+      color: #666;
+      margin-bottom: 25px;
+      padding-left: 10px;
+      border-left: 4px solid #764ba2;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      border-radius: 15px;
+      padding: 25px;
+      text-decoration: none;
+      color: #333;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-icon {
+      font-size: 3em;
+      margin-bottom: 15px;
+    }
+
+    .card-title {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    .card-desc {
+      font-size: 0.9em;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .card-tag {
+      display: inline-block;
+      padding: 5px 12px;
+      background: rgba(102, 126, 234, 0.1);
+      color: #667eea;
+      border-radius: 20px;
+      font-size: 0.8em;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-size: 0.7em;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+
+    .badge-new {
+      background: #ff6b6b;
+      color: white;
+    }
+
+    .badge-popular {
+      background: #4ecdc4;
+      color: white;
+    }
+
+    .opw-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .opw-section .section-title {
+      color: white;
+      border-bottom-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .opw-section .section-subtitle {
+      color: rgba(255, 255, 255, 0.9);
+      border-left-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .opw-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .opw-card:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-5px);
+    }
+
+    .opw-card::before {
+      background: linear-gradient(90deg, #ffd700, #ff6b6b);
+    }
+
+    .opw-card .card-title {
+      color: white;
+    }
+
+    .opw-card .card-desc {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .opw-card .card-tag {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .other-card {
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    }
+
+    .other-card .card-tag {
+      background: rgba(255, 107, 107, 0.2);
+      color: #ff6b6b;
+    }
+
+    .upgrade-card {
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    }
+
+    .upgrade-card .card-tag {
+      background: rgba(118, 75, 162, 0.2);
+      color: #764ba2;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px;
+      color: white;
+      opacity: 0.8;
+    }
+
+    .footer a {
+      color: #ffd700;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .quick-nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .quick-nav-btn {
+      background: white;
+      padding: 15px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      color: #667eea;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .quick-nav-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2em;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📚 教材预览中心</h1>
+      <p>UpGrade English + Oxford Phonics World 完整教材体系</p>
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-number">20</div>
+          <div class="stat-label">教材页面</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">2</div>
+          <div class="stat-label">课程体系</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">1800+</div>
+          <div class="stat-label">词汇量</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">110+</div>
+          <div class="stat-label">课程周数</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-nav">
+      <a href="#upgrade" class="quick-nav-btn">🎨 UpGrade 启蒙</a>
+      <a href="#opw" class="quick-nav-btn">🔤 OPW 拼读</a>
+      <a href="#resources" class="quick-nav-btn">🛠️ 教学资源</a>
+    </div>
+
+    <div class="section" id="upgrade">
+      <div class="section-title">🎨 UpGrade 英语启蒙教材（0-5岁）</div>
+      <div class="section-subtitle">适合0-5岁幼儿的趣味启蒙课程，通过游戏和互动培养英语兴趣</div>
+      <div class="cards-grid">
+        <a href="abc.html" class="card upgrade-card">
+          <div class="card-icon">🔤</div>
+          <div class="card-title">字母王国</div>
+          <div class="card-desc">26个英文字母发音、拼写、单词学习，互动式教学</div>
+          <div class="card-tag">A-Z 字母学习</div>
+        </a>
+
+        <a href="numbers.html" class="card upgrade-card">
+          <div class="card-icon">🔢</div>
+          <div class="card-title">数字乐园</div>
+          <div class="card-desc">1-20数字认读、数数、简单加减法互动游戏</div>
+          <div class="card-tag">数字认知</div>
+        </a>
+
+        <a href="colors.html" class="card upgrade-card">
+          <div class="card-icon">🌈</div>
+          <div class="card-title">颜色世界</div>
+          <div class="card-desc">10种基本颜色认知、颜色配对、颜色游戏</div>
+          <div class="card-tag">颜色学习</div>
+        </a>
+
+        <a href="animals.html" class="card upgrade-card">
+          <div class="card-icon">🦁</div>
+          <div class="card-title">动物王国</div>
+          <div class="card-desc">12种常见动物认知、动物声音、动物特征</div>
+          <div class="card-tag">动物认知</div>
+        </a>
+
+        <a href="body.html" class="card upgrade-card">
+          <div class="card-icon">👤</div>
+          <div class="card-title">我的身体</div>
+          <div class="card-desc">身体部位认知、健康习惯、自我保护意识</div>
+          <div class="card-tag">身体认知</div>
+        </a>
+
+        <a href="food.html" class="card upgrade-card">
+          <div class="card-icon">🍎</div>
+          <div class="card-title">美食世界</div>
+          <div class="card-desc">常见食物认知、饮食健康、餐桌礼仪</div>
+          <div class="card-tag">食物认知</div>
+        </a>
+
+        <a href="greetings.html" class="card upgrade-card">
+          <div class="card-icon">👋</div>
+          <div class="card-title">问候礼仪</div>
+          <div class="card-desc">日常问候、礼貌用语、社交礼仪训练</div>
+          <div class="card-tag">社交礼仪</div>
+        </a>
+
+        <a href="safety.html" class="card upgrade-card">
+          <div class="card-icon">🦺</div>
+          <div class="card-title">安全第一 <span class="badge badge-new">NEW</span></div>
+          <div class="card-desc">基础安全教育，4-5岁幼儿安全意识培养</div>
+          <div class="card-tag">4-5岁</div>
+        </a>
+
+        <a href="safety-extended.html" class="card upgrade-card">
+          <div class="card-icon">🦺</div>
+          <div class="card-title">安全教育扩展</div>
+          <div class="card-desc">完整安全教育体系，覆盖4-12岁不同年龄段</div>
+          <div class="card-tag">4-12岁</div>
+        </a>
+
+        <a href="team.html" class="card upgrade-card">
+          <div class="card-icon">🤝</div>
+          <div class="card-title">团队合作</div>
+          <div class="card-desc">团队协作能力培养、合作游戏、沟通技巧</div>
+          <div class="card-tag">社交能力</div>
+        </a>
+
+        <a href="rules.html" class="card upgrade-card">
+          <div class="card-icon">📋</div>
+          <div class="card-title">课堂纪律</div>
+          <div class="card-desc">课堂规则学习、行为规范、纪律意识培养</div>
+          <div class="card-tag">行为规范</div>
+        </a>
+
+        <a href="games.html" class="card upgrade-card">
+          <div class="card-icon">🎮</div>
+          <div class="card-title">游戏中心 <span class="badge badge-popular">HOT</span></div>
+          <div class="card-desc">互动小游戏集：泡泡消除、记忆游戏、拼字比赛等</div>
+          <div class="card-tag">游戏学习</div>
+        </a>
+
+        <a href="upgrade-lessons.html" class="card upgrade-card">
+          <div class="card-icon">📖</div>
+          <div class="card-title">专题教案</div>
+          <div class="card-desc">UpGrade 各模块详细教案，包含90分钟课堂设计</div>
+          <div class="card-tag">教学资源</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section opw-section" id="opw">
+      <div class="section-title">🔤 Oxford Phonics World 牛津自然拼读（5-7岁+）</div>
+      <div class="section-subtitle">5册完整课程体系，建立解码能力，过渡到自主阅读</div>
+      <div class="cards-grid">
+        <a href="opw-overview.html" class="card opw-card">
+          <div class="card-icon">📚</div>
+          <div class="card-title">课程总览</div>
+          <div class="card-desc">5册教材完整体系、110周课程安排、教学资源总览</div>
+          <div class="card-tag">体系概览</div>
+        </a>
+
+        <a href="opw-lesson-template.html" class="card opw-card">
+          <div class="card-icon">⏱️</div>
+          <div class="card-title">教案模板</div>
+          <div class="card-desc">90分钟统一教案模板，6个环节详细设计</div>
+          <div class="card-tag">教学工具</div>
+        </a>
+
+        <a href="opw-level1.html" class="card opw-card">
+          <div class="card-icon">1️⃣</div>
+          <div class="card-title">Level 1 字母音值</div>
+          <div class="card-desc">26个字母音值、26周课程、50个核心词汇</div>
+          <div class="card-tag">5岁 · 26周</div>
+        </a>
+
+        <a href="opw-level2.html" class="card opw-card">
+          <div class="card-icon">2️⃣</div>
+          <div class="card-title">Level 2 辅音组合</div>
+          <div class="card-desc">bl/cl/fl/tr等辅音组合、20周课程、150个词汇</div>
+          <div class="card-tag">5.5岁 · 20周</div>
+        </a>
+
+        <a href="opw-level3.html" class="card opw-card">
+          <div class="card-icon">3️⃣</div>
+          <div class="card-title">Level 3 短元音家族</div>
+          <div class="card-desc">CVC词族、15个词族、20周课程、300个词汇</div>
+          <div class="card-tag">6岁 · 20周</div>
+        </a>
+
+        <a href="opw-level4.html" class="card opw-card">
+          <div class="card-icon">4️⃣</div>
+          <div class="card-title">Level 4 长元音规则</div>
+          <div class="card-desc">CVCe/元音组合、魔法e、20周课程、500个词汇</div>
+          <div class="card-tag">6.5岁 · 20周</div>
+        </a>
+
+        <a href="opw-level5.html" class="card opw-card">
+          <div class="card-icon">5️⃣</div>
+          <div class="card-title">Level 5 高级规则</div>
+          <div class="card-desc">双元音/R控元音/多音节、24周课程、800个词汇</div>
+          <div class="card-tag">7岁+ · 24周</div>
+        </a>
+
+        <a href="opw-interactive.html" class="card opw-card">
+          <div class="card-icon">🎮</div>
+          <div class="card-title">互动练习</div>
+          <div class="card-desc">拼读测验、单词构建、拼读练习，在线互动学习</div>
+          <div class="card-tag">所有级别</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section" id="resources">
+      <div class="section-title">🛠️ 教学资源 & 工具</div>
+      <div class="section-subtitle">辅助教学和部署的相关资源</div>
+      <div class="cards-grid">
+        <a href="DEPLOYMENT_GUIDE.md" class="card other-card" target="_blank">
+          <div class="card-icon">🚀</div>
+          <div class="card-title">部署指南</div>
+          <div class="card-desc">Netlify 快速部署教程，包含拖拽、命令行、Git三种方法</div>
+          <div class="card-tag">部署文档</div>
+        </a>
+
+        <a href="index.html" class="card other-card">
+          <div class="card-icon">🏠</div>
+          <div class="card-title">返回主页</div>
+          <div class="card-desc">回到 UpGrade English 主页</div>
+          <div class="card-tag">导航</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">📖 使用指南</div>
+      <div class="section-subtitle">如何使用这些教材页面</div>
+      <div style="line-height: 2; color: #555;">
+        <p><strong>1. 教师使用：</strong></p>
+        <ul style="margin-left: 30px; margin-bottom: 20px;">
+          <li>点击相应模块查看详细教学内容</li>
+          <li>参考教案模板准备90分钟课程</li>
+          <li>使用互动卡片辅助课堂演示</li>
+          <li>下载打印词汇卡片和教具</li>
+        </ul>
+
+        <p><strong>2. 家长使用：</strong></p>
+        <ul style="margin-left: 30px; margin-bottom: 20px;">
+          <li>根据孩子年龄选择合适的教材</li>
+          <li>陪伴孩子一起学习互动卡片</li>
+          <li>使用游戏中心巩固学习效果</li>
+          <li>参考安全教育内容培养孩子安全意识</li>
+        </ul>
+
+        <p><strong>3. 学生使用：</strong></p>
+        <ul style="margin-left: 30px; margin-bottom: 20px;">
+          <li>点击互动卡片学习发音和单词</li>
+          <li>完成每个模块的学习任务</li>
+          <li>在游戏中心练习和巩固</li>
+          <li>跟随 OPW 课程系统学习拼读</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>UpGrade English + Oxford Phonics World 完整教材体系</p>
+      <p>British English for Young Learners · 🇬🇧</p>
+      <div style="margin-top: 20px;">
+        <a href="index.html">返回主页</a>
+        <a href="DEPLOYMENT_GUIDE.md" target="_blank">部署指南</a>
+        <a href="#upgrade">UpGrade 启蒙</a>
+        <a href="#opw">OPW 拼读</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // 动画效果
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    cards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(card);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class Rules – UpGrade English</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0D1B2A;--royal:#1B4FD8;--gold:#F5C518;--teal:#00B4D8;--rose:#FF6B9D;--green:#27AE60;--orange:#FF8C42;--purple:#7B2FBE}
+body{font-family:'Nunito',sans-serif;background:var(--navy);min-height:100vh;color:white;overflow-x:hidden}
+.back-btn{position:fixed;top:18px;left:18px;z-index:999;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);color:white;padding:8px 18px;border-radius:30px;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;text-decoration:none;transition:.2s;backdrop-filter:blur(8px)}
+.back-btn:hover{background:var(--gold);color:var(--navy)}
+header{text-align:center;padding:70px 20px 30px;background:linear-gradient(135deg,#0a2e10,var(--green))}
+header .badge{display:inline-block;background:var(--gold);color:var(--navy);font-family:'Fredoka One',cursive;font-size:.9rem;padding:4px 16px;border-radius:20px;margin-bottom:12px}
+header h1{font-family:'Fredoka One',cursive;font-size:3rem;color:var(--gold);text-shadow:0 4px 15px rgba(0,0,0,.3)}
+header p{color:rgba(255,255,255,.75);font-size:1.1rem;margin-top:8px}
+
+/* Poster-style rules */
+.poster-section{padding:36px 24px;max-width:900px;margin:0 auto}
+.poster{background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.04));border:3px solid var(--gold);border-radius:28px;padding:30px 28px}
+.poster-title{font-family:'Fredoka One',cursive;font-size:2rem;color:var(--gold);text-align:center;margin-bottom:24px;text-shadow:0 2px 10px rgba(0,0,0,.3)}
+.rule-list{display:flex;flex-direction:column;gap:14px}
+.rule-item{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.06);border-radius:16px;padding:14px 18px;cursor:pointer;transition:.25s;border:2px solid rgba(255,255,255,.1)}
+.rule-item:hover{background:rgba(255,255,255,.12);border-color:var(--gold);transform:translateX(4px)}
+.rule-num{width:40px;height:40px;background:var(--gold);color:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:1.2rem;flex-shrink:0}
+.rule-icon{font-size:2rem;flex-shrink:0}
+.rule-content .en{font-family:'Fredoka One',cursive;font-size:1.15rem;color:white}
+.rule-content .cn{font-size:.82rem;color:rgba(255,255,255,.6);margin-top:3px}
+.rule-badge{margin-left:auto;background:var(--green);color:white;padding:4px 12px;border-radius:20px;font-size:.78rem;font-family:'Fredoka One',cursive;white-space:nowrap}
+.rule-badge.red{background:#e74c3c}
+
+/* Do / Don't toggle */
+.toggle-section{padding:0 24px 36px;max-width:1000px;margin:0 auto}
+.toggle-tabs{display:flex;justify-content:center;gap:14px;margin-bottom:22px}
+.toggle-tab{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.2);color:white;padding:10px 30px;border-radius:30px;font-family:'Fredoka One',cursive;font-size:1.1rem;cursor:pointer;transition:.25s}
+.toggle-tab.active-do{background:var(--green);border-color:var(--green);color:white}
+.toggle-tab.active-dont{background:#e74c3c;border-color:#e74c3c;color:white}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.do-card,.dont-card{border-radius:18px;padding:18px 14px;text-align:center;cursor:pointer;transition:.25s;border:2px solid}
+.do-card{background:rgba(39,174,96,.15);border-color:rgba(39,174,96,.4)}
+.do-card:hover{background:rgba(39,174,96,.3);transform:translateY(-3px)}
+.dont-card{background:rgba(231,76,60,.12);border-color:rgba(231,76,60,.35)}
+.dont-card:hover{background:rgba(231,76,60,.25);transform:translateY(-3px)}
+.cd-emoji{font-size:2.5rem;display:block;margin-bottom:8px}
+.cd-en{font-family:'Fredoka One',cursive;font-size:1.05rem;color:white}
+.cd-cn{font-size:.78rem;color:rgba(255,255,255,.55);margin-top:4px}
+
+/* Classroom scenario game */
+.game-section{padding:0 24px 60px;max-width:900px;margin:0 auto}
+.game-box{background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.12);border-radius:24px;padding:30px}
+.game-box h2{font-family:'Fredoka One',cursive;font-size:1.6rem;color:var(--orange);margin-bottom:8px;text-align:center}
+.game-box p{color:rgba(255,255,255,.65);text-align:center;margin-bottom:22px}
+.scene-box{background:rgba(255,255,255,.08);border-radius:16px;padding:24px;text-align:center;margin-bottom:18px}
+.scene-emoji{font-size:3.5rem;display:block;margin-bottom:10px}
+.scene-text{font-family:'Fredoka One',cursive;font-size:1.2rem;color:white}
+.scene-hint{font-size:.85rem;color:rgba(255,255,255,.5);margin-top:6px}
+.judge-btns{display:flex;gap:14px;justify-content:center;margin-bottom:18px}
+.judge-btn{padding:14px 40px;border-radius:26px;border:none;font-family:'Fredoka One',cursive;font-size:1.2rem;cursor:pointer;transition:.25s}
+.judge-btn.yes{background:var(--green);color:white;box-shadow:0 6px 20px rgba(39,174,96,.3)}
+.judge-btn.no{background:#e74c3c;color:white;box-shadow:0 6px 20px rgba(231,76,60,.3)}
+.judge-btn:hover{transform:scale(1.06)}
+.judge-btn.correct-flash{animation:flash .5s ease}
+@keyframes flash{0%,100%{opacity:1}50%{opacity:.5}}
+.fb2{font-family:'Fredoka One',cursive;font-size:1.15rem;min-height:34px;color:var(--gold);text-align:center;margin-bottom:10px}
+.score-row{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.08);border-radius:12px;padding:10px 18px}
+.score-row span{font-family:'Fredoka One',cursive;font-size:1rem;color:var(--gold)}
+.nxt2{background:var(--royal);border:none;color:white;padding:10px 26px;border-radius:20px;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;transition:.2s}
+.nxt2:hover{background:var(--teal)}
+
+/* Rule card poster printable */
+.print-section{padding:0 24px 40px;max-width:700px;margin:0 auto;text-align:center}
+.print-btn{background:linear-gradient(135deg,var(--gold),#e0a800);color:var(--navy);border:none;padding:14px 32px;border-radius:26px;font-family:'Fredoka One',cursive;font-size:1.1rem;cursor:pointer;transition:.2s}
+.print-btn:hover{transform:scale(1.04)}
+</style>
+</head>
+<body>
+
+<a class="back-btn" href="index.html">← Home</a>
+
+<header>
+  <div class="badge">UpGrade English</div>
+  <h1>📋 Class Rules</h1>
+  <p>Good rules help everyone learn and have fun together!</p>
+</header>
+
+<!-- Classroom Rules Poster -->
+<div class="poster-section">
+  <div class="poster">
+    <div class="poster-title">🏫 Our Class Rules</div>
+    <div class="rule-list" id="ruleList"></div>
+  </div>
+</div>
+
+<!-- Do / Don't -->
+<div class="toggle-section">
+  <div class="toggle-tabs">
+    <button class="toggle-tab active-do" id="doTab" onclick="showTab('do')">✅ We Do</button>
+    <button class="toggle-tab" id="dontTab" onclick="showTab('dont')">❌ We Don't</button>
+  </div>
+  <div class="cards-grid" id="behaviourGrid"></div>
+</div>
+
+<!-- Game -->
+<div class="game-section">
+  <div class="game-box">
+    <h2>🎮 Good or Bad? Game</h2>
+    <p>Is this good classroom behaviour? Say YES ✅ or NO ❌!</p>
+    <div class="scene-box">
+      <span class="scene-emoji" id="sEmoji">🤔</span>
+      <div class="scene-text" id="sText">Loading…</div>
+      <div class="scene-hint" id="sHint"></div>
+    </div>
+    <div class="judge-btns">
+      <button class="judge-btn yes" onclick="judge(true)">✅ Good!</button>
+      <button class="judge-btn no" onclick="judge(false)">❌ Bad!</button>
+    </div>
+    <div class="fb2" id="fb2"></div>
+    <div class="score-row">
+      <span>⭐ Score: <span id="sc2">0</span></span>
+      <button class="nxt2" id="nxt2" onclick="nextS()" style="display:none">Next →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Data ──────────────────────────────────────────────
+const rules = [
+  {num:1,icon:'🤫',en:'Be quiet and listen.',cn:'保持安静，认真听讲。',badge:'DO',good:true},
+  {num:2,icon:'🙋',en:'Put your hand up to speak.',cn:'发言前举手。',badge:'DO',good:true},
+  {num:3,icon:'🖊️',en:'Keep your desk tidy.',cn:'保持桌面整洁。',badge:'DO',good:true},
+  {num:4,icon:'🤝',en:'Be kind to everyone.',cn:'对所有人友善。',badge:'DO',good:true},
+  {num:5,icon:'🕐',en:'Be on time.',cn:'准时到校。',badge:'DO',good:true},
+  {num:6,icon:'🚶',en:'Walk inside the classroom.',cn:'在教室里要走路。',badge:'DO',good:true},
+  {num:7,icon:'📵',en:'No shouting in class.',cn:'上课不大喊大叫。',badge:"DON'T",good:false},
+  {num:8,icon:'🙅',en:'Do not run inside.',cn:'室内不跑步。',badge:"DON'T",good:false},
+  {num:9,icon:'👂',en:'Always listen to the teacher.',cn:'始终听从老师的指导。',badge:'DO',good:true},
+  {num:10,icon:'💬',en:'Use polite words: please and thank you.',cn:'使用礼貌用语：请和谢谢。',badge:'DO',good:true},
+];
+
+const doCards = [
+  {emoji:'✋',en:'Raise your hand.',cn:'举手发言'},
+  {emoji:'🤫',en:'Use an indoor voice.',cn:'保持轻声说话'},
+  {emoji:'🪑',en:'Sit properly in your chair.',cn:'端正坐姿'},
+  {emoji:'👀',en:'Look at the board.',cn:'注视黑板'},
+  {emoji:'🤝',en:'Share your things.',cn:'分享物品'},
+  {emoji:'🙏',en:'Say please and thank you.',cn:'说请和谢谢'},
+  {emoji:'🧹',en:'Tidy up after yourself.',cn:'收拾自己的东西'},
+  {emoji:'😊',en:'Smile and be friendly.',cn:'微笑友好地对待他人'},
+];
+
+const dontCards = [
+  {emoji:'🗣️',en:"Don't shout.",cn:'不大声喧哗'},
+  {emoji:'🏃',en:"Don't run indoors.",cn:'室内不奔跑'},
+  {emoji:'📱',en:"Don't use phones in class.",cn:'课堂不玩手机'},
+  {emoji:'😤',en:"Don't be rude.",cn:'不无礼'},
+  {emoji:'🤜',en:"Don't hurt others.",cn:'不伤害他人'},
+  {emoji:'😒',en:"Don't ignore the teacher.",cn:'不忽视老师'},
+  {emoji:'🗑️',en:"Don't drop litter.",cn:'不乱扔垃圾'},
+  {emoji:'😜',en:"Don't distract friends.",cn:'不打扰同学'},
+];
+
+const scenarios = [
+  {emoji:'✋',text:'Leo raises his hand before speaking.',hint:'Leo 说话前举手。',good:true},
+  {emoji:'🏃',text:'Emma runs inside the classroom.',hint:'Emma 在教室里奔跑。',good:false},
+  {emoji:'🤫',text:'Tom whispers so he does not disturb others.',hint:'Tom 轻声说话，不打扰别人。',good:true},
+  {emoji:'🗣️',text:'Sophie shouts across the room.',hint:'Sophie 大声喊叫。',good:false},
+  {emoji:'🧹',text:'Oliver tidies up his desk after class.',hint:'Oliver 课后整理桌子。',good:true},
+  {emoji:'😤',text:'Max says "No! I don\'t want to share!"',hint:'Max 拒绝分享。',good:false},
+  {emoji:'🙏',text:'Amara says "Please" and "Thank you".',hint:'Amara 说请和谢谢。',good:true},
+  {emoji:'📵',text:'A child uses their phone during the lesson.',hint:'孩子上课玩手机。',good:false},
+  {emoji:'🕐',text:'Everyone arrives on time.',hint:'大家准时到校。',good:true},
+  {emoji:'🎒',text:'A child draws on the wall.',hint:'孩子在墙上画画。',good:false},
+];
+
+// ── Speech ────────────────────────────────────────────
+function speak(text){
+  if(!window.speechSynthesis)return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-GB';u.rate=0.8;u.pitch=1.1;
+  speechSynthesis.speak(u);
+}
+
+// ── Render rules ──────────────────────────────────────
+function renderRules(){
+  document.getElementById('ruleList').innerHTML=rules.map(r=>`
+    <div class="rule-item" onclick="speak('${r.en}')">
+      <div class="rule-num">${r.num}</div>
+      <span class="rule-icon">${r.icon}</span>
+      <div class="rule-content">
+        <div class="en">${r.en}</div>
+        <div class="cn">${r.cn}</div>
+      </div>
+      <span class="rule-badge ${r.good?'':'red'}">${r.badge}</span>
+    </div>
+  `).join('');
+}
+
+// ── Do/Don't toggle ───────────────────────────────────
+let curTab='do';
+function showTab(tab){
+  curTab=tab;
+  document.getElementById('doTab').className='toggle-tab'+(tab==='do'?' active-do':'');
+  document.getElementById('dontTab').className='toggle-tab'+(tab==='dont'?' active-dont':'');
+  renderBehaviour();
+}
+function renderBehaviour(){
+  const cards=curTab==='do'?doCards:dontCards;
+  document.getElementById('behaviourGrid').innerHTML=cards.map(c=>`
+    <div class="${curTab==='do'?'do-card':'dont-card'}" onclick="speak('${c.en}')">
+      <span class="cd-emoji">${c.emoji}</span>
+      <div class="cd-en">${c.en}</div>
+      <div class="cd-cn">${c.cn}</div>
+    </div>
+  `).join('');
+}
+
+// ── Game ──────────────────────────────────────────────
+let si=0,sc=0;
+function loadS(){
+  const s=scenarios[si%scenarios.length];
+  document.getElementById('sEmoji').textContent=s.emoji;
+  document.getElementById('sText').textContent=s.text;
+  document.getElementById('sHint').textContent=s.hint;
+  document.getElementById('fb2').textContent='';
+  document.getElementById('nxt2').style.display='none';
+  document.querySelectorAll('.judge-btn').forEach(b=>b.onclick=b.classList.contains('yes')?()=>judge(true):()=>judge(false));
+}
+function judge(answer){
+  const s=scenarios[si%scenarios.length];
+  document.querySelectorAll('.judge-btn').forEach(b=>b.onclick=null);
+  if(answer===s.good){
+    sc++;document.getElementById('sc2').textContent=sc;
+    document.getElementById('fb2').textContent='⭐ Correct! Brilliant!';
+    speak('Brilliant! That is correct!');
+  }else{
+    document.getElementById('fb2').textContent='💪 Not quite! '+(s.good?'This is GOOD behaviour!':'This is BAD behaviour!');
+    speak('Not quite! '+(s.good?'This is good behaviour!':'This is bad behaviour!'));
+  }
+  si++;
+  document.getElementById('nxt2').style.display='inline-block';
+}
+function nextS(){loadS();}
+
+renderRules();renderBehaviour();loadS();
+</script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Body 我的身体 | 小星星英语</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito',sans-serif;background:linear-gradient(160deg,#667eea,#764ba2 50%,#f093fb 100%);min-height:100vh;overflow-x:hidden;}
+
+.back-btn{position:fixed;left:18px;top:18px;z-index:200;background:rgba(255,255,255,.9);border:none;border-radius:30px;padding:9px 20px;font-family:'Nunito',sans-serif;font-weight:900;color:#667eea;font-size:1rem;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.15);text-decoration:none;transition:transform .2s;}
+.back-btn:hover{transform:scale(1.07);}
+
+header{text-align:center;padding:70px 20px 16px;position:relative;z-index:10;}
+.page-title{font-family:'Fredoka One',cursive;font-size:clamp(2rem,8vw,3.8rem);color:white;text-shadow:0 3px 14px rgba(0,0,0,.25);}
+.page-sub{color:rgba(255,255,255,.85);font-size:1rem;margin-top:4px;}
+
+.mode-tabs{display:flex;justify-content:center;gap:12px;margin:14px auto 20px;flex-wrap:wrap;position:relative;z-index:10;padding:0 16px;}
+.tab-btn{background:rgba(255,255,255,.25);border:2.5px solid rgba(255,255,255,.5);color:white;font-family:'Nunito',sans-serif;font-weight:900;font-size:.95rem;padding:9px 22px;border-radius:30px;cursor:pointer;transition:all .22s;}
+.tab-btn.active,.tab-btn:hover{background:white;color:#667eea;transform:scale(1.06);}
+
+.score-bar{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:0 auto 14px;position:relative;z-index:10;}
+.score-pill{background:rgba(255,255,255,.25);border-radius:20px;padding:7px 18px;font-weight:900;font-size:.95rem;color:white;}
+
+.section{position:relative;z-index:10;max-width:960px;margin:0 auto;padding:0 16px 80px;}
+#section-learn{display:block;}
+#section-point{display:none;}
+#section-simon{display:none;}
+
+/* Body diagram */
+.body-layout{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;}
+.body-diagram{flex:0 0 auto;position:relative;width:220px;margin:0 auto;}
+.body-svg{width:220px;height:360px;}
+.body-hotspot{cursor:pointer;transition:opacity .2s;}
+.body-hotspot:hover{opacity:.7;}
+.body-label-popup{display:none;position:absolute;background:white;border-radius:14px;padding:8px 14px;font-weight:900;font-size:.95rem;color:#667eea;box-shadow:0 4px 16px rgba(0,0,0,.2);white-space:nowrap;z-index:20;pointer-events:none;border:2px solid #f093fb;}
+.body-label-popup.show{display:block;}
+
+.body-parts-grid{flex:1;min-width:260px;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;}
+.body-part-card{background:rgba(255,255,255,.15);border:2.5px solid rgba(255,255,255,.3);border-radius:20px;padding:14px 10px;text-align:center;cursor:pointer;transition:all .22s;color:white;}
+.body-part-card:hover,.body-part-card.lit{background:rgba(255,255,255,.35);transform:scale(1.06);border-color:white;}
+.bp-emoji{font-size:2.5rem;display:block;}
+.bp-en{font-family:'Fredoka One',cursive;font-size:1.15rem;margin:5px 0 2px;}
+.bp-cn{font-size:.8rem;opacity:.75;}
+
+/* Point game */
+.point-arena{background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border-radius:28px;padding:30px;border:2px solid rgba(255,255,255,.25);text-align:center;}
+.point-instruction{font-family:'Fredoka One',cursive;font-size:1.6rem;color:white;margin-bottom:10px;}
+.point-target{font-family:'Fredoka One',cursive;font-size:3rem;color:#FFD700;margin:10px 0 24px;animation:targetPulse 1.5s ease-in-out infinite;}
+@keyframes targetPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+.point-body-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:420px;margin:0 auto;}
+.point-btn{background:rgba(255,255,255,.12);border:3px solid rgba(255,255,255,.3);border-radius:20px;padding:16px 8px;font-size:2.2rem;cursor:pointer;transition:all .22s;}
+.point-btn:hover{background:rgba(255,255,255,.3);transform:scale(1.1);}
+.point-btn.correct{background:#2ECC71;border-color:#2ECC71;animation:pop .5s ease;}
+.point-btn.wrong{background:#E74C3C;border-color:#E74C3C;animation:shk .4s ease;}
+@keyframes pop{0%{transform:scale(1);}50%{transform:scale(1.35);}100%{transform:scale(1);}}
+@keyframes shk{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}
+
+/* Simon Says */
+.simon-arena{background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border-radius:28px;padding:30px;border:2px solid rgba(255,255,255,.25);text-align:center;}
+.simon-mascot{font-size:6rem;animation:simonBounce 1.5s ease-in-out infinite;display:inline-block;}
+@keyframes simonBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+.simon-says-box{background:rgba(255,255,255,.2);border-radius:20px;padding:18px 30px;margin:20px auto;max-width:500px;border:2px solid rgba(255,255,255,.4);}
+.simon-command{font-family:'Fredoka One',cursive;font-size:clamp(1.4rem,5vw,2.2rem);color:white;text-shadow:0 2px 8px rgba(0,0,0,.2);}
+.simon-cn{color:rgba(255,255,255,.75);font-size:1rem;margin-top:6px;}
+.simon-action-zone{margin:20px 0;font-size:5rem;min-height:80px;}
+.simon-done-btn{background:white;border:none;border-radius:30px;padding:13px 36px;font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;color:#667eea;cursor:pointer;transition:transform .2s;margin-top:8px;}
+.simon-done-btn:hover{transform:scale(1.08);}
+.simon-next-btn{background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.5);color:white;font-family:'Nunito',sans-serif;font-weight:900;font-size:1rem;padding:11px 28px;border-radius:24px;cursor:pointer;margin-top:12px;transition:all .2s;}
+.simon-next-btn:hover{background:rgba(255,255,255,.35);}
+
+/* Toast */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);background:white;border-radius:20px;padding:14px 28px;font-weight:900;font-size:1.1rem;color:#333;box-shadow:0 8px 30px rgba(0,0,0,.2);z-index:9999;transition:transform .3s;pointer-events:none;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.toast.good{border-left:6px solid #2ECC71;}
+.toast.bad{border-left:6px solid #E74C3C;}
+
+@media(max-width:600px){.body-layout{flex-direction:column;align-items:center;}.body-diagram{width:180px;}.body-svg{width:180px;height:290px;}}
+</style>
+</head>
+<body>
+<a class="back-btn" href="index.html">← 返回</a>
+
+<header>
+  <div class="page-title">🙆 My Body 我的身体</div>
+  <div class="page-sub">认识身体部位，一起做动作！</div>
+</header>
+
+<div class="score-bar">
+  <div class="score-pill">⭐ 积分: <span id="scoreNum">0</span></div>
+  <div class="score-pill" id="starPill">☆☆☆☆☆</div>
+</div>
+
+<div class="mode-tabs">
+  <button class="tab-btn active" onclick="switchMode('learn')">🧠 认识部位</button>
+  <button class="tab-btn" onclick="switchMode('point')">👆 点点游戏</button>
+  <button class="tab-btn" onclick="switchMode('simon')">🕺 Simon Says</button>
+</div>
+
+<!-- LEARN -->
+<div class="section" id="section-learn">
+  <div class="body-layout">
+    <div class="body-diagram">
+      <!-- Simple SVG body figure with clickable parts -->
+      <svg class="body-svg" viewBox="0 0 220 360" xmlns="http://www.w3.org/2000/svg">
+        <!-- Head -->
+        <circle cx="110" cy="55" r="40" fill="#FFDDC1" stroke="#f093fb" stroke-width="3" class="body-hotspot" onclick="highlightPart('head')" />
+        <!-- Eyes -->
+        <circle cx="98"  cy="50" r="6" fill="white"/>
+        <circle cx="122" cy="50" r="6" fill="white"/>
+        <circle cx="100" cy="51" r="3.5" fill="#5C4033"/>
+        <circle cx="124" cy="51" r="3.5" fill="#5C4033"/>
+        <!-- Nose -->
+        <ellipse cx="111" cy="60" rx="4" ry="3" fill="#FFB199"/>
+        <!-- Mouth / smile -->
+        <path d="M100 70 Q110 80 120 70" stroke="#E88" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- Ears -->
+        <ellipse cx="68" cy="55" rx="10" ry="14" fill="#FFDDC1" stroke="#f093fb" stroke-width="2" class="body-hotspot" onclick="highlightPart('ear')" />
+        <ellipse cx="152" cy="55" rx="10" ry="14" fill="#FFDDC1" stroke="#f093fb" stroke-width="2" class="body-hotspot" onclick="highlightPart('ear')" />
+        <!-- Body -->
+        <rect x="72" y="98" width="76" height="100" rx="18" fill="#a78bfa" class="body-hotspot" onclick="highlightPart('tummy')" />
+        <!-- Neck -->
+        <rect x="98" y="93" width="24" height="18" rx="8" fill="#FFDDC1"/>
+        <!-- Arms -->
+        <rect x="30" y="102" width="44" height="20" rx="10" fill="#FFDDC1" stroke="#f093fb" stroke-width="2" class="body-hotspot" onclick="highlightPart('arm')"/>
+        <rect x="146" y="102" width="44" height="20" rx="10" fill="#FFDDC1" stroke="#f093fb" stroke-width="2" class="body-hotspot" onclick="highlightPart('arm')"/>
+        <!-- Hands -->
+        <circle cx="26" cy="112" r="13" fill="#FFDDC1" stroke="#f093fb" stroke-width="2" class="body-hotspot" onclick="highlightPart('hand')"/>
+        <circle cx="194" cy="112" r="13" fill="#FFDDC1" stroke="#f093fb" stroke-width="2" class="body-hotspot" onclick="highlightPart('hand')"/>
+        <!-- Legs -->
+        <rect x="78"  y="196" width="28" height="90" rx="14" fill="#FFDDC1" stroke="#f093fb" stroke-width="2" class="body-hotspot" onclick="highlightPart('leg')"/>
+        <rect x="114" y="196" width="28" height="90" rx="14" fill="#FFDDC1" stroke="#f093fb" stroke-width="2" class="body-hotspot" onclick="highlightPart('leg')"/>
+        <!-- Feet -->
+        <ellipse cx="92"  cy="295" rx="18" ry="10" fill="#FFDDC1" stroke="#f093fb" stroke-width="2" class="body-hotspot" onclick="highlightPart('foot')"/>
+        <ellipse cx="128" cy="295" rx="18" ry="10" fill="#FFDDC1" stroke="#f093fb" stroke-width="2" class="body-hotspot" onclick="highlightPart('foot')"/>
+        <!-- Hair -->
+        <ellipse cx="110" cy="20" rx="40" ry="18" fill="#C17B3C"/>
+        <text x="110" y="340" text-anchor="middle" font-size="11" fill="rgba(255,255,255,.6)" font-family="Nunito">点击身体部位！</text>
+      </svg>
+      <div class="body-label-popup" id="labelPopup"></div>
+    </div>
+    <div class="body-parts-grid" id="bodyPartsGrid"></div>
+  </div>
+</div>
+
+<!-- POINT GAME -->
+<div class="section" id="section-point">
+  <div class="point-arena">
+    <div class="point-instruction">找到这个部位！Touch the...</div>
+    <div class="point-target" id="pointTarget">Head</div>
+    <div class="point-body-grid" id="pointGrid"></div>
+  </div>
+</div>
+
+<!-- SIMON SAYS -->
+<div class="section" id="section-simon">
+  <div class="simon-arena">
+    <div class="simon-mascot">🤖</div>
+    <p style="color:rgba(255,255,255,.7);font-size:.9rem;margin:8px 0 4px;">Simon Says 说什么就做什么！</p>
+    <div class="simon-says-box">
+      <div class="simon-command" id="simonCommand">Simon says... Touch your HEAD!</div>
+      <div class="simon-cn" id="simonCn">Simon 说……摸你的头！</div>
+    </div>
+    <div class="simon-action-zone" id="simonActionZone">👆</div>
+    <div>
+      <button class="simon-done-btn" onclick="simonDone()">✅ Done! 做好了！</button>
+    </div>
+    <div style="margin-top:12px;">
+      <button class="simon-next-btn" onclick="setupSimon()">▶ 下一个 Next</button>
+    </div>
+    <div style="margin-top:14px;color:rgba(255,255,255,.6);font-size:.85rem;" id="simonStreak">连续做对: 0 次</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const BODY_PARTS = [
+  {key:'head',  en:'Head',    cn:'头',   e:'🗣️', action:'Touch your head',     actionCn:'摸摸头',     gif:'☝️'},
+  {key:'eye',   en:'Eye',     cn:'眼睛', e:'👀', action:'Point to your eyes',  actionCn:'指指眼睛',   gif:'👀'},
+  {key:'nose',  en:'Nose',    cn:'鼻子', e:'👃', action:'Touch your nose',     actionCn:'摸摸鼻子',   gif:'👃'},
+  {key:'mouth', en:'Mouth',   cn:'嘴巴', e:'👄', action:'Open your mouth',     actionCn:'张开嘴巴',   gif:'😮'},
+  {key:'ear',   en:'Ear',     cn:'耳朵', e:'👂', action:'Touch your ear',      actionCn:'摸摸耳朵',   gif:'🙉'},
+  {key:'hand',  en:'Hand',    cn:'手',   e:'🤚', action:'Wave your hands',     actionCn:'挥挥手',     gif:'👋'},
+  {key:'arm',   en:'Arm',     cn:'手臂', e:'💪', action:'Raise your arms',     actionCn:'举起手臂',   gif:'🙋'},
+  {key:'tummy', en:'Tummy',   cn:'肚子', e:'🫃', action:'Pat your tummy',      actionCn:'拍拍肚子',   gif:'🤰'},
+  {key:'leg',   en:'Leg',     cn:'腿',   e:'🦵', action:'Stomp your legs',     actionCn:'跺跺腿',     gif:'🕺'},
+  {key:'foot',  en:'Foot',    cn:'脚',   e:'🦶', action:'Stamp your feet',     actionCn:'跺跺脚',     gif:'👣'},
+];
+
+let score=0, simonStreak=0, pointAnswer='';
+
+function speak(t,r=0.72,p=1.3){
+  if(!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(t);
+  u.lang='en-US';u.rate=r;u.pitch=p;window.speechSynthesis.speak(u);
+}
+function addScore(n){
+  score+=n;document.getElementById('scoreNum').textContent=score;
+  const s=Math.min(5,Math.floor(score/10));
+  document.getElementById('starPill').textContent='★'.repeat(s)+'☆'.repeat(5-s);
+}
+function showToast(msg,good){
+  const t=document.getElementById('toast');t.textContent=msg;
+  t.className='toast '+(good?'good':'bad')+' show';setTimeout(()=>t.classList.remove('show'),1800);
+}
+
+function switchMode(m){
+  ['learn','point','simon'].forEach(id=>{
+    document.getElementById('section-'+id).style.display=m===id?'block':'none';
+  });
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
+    b.classList.toggle('active',['learn','point','simon'][i]===m);
+  });
+  if(m==='point')setupPoint();
+  if(m==='simon')setupSimon();
+}
+
+// ---- LEARN ----
+function buildBodyGrid(){
+  const g=document.getElementById('bodyPartsGrid');
+  BODY_PARTS.forEach(item=>{
+    const c=document.createElement('div');
+    c.className='body-part-card';
+    c.innerHTML=`<span class="bp-emoji">${item.e}</span><div class="bp-en">${item.en}</div><div class="bp-cn">${item.cn}</div>`;
+    c.onclick=()=>{
+      document.querySelectorAll('.body-part-card').forEach(x=>x.classList.remove('lit'));
+      c.classList.add('lit');
+      speak(`${item.en}. Touch your ${item.en}.`,0.7,1.3);
+    };
+    g.appendChild(c);
+  });
+}
+function highlightPart(key){
+  const item=BODY_PARTS.find(x=>x.key===key)||BODY_PARTS[0];
+  speak(`${item.en}. ${item.en}.`,0.7,1.35);
+  const popup=document.getElementById('labelPopup');
+  popup.textContent=`${item.en} — ${item.cn} ${item.e}`;
+  popup.classList.add('show');
+  setTimeout(()=>popup.classList.remove('show'),2000);
+}
+
+// ---- POINT GAME ----
+function setupPoint(){
+  const item=BODY_PARTS[Math.floor(Math.random()*BODY_PARTS.length)];
+  pointAnswer=item.key;
+  document.getElementById('pointTarget').textContent=item.en+' '+item.e;
+  speak(`Touch your ${item.en}! Where is your ${item.en}?`,0.7,1.3);
+
+  const opts=[...BODY_PARTS].sort(()=>Math.random()-.5).slice(0,6);
+  if(!opts.find(x=>x.key===item.key)){opts[0]=item;}
+  const div=document.getElementById('pointGrid');div.innerHTML='';
+  opts.sort(()=>Math.random()-.5).forEach(bp=>{
+    const btn=document.createElement('button');
+    btn.className='point-btn';
+    btn.innerHTML=`${bp.e}<div style="font-size:.75rem;color:rgba(255,255,255,.8);margin-top:3px;">${bp.en}</div>`;
+    btn.onclick=()=>checkPoint(bp.key,btn);
+    div.appendChild(btn);
+  });
+}
+function checkPoint(key,btn){
+  document.querySelectorAll('.point-btn').forEach(b=>b.onclick=null);
+  if(key===pointAnswer){
+    btn.classList.add('correct');addScore(6);
+    speak(`Yes! That is your ${BODY_PARTS.find(x=>x.key===key).en}!`,0.7,1.4);
+    showToast('🎉 正确！Great job!',true);
+  }else{
+    btn.classList.add('wrong');
+    speak('Oops! Try again!',0.7,1.3);
+    showToast(`💡 正确是: ${BODY_PARTS.find(x=>x.key===pointAnswer).en}`,false);
+  }
+  setTimeout(setupPoint,2000);
+}
+
+// ---- SIMON SAYS ----
+function setupSimon(){
+  const item=BODY_PARTS[Math.floor(Math.random()*BODY_PARTS.length)];
+  document.getElementById('simonCommand').textContent=`Simon says... ${item.action}!`;
+  document.getElementById('simonCn').textContent=`Simon 说……${item.actionCn}！`;
+  document.getElementById('simonActionZone').textContent=item.gif;
+  document.getElementById('simonActionZone').style.fontSize='5rem';
+  speak(`Simon says... ${item.action}!`,0.68,1.3);
+}
+function simonDone(){
+  simonStreak++;addScore(5);
+  speak('Great job! Well done!',0.7,1.4);
+  document.getElementById('simonStreak').textContent=`连续做对: ${simonStreak} 次 🔥`;
+  showToast('🎉 Well done! 棒棒的！',true);
+  const zone=document.getElementById('simonActionZone');
+  zone.textContent='🎉';
+  setTimeout(setupSimon,1500);
+}
+
+buildBodyGrid();
+window.onload=()=>setTimeout(()=>speak('My body! Head, shoulders, knees and toes!',0.7,1.3),700);
+</script>
+</body>
+</html>

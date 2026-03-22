@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 5 - 高级规则 | Oxford Phonics World</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #FFD200 0%, #F7971E 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-info h1 {
+            font-size: 2.2em;
+            color: #F7971E;
+            margin-bottom: 8px;
+        }
+        .header-info p {
+            color: #666;
+            font-size: 1.05em;
+        }
+        .header-badge {
+            background: linear-gradient(135deg, #FFD200, #F7971E);
+            color: #333;
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .header-badge .level {
+            font-size: 1.5em;
+            font-weight: bold;
+            display: block;
+        }
+        .header-badge .desc {
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            gap: 10px;
+        }
+        .tab {
+            padding: 12px 25px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            color: #666;
+            border-radius: 8px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .tab.active {
+            background: linear-gradient(135deg, #FFD200, #F7971E);
+            color: #333;
+            box-shadow: 0 4px 12px rgba(255, 210, 0, 0.4);
+        }
+        .tab:hover:not(.active) {
+            background: #f0f0f0;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            color: #2c3e50;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #F7971E;
+        }
+        .rule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .rule-card {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffe082 100%);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid #F7971E;
+        }
+        .rule-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(247, 151, 30, 0.3);
+        }
+        .rule-card .type {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #F7971E;
+            margin-bottom: 10px;
+        }
+        .rule-card .pattern {
+            font-size: 1.2em;
+            color: #666;
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 4px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .rule-card .example {
+            color: #333;
+            font-size: 0.95em;
+        }
+        .rule-card .desc {
+            color: #666;
+            font-size: 0.85em;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        .lesson-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .lesson-table th {
+            background: linear-gradient(135deg, #FFD200, #F7971E);
+            color: #333;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .lesson-table th:first-child { border-radius: 8px 0 0 0; }
+        .lesson-table th:last-child { border-radius: 0 8px 0 0; }
+        .lesson-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .lesson-table tr:hover td {
+            background: #fff8e1;
+        }
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .activity-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #F7971E;
+        }
+        .activity-card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .activity-card p {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        .word-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+        }
+        .word-card {
+            background: white;
+            border: 2px solid #F7971E;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .word-card:hover {
+            background: #F7971E;
+            color: white;
+            transform: scale(1.05);
+        }
+        .word-card .word {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.2);
+            color: #333;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .rule-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #F7971E;
+        }
+        .rule-section h3 {
+            color: #F7971E;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .rule-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .rule-word {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1em;
+            font-weight: 600;
+        }
+        .tip-box {
+            background: #e8f5e9;
+            border: 2px solid #4CAF50;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .tip-box h3 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+        .tip-box ul {
+            color: #666;
+            padding-left: 20px;
+            line-height: 1.8;
+        }
+        .resources-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .resource-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .resource-item:hover {
+            transform: translateX(5px);
+        }
+        .resource-icon {
+            font-size: 1.8em;
+        }
+        .resource-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .achievement-card {
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .achievement-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        .achievement-card p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-info">
+                <h1>🔤 Level 5 - 高级规则</h1>
+                <p>掌握双元音、R控元音和多音节词，实现自主阅读</p>
+            </div>
+            <div class="header-badge">
+                <span class="level">Level 5</span>
+                <span class="desc">7岁+ · 第5学期</span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('rules')">🔤 高级规则</button>
+            <button class="tab" onclick="showTab('schedule')">📅 课程安排</button>
+            <button class="tab" onclick="showTab('activities')">🎮 教学活动</button>
+            <button class="tab" onclick="showTab('words')">📖 词汇表</button>
+            <button class="tab" onclick="showTab('resources')">🛠️ 教学资源</button>
+        </div>
+
+        <div id="rules" class="tab-content active">
+            <div class="card">
+                <h2>三大高级规则</h2>
+                <div class="rule-grid" id="ruleCards"></div>
+
+                <div id="rulesDetail"></div>
+
+                <div class="achievement-card">
+                    <h3>🎉 恭喜完成5册学习！</h3>
+                    <p>完成Level 5后，学生将掌握约800个高频词汇，能够进行自主阅读，为后续的英语学习打下坚实基础。</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="schedule" class="tab-content">
+            <div class="card">
+                <h2>24周课程安排表</h2>
+                <table class="lesson-table">
+                    <thead>
+                        <tr>
+                            <th>周次</th>
+                            <th>规则类型</th>
+                            <th>发音模式</th>
+                            <th>例词</th>
+                            <th>活动重点</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scheduleBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="activities" class="tab-content">
+            <div class="card">
+                <h2>教学活动设计</h2>
+                <div class="activity-grid">
+                    <div class="activity-card">
+                        <h3>🎵 双元音歌谣</h3>
+                        <p>创编双元音发音口诀，如 "oi says /ɔɪ/ in oil, boy, toy..." 帮助记忆复杂发音。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🔊 R控元音练习</h3>
+                        <p>重点练习ar, er, ir, or, ur等R控元音，强调舌位变化和口型。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🃏 多音节词拆分</h3>
+                        <p>将多音节词按音节拆分：butter-fly, hap-py, let-ter，训练音节意识。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🔍 听音辨音</h3>
+                        <p>听录音，区分双元音的不同发音，如 /ɔɪ/ vs /aɪ/。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🎤 流利阅读</h3>
+                        <p>进行分级读本的流利阅读训练，注重语调和停顿。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>📝 综合拼写</h3>
+                        <p>听写含高级规则的单词，检验拼读掌握情况。</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h3>💡 教学提示</h3>
+                    <ul>
+                        <li>双元音是两个元音合在一起发一个音，发音要连贯流畅</li>
+                        <li>R控元音中，r会改变前面元音的发音，需要大量练习</li>
+                        <li>多音节词要先教音节划分规则，再进行拼读</li>
+                        <li>提供大量对比练习，如 oil/ear, car/for, sun/sure</li>
+                        <li>结合绘本和短文进行阅读实践，培养自主阅读能力</li>
+                        <li>注重培养学生的阅读流利度和理解力</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="words" class="tab-content">
+            <div class="card">
+                <h2>Level 5 核心词汇表（约800词）</h2>
+                <div class="word-list" id="wordList"></div>
+            </div>
+        </div>
+
+        <div id="resources" class="tab-content">
+            <div class="card">
+                <h2>教学资源</h2>
+                <div class="resources-list">
+                    <div class="resource-item">
+                        <span class="resource-icon">🎵</span>
+                        <span class="resource-name">Diphthongs Song - Phonics Song</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎵</span>
+                        <span class="resource-name">R-controlled Vowels - Jack Hartmann</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎵</span>
+                        <span class="resource-name">Syllables Song - Alphablocks</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎮</span>
+                        <span class="resource-name">Diphthongs Game - Starfall</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎮</span>
+                        <span class="resource-name">R-controlled Bingo - ABCya</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎮</span>
+                        <span class="resource-name">Syllable Sort - Reading Eggs</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🖨️</span>
+                        <span class="resource-name">Diphthongs Worksheets</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🖨️</span>
+                        <span class="resource-name">R-controlled Flash Cards</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🖨️</span>
+                        <span class="resource-name">Syllable Division Printables</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">📖</span>
+                        <span class="resource-name">OPW Level 5 Reader Set</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="opw-overview.html" class="back-link">🏠 返回概览</a>
+        </div>
+    </div>
+
+    <script>
+        const rules = [
+            { type: 'Diphthongs', pattern: 'oi/oy', example: 'oil, boy, toy', desc: 'Two vowels, one sound' },
+            { type: 'Diphthongs', pattern: 'ow/ou', example: 'now, cow, house', desc: 'Different spellings, same sound' },
+            { type: 'Diphthongs', pattern: 'oo/ue', example: 'book, moon, blue', desc: 'Long or short vowel sound' },
+            { type: 'Diphthongs', pattern: 'au/aw', example: 'autumn, saw, law', desc: '/ɔ:/ sound' },
+            { type: 'R-controlled', pattern: 'ar', example: 'car, star, park', desc: 'ar says /ɑ:/' },
+            { type: 'R-controlled', pattern: 'er/ir/ur', example: 'her, bird, turn', desc: 'All say /ɜ:/' },
+            { type: 'R-controlled', pattern: 'or', example: 'for, corn, born', desc: 'or says /ɔ:/' },
+            { type: 'R-controlled', pattern: 'air/ear', example: 'air, ear, hear', desc: '/eə/ or /ɪə/' },
+            { type: 'Syllables', pattern: 'Open', example: 'baby, paper, open', desc: 'Ends in vowel sound' },
+            { type: 'Syllables', pattern: 'Closed', example: 'happy, little, rabbit', desc: 'Ends in consonant' }
+        ];
+
+        const rulesDetail = [
+            { vowel: 'oi', name: 'oi says /ɔɪ/', words: ['oil', 'coin', 'join', 'point', 'noise', 'voice'] },
+            { vowel: 'oy', name: 'oy says /ɔɪ/', words: ['boy', 'toy', 'joy', 'soy', 'employ', 'enjoy'] },
+            { vowel: 'ou', name: 'ou says /aʊ/', words: ['now', 'how', 'cow', 'house', 'mouse', 'mouth'] },
+            { vowel: 'ow', name: 'ow says /aʊ/', words: ['cow', 'now', 'how', 'brown', 'town', 'down'] },
+            { vowel: 'oo(u:)', name: 'oo says /u:/', words: ['moon', 'cool', 'pool', 'tool', 'school', 'food'] },
+            { vowel: 'oo(ʊ)', name: 'oo says /ʊ/', words: ['book', 'look', 'good', 'wood', 'foot', 'cook'] },
+            { vowel: 'ue', name: 'ue says /u:/', words: ['blue', 'true', 'glue', 'clue', 'due', 'sue'] },
+            { vowel: 'au', name: 'au says /ɔ:/', words: ['autumn', 'cause', 'pause', 'because', 'laugh', 'sauce'] },
+            { vowel: 'aw', name: 'aw says /ɔ:/', words: ['saw', 'law', 'draw', 'raw', 'straw', 'claw'] },
+            { vowel: 'ar', name: 'ar says /ɑ:/', words: ['car', 'star', 'park', 'dark', 'farm', 'start'] },
+            { vowel: 'er', name: 'er says /ɜ:/', words: ['her', 'term', 'fern', 'herb', 'person', 'teacher'] },
+            { vowel: 'ir', name: 'ir says /ɜ:/', words: ['bird', 'girl', 'shirt', 'skirt', 'first', 'third'] },
+            { vowel: 'ur', name: 'ur says /ɜ:/', words: ['turn', 'burn', 'surf', 'fur', 'hurt', 'nurse'] },
+            { vowel: 'or', name: 'or says /ɔ:/', words: ['for', 'corn', 'born', 'short', 'fork', 'sport'] },
+            { vowel: 'air', name: 'air says /eə/', words: ['air', 'hair', 'fair', 'pair', 'chair', 'stair'] },
+            { vowel: 'ear', name: 'ear says /ɪə/', words: ['ear', 'hear', 'near', 'dear', 'fear', 'year'] }
+        ];
+
+        const schedule = [
+            { week: 1, type: 'Diphthongs', pattern: 'oi', words: 'oil, coin', focus: 'oi引入' },
+            { week: 2, type: 'Diphthongs', pattern: 'oy', words: 'boy, toy', focus: 'oy引入' },
+            { week: 3, type: 'Diphthongs', pattern: 'ou', words: 'now, house', focus: 'ou引入' },
+            { week: 4, type: 'Diphthongs', pattern: 'ow(aʊ)', words: 'cow, brown', focus: 'ow短音' },
+            { week: 5, type: 'Diphthongs', pattern: 'oo(u:)', words: 'moon, cool', focus: 'oo长音' },
+            { week: 6, type: 'Diphthongs', pattern: 'oo(ʊ)', words: 'book, good', focus: 'oo短音' },
+            { week: 7, type: 'Diphthongs', pattern: 'ue', words: 'blue, true', focus: 'ue引入' },
+            { week: 8, type: 'Diphthongs', pattern: 'au/aw', words: 'autumn, saw', focus: 'au/aw引入' },
+            { week: 9, type: 'Review', pattern: 'Diphthongs', words: 'All diphthongs', focus: '双元音综合' },
+            { week: 10, type: 'R-controlled', pattern: 'ar', words: 'car, star', focus: 'ar引入' },
+            { week: 11, type: 'R-controlled', pattern: 'er', words: 'her, term', focus: 'er引入' },
+            { week: 12, type: 'R-controlled', pattern: 'ir', words: 'bird, girl', focus: 'ir引入' },
+            { week: 13, type: 'R-controlled', pattern: 'ur', words: 'turn, burn', focus: 'ur引入' },
+            { week: 14, type: 'R-controlled', pattern: 'or', words: 'for, corn', focus: 'or引入' },
+            { week: 15, type: 'R-controlled', pattern: 'air/ear', words: 'air, ear', focus: 'air/ear引入' },
+            { week: 16, type: 'Review', pattern: 'R-controlled', words: 'All R-vowels', focus: 'R控综合' },
+            { week: 17, type: 'Syllables', pattern: 'Open syllables', words: 'baby, paper', focus: '开音节' },
+            { week: 18, type: 'Syllables', pattern: 'Closed syllables', words: 'happy, little', focus: '闭音节' },
+            { week: 19, type: 'Syllables', pattern: 'Multi-syllable words', words: 'butterfly, happy', focus: '多音节' },
+            { week: 20, type: 'Reading', pattern: 'Application', words: 'Reading practice', focus: '阅读应用' },
+            { week: 21, type: 'Fluency', pattern: 'Reading', words: 'Fluent reading', focus: '流利度训练' },
+            { week: 22, type: 'Review', pattern: 'All rules', words: 'Comprehensive', focus: '综合复习' },
+            { week: 23, type: 'Assessment', pattern: 'Test', words: 'Skills test', focus: '技能测试' },
+            { week: 24, type: 'Celebration', pattern: 'Graduation', words: 'Completion', focus: '毕业庆祝' }
+        ];
+
+        const words = [
+            'oil', 'coin', 'join', 'point', 'noise', 'voice', 'choice', 'spoilt', 'joint', 'boil',
+            'boy', 'toy', 'joy', 'soy', 'employ', 'enjoy', 'destroy', 'annoy', 'loyal', 'royal',
+            'now', 'how', 'cow', 'house', 'mouse', 'mouth', 'south', 'shout', 'cloud', 'loud',
+            'cow', 'now', 'how', 'brown', 'town', 'down', 'crown', 'clown', 'frown', 'gown',
+            'moon', 'cool', 'pool', 'tool', 'school', 'food', 'room', 'bloom', 'gloom', 'spoon',
+            'book', 'look', 'good', 'wood', 'foot', 'cook', 'took', 'hook', 'nook', 'brook',
+            'blue', 'true', 'glue', 'clue', 'due', 'sue', 'rude', 'prude', 'crude', 'fluke',
+            'autumn', 'cause', 'pause', 'because', 'laugh', 'sauce', 'caught', 'taught', 'fault', 'haunt',
+            'saw', 'law', 'draw', 'raw', 'straw', 'claw', 'flaw', 'paw', 'jaw', 'gnaw',
+            'car', 'star', 'park', 'dark', 'farm', 'start', 'card', 'hard', 'part', 'mart',
+            'her', 'term', 'fern', 'herb', 'person', 'teacher', 'clerk', 'stern', 'nerve', 'serve',
+            'bird', 'girl', 'shirt', 'skirt', 'first', 'third', 'thirty', 'dirt', 'birth', 'firm',
+            'turn', 'burn', 'surf', 'fur', 'hurt', 'nurse', 'purse', 'burst', 'curve', 'surf',
+            'for', 'corn', 'born', 'short', 'fork', 'sport', 'port', 'sort', 'north', 'fort',
+            'air', 'hair', 'fair', 'pair', 'chair', 'stair', 'repair', 'affair', 'despair', 'lair',
+            'ear', 'hear', 'near', 'dear', 'fear', 'year', 'clear', 'tear', 'gear', 'appear'
+        ];
+
+        // 生成高级规则卡片
+        function generateRuleCards() {
+            const container = document.getElementById('ruleCards');
+            container.innerHTML = rules.map(rule => `
+                <div class="rule-card" onclick="playSound('${rule.pattern}')">
+                    <div class="type">${rule.type}</div>
+                    <div class="pattern">${rule.pattern}</div>
+                    <div class="example">${rule.example}</div>
+                    <div class="desc">${rule.desc}</div>
+                </div>
+            `).join('');
+        }
+
+        // 生成规则详情
+        function generateRulesDetail() {
+            const container = document.getElementById('rulesDetail');
+            container.innerHTML = rulesDetail.map(rule => `
+                <div class="rule-section">
+                    <h3>${rule.name}</h3>
+                    <div class="rule-examples">
+                        ${rule.words.map(word => `
+                            <div class="rule-word" onclick="playSound('${word}')">${word}</div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 生成课程表
+        function generateSchedule() {
+            const tbody = document.getElementById('scheduleBody');
+            tbody.innerHTML = schedule.map(item => `
+                <tr>
+                    <td>第 ${item.week} 周</td>
+                    <td><strong>${item.type}</strong></td>
+                    <td>${item.pattern}</td>
+                    <td>${item.words}</td>
+                    <td>${item.focus}</td>
+                </tr>
+            `).join('');
+        }
+
+        // 生成词汇表
+        function generateWordList() {
+            const container = document.getElementById('wordList');
+            container.innerHTML = words.map(word => `
+                <div class="word-card" onclick="playSound('${word}')">
+                    <div class="word">${word}</div>
+                </div>
+            `).join('');
+        }
+
+        // 切换标签页
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // 播放发音
+        function playSound(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.8;
+                speechSynthesis.speak(utterance);
+            } else {
+                alert(`发音: ${text}`);
+            }
+        }
+
+        // 初始化
+        generateRuleCards();
+        generateRulesDetail();
+        generateSchedule();
+        generateWordList();
+    </script>
+</body>
+</html>

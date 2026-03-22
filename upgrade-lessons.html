@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>UpGrade English — 新增专题教案</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito","PingFang SC","Microsoft YaHei",sans-serif;background:#f0f4ff;color:#333;line-height:1.8}
+.hero{background:linear-gradient(135deg,#667eea,#764ba2,#f093fb);color:#fff;padding:60px 32px 48px;text-align:center}
+.hero h1{font-size:2.4rem;font-weight:900;letter-spacing:3px;margin-bottom:12px;text-shadow:0 2px 8px rgba(0,0,0,.2)}
+.hero .sub{font-size:1.05rem;opacity:.92;margin-bottom:24px}
+.hero .notice{background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.5);border-radius:14px;padding:14px 22px;max-width:680px;margin:0 auto;font-size:.92rem;line-height:1.9}
+.hero .notice b{font-size:1rem}
+.tabs{background:#fff;box-shadow:0 3px 12px rgba(0,0,0,.08);position:sticky;top:0;z-index:200;padding:0 24px}
+.tab-list{display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.tab-list::-webkit-scrollbar{display:none}
+.tab-btn{padding:16px 20px;border:none;background:none;cursor:pointer;font-size:.9rem;font-weight:600;color:#888;border-bottom:3px solid transparent;white-space:nowrap;transition:.2s}
+.tab-btn.active,.tab-btn:hover{color:#764ba2;border-bottom-color:#764ba2}
+.section{display:none;max-width:1100px;margin:0 auto;padding:36px 20px 80px}
+.section.active{display:block}
+.sec-title{font-size:1.6rem;font-weight:800;color:#333;margin-bottom:8px}
+.sec-desc{color:#666;font-size:.95rem;margin-bottom:32px;line-height:1.8}
+.unit{background:#fff;border-radius:18px;padding:0;margin-bottom:36px;box-shadow:0 3px 16px rgba(0,0,0,.07);overflow:hidden}
+.unit-header{padding:22px 32px;display:flex;align-items:center;gap:18px}
+.unit-num{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:800;color:#fff;flex-shrink:0}
+.unit-info h2{font-size:1.3rem;font-weight:700;margin-bottom:2px}
+.unit-info .unit-en{font-size:1rem;opacity:.75}
+.unit-body{padding:8px 32px 32px}
+.slabel{font-size:.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#fff;border-radius:6px;padding:3px 10px;display:inline-block;margin:20px 0 10px}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:8px}
+.vocab-card{border-radius:12px;padding:14px 16px;text-align:center;border:2px solid transparent}
+.vocab-card .emoji{font-size:2rem;margin-bottom:4px;display:block}
+.vocab-card .en{font-weight:700;font-size:1rem}
+.vocab-card .cn{font-size:.78rem;color:#888;margin-top:2px}
+.sent-list{list-style:none}
+.sent-list li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed #f0f0f0}
+.sent-list li:last-child{border-bottom:none}
+.sent-en{font-weight:700;color:#333;min-width:260px}
+.sent-cn{color:#888;font-size:.9rem}
+.lesson-plan{border:2px solid #f0f0f0;border-radius:14px;overflow:hidden;margin-top:4px}
+.lp-header{display:grid;grid-template-columns:80px 120px 1fr 160px;background:#f8f8f8;font-size:.78rem;font-weight:700;color:#888;padding:8px 16px;gap:12px}
+.lp-row{display:grid;grid-template-columns:80px 120px 1fr 160px;padding:10px 16px;gap:12px;border-top:1px solid #f5f5f5;font-size:.88rem;align-items:start}
+.lp-row:nth-child(odd){background:#fffbf8}
+.lp-time{font-weight:700;color:#f5576c;white-space:nowrap}
+.lp-phase{border-radius:8px;padding:2px 8px;font-size:.76rem;font-weight:600;text-align:center;white-space:nowrap}
+.lp-content{line-height:1.7}
+.lp-content b{color:#333}
+.lp-method{font-size:.78rem;color:#888;line-height:1.6}
+.game-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:4px}
+.game-card{border-radius:14px;padding:20px;border:2px solid transparent}
+.game-card .game-name{font-weight:800;font-size:1.05rem;margin-bottom:6px}
+.game-card .game-aim{font-size:.78rem;margin-bottom:10px;opacity:.8}
+.game-card .game-step{font-size:.85rem;line-height:1.8}
+.game-card .game-step li{margin-left:16px;margin-bottom:2px}
+.game-card .game-tip{margin-top:10px;font-size:.78rem;background:rgba(255,255,255,.5);border-radius:8px;padding:6px 10px}
+.mat-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.mat-chip{background:#f3f3f3;border-radius:20px;padding:4px 14px;font-size:.82rem;color:#555}
+.tips-box{background:#fffde7;border-left:4px solid #ffc107;border-radius:0 10px 10px 0;padding:12px 16px;font-size:.88rem;color:#5d4037;margin-top:12px}
+.gu1 .unit-header{background:linear-gradient(135deg,#1B4FD8,#00B4D8)}
+.gu1 .unit-num{background:#1B4FD8}
+.gu1 .slabel{background:#1B4FD8}
+.gu1 .vocab-card{background:#f0f8ff;border-color:#b3d7ff}
+.gu2 .unit-header{background:linear-gradient(135deg,#7B2FBE,#FF6B9D)}
+.gu2 .unit-num{background:#7B2FBE}
+.gu2 .slabel{background:#7B2FBE}
+.gu2 .vocab-card{background:#faf0ff;border-color:#ddb0f5}
+.gu3 .unit-header{background:linear-gradient(135deg,#27AE60,#00B4D8)}
+.gu3 .unit-num{background:#27AE60}
+.gu3 .slabel{background:#27AE60}
+.gu3 .vocab-card{background:#f3fdf4;border-color:#b9f0c0}
+.gu4 .unit-header{background:linear-gradient(135deg,#E74C3C,#FF8C42)}
+.gu4 .unit-num{background:#E74C3C}
+.gu4 .slabel{background:#E74C3C}
+.gu4 .vocab-card{background:#fff5f0;border-color:#ffd0b5}
+.gc1{background:#fff8e1;border-color:#ffe082}.gc1 .game-name{color:#e65100}
+.gc2{background:#e8f5e9;border-color:#a5d6a7}.gc2 .game-name{color:#2e7d32}
+.gc3{background:#e3f2fd;border-color:#90caf9}.gc3 .game-name{color:#1565c0}
+.gc4{background:#fce4ec;border-color:#f48fb1}.gc4 .game-name{color:#880e4f}
+.ph-open{background:#ffecd2;color:#e65100}
+.ph-warm{background:#e8f5e9;color:#2e7d32}
+.ph-new{background:#e3f2fd;color:#1565c0}
+.ph-game{background:#fce4ec;color:#880e4f}
+.ph-story{background:#f3e5f5;color:#6a1b9a}
+.ph-close{background:#e0f2f1;color:#004d40}
+@media(max-width:640px){
+  .lp-header,.lp-row{grid-template-columns:60px 90px 1fr;}.lp-method{display:none}
+  .hero h1{font-size:1.6rem}
+  .unit-body{padding:8px 16px 24px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🌟 UpGrade English — 新增专题教案</h1>
+  <p class="sub">英式英语 · 4-5岁启蒙 · 4个新专题 · 8课时详细安排</p>
+  <div class="notice">
+    <b>⚠️ 英式英语提示</b><br>
+    本教案采用 <b>英式英语（en-GB）</b>，所有发音练习、歌曲推荐均以英国发音为准。<br>
+    词汇差异：color → colour, favorite → favourite, center → centre 等。
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab-list">
+    <button class="tab-btn active" onclick="showTab('greetings')">👋 Greetings</button>
+    <button class="tab-btn" onclick="showTab('team')">👨‍👩‍👧‍👦 Team</button>
+    <button class="tab-btn" onclick="showTab('rules')">📋 Class Rules</button>
+    <button class="tab-btn" onclick="showTab('safety')">🦺 Safety</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     UNIT 1  Greetings
+══════════════════════════════════════════════ -->
+<div id="tab-greetings" class="section active">
+  <div class="sec-title">专题一：问候与道别</div>
+  <p class="sec-desc">学习不同时间的问候、自我介绍、礼貌道别，建立课堂仪式感。</p>
+
+  <div class="unit gu1">
+    <div class="unit-header">
+      <div class="unit-num">1</div>
+      <div class="unit-info">
+        <h2>问候与道别</h2>
+        <div class="unit-en">Greetings & Farewells · 2课时</div>
+      </div>
+    </div>
+    <div class="unit-body">
+
+      <span class="slabel">核心词汇（英式）</span>
+      <div class="vocab-grid">
+        <div class="vocab-card"><span class="emoji">👋</span><div class="en">Hello / Hi</div><div class="cn">你好</div></div>
+        <div class="vocab-card"><span class="emoji">🌅</span><div class="en">Good morning</div><div class="cn">早上好</div></div>
+        <div class="vocab-card"><span class="emoji">🌆</span><div class="en">Good afternoon</div><div class="cn">下午好</div></div>
+        <div class="vocab-card"><span class="emoji">🌙</span><div class="en">Good evening</div><div class="cn">晚上好</div></div>
+        <div class="vocab-card"><span class="emoji">👋</span><div class="en">Goodbye / Bye-bye</div><div class="cn">再见</div></div>
+        <div class="vocab-card"><span class="emoji">👋</span><div class="en">See you next time</div><div class="cn">下次见</div></div>
+      </div>
+
+      <span class="slabel">核心句型（英式）</span>
+      <ul class="sent-list">
+        <li><span class="sent-en">Good morning, Teacher!</span><span class="sent-cn">早上好，老师！</span></li>
+        <li><span class="sent-en">Good morning, [Name]!</span><span class="sent-cn">早上好，[名字]！</span></li>
+        <li><span class="sent-en">How are you?</span><span class="sent-cn">你好吗？</span></li>
+        <li><span class="sent-en">I'm very well, thank you!</span><span class="sent-cn">我很好，谢谢！</span></li>
+        <li><span class="sent-en">Goodbye! / Bye-bye!</span><span class="sent-cn">再见！</span></li>
+        <li><span class="sent-en">See you tomorrow!</span><span class="sent-cn">明天见！</span></li>
+      </ul>
+
+      <span class="slabel">推荐歌谣（英式）</span>
+      <div class="tips-box">
+        🎵 <b>Good Morning Song</b>（Dream English Kids，英式发音）<br>
+        歌词：Good morning, good morning, how are you? Good morning, good morning, I'm fine, thank you!<br>
+        每节课固定作为<b>开场歌</b>，3周后孩子能自然跟唱。
+      </div>
+
+      <span class="slabel">配套游戏设计</span>
+      <div class="game-grid">
+        <div class="game-card gc1">
+          <div class="game-name">🎪 Hand Puppet Greeting</div>
+          <div class="game-aim">目标：自然使用各种问候语</div>
+          <ol class="game-step">
+            <li>老师用两只手偶（小兔 & 小熊）互相问候示范</li>
+            <li>孩子每人拿一只手偶，找同伴互相说 "Hello!"</li>
+            <li>老师喊 "Goodbye time!"，手偶互相说 Bye 并挥手</li>
+            <li>升级：用 Good morning / Good afternoon / Good evening 替换</li>
+          </ol>
+          <div class="game-tip">💡 手偶消除开口心理障碍，是最强启蒙道具</div>
+        </div>
+        <div class="game-card gc2">
+          <div class="game-name">🎯 Magic Wand</div>
+          <div class="game-aim">目标：建立问候语与动作的联结</div>
+          <ol class="game-step">
+            <li>老师用"魔法棒"指向某个孩子</li>
+            <li>被指到的孩子必须说 "Good morning, Teacher!" 并挥手</li>
+            <li>老师回应 "Good morning, [Name]!"</li>
+            <li>孩子变成"魔法师"去指下一个人</li>
+          </ol>
+          <div class="game-tip">💡 孩子抢着当魔法师，自然反复练习问候</div>
+        </div>
+        <div class="game-card gc3">
+          <div class="game-name">🎵 Goodbye Circle</div>
+          <div class="game-aim">目标：巩固 Goodbye，作为下课仪式</div>
+          <ol class="game-step">
+            <li>全班围成圆圈</li>
+            <li>老师先说 "Goodbye, [Name]!" 并握手/击掌</li>
+            <li>被说到的孩子回应 "Goodbye, Teacher!" 然后向下一个人说再见</li>
+            <li>传遍全圆圈，最后齐喊 "Goodbye, everyone!"</li>
+          </ol>
+          <div class="game-tip">💡 固定仪式让孩子期待每节课的结尾</div>
+        </div>
+      </div>
+
+      <span class="slabel">第1课 详细课堂安排（45分钟）</span>
+      <div class="lesson-plan">
+        <div class="lp-header"><span>时间</span><span>环节</span><span>教学内容与步骤</span><span>方法/道具</span></div>
+        <div class="lp-row">
+          <span class="lp-time">0:00–5:00</span>
+          <span class="lp-phase ph-open">Opening</span>
+          <div class="lp-content"><b>Good Morning Song 开场（英式发音）</b><br>① 老师播放 Good Morning Song，边唱边挥手示范<br>② 鼓励孩子跟着律动，不强求开口<br>③ 歌后老师大声说 "Good morning, everyone!"</div>
+          <div class="lp-method">道具：音箱<br>歌曲：Good Morning Song<br>（Dream English Kids）</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">5:00–10:00</span>
+          <span class="lp-phase ph-warm">Warm-up</span>
+          <div class="lp-content"><b>自我介绍示范</b><br>① 老师拿出手偶小兔："Hello! I'm Lily! What's your name?"<br>② 手偶走到每个孩子面前，伸出手说 "Hello!"<br>③ 引导孩子用手指戳手偶，老师帮孩子说 "Hello, Lily!"<br>④ 重复 8-10 次，让每个孩子都参与一次</div>
+          <div class="lp-method">道具：手偶<br>方法：TPR<br>示范先行</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">10:00–20:00</span>
+          <span class="lp-phase ph-new">New Learning</span>
+          <div class="lp-content"><b>引入问候语（英式）</b><br>① 图卡展示：Hello 配图（孩子挥手）→ 老师说 "Hello!"，全班跟读×3<br>② 图卡展示：Goodbye 配图（孩子挥手离开）→ 老师说 "Goodbye!"，全班跟读×3<br>③ <b>对比练习</b>：老师走进教室→ "Hello!"；老师走出教室→ "Goodbye!"（孩子跟说）<br>④ 两两配对：小朋友互相说 Hello / Goodbye（老师巡回鼓励）<br>⑤ 引入 Good morning：老师指太阳图片 "It's morning! Good morning!" 全班跟读<br>⑥ 引入 How are you? / I'm very well, thank you!</div>
+          <div class="lp-method">道具：词卡<br>太阳图片<br>方法：图卡<br>情境对比</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">20:00–35:00</span>
+          <span class="lp-phase ph-game">Game Time</span>
+          <div class="lp-content"><b>游戏①：Hand Puppet Greeting（10分钟）</b><br>→ 见游戏设计详细规则<br><b>游戏②：Magic Wand（5分钟）</b><br>→ 见游戏设计详细规则<br>两个游戏之间老师做 <b>能量加油站</b>：全班大声说 "Hello, hello, HELLO!" 拍手3次</div>
+          <div class="lp-method">道具：手偶<br>魔法棒<br>方法：角色<br>扮演游戏</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">35:00–42:00</span>
+          <span class="lp-phase ph-story">Story Time</span>
+          <div class="lp-content"><b>绘本：《Hello, World!》 或 《Hello》（Anthony Browne）</b><br>① 老师翻页，用英语描述图片："Look! The bear says Hello!"<br>② 每次有人打招呼，老师暂停请孩子一起说<br>③ 结尾：问孩子 "Who did we meet today?"（用中文回答没关系）</div>
+          <div class="lp-method">道具：绘本<br>方法：大书<br>共读</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">42:00–45:00</span>
+          <span class="lp-phase ph-close">Closing</span>
+          <div class="lp-content"><b>Goodbye Circle 下课仪式</b><br>→ 见游戏设计详细规则<br>发送 <b>今日词卡</b>（Hello/Goodbye 图卡）带回家</div>
+          <div class="lp-method">词卡带回家<br>家长配合卡</div>
+        </div>
+      </div>
+
+      <span class="slabel" style="margin-top:24px">第2课 详细课堂安排（45分钟）</span>
+      <div class="lesson-plan">
+        <div class="lp-header"><span>时间</span><span>环节</span><span>教学内容与步骤</span><span>方法/道具</span></div>
+        <div class="lp-row">
+          <span class="lp-time">0:00–5:00</span>
+          <span class="lp-phase ph-open">Opening</span>
+          <div class="lp-content"><b>Good Morning Song + 点名</b><br>唱完歌后老师逐一点名："Good morning, [Name]!" 孩子回应 "Good morning, Teacher!"</div>
+          <div class="lp-method">固定仪式</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">5:00–15:00</span>
+          <span class="lp-phase ph-warm">复习+拓展</span>
+          <div class="lp-content"><b>复习第1课 + 引入 Good afternoon / Good evening / See you</b><br>① 快速图卡闪认：Hello / Goodbye / Good morning（每张3秒）<br>② 引入 Good afternoon：老师拉窗帘模拟"下午"，说 "Now it's afternoon. Good afternoon!"<br>③ 引入 Good evening：老师调暗教室灯光，说 "It's evening. Good evening!"<br>④ 引入 See you next time!：老师假装要离开，说 "See you next time!" 挥手，重复3次<br>⑤ 引入 How are you? / I'm very well, thank you!：对话练习</div>
+          <div class="lp-method">道具：词卡<br>情境模拟</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">15:00–30:00</span>
+          <span class="lp-phase ph-game">Game Combo</span>
+          <div class="lp-content"><b>游戏：角色扮演"小老师"（15分钟）</b><br>① 请一个孩子戴上老师帽子，站在门口<br>② 其他孩子依次走进来，对"小老师"说 "Good morning, Teacher!"<br>③ "小老师"回应 "Good morning, [Name]!"（老师帮提示名字）<br>④ 下课时所有人对"小老师"说 "Goodbye!"<br>⑤ 每个孩子轮流当一次小老师（或挑3-4人演示）<br><br><b>扩展：Morning/Afternoon/Evening 转换游戏</b><br>老师翻太阳/下午/夜晚卡片，孩子判断说 Good morning / Good afternoon / Good evening</div>
+          <div class="lp-method">道具：老师帽<br>太阳/下午/夜晚卡<br>方法：角色<br>扮演</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">30:00–40:00</span>
+          <span class="lp-phase ph-story">手工+律动</span>
+          <div class="lp-content"><b>制作"Hello 挥手卡"</b><br>① 孩子在纸上描画自己的手，涂色<br>② 老师帮写上 "Hello, I'm ___!"<br>③ 孩子拿着自己的手卡互相打招呼<br>（此手工可作为单元作品留档）</div>
+          <div class="lp-method">道具：彩纸<br>蜡笔<br>方法：手工</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">40:00–45:00</span>
+          <span class="lp-phase ph-close">Closing</span>
+          <div class="lp-content">Goodbye Circle + 今日词卡（Good morning / Good afternoon / Good evening / See you）</div>
+          <div class="lp-method">词卡带回家</div>
+        </div>
+      </div>
+
+      <span class="slabel">教学材料清单</span>
+      <div class="mat-list">
+        <span class="mat-chip">👋 Hello/Goodbye 词卡</span>
+        <span class="mat-chip">🌅 Good morning 词卡</span>
+        <span class="mat-chip">🌆 Good afternoon 词卡</span>
+        <span class="mat-chip">🌙 Good evening 词卡</span>
+        <span class="mat-chip">🐰 手偶2个</span>
+        <span class="mat-chip">🪄 魔法棒1根</span>
+        <span class="mat-chip">🎩 小老师帽子</span>
+        <span class="mat-chip">📖 绘本《Hello》</span>
+        <span class="mat-chip">🖍️ 彩纸+蜡笔（手工）</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     UNIT 2  Our Team
+══════════════════════════════════════════════ -->
+<div id="tab-team" class="section">
+  <div class="sec-title">专题二：我们的团队</div>
+  <p class="sec-desc">学习团队合作、角色分工、礼貌用语、分享与轮流。</p>
+
+  <div class="unit gu2">
+    <div class="unit-header">
+      <div class="unit-num">2</div>
+      <div class="unit-info">
+        <h2>我们的团队</h2>
+        <div class="unit-en">Our Team · 2课时</div>
+      </div>
+    </div>
+    <div class="unit-body">
+
+      <span class="slabel">核心词汇</span>
+      <div class="vocab-grid">
+        <div class="vocab-card"><span class="emoji">🙋</span><div class="en">My name is...</div><div class="cn">我叫……</div></div>
+        <div class="vocab-card"><span class="emoji">🤝</span><div class="en">Nice to meet you</div><div class="cn">很高兴认识你</div></div>
+        <div class="vocab-card"><span class="emoji">❓</span><div class="en">What's your name?</div><div class="cn">你叫什么名字？</div></div>
+        <div class="vocab-card"><span class="emoji">🙏</span><div class="en">Please</div><div class="cn">请</div></div>
+        <div class="vocab-card"><span class="emoji">💛</span><div class="en">Thank you / Thanks</div><div class="cn">谢谢</div></div>
+        <div class="vocab-card"><span class="emoji">😊</span><div class="en">You're welcome</div><div class="cn">不客气</div></div>
+        <div class="vocab-card"><span class="emoji">😔</span><div class="en">Sorry</div><div class="cn">对不起</div></div>
+        <div class="vocab-card"><span class="emoji">🤗</span><div class="en">It's OK</div><div class="cn">没关系</div></div>
+      </div>
+
+      <span class="slabel">团队角色词汇</span>
+      <div class="vocab-grid">
+        <div class="vocab-card"><span class="emoji">👑</span><div class="en">Team Leader</div><div class="cn">队长</div></div>
+        <div class="vocab-card"><span class="emoji">🤝</span><div class="en">Helper</div><div class="cn">助手</div></div>
+        <div class="vocab-card"><span class="emoji">🎨</span><div class="en">Artist</div><div class="cn">艺术家</div></div>
+        <div class="vocab-card"><span class="emoji">📚</span><div class="en">Reader</div><div class="cn">阅读者</div></div>
+        <div class="vocab-card"><span class="emoji">🔬</span><div class="en">Scientist</div><div class="cn">科学家</div></div>
+        <div class="vocab-card"><span class="emoji">🎵</span><div class="en">Singer</div><div class="cn">歌手</div></div>
+        <div class="vocab-card"><span class="emoji">🏗️</span><div class="en">Builder</div><div class="cn">建造者</div></div>
+        <div class="vocab-card"><span class="emoji">✍️</span><div class="en">Writer</div><div class="cn">写作者</div></div>
+      </div>
+
+      <span class="slabel">团队价值观</span>
+      <div class="vocab-grid">
+        <div class="vocab-card"><span class="emoji">🤝</span><div class="en">Share</div><div class="cn">分享</div></div>
+        <div class="vocab-card"><span class="emoji">👂</span><div class="en">Listen</div><div class="cn">倾听</div></div>
+        <div class="vocab-card"><span class="emoji">😊</span><div class="en">Be Kind</div><div class="cn">友善</div></div>
+        <div class="vocab-card"><span class="emoji">💪</span><div class="en">Help Each Other</div><div class="cn">互相帮助</div></div>
+        <div class="vocab-card"><span class="emoji">🙌</span><div class="en">Celebrate</div><div class="cn">庆祝</div></div>
+        <div class="vocab-card"><span class="emoji">🔄</span><div class="en">Take Turns</div><div class="cn">轮流</div></div>
+      </div>
+
+      <span class="slabel">推荐歌谣</span>
+      <div class="tips-box">
+        🎵 <b>What's Your Name?</b>（Super Simple Songs，英式发音可选）<br>
+        歌词核心：What's your name? My name is [Name]. Nice to meet you!<br>
+        用于自我介绍环节，配握手动作效果最佳。
+      </div>
+
+      <span class="slabel">配套游戏设计</span>
+      <div class="game-grid">
+        <div class="game-card gc1">
+          <div class="game-name">🎟️ Name Tag Party</div>
+          <div class="game-aim">目标：自然使用 My name is + What's your name</div>
+          <ol class="game-step">
+            <li>每个孩子胸前贴上名字贴纸（英文名/拼音）</li>
+            <li>老师示范："Hi! My name is Miss Li. What's your name?"</li>
+            <li>孩子回答："My name is [Name]."</li>
+            <li>互相握手说 "Nice to meet you!"</li>
+            <li>音乐游戏：音乐响时自由走动，音乐停时找离自己最近的人打招呼</li>
+          </ol>
+          <div class="game-tip">💡 名字贴纸降低记忆负担，孩子专注练习句型</div>
+        </div>
+        <div class="game-card gc2">
+          <div class="game-name">🎲 Friend Ball</div>
+          <div class="game-aim">目标：反复练习问答对话</div>
+          <ol class="game-step">
+            <li>全班围圈站，老师拿软球</li>
+            <li>老师把球滚给某个孩子，同时说 "What's your name?"</li>
+            <li>孩子接住球说 "My name is [Name]!" 然后把球滚给另一个孩子</li>
+            <li>接球者问 "What's your name?"，循环</li>
+            <li>升级：把球换成传递感谢："Thank you!" → "You're welcome!"</li>
+          </ol>
+          <div class="game-tip">💡 软球让孩子期待被叫到，游戏感强</div>
+        </div>
+        <div class="game-card gc3">
+          <div class="game-name">🎭 Sorry Sorry Game</div>
+          <div class="game-aim">目标：掌握 Sorry / It's OK 礼貌表达</div>
+          <ol class="game-step">
+            <li>老师演示：假装踩到孩子的脚，说 "Oh! Sorry!"</li>
+            <li>孩子练习回应 "It's OK!"</li>
+            <li>情境1：碰撞（Sorry / It's OK）</li>
+            <li>情境2：抢玩具后（Sorry / It's OK）</li>
+            <li>情境3：帮忙递东西（Thank you / You're welcome）</li>
+            <li>孩子两两配对，随机抽情境卡表演</li>
+          </ol>
+          <div class="game-tip">💡 连接真实社交场景，让礼貌英语有实际意义</div>
+        </div>
+      </div>
+
+      <span class="slabel">第3课 详细课堂安排（45分钟）</span>
+      <div class="lesson-plan">
+        <div class="lp-header"><span>时间</span><span>环节</span><span>教学内容与步骤</span><span>方法/道具</span></div>
+        <div class="lp-row">
+          <span class="lp-time">0:00–5:00</span>
+          <span class="lp-phase ph-open">Opening</span>
+          <div class="lp-content"><b>Good Morning Song + 点名 + 问候热身</b><br>唱完歌后老师问："How are you today?" 先接受任何回答（包括中文）</div>
+          <div class="lp-method">固定仪式</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">5:00–15:00</span>
+          <span class="lp-phase ph-new">New Learning</span>
+          <div class="lp-content"><b>引入自我介绍句型 + 团队角色</b><br>① 老师拿出陌生手偶："Hi! My name is Benny! What's your name?"<br>② 引导孩子用手偶回答：逐一练习<br>③ 引入 Nice to meet you!：老师演示握手时说<br>④ 全班两两配对：A说 "My name is ___." B说 "Nice to meet you!" A回 "Nice to meet you, too!"<br>⑤ 引入团队角色词汇：Team Leader / Helper / Artist 等，用图卡+角色扮演</div>
+          <div class="lp-method">道具：手偶<br>名字贴纸<br>角色图卡<br>TPR示范</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">15:00–30:00</span>
+          <span class="lp-phase ph-game">Game Time</span>
+          <div class="lp-content"><b>Name Tag Party（15分钟）</b><br>→ 见游戏设计<br>每次成功交友后，老师给双方贴"友谊星星"贴纸</div>
+          <div class="lp-method">道具：名牌<br>贴纸<br>音乐</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">30:00–40:00</span>
+          <span class="lp-phase ph-warm">拓展</span>
+          <div class="lp-content"><b>引入 Thank you / Sorry + 团队价值观</b><br>① 老师故意打翻东西→孩子帮捡→说 Thank you<br>② 引导孩子回 You're welcome<br>③ 老师故意撞孩子→说 Sorry<br>④ 孩子回 It's OK<br>⑤ 引入团队价值观：Share / Listen / Be Kind / Help Each Other / Celebrate / Take Turns<br>重复 5-6 次自然情境</div>
+          <div class="lp-method">真实情境<br>无道具</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">40:00–45:00</span>
+          <span class="lp-phase ph-close">Closing</span>
+          <div class="lp-content">Goodbye Circle + 名字贴纸带回家</div>
+          <div class="lp-method">家长互动</div>
+        </div>
+      </div>
+
+      <span class="slabel" style="margin-top:24px">第4课 详细课堂安排（45分钟）</span>
+      <div class="lesson-plan">
+        <div class="lp-header"><span>时间</span><span>环节</span><span>教学内容与步骤</span><span>方法/道具</span></div>
+        <div class="lp-row">
+          <span class="lp-time">0:00–5:00</span>
+          <span class="lp-phase ph-open">Opening</span>
+          <div class="lp-content"><b>Good Morning Song + 今天让孩子主动向老师打招呼（角色互换）</b></div>
+          <div class="lp-method"></div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">5:00–15:00</span>
+          <span class="lp-phase ph-warm">复习游戏</span>
+          <div class="lp-content"><b>Friend Ball 游戏（10分钟）</b> → 见游戏设计<br>快速复习团队角色词汇</div>
+          <div class="lp-method">道具：软球<br>角色图卡</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">15:00–30:00</span>
+          <span class="lp-phase ph-game">情景剧</span>
+          <div class="lp-content"><b>Sorry Sorry Game（15分钟）</b><br>→ 见游戏设计<br>情境卡片随机抽取，两两表演<br>老师点评：用英语夸奖 "Excellent manners!"</div>
+          <div class="lp-method">道具：情境卡</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">30:00–42:00</span>
+          <span class="lp-phase ph-story">手工</span>
+          <div class="lp-content"><b>制作"我的朋友卡"</b><br>卡片上写/画：My name is ___ / My friend is ___<br>孩子互相交换朋友卡</div>
+          <div class="lp-method">道具：卡片<br>彩笔</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">42:00–45:00</span>
+          <span class="lp-phase ph-close">Closing</span>
+          <div class="lp-content">朋友圈 Goodbye：每人说 "Goodbye, [friend's name]!"</div>
+          <div class="lp-method"></div>
+        </div>
+      </div>
+
+      <span class="slabel">教学材料清单</span>
+      <div class="mat-list">
+        <span class="mat-chip">🏷️ 名字贴纸（每人1张）</span>
+        <span class="mat-chip">🎾 软球1个</span>
+        <span class="mat-chip">🃏 情境卡片（3种情境）</span>
+        <span class="mat-chip">🌟 友谊星星贴纸</span>
+        <span class="mat-chip">📇 朋友卡制作材料</span>
+        <span class="mat-chip">🎯 团队角色图卡（8张）</span>
+        <span class="mat-chip">🎵 What's Your Name 歌曲</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     UNIT 3  Class Rules
+══════════════════════════════════════════════ -->
+<div id="tab-rules" class="section">
+  <div class="sec-title">专题三：课堂纪律</div>
+  <p class="sec-desc">学习课堂指令、遵守规则、培养良好课堂习惯。</p>
+
+  <div class="unit gu3">
+    <div class="unit-header">
+      <div class="unit-num">3</div>
+      <div class="unit-info">
+        <h2>课堂纪律</h2>
+        <div class="unit-en">Class Rules · 2课时</div>
+      </div>
+    </div>
+    <div class="unit-body">
+
+      <span class="slabel">核心指令词汇</span>
+      <div class="vocab-grid">
+        <div class="vocab-card"><span class="emoji">🪑</span><div class="en">Sit down</div><div class="cn">坐下</div></div>
+        <div class="vocab-card"><span class="emoji">🧍</span><div class="en">Stand up</div><div class="cn">站起来</div></div>
+        <div class="vocab-card"><span class="emoji">🤫</span><div class="en">Quiet / Shh</div><div class="cn">安静</div></div>
+        <div class="vocab-card"><span class="emoji">👁️</span><div class="en">Look at me</div><div class="cn">看我</div></div>
+        <div class="vocab-card"><span class="emoji">👂</span><div class="en">Listen</div><div class="cn">听</div></div>
+        <div class="vocab-card"><span class="emoji">🙌</span><div class="en">Hands up</div><div class="cn">举手</div></div>
+        <div class="vocab-card"><span class="emoji">🚶</span><div class="en">Line up</div><div class="cn">排队</div></div>
+        <div class="vocab-card"><span class="emoji">🧹</span><div class="en">Clean up</div><div class="cn">收拾好</div></div>
+      </div>
+
+      <span class="slabel">核心句型</span>
+      <ul class="sent-list">
+        <li><span class="sent-en">Sit down, please.</span><span class="sent-cn">请坐下</span></li>
+        <li><span class="sent-en">Stand up, please.</span><span class="sent-cn">请站起来</span></li>
+        <li><span class="sent-en">Eyes on me! / Look at me!</span><span class="sent-cn">看着我！</span></li>
+        <li><span class="sent-en">Quiet, please. Shh...</span><span class="sent-cn">请安静</span></li>
+        <li><span class="sent-en">Raise your hand!</span><span class="sent-cn">举手！</span></li>
+        <li><span class="sent-en">Let's clean up!</span><span class="sent-cn">一起收拾！</span></li>
+        <li><span class="sent-en">Good job! / Well done! / Brilliant!</span><span class="sent-cn">做得好！</span></li>
+      </ul>
+
+      <span class="slabel">推荐歌谣</span>
+      <div class="tips-box">
+        🎵 <b>"Sit Down" Song</b>（改编自 Head Shoulders，英式发音）<br>
+        "Sit down, sit down, sit down now × 2 / Stand up, stand up, stand up now × 2 / Turn around, turn around, turn around now..."<br>
+        配合动作，边唱边做，孩子能在唱歌中自然习得所有指令。
+      </div>
+
+      <span class="slabel">配套游戏设计</span>
+      <div class="game-grid">
+        <div class="game-card gc1">
+          <div class="game-name">🎮 Simon Says</div>
+          <div class="game-aim">目标：掌握所有课堂指令，培养专注力</div>
+          <ol class="game-step">
+            <li>老师说 "Simon says, stand up!" → 孩子必须做</li>
+            <li>老师只说 "Stand up!"（不含Simon says）→ 孩子不能动</li>
+            <li>做错的孩子暂时坐回圆圈中心</li>
+            <li>初级版（4岁班）：不设淘汰，只是一起玩，老师放慢语速</li>
+            <li>进阶版（5岁班）：加快节奏，可以淘汰</li>
+          </ol>
+          <div class="game-tip">💡 先只用 2-3 个指令，熟练后逐步加入新指令</div>
+        </div>
+        <div class="game-card gc2">
+          <div class="game-name">🤖 Robot Game</div>
+          <div class="game-aim">目标：让孩子主动发指令（输出练习）</div>
+          <ol class="game-step">
+            <li>老师扮演机器人，发出机器人声音</li>
+            <li>孩子对机器人发指令（Stand up! Sit down!）</li>
+            <li>机器人按指令行动</li>
+            <li>孩子轮流当机器人</li>
+          </ol>
+          <div class="game-tip">💡 输出比输入更难，角色扮演消除心理压力</div>
+        </div>
+        <div class="game-card gc3">
+          <div class="game-name">🎵 Freeze Dance</div>
+          <div class="game-aim">目标：通过律动强化 Stand up / Sit down / Quiet</div>
+          <ol class="game-step">
+            <li>播放欢快音乐，孩子随意跳舞</li>
+            <li>老师喊 "Freeze!" → 孩子立刻静止不动</li>
+            <li>老师说 "Sit down!" → 孩子坐下</li>
+            <li>老师说 "Stand up!" → 孩子站起准备继续跳</li>
+            <li>老师说 "Quiet please" + 竖手指 → 孩子复制动作</li>
+          </ol>
+          <div class="game-tip">💡 音乐游戏消耗孩子过剩精力，同时建立指令反射</div>
+        </div>
+      </div>
+
+      <span class="slabel">第5课 详细课堂安排（45分钟）</span>
+      <div class="lesson-plan">
+        <div class="lp-header"><span>时间</span><span>环节</span><span>教学内容与步骤</span><span>方法/道具</span></div>
+        <div class="lp-row">
+          <span class="lp-time">0:00–5:00</span>
+          <span class="lp-phase ph-open">Opening</span>
+          <div class="lp-content"><b>Good Morning Song + 点名</b><br>固定开场，今天加入：点名后老师说 "Sit down, please!" 孩子坐下（提前埋入第一个指令）</div>
+          <div class="lp-method">固定仪式</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">5:00–12:00</span>
+          <span class="lp-phase ph-new">New Learning</span>
+          <div class="lp-content"><b>TPR 直接引入 4 个核心指令</b><br>① 老师说 "Stand up!" 同时自己站起 → 手势示意孩子模仿 → 全班跟做×3<br>② 老师说 "Sit down!" 同时坐下 → 全班跟做×3<br>③ 老师说 "Look at me!" 同时指自己眼睛 → 全班跟做×3<br>④ 老师说 "Quiet!" 同时竖食指放嘴边 → 全班跟做×3<br>⑤ 随机混合4个指令，快节奏练习（像做体操）</div>
+          <div class="lp-method">方法：纯TPR<br>全程无翻译<br>夸张表情+<br>动作辅助</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">12:00–25:00</span>
+          <span class="lp-phase ph-game">Game Time</span>
+          <div class="lp-content"><b>Simon Says 基础版（8分钟）</b><br>只用 Stand up / Sit down / Hands up / Quiet<br>老师故意做慢，让孩子有时间反应，失误时笑着重来<br><br><b>Robot Game（5分钟）</b><br>老师先示范当机器人，然后请2-3个孩子来发指令</div>
+          <div class="lp-method">道具：无<br>方法：游戏<br>奖励：贴纸</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">25:00–33:00</span>
+          <span class="lp-phase ph-warm">拓展+律动</span>
+          <div class="lp-content"><b>Classroom Commands 歌（8分钟）</b><br>教唱改编歌谣："Sit down sit down sit down now..."<br>边唱边做动作，重复2-3遍<br>第3遍孩子只做动作不用唱，老师单独唱</div>
+          <div class="lp-method">道具：音箱<br>动作卡片</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">33:00–42:00</span>
+          <span class="lp-phase ph-story">Story+手工</span>
+          <div class="lp-content"><b>情境扮演：课堂小模拟（9分钟）</b><br>布置一个"迷你教室"场景<br>老师当"校长"突然来视察<br>孩子当"小老师"和"同学"<br>小老师给同学发指令：Sit down! Stand up! Quiet!<br>校长（真老师）表扬表现好的孩子</div>
+          <div class="lp-method">方法：情境<br>角色扮演</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">42:00–45:00</span>
+          <span class="lp-phase ph-close">Closing</span>
+          <div class="lp-content">Goodbye Circle + 词卡（Stand up/Sit down/Quiet 图示卡）</div>
+          <div class="lp-method">词卡带回家</div>
+        </div>
+      </div>
+
+      <span class="slabel" style="margin-top:24px">第6课 详细课堂安排（45分钟）</span>
+      <div class="lesson-plan">
+        <div class="lp-header"><span>时间</span><span>环节</span><span>教学内容与步骤</span><span>方法/道具</span></div>
+        <div class="lp-row">
+          <span class="lp-time">0:00–5:00</span>
+          <span class="lp-phase ph-open">Opening</span>
+          <div class="lp-content"><b>Hello Song + 点名（全程指令管理：用英语指令让孩子坐好、安静）</b></div>
+          <div class="lp-method">强化日常使用</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">5:00–15:00</span>
+          <span class="lp-phase ph-warm">复习+拓展</span>
+          <div class="lp-content"><b>快速复习+引入新指令</b><br>① 快速 Simon Says 热身 5 分钟（复习旧指令）<br>② 引入 Line up!：老师说 "Line up!" 自己先排到门口，手势引导孩子跟上<br>③ 引入 Clean up!：拿出一些散落的玩具，说 "Let's clean up!" 一起收拾<br>④ 引入 Good job!：每次孩子做对，老师说 "Good job!" 并击掌</div>
+          <div class="lp-method">TPR + 情境<br>真实场景</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">15:00–30:00</span>
+          <span class="lp-phase ph-game">Game Time</span>
+          <div class="lp-content"><b>Freeze Dance（15分钟）</b><br>→ 见游戏设计详细规则<br>音乐停时随机说不同指令：Sit down! / Stand up! / Hands up! / Line up!<br>升级：老师不动作，只说英语，看孩子能否正确反应</div>
+          <div class="lp-method">道具：音箱<br>音乐：轻快<br>儿歌</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">30:00–40:00</span>
+          <span class="lp-phase ph-story">绘本</span>
+          <div class="lp-content"><b>绘本：《No, David!》</b><br>书中充满课堂指令的反面示例（David 总是做错）<br>每页老师问 "What should David do?" 引导孩子说出正确指令<br>孩子看到调皮行为会笑，边笑边学习正确指令</div>
+          <div class="lp-method">道具：绘本<br>《No, David!》</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">40:00–45:00</span>
+          <span class="lp-phase ph-close">Closing</span>
+          <div class="lp-content">Goodbye Circle + 发"课堂指令小手册"（家长在家可以一起玩 Simon Says）</div>
+          <div class="lp-method">家校协同</div>
+        </div>
+      </div>
+
+      <span class="slabel">教学材料清单</span>
+      <div class="mat-list">
+        <span class="mat-chip">📋 指令动作图卡（8张）</span>
+        <span class="mat-chip">🤖 机器人头饰（可自制）</span>
+        <span class="mat-chip">📖 绘本《No, David!》</span>
+        <span class="mat-chip">🎵 课堂指令改编歌曲音频</span>
+        <span class="mat-chip">📄 课堂指令小手册（家长版）</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     UNIT 4  Safety First
+══════════════════════════════════════════════ -->
+<div id="tab-safety" class="section">
+  <div class="sec-title">专题四：安全第一</div>
+  <p class="sec-desc">学习道路安全、火灾安全、水上安全、陌生人安全，培养自我保护意识。</p>
+
+  <div class="unit gu4">
+    <div class="unit-header">
+      <div class="unit-num">4</div>
+      <div class="unit-info">
+        <h2>安全第一</h2>
+        <div class="unit-en">Safety First · 2课时</div>
+      </div>
+    </div>
+    <div class="unit-body">
+
+      <span class="slabel">道路安全词汇</span>
+      <div class="vocab-grid">
+        <div class="vocab-card"><span class="emoji">🚦</span><div class="en">Traffic light</div><div class="cn">红绿灯</div></div>
+        <div class="vocab-card"><span class="emoji">🚶</span><div class="en">Walk</div><div class="cn">走</div></div>
+        <div class="vocab-card"><span class="emoji">🏃</span><div class="en">Run</div><div class="cn">跑</div></div>
+        <div class="vocab-card"><span class="emoji">🛑</span><div class="en">Stop</div><div class="cn">停</div></div>
+        <div class="vocab-card"><span class="emoji">➡️</span><div class="en">Go</div><div class="cn">行</div></div>
+        <div class="vocab-card"><span class="emoji">🚗</span><div class="en">Car</div><div class="cn">车</div></div>
+      </div>
+
+      <span class="slabel">火灾安全词汇</span>
+      <div class="vocab-grid">
+        <div class="vocab-card"><span class="emoji">🔥</span><div class="en">Fire</div><div class="cn">火</div></div>
+        <div class="vocab-card"><span class="emoji">🚨</span><div class="en">Emergency</div><div class="cn">紧急情况</div></div>
+        <div class="vocab-card"><span class="emoji">📞</span><div class="en">Call 999</div><div class="cn">拨打999</div></div>
+        <div class="vocab-card"><span class="emoji">🏃</span><div class="en">Get out!</div><div class="cn">快出去！</div></div>
+        <div class="vocab-card"><span class="emoji">⬇️</span><div class="en">Stay low</div><div class="cn">保持低姿势</div></div>
+        <div class="vocab-card"><span class="emoji">🚪</span><div class="en">Exit</div><div class="cn">出口</div></div>
+      </div>
+
+      <span class="slabel">水上安全词汇</span>
+      <div class="vocab-grid">
+        <div class="vocab-card"><span class="emoji">🏊</span><div class="en">Swim</div><div class="cn">游泳</div></div>
+        <div class="vocab-card"><span class="emoji">🦺</span><div class="en">Life jacket</div><div class="cn">救生衣</div></div>
+        <div class="vocab-card"><span class="emoji">👨</span><div class="en">Adult</div><div class="cn">大人</div></div>
+        <div class="vocab-card"><span class="emoji">🚫</span><div class="en">No swimming alone</div><div class="cn">不独自游泳</div></div>
+        <div class="vocab-card"><span class="emoji">⚠️</span><div class="en">Deep water</div><div class="cn">深水区</div></div>
+        <div class="vocab-card"><span class="emoji">💧</span><div class="en">Slippery</div><div class="cn">滑的</div></div>
+      </div>
+
+      <span class="slabel">陌生人安全词汇</span>
+      <div class="vocab-grid">
+        <div class="vocab-card"><span class="emoji">👤</span><div class="en">Stranger</div><div class="cn">陌生人</div></div>
+        <div class="vocab-card"><span class="emoji">🚫</span><div class="en">Don't go</div><div class="cn">不要去</div></div>
+        <div class="vocab-card"><span class="emoji">👨‍👩‍👧</span><div class="en">Parent</div><div class="cn">父母</div></div>
+        <div class="vocab-card"><span class="emoji">🚨</span><div class="en">Dangerous</div><div class="cn">危险</div></div>
+        <div class="vocab-card"><span class="emoji">🍬</span><div class="en">Don't accept sweets</div><div class="cn">不接受糖果</div></div>
+        <div class="vocab-card"><span class="emoji">📞</span><div class="en">Ask for help</div><div class="cn">寻求帮助</div></div>
+      </div>
+
+      <span class="slabel">核心句型</span>
+      <ul class="sent-list">
+        <li><span class="sent-en">Look left, look right!</span><span class="sent-cn">左看，右看！</span></li>
+        <li><span class="sent-en">Walk, don't run!</span><span class="sent-cn">走，不要跑！</span></li>
+        <li><span class="sent-en">Stop! Wait for green!</span><span class="sent-cn">停！等绿灯！</span></li>
+        <li><span class="sent-en">Fire! Get out quickly!</span><span class="sent-cn">着火了！快出去！</span></li>
+        <li><span class="sent-en">Call 999!</span><span class="sent-cn">拨打999！</span></li>
+        <li><span class="sent-en">Don't go with a stranger!</span><span class="sent-cn">不要跟陌生人走！</span></li>
+        <li><span class="sent-en">I need help!</span><span class="sent-cn">我需要帮助！</span></li>
+      </ul>
+
+      <span class="slabel">推荐歌谣</span>
+      <div class="tips-box">
+        🎵 <b>Safety Song</b>（英式安全儿歌）<br>
+        歌词核心：Stop, look, and listen... Stay safe, stay safe, stay safe today!<br>
+        用于安全教育环节，用孩子喜欢的旋律强化安全意识。
+      </div>
+
+      <span class="slabel">配套游戏设计</span>
+      <div class="game-grid">
+        <div class="game-card gc1">
+          <div class="game-name">🚦 Traffic Light Game</div>
+          <div class="game-aim">目标：掌握红灯停、绿灯行</div>
+          <ol class="game-step">
+            <li>老师手持红绿卡片代表交通灯</li>
+            <li>举红卡 → 孩子必须停止站立，说 "Stop!"</li>
+            <li>举绿卡 → 孩子可以走动，说 "Go!"</li>
+            <li>升级：加入"汽车"角色，孩子扮演小汽车在"马路"上行驶</li>
+          </ol>
+          <div class="game-tip">💡 游戏化教学，孩子记牢交通规则</div>
+        </div>
+        <div class="game-card gc2">
+          <div class="game-name">🔥 Fire Drill</div>
+          <div class="game-aim">目标：演练火灾逃生流程</div>
+          <ol class="game-step">
+            <li>老师播放警报声，大喊 "Fire! Fire!"</li>
+            <li>孩子立刻捂住口鼻，弯腰低姿势</li>
+            <li>跟着老师快速有序地走到安全出口</li>
+            <li>老师数人数：全部到齐后说 "Well done! Everyone is safe!"</li>
+            <li>讨论：记住，发生火灾要 Call 999!</li>
+          </ol>
+          <div class="game-tip">💡 真实演练让肌肉记忆，关键时刻能自救</div>
+        </div>
+        <div class="game-card gc3">
+          <div class="game-name">👤 Stranger Danger Quiz</div>
+          <div class="game-aim">目标：识别危险情境，学会拒绝</div>
+          <ol class="game-step">
+            <li>老师描述一个情境："一个陌生人给你糖果，你怎么办？"</li>
+            <li>孩子回答："No! Go away!" 并向后退</li>
+            <li>情境2：陌生人说"你妈妈让我来接你，快上车"</li>
+            <li>正确做法：大声说 "No!" 然后跑向人多的地方找老师或警察</li>
+            <li>老师表扬："Brilliant! Stay safe!"</li>
+          </ol>
+          <div class="game-tip">💡 角色扮演危险情境，孩子学会拒绝陌生人的技巧</div>
+        </div>
+      </div>
+
+      <span class="slabel">第7课 详细课堂安排（45分钟）</span>
+      <div class="lesson-plan">
+        <div class="lp-header"><span>时间</span><span>环节</span><span>教学内容与步骤</span><span>方法/道具</span></div>
+        <div class="lp-row">
+          <span class="lp-time">0:00–5:00</span>
+          <span class="lp-phase ph-open">Opening</span>
+          <div class="lp-content"><b>Good Morning Song + 点名问 "How are you?"</b><br>固定开场，今天加入安全提醒</div>
+          <div class="lp-method">固定仪式</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">5:00–20:00</span>
+          <span class="lp-phase ph-new">New Learning</span>
+          <div class="lp-content"><b>道路安全+火灾安全引入</b><br>① 道路安全图卡展示：Traffic light / Walk / Don't run / Stop / Go / Car<br>② 每个词老师示范动作并说英语，全班跟读×3<br>③ 引入句型："Look left, look right!" "Walk, don't run!"<br>④ 火灾安全图卡展示：Fire / Emergency / Call 999 / Get out / Stay low / Exit<br>⑤ 每个词老师做动作示范（捂口鼻、弯腰、跑向出口），全班跟读×3<br>⑥ 引入句型："Fire! Get out quickly!" "Call 999!"</div>
+          <div class="lp-method">道具：安全图卡<br>红绿卡片<br>警报声<br>方法：TPR + 情境</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">20:00–30:00</span>
+          <span class="lp-phase ph-game">Game Time</span>
+          <div class="lp-content"><b>Traffic Light Game（5分钟）</b><br>→ 见游戏设计<br><b>Fire Drill（5分钟）</b><br>→ 见游戏设计<br><b>快速复习：角色扮演</b><br>① 分组：一组扮演"交通灯"，一组扮演"小汽车"<br>② 另一组扮演"火灾警报"，全班练习逃生</div>
+          <div class="lp-method">道具：红绿卡片<br>警报器<br>角色标签</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">30:00–40:00</span>
+          <span class="lp-phase ph-story">绘本+讨论</span>
+          <div class="lp-content"><b>绘本：《Stop! Drop and Roll》</b><br>① 老师翻页讲解火灾发生时的正确做法<br>② 孩子练习：Stop! Drop! Roll!<br>③ 讨论：家庭火灾预案：知道紧急电话吗？</div>
+          <div class="lp-method">道具：绘本<br>讨论卡片</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">40:00–45:00</span>
+          <span class="lp-phase ph-close">Closing</span>
+          <div class="lp-content">Goodbye Circle + 安全提示卡带回家</div>
+          <div class="lp-method">家庭安全<br>教育</div>
+        </div>
+      </div>
+
+      <span class="slabel" style="margin-top:24px">第8课 详细课堂安排（45分钟）</span>
+      <div class="lesson-plan">
+        <div class="lp-header"><span>时间</span><span>环节</span><span>教学内容与步骤</span><span>方法/道具</span></div>
+        <div class="lp-row">
+          <span class="lp-time">0:00–5:00</span>
+          <span class="lp-phase ph-open">Opening</span>
+          <div class="lp-content"><b>Good Morning Song + 安全知识问答热身</b><br>老师问："What number do you call for an emergency?" 全班回答："999!"</div>
+          <div class="lp-method">固定仪式</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">5:00–20:00</span>
+          <span class="lp-phase ph-new">New Learning</span>
+          <div class="lp-content"><b>水上安全+陌生人安全引入</b><br>① 水上安全图卡展示：Swim / Life jacket / Adult / No swimming alone / Deep water / Slippery<br>② 老师强调："Always swim with an adult!" "Never swim alone!"<br>③ 陌生人安全图卡展示：Stranger / Don't go / Parent / Dangerous / Don't accept sweets / Ask for help<br>④ 老师强调："Never go with a stranger!"<br>⑤ 引入句型："Don't go with a stranger!" "I need help!"<br>⑥ 引入"可信赖的人"概念：Teacher / Police Officer / Doctor / Parent / Shop Assistant</div>
+          <div class="lp-method">道具：安全图卡<br>角色图卡<br>方法：图卡+讨论</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">20:00–30:00</span>
+          <span class="lp-phase ph-game">Game Time</span>
+          <div class="lp-content"><b>Stranger Danger Quiz（10分钟）</b><br>→ 见游戏设计<br><b>安全情境角色扮演（5分钟）</b><br>小组分别扮演"危险陌生人"、"聪明的孩子"、"可信赖的大人"<br>老师点评：正确的行为能得到表扬</div>
+          <div class="lp-method">道具：情境卡<br>角色标签</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">30:00–40:00</span>
+          <span class="lp-phase ph-story">绘本+手工</span>
+          <div class="lp-content"><b>绘本：《The Berenstain Bears Learn About Strangers》</b><br>① 老师讲故事：小熊们如何应对陌生人的接近<br>② 讨论：书中哪些做法是对的？哪些是错的？<br>③ 手工：制作"我的安全联系卡"，写上父母电话</div>
+          <div class="lp-method">道具：绘本<br>联系卡模板<br>彩笔</div>
+        </div>
+        <div class="lp-row">
+          <span class="lp-time">40:00–45:00</span>
+          <span class="lp-phase ph-close">Closing</span>
+          <div class="lp-content">Goodbye Circle + 安全联系卡带回家（请家长帮助填写真实电话）</div>
+          <div class="lp-method">家庭安全<br>教育</div>
+        </div>
+      </div>
+
+      <span class="slabel">教学材料清单</span>
+      <div class="mat-list">
+        <span class="mat-chip">🚦 交通灯图卡（红绿）</span>
+        <span class="mat-chip">🔥 火灾安全图卡（6张）</span>
+        <span class="mat-chip">🏊 水上安全图卡（6张）</span>
+        <span class="mat-chip">👤 陌生人安全图卡（6张）</span>
+        <span class="mat-chip">📞 紧急电话卡片（999）</span>
+        <span class="mat-chip">👨‍👩‍👧 可信赖的人图卡</span>
+        <span class="mat-chip">📖 《Stop! Drop and Roll》绘本</span>
+        <span class="mat-chip">📄 安全联系卡模板</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showTab(tabName) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tabName).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+
+<footer style="text-align:center;color:#888;font-size:.82rem;padding:24px">
+  UpGrade English · British English for Young Learners · 🇬🇧 · 4专题 · 8课时 · 设计日期：2026年3月
+</footer>
+</body>
+</html>

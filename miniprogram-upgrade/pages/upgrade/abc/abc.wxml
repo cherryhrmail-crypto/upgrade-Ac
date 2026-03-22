@@ -1,0 +1,96 @@
+<!-- pages/upgrade/abc/abc.wxml — 字母王国 -->
+<view class="page">
+
+  <!-- 标签切换 -->
+  <view class="tabs">
+    <view class="tab {{activeTab==='learn'?'active':''}}" bindtap="switchTab" data-tab="learn">📚 学习</view>
+    <view class="tab {{activeTab==='quiz'?'active':''}}" bindtap="switchTab" data-tab="quiz">📝 测验</view>
+    <view class="tab {{activeTab==='trace'?'active':''}}" bindtap="switchTab" data-tab="trace">✏️ 描写</view>
+  </view>
+
+  <!-- ── 学习模式 ── -->
+  <block wx:if="{{activeTab==='learn'}}">
+    <!-- 当前字母详情 -->
+    <view class="detail-card fade-in" style="border-color: {{currentLetter.color}}20">
+      <view class="detail-letter" style="color: {{currentLetter.color}}">{{currentLetter.letter}}</view>
+      <view class="detail-lower" style="color: {{currentLetter.color}}99">{{currentLetter.letter.toLowerCase()}}</view>
+      <view class="detail-right">
+        <text class="detail-emoji">{{currentLetter.emoji}}</text>
+        <text class="detail-word">{{currentLetter.word}}</text>
+        <text class="detail-cn">{{currentLetter.cn}}</text>
+        <text class="detail-sound">{{currentLetter.sound}}</text>
+        <view class="speak-btn" bindtap="speakCurrent">
+          <text>🔊 点击发音</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 字母网格 -->
+    <view class="grid">
+      <view class="abc-card {{currentLetter.letter===item.letter?'selected':''}}"
+            wx:for="{{abcList}}" wx:key="letter"
+            style="border-color: {{item.color}}; background: {{currentLetter.letter===item.letter ? item.color+'15' : '#fff'}}"
+            bindtap="selectLetter" data-index="{{index}}">
+        <text class="abc-upper" style="color: {{item.color}}">{{item.letter}}</text>
+        <text class="abc-lower">{{item.letter.toLowerCase()}}</text>
+        <text class="abc-emoji">{{item.emoji}}</text>
+        <view wx:if="{{learned[index]}}" class="learned-dot">✓</view>
+      </view>
+    </view>
+  </block>
+
+  <!-- ── 测验模式 ── -->
+  <block wx:if="{{activeTab==='quiz'}}">
+    <view class="quiz-box">
+      <view class="quiz-score-row">
+        <text class="quiz-score">得分：{{quizScore}}</text>
+        <text class="quiz-total">第{{quizIndex+1}}/{{quizTotal}}题</text>
+      </view>
+
+      <view class="quiz-question">
+        <text class="quiz-q-label">这是哪个字母的单词？</text>
+        <text class="quiz-q-emoji">{{quizQuestion.emoji}}</text>
+        <text class="quiz-q-word">{{quizQuestion.word}}</text>
+      </view>
+
+      <view class="quiz-options">
+        <view class="quiz-opt {{quizAnswered ? (opt===quizQuestion.letter ? 'correct' : (opt===selectedOpt ? 'wrong' : '')) : ''}}"
+              wx:for="{{quizOptions}}" wx:key="*this"
+              bindtap="{{quizAnswered?'':'answerQuiz'}}" data-opt="{{item}}">
+          <text>{{item}}</text>
+        </view>
+      </view>
+
+      <view class="quiz-next-btn" wx:if="{{quizAnswered}}" bindtap="nextQuestion">
+        <text>下一题 ▶</text>
+      </view>
+    </view>
+  </block>
+
+  <!-- ── 描写模式 ── -->
+  <block wx:if="{{activeTab==='trace'}}">
+    <view class="trace-box">
+      <view class="trace-nav">
+        <view class="trace-prev" bindtap="tracePrev">◀</view>
+        <text class="trace-current-letter" style="color: {{currentLetter.color}}">{{currentLetter.letter}}</text>
+        <view class="trace-next" bindtap="traceNext">▶</view>
+      </view>
+      <view class="trace-guide">
+        <text class="trace-big-letter" style="color: {{currentLetter.color}}20">{{currentLetter.letter}}</text>
+        <canvas canvas-id="traceCanvas" class="trace-canvas"
+                bindtouchstart="traceStart"
+                bindtouchmove="traceMove"
+                bindtouchend="traceEnd"></canvas>
+      </view>
+      <view class="trace-tips">
+        <text>大写: {{currentLetter.letter}} &nbsp;|&nbsp; 小写: {{currentLetter.letter.toLowerCase()}}</text>
+        <text>示例单词: {{currentLetter.word}} {{currentLetter.emoji}}</text>
+      </view>
+      <view class="trace-controls">
+        <view class="trace-clear-btn" bindtap="traceClear">🗑️ 清除</view>
+        <view class="trace-say-btn" bindtap="speakCurrent">🔊 发音</view>
+      </view>
+    </view>
+  </block>
+
+</view>

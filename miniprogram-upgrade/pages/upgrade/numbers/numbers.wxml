@@ -1,0 +1,57 @@
+<!-- 通用词汇学习页 WXML (数字/颜色/动物/食物/身体/问候均使用此模板) -->
+<view class="page">
+  <view class="tabs">
+    <view class="tab {{mode==='learn'?'active':''}}" bindtap="setMode" data-mode="learn">📚 学习</view>
+    <view class="tab {{mode==='quiz'?'active':''}}"  bindtap="setMode" data-mode="quiz">📝 测验</view>
+  </view>
+
+  <!-- 学习模式 -->
+  <block wx:if="{{mode==='learn'}}">
+    <view class="word-grid">
+      <view class="word-card {{item.selected?'selected':''}}"
+            wx:for="{{words}}" wx:key="index"
+            style="border-color: {{item.color||themeColor}}"
+            bindtap="selectWord" data-index="{{index}}">
+        <text class="word-emoji">{{item.emoji}}</text>
+        <text class="word-en" style="color: {{item.color||themeColor}}">{{item.word}}</text>
+        <text class="word-cn">{{item.cn}}</text>
+        <view wx:if="{{item.learned}}" class="check">✓</view>
+      </view>
+    </view>
+
+    <!-- 详情浮层 -->
+    <view class="detail-popup {{selectedWord.word?'show':''}}" bindtap="closeDetail">
+      <view class="popup-card" catchtap="">
+        <text class="popup-emoji">{{selectedWord.emoji}}</text>
+        <text class="popup-word">{{selectedWord.word}}</text>
+        <text class="popup-cn">{{selectedWord.cn}}</text>
+        <text wx:if="{{selectedWord.sound}}" class="popup-sound">🔊 {{selectedWord.sound}}</text>
+        <text wx:if="{{selectedWord.usage}}" class="popup-usage">{{selectedWord.usage}}</text>
+        <view class="popup-btn" bindtap="speakSelected">🔊 点击发音</view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 测验模式 -->
+  <block wx:if="{{mode==='quiz'}}">
+    <view class="quiz-wrap">
+      <view class="quiz-header">
+        <text class="quiz-score-text">⭐ {{score}}分</text>
+        <text class="quiz-prog">{{qIndex+1}} / {{qTotal}}</text>
+      </view>
+      <view class="quiz-card">
+        <text class="quiz-label">{{quizType==='word2cn'?'这个单词是什么意思？':'哪个单词是这个意思？'}}</text>
+        <text class="quiz-big">{{quizType==='word2cn'? question.word : question.cn}}</text>
+        <text class="quiz-emoji-show">{{question.emoji}}</text>
+        <view class="options-grid">
+          <view class="opt {{answered?(opt.word===question.word?'correct':(opt.word===picked.word?'wrong':'')):''}}"
+                wx:for="{{options}}" wx:key="word"
+                bindtap="{{answered?'':'pickAnswer'}}" data-index="{{index}}">
+            <text>{{quizType==='word2cn'? item.cn : item.word}}</text>
+          </view>
+        </view>
+        <view wx:if="{{answered}}" class="next-btn" bindtap="nextQ">下一题 ▶</view>
+      </view>
+    </view>
+  </block>
+</view>

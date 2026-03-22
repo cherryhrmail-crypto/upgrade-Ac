@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colors 颜色世界 | 小星星英语</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito',sans-serif;min-height:100vh;overflow-x:hidden;transition:background 0.6s;}
+body.bg-default{background:linear-gradient(135deg,#f5f7fa,#c3cfe2);}
+
+.back-btn{position:fixed;left:18px;top:18px;z-index:200;background:rgba(255,255,255,.85);border:none;border-radius:30px;padding:9px 20px;font-family:'Nunito',sans-serif;font-weight:900;color:#555;font-size:1rem;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.15);text-decoration:none;transition:transform .2s;backdrop-filter:blur(6px);}
+.back-btn:hover{transform:scale(1.07);}
+
+header{text-align:center;padding:70px 20px 16px;position:relative;z-index:10;}
+.page-title{font-family:'Fredoka One',cursive;font-size:clamp(2rem,8vw,3.8rem);color:white;text-shadow:0 3px 12px rgba(0,0,0,.25);}
+.page-sub{color:rgba(255,255,255,.8);font-size:1rem;margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,.2);}
+
+/* Mode tabs */
+.mode-tabs{display:flex;justify-content:center;gap:12px;margin:14px auto 20px;flex-wrap:wrap;position:relative;z-index:10;padding:0 16px;}
+.tab-btn{background:rgba(255,255,255,.3);border:2.5px solid rgba(255,255,255,.5);color:white;font-family:'Nunito',sans-serif;font-weight:900;font-size:.95rem;padding:9px 22px;border-radius:30px;cursor:pointer;transition:all .22s;backdrop-filter:blur(4px);}
+.tab-btn.active,.tab-btn:hover{background:rgba(255,255,255,.9);color:#555;transform:scale(1.06);}
+
+/* Score */
+.score-bar{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:0 auto 14px;position:relative;z-index:10;}
+.score-pill{background:rgba(255,255,255,.3);border-radius:20px;padding:7px 18px;font-weight:900;font-size:.95rem;color:white;backdrop-filter:blur(4px);}
+
+.section{position:relative;z-index:10;max-width:960px;margin:0 auto;padding:0 16px 80px;}
+#section-learn{display:block;}
+#section-mix{display:none;}
+#section-quiz{display:none;}
+
+/* Color cards */
+.color-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:18px;}
+.color-card{border-radius:24px;padding:30px 16px 22px;text-align:center;cursor:pointer;transition:transform .25s,box-shadow .25s;box-shadow:0 6px 20px rgba(0,0,0,.15);color:white;position:relative;overflow:hidden;user-select:none;}
+.color-card:hover,.color-card.lit{transform:translateY(-10px) scale(1.06);box-shadow:0 18px 40px rgba(0,0,0,.25);}
+.color-card::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.12);opacity:0;transition:opacity .2s;}
+.color-card:hover::after{opacity:1;}
+.color-word-en{font-family:'Fredoka One',cursive;font-size:2rem;display:block;text-shadow:0 2px 8px rgba(0,0,0,.25);}
+.color-word-cn{font-size:.9rem;opacity:.85;margin-top:4px;}
+.color-emoji-row{font-size:2rem;margin-top:10px;}
+.color-swatch{width:60px;height:60px;border-radius:50%;margin:0 auto 12px;border:4px solid rgba(255,255,255,.5);box-shadow:0 4px 14px rgba(0,0,0,.2);}
+
+/* Speak panel */
+.speak-panel{background:rgba(255,255,255,.2);backdrop-filter:blur(10px);border-radius:28px;padding:22px 28px;margin-bottom:22px;border:2px solid rgba(255,255,255,.35);text-align:center;color:white;min-height:80px;transition:all .4s;}
+.speak-panel-big{font-family:'Fredoka One',cursive;font-size:3.5rem;text-shadow:0 3px 12px rgba(0,0,0,.3);}
+.speak-panel-word{font-family:'Fredoka One',cursive;font-size:1.8rem;margin:4px 0;}
+.speak-panel-hint{font-size:.9rem;opacity:.75;}
+
+/* Mix painter */
+.painter-wrap{background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border-radius:28px;padding:28px;border:2px solid rgba(255,255,255,.3);}
+.painter-title{color:white;font-size:1.2rem;font-weight:900;margin-bottom:16px;text-align:center;}
+.painter-canvas-wrap{text-align:center;margin-bottom:16px;}
+canvas#paintCanvas{border-radius:20px;cursor:crosshair;touch-action:none;background:white;box-shadow:0 4px 20px rgba(0,0,0,.15);}
+.palette{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:16px;}
+.pal-btn{width:50px;height:50px;border-radius:50%;border:4px solid rgba(255,255,255,.5);cursor:pointer;transition:transform .2s,border-color .2s;box-shadow:0 3px 10px rgba(0,0,0,.2);}
+.pal-btn.selected{transform:scale(1.25);border-color:white;box-shadow:0 0 0 3px rgba(255,255,255,.8);}
+.brush-size{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+.brush-label{color:rgba(255,255,255,.8);font-size:.9rem;font-weight:700;}
+.brush-slider{-webkit-appearance:none;width:160px;height:8px;border-radius:4px;background:rgba(255,255,255,.3);outline:none;}
+.brush-slider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:white;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.2);}
+.paint-controls{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+.paint-btn{background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);color:white;font-family:'Nunito',sans-serif;font-weight:900;padding:9px 22px;border-radius:24px;cursor:pointer;transition:all .2s;}
+.paint-btn:hover{background:rgba(255,255,255,.45);}
+
+/* Quiz */
+.quiz-card{background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border-radius:28px;padding:30px;text-align:center;border:2px solid rgba(255,255,255,.3);}
+.quiz-q{color:rgba(255,255,255,.85);font-size:1.1rem;margin-bottom:14px;}
+.quiz-swatch-big{width:120px;height:120px;border-radius:50%;margin:0 auto 20px;border:6px solid rgba(255,255,255,.5);box-shadow:0 8px 30px rgba(0,0,0,.25);animation:swatchPulse 2s ease-in-out infinite;}
+@keyframes swatchPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.06);}}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:380px;margin:0 auto;}
+.q-opt{border:3px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);border-radius:20px;padding:14px;font-family:'Fredoka One',cursive;font-size:1.5rem;cursor:pointer;color:white;transition:all .22s;}
+.q-opt:hover{background:rgba(255,255,255,.3);transform:scale(1.06);}
+.q-opt.correct{background:#2ECC71;border-color:#2ECC71;animation:pop .5s ease;}
+.q-opt.wrong{background:#E74C3C;border-color:#E74C3C;animation:shk .4s ease;}
+@keyframes pop{0%{transform:scale(1);}50%{transform:scale(1.3);}100%{transform:scale(1);}}
+@keyframes shk{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}
+
+/* Toast */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);background:white;border-radius:20px;padding:14px 30px;font-weight:900;font-size:1.1rem;color:#333;box-shadow:0 8px 30px rgba(0,0,0,.2);z-index:9999;transition:transform .3s;pointer-events:none;border-left:6px solid #aaa;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.toast.good{border-color:#2ECC71;}
+.toast.bad{border-color:#E74C3C;}
+
+@media(max-width:480px){.color-grid{grid-template-columns:repeat(2,1fr);}.quiz-opts{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body class="bg-default" id="mainBody">
+
+<a class="back-btn" href="index.html">← 返回</a>
+
+<header>
+  <div class="page-title">🎨 Colors 颜色世界</div>
+  <div class="page-sub">认识缤纷颜色，一起涂色吧！</div>
+</header>
+
+<div class="score-bar">
+  <div class="score-pill">⭐ 积分: <span id="scoreNum">0</span></div>
+  <div class="score-pill" id="starPill">☆☆☆☆☆</div>
+</div>
+
+<div class="mode-tabs">
+  <button class="tab-btn active" onclick="switchMode('learn')">🖌 认识颜色</button>
+  <button class="tab-btn" onclick="switchMode('mix')">🎨 自由涂色</button>
+  <button class="tab-btn" onclick="switchMode('quiz')">🎯 颜色猜猜</button>
+</div>
+
+<!-- LEARN -->
+<div class="section" id="section-learn">
+  <div class="speak-panel" id="speakPanel">
+    <div class="speak-panel-big" id="spBig">🎨</div>
+    <div class="speak-panel-word" id="spWord">点击颜色卡片听发音！</div>
+    <div class="speak-panel-hint" id="spHint">Click a color card to hear it!</div>
+  </div>
+  <div class="color-grid" id="colorGrid"></div>
+</div>
+
+<!-- PAINT -->
+<div class="section" id="section-mix">
+  <div class="painter-wrap">
+    <div class="painter-title">🎨 自由画画 Free Painting！</div>
+    <div class="palette" id="palette"></div>
+    <div class="brush-size">
+      <span class="brush-label">🖌 笔刷大小</span>
+      <input type="range" class="brush-slider" id="brushSlider" min="4" max="40" value="14">
+      <span class="brush-label" id="brushSizeLabel">14</span>
+    </div>
+    <div class="painter-canvas-wrap">
+      <canvas id="paintCanvas" width="500" height="320"></canvas>
+    </div>
+    <div class="paint-controls">
+      <button class="paint-btn" onclick="clearPaint()">🗑 清除</button>
+      <button class="paint-btn" id="eraserBtn" onclick="toggleEraser()">◻ 橡皮</button>
+      <button class="paint-btn" onclick="savePainting()">💾 保存</button>
+    </div>
+    <p style="color:rgba(255,255,255,.6);font-size:.85rem;text-align:center;margin-top:12px;">用画笔画出美丽的彩色图画！</p>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="section" id="section-quiz">
+  <div class="quiz-card">
+    <div class="quiz-q" id="quizQ">这是什么颜色？ What color is this?</div>
+    <div class="quiz-swatch-big" id="quizSwatch"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const COLORS = [
+  {en:'Red',    cn:'红色', hex:'#E74C3C', emojis:'🍎🌹❤️',  bg:'linear-gradient(135deg,#E74C3C,#C0392B)'},
+  {en:'Orange', cn:'橙色', hex:'#FF8C42', emojis:'🍊🥕🟠',  bg:'linear-gradient(135deg,#FF8C42,#E67E22)'},
+  {en:'Yellow', cn:'黄色', hex:'#F1C40F', emojis:'🌟🍋🌻', bg:'linear-gradient(135deg,#F1C40F,#F39C12)'},
+  {en:'Green',  cn:'绿色', hex:'#2ECC71', emojis:'🌿🐸🍃', bg:'linear-gradient(135deg,#2ECC71,#27AE60)'},
+  {en:'Blue',   cn:'蓝色', hex:'#3498DB', emojis:'🌊🫐💙',  bg:'linear-gradient(135deg,#3498DB,#2980B9)'},
+  {en:'Purple', cn:'紫色', hex:'#9B59B6', emojis:'🍇🦄💜', bg:'linear-gradient(135deg,#9B59B6,#8E44AD)'},
+  {en:'Pink',   cn:'粉色', hex:'#FF6B9D', emojis:'🌸🩷🌺', bg:'linear-gradient(135deg,#FF6B9D,#E91E8C)'},
+  {en:'White',  cn:'白色', hex:'#F8F9FA', emojis:'☁️🤍🕊️', bg:'linear-gradient(135deg,#eceff1,#cfd8dc)'},
+  {en:'Black',  cn:'黑色', hex:'#2C3E50', emojis:'🐦‍⬛🌑🖤', bg:'linear-gradient(135deg,#2C3E50,#1a252f)'},
+  {en:'Brown',  cn:'棕色', hex:'#8B4513', emojis:'🍫🐻🪵', bg:'linear-gradient(135deg,#8B4513,#6B3410)'},
+];
+
+let score=0, selectedColor=COLORS[0].hex, erasing=false, isDrawing=false, lastX=0, lastY=0;
+let currentQuizItem=null;
+
+function speak(t,r=0.72,p=1.3){
+  if(!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(t);
+  u.lang='en-US';u.rate=r;u.pitch=p;
+  window.speechSynthesis.speak(u);
+}
+function addScore(n){
+  score+=n;
+  document.getElementById('scoreNum').textContent=score;
+  const s=Math.min(5,Math.floor(score/10));
+  document.getElementById('starPill').textContent='★'.repeat(s)+'☆'.repeat(5-s);
+}
+function setBodyBg(bg){
+  document.getElementById('mainBody').style.background=bg;
+}
+
+// ---- MODE ----
+function switchMode(m){
+  ['learn','mix','quiz'].forEach(id=>{
+    document.getElementById('section-'+id).style.display=m===id?'block':'none';
+  });
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
+    b.classList.toggle('active',['learn','mix','quiz'][i]===m);
+  });
+  if(m==='mix')initPainter();
+  if(m==='quiz')setupQuiz();
+}
+
+// ---- LEARN ----
+function buildColorGrid(){
+  const g=document.getElementById('colorGrid');
+  COLORS.forEach((item,i)=>{
+    const c=document.createElement('div');
+    c.className='color-card';
+    c.style.background=item.bg;
+    c.innerHTML=`
+      <div class="color-swatch" style="background:${item.hex}"></div>
+      <span class="color-word-en">${item.en}</span>
+      <div class="color-word-cn">${item.cn}</div>
+      <div class="color-emoji-row">${item.emojis}</div>
+    `;
+    c.onclick=()=>{
+      document.querySelectorAll('.color-card').forEach(x=>x.classList.remove('lit'));
+      c.classList.add('lit');
+      speak(item.en,0.68,1.35);
+      setBodyBg(item.bg);
+      document.getElementById('spBig').textContent=item.emojis.split('')[0];
+      document.getElementById('spWord').textContent=`${item.en} — ${item.cn}`;
+      document.getElementById('spHint').textContent=`Click again to hear: "${item.en}"`;
+      document.getElementById('speakPanel').style.background=item.hex+'44';
+    };
+    g.appendChild(c);
+  });
+}
+
+// ---- PAINTER ----
+function buildPalette(){
+  const p=document.getElementById('palette');
+  COLORS.forEach(item=>{
+    const btn=document.createElement('div');
+    btn.className='pal-btn'+(item===COLORS[0]?' selected':'');
+    btn.style.background=item.bg;
+    btn.title=item.en;
+    btn.onclick=()=>{
+      erasing=false;
+      document.getElementById('eraserBtn').textContent='◻ 橡皮';
+      selectedColor=item.hex;
+      document.querySelectorAll('.pal-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      speak(item.en,0.7,1.3);
+      setBodyBg(item.bg);
+    };
+    p.appendChild(btn);
+  });
+}
+function initPainter(){
+  const canvas=document.getElementById('paintCanvas');
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='white';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  const slider=document.getElementById('brushSlider');
+  slider.oninput=()=>document.getElementById('brushSizeLabel').textContent=slider.value;
+
+  canvas.onmousedown=e=>{isDrawing=true;[lastX,lastY]=getPos(e,canvas);};
+  canvas.onmousemove=e=>{if(!isDrawing)return;paintDraw(ctx,...getPos(e,canvas));};
+  canvas.onmouseup=canvas.onmouseleave=()=>isDrawing=false;
+  canvas.ontouchstart=e=>{e.preventDefault();isDrawing=true;[lastX,lastY]=getPos(e.touches[0],canvas);};
+  canvas.ontouchmove=e=>{e.preventDefault();if(!isDrawing)return;paintDraw(ctx,...getPos(e.touches[0],canvas));};
+  canvas.ontouchend=()=>isDrawing=false;
+}
+function getPos(e,canvas){
+  const r=canvas.getBoundingClientRect();
+  const scaleX=canvas.width/r.width, scaleY=canvas.height/r.height;
+  return[(e.clientX-r.left)*scaleX,(e.clientY-r.top)*scaleY];
+}
+function paintDraw(ctx,x,y){
+  const sz=parseInt(document.getElementById('brushSlider').value);
+  ctx.beginPath();
+  ctx.moveTo(lastX,lastY);
+  ctx.lineTo(x,y);
+  ctx.strokeStyle=erasing?'white':selectedColor;
+  ctx.lineWidth=erasing?sz*2:sz;
+  ctx.lineCap='round';
+  ctx.lineJoin='round';
+  ctx.stroke();
+  [lastX,lastY]=[x,y];
+}
+function clearPaint(){
+  const canvas=document.getElementById('paintCanvas');
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='white';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+}
+function toggleEraser(){
+  erasing=!erasing;
+  document.getElementById('eraserBtn').textContent=erasing?'✏ 画笔':'◻ 橡皮';
+}
+function savePainting(){
+  const canvas=document.getElementById('paintCanvas');
+  const a=document.createElement('a');
+  a.download='my-painting.png';
+  a.href=canvas.toDataURL();
+  a.click();
+  speak('Your painting is saved!',0.7,1.3);
+}
+
+// ---- QUIZ ----
+function setupQuiz(){
+  currentQuizItem=COLORS[Math.floor(Math.random()*COLORS.length)];
+  document.getElementById('quizSwatch').style.background=currentQuizItem.hex;
+  document.getElementById('quizSwatch').style.border=`6px solid ${currentQuizItem.hex === '#F8F9FA' ? '#ccc' : 'rgba(255,255,255,.5)'}`;
+  setBodyBg(currentQuizItem.bg);
+  document.getElementById('quizQ').textContent='这是什么颜色？ What color is this?';
+
+  const opts=new Set([COLORS.indexOf(currentQuizItem)]);
+  while(opts.size<4)opts.add(Math.floor(Math.random()*COLORS.length));
+  const div=document.getElementById('quizOpts');
+  div.innerHTML='';
+  [...opts].sort(()=>Math.random()-.5).forEach(i=>{
+    const item=COLORS[i];
+    const btn=document.createElement('button');
+    btn.className='q-opt';
+    btn.style.borderColor=item.hex+'88';
+    btn.textContent=item.en;
+    btn.onclick=()=>checkQuiz(i,btn);
+    div.appendChild(btn);
+  });
+}
+function checkQuiz(i,btn){
+  document.querySelectorAll('.q-opt').forEach(b=>b.onclick=null);
+  if(COLORS[i]===currentQuizItem){
+    btn.classList.add('correct');
+    speak(`Yes! ${currentQuizItem.en}! Great job!`,0.7,1.4);
+    addScore(8);
+    showToast(`🎉 ${currentQuizItem.en}! 正确！`,true);
+  }else{
+    btn.classList.add('wrong');
+    document.querySelectorAll('.q-opt').forEach(b=>{
+      if(b.textContent===currentQuizItem.en)b.classList.add('correct');
+    });
+    speak(`Oops! It is ${currentQuizItem.en}!`,0.7,1.3);
+    showToast(`💡 正确答案: ${currentQuizItem.en} — ${currentQuizItem.cn}`,false);
+  }
+  setTimeout(setupQuiz,2000);
+}
+
+function showToast(msg,good){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.className='toast '+(good?'good':'bad')+' show';
+  setTimeout(()=>t.classList.remove('show'),1800);
+}
+
+buildColorGrid();
+buildPalette();
+setBodyBg(COLORS[0].bg);
+window.onload=()=>setTimeout(()=>speak('Colors! Red, Blue, Green! Let\'s learn colors!',0.7,1.3),600);
+</script>
+</body>
+</html>

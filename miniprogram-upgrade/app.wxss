@@ -1,0 +1,114 @@
+/* app.wxss — 全局样式 */
+page {
+  font-family: -apple-system, 'PingFang SC', 'Helvetica Neue', sans-serif;
+  background-color: #F5F7FA;
+  color: #333;
+  box-sizing: border-box;
+}
+
+/* ── 通用工具类 ── */
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.text-center { text-align: center; }
+.bold { font-weight: 700; }
+
+/* ── 颜色变量（模拟CSS变量通过类名） ── */
+.color-blue  { color: #1976D2; }
+.color-red   { color: #E53935; }
+.color-green { color: #43A047; }
+.color-gold  { color: #F9A825; }
+.color-gray  { color: #888; }
+.color-white { color: #fff; }
+
+/* ── 卡片基础样式 ── */
+.card {
+  background: #fff;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.card-lg {
+  border-radius: 28rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0,0,0,0.10);
+}
+
+/* ── 渐变按钮 ── */
+.btn-primary {
+  background: linear-gradient(135deg, #1565C0, #1976D2);
+  color: #fff;
+  border-radius: 50rpx;
+  padding: 20rpx 60rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  border: none;
+  text-align: center;
+  box-shadow: 0 6rpx 20rpx rgba(25, 118, 210, 0.4);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #F9A825, #FFD600);
+  color: #333;
+  border-radius: 50rpx;
+  padding: 18rpx 50rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+  border: none;
+  text-align: center;
+  box-shadow: 0 6rpx 20rpx rgba(249, 168, 37, 0.4);
+}
+
+/* ── 进度条 ── */
+.progress-bar {
+  height: 12rpx;
+  background: #E3F2FD;
+  border-radius: 6rpx;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #1976D2, #42A5F5);
+  border-radius: 6rpx;
+  transition: width 0.5s ease;
+}
+
+/* ── 徽章 ── */
+.badge {
+  display: inline-block;
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  font-weight: 700;
+  background: #E3F2FD;
+  color: #1976D2;
+}
+.badge-gold { background: #FFF8E1; color: #F57F17; }
+.badge-pink { background: #FCE4EC; color: #C62828; }
+.badge-green { background: #E8F5E9; color: #2E7D32; }
+
+/* ── 页面安全区 ── */
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+
+/* ── 星星动画 ── */
+@keyframes starPop {
+  0%   { transform: scale(0) rotate(-20deg); opacity: 0; }
+  60%  { transform: scale(1.3) rotate(10deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.star-pop { animation: starPop 0.4s ease forwards; }
+
+/* ── 弹跳动画 ── */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-12rpx); }
+}
+.bounce { animation: bounce 1.6s ease-in-out infinite; }
+
+/* ── 淡入动画 ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30rpx); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeInUp 0.4s ease forwards; }

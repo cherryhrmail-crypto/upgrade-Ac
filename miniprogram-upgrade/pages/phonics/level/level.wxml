@@ -1,0 +1,50 @@
+<!-- pages/phonics/level/level.wxml — Level详情页 -->
+<view class="page" style="--theme: {{level.color}}">
+  <!-- 顶部信息 -->
+  <view class="hero" style="background: linear-gradient(135deg, {{level.color}}, {{level.color}}aa)">
+    <text class="level-badge">Level {{level.id}}</text>
+    <text class="level-title">{{level.subtitle}}</text>
+    <text class="level-desc">{{level.desc}}</text>
+    <view class="level-meta">
+      <view class="meta-pill">{{level.age}}</view>
+      <view class="meta-pill">{{level.weeks}}周</view>
+      <view class="meta-pill">约{{level.words}}词</view>
+    </view>
+  </view>
+
+  <!-- 单元列表 -->
+  <view class="units-section">
+    <view class="sec-title">📚 学习单元</view>
+    <view class="unit-card" wx:for="{{level.units}}" wx:key="name">
+      <view class="unit-header" bindtap="toggleUnit" data-index="{{index}}">
+        <view class="unit-num" style="background: {{level.color}}">{{index+1}}</view>
+        <text class="unit-name">{{item.name}}</text>
+        <text class="unit-toggle">{{expandedUnit===index?'▲':'▼'}}</text>
+      </view>
+
+      <block wx:if="{{expandedUnit===index}}">
+        <!-- 音素卡片 -->
+        <view class="sounds-row">
+          <view class="sound-chip" wx:for="{{item.sounds}}" wx:key="*this"
+                style="border-color: {{level.color}}; color: {{level.color}}"
+                bindtap="speakSound" data-sound="{{item}}">
+            {{item}}
+          </view>
+        </view>
+        <!-- 单词卡片 -->
+        <view class="words-row">
+          <view class="word-chip" wx:for="{{item.words}}" wx:key="*this"
+                bindtap="speakWord" data-word="{{item}}">
+            <text class="wc-word">{{item}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 练习按钮 -->
+  <view class="practice-btn" style="background: linear-gradient(135deg, {{level.color}}, {{level.color}}bb)"
+        bindtap="startPractice">
+    🎮 开始拼读练习
+  </view>
+</view>

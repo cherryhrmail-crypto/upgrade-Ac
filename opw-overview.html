@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oxford Phonics World - 牛津自然拼读教材体系</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .header h2 {
+            font-size: 1.5em;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+        .header p {
+            margin-top: 15px;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ffd700;
+        }
+        .stat-label {
+            color: white;
+            font-size: 0.9em;
+        }
+
+        /* Section Styles */
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+        .section-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Level Cards */
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        .level-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+        }
+        .level-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+        }
+        .level-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+        }
+        .level-1::before { background: linear-gradient(90deg, #FF6B6B, #FF8E53); }
+        .level-2::before { background: linear-gradient(90deg, #4ECDC4, #44A08D); }
+        .level-3::before { background: linear-gradient(90deg, #667eea, #764ba2); }
+        .level-4::before { background: linear-gradient(90deg, #f093fb, #f5576c); }
+        .level-5::before { background: linear-gradient(90deg, #FFD200, #F7971E); }
+
+        .level-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        .level-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 15px;
+        }
+        .level-1 .level-badge { background: linear-gradient(90deg, #FF6B6B, #FF8E53); }
+        .level-2 .level-badge { background: linear-gradient(90deg, #4ECDC4, #44A08D); }
+        .level-3 .level-badge { background: linear-gradient(90deg, #667eea, #764ba2); }
+        .level-4 .level-badge { background: linear-gradient(90deg, #f093fb, #f5576c); }
+        .level-5 .level-badge { background: linear-gradient(90deg, #FFD200, #F7971E); color: #333; }
+
+        .level-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        .level-card .age {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .level-card .description {
+            font-size: 0.95em;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .level-stats {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid rgba(0,0,0,0.1);
+        }
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .stat-icon {
+            font-size: 1.2em;
+        }
+
+        /* Curriculum Table */
+        .curriculum-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .curriculum-table thead {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+        }
+        .curriculum-table th, .curriculum-table td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .curriculum-table th {
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        .curriculum-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+        .curriculum-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Class Structure Timeline */
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+            padding-left: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .timeline-item:hover {
+            transform: translateX(5px);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 25px;
+            width: 16px;
+            height: 16px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .timeline-item:nth-child(2)::before { background: #4ECDC4; }
+        .timeline-item:nth-child(3)::before { background: #FFD200; }
+        .timeline-item:nth-child(4)::before { background: #FF6B6B; }
+        .timeline-item:nth-child(5)::before { background: #f5576c; }
+        .timeline-item:nth-child(6)::before { background: #764ba2; }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .timeline-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+        }
+        .timeline-time {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        .timeline-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+        .timeline-activity {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        /* Resources Grid */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .resource-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        .resource-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        .resource-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .resource-desc {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+        .feature-icon {
+            font-size: 2.5em;
+            flex-shrink: 0;
+        }
+        .feature-content h4 {
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        .feature-content p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        /* Teaching Tips */
+        .tips-box {
+            background: linear-gradient(135deg, #FFF9E6 0%, #FFE6CC 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            border-left: 5px solid #FFD200;
+        }
+        .tips-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #D35400;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .tips-list {
+            list-style: none;
+        }
+        .tips-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #555;
+            line-height: 1.6;
+        }
+        .tips-list li::before {
+            content: '💡';
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+
+        /* Back Button */
+        .back-btn {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            z-index: 1000;
+            background: white;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 25px;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .back-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            opacity: 0.9;
+        }
+        .footer-links {
+            margin-top: 15px;
+        }
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        .footer-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .stats-bar {
+                gap: 15px;
+            }
+            .stat-item {
+                padding: 10px 20px;
+            }
+            .timeline {
+                padding-left: 20px;
+            }
+            .timeline-item::before {
+                left: -20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← 返回主页</a>
+
+    <div class="container">
+        <div class="header">
+            <h1>🔤 Oxford Phonics World</h1>
+            <h2>牛津自然拼读教材体系</h2>
+            <p>建立解码能力 · 逐步过渡到自主阅读 · 约1800个词汇</p>
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">册教材</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">110</div>
+                    <div class="stat-label">周课程</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1800+</div>
+                    <div class="stat-label">词汇量</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">90</div>
+                    <div class="stat-label">分钟/课</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 课程体系 -->
+        <div class="section">
+            <div class="section-title">📚 完整课程体系</div>
+            <div class="level-grid">
+                <a href="opw-level1.html" class="level-card level-1">
+                    <div class="level-icon">1️⃣</div>
+                    <div class="level-badge">Level 1</div>
+                    <h3>字母音值</h3>
+                    <div class="age">👶 5岁 · 第1学期</div>
+                    <div class="description">学习26个英文字母的独立发音，建立字母与声音的联系，为拼读打下基础。</div>
+                    <div class="level-stats">
+                        <div class="stat">
+                            <span class="stat-icon">📖</span>
+                            <span>26周课程</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-icon">📝</span>
+                            <span>约50词</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-icon">🎯</span>
+                            <span>字母音</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="opw-level2.html" class="level-card level-2">
+                    <div class="level-icon">2️⃣</div>
+                    <div class="level-badge">Level 2</div>
+                    <h3>辅音组合</h3>
+                    <div class="age">👦 5.5岁 · 第2学期</div>
+                    <div class="description">学习辅音组合，如 bl、cl、fl、tr 等，掌握连续发音技巧。</div>
+                    <div class="level-stats">
+                        <div class="stat">
+                            <span class="stat-icon">📖</span>
+                            <span>20周课程</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-icon">📝</span>
+                            <span>约150词</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-icon">🎯</span>
+                            <span>辅音组合</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="opw-level3.html" class="level-card level-3">
+                    <div class="level-icon">3️⃣</div>
+                    <div class="level-badge">Level 3</div>
+                    <h3>短元音家族</h3>
+                    <div class="age">👧 6岁 · 第3学期</div>
+                    <div class="description">学习CVC（辅音-元音-辅音）词族，如 cat、bed、hit 等，掌握短元音发音。</div>
+                    <div class="level-stats">
+                        <div class="stat">
+                            <span class="stat-icon">📖</span>
+                            <span>20周课程</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-icon">📝</span>
+                            <span>约300词</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-icon">🎯</span>
+                            <span>短元音</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="opw-level4.html" class="level-card level-4">
+                    <div class="level-icon">4️⃣</div>
+                    <div class="level-badge">Level 4</div>
+                    <h3>长元音规则</h3>
+                    <div class="age">🧒 6.5岁 · 第4学期</div>
+                    <div class="description">学习CVCe规则和元音组合，如 cake、rain 等，掌握魔法e和长元音发音。</div>
+                    <div class="level-stats">
+                        <div class="stat">
+                            <span class="stat-icon">📖</span>
+                            <span>20周课程</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-icon">📝</span>
+                            <span>约500词</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-icon">🎯</span>
+                            <span>长元音</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="opw-level5.html" class="level-card level-5">
+                    <div class="level-icon">5️⃣</div>
+                    <div class="level-badge">Level 5</div>
+                    <h3>高级规则</h3>
+                    <div class="age">🧓 7岁+ · 第5学期</div>
+                    <div class="description">学习双元音、R控元音和多音节词，如 ai、ea、ar、or 等，完成拼读体系。</div>
+                    <div class="level-stats">
+                        <div class="stat">
+                            <span class="stat-icon">📖</span>
+                            <span>24周课程</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-icon">📝</span>
+                            <span>约800词</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-icon">🎯</span>
+                            <span>高级规则</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="opw-interactive.html" class="level-card" style="background: linear-gradient(135deg, #FFD200 0%, #F7971E 100%);">
+                    <div class="level-icon">🎮</div>
+                    <div class="level-badge" style="background: #333; color: white;">互动练习</div>
+                    <h3>在线互动</h3>
+                    <div class="age">📱 所有级别</div>
+                    <div class="description">拼读测验、单词构建、拼读练习，在线互动学习，巩固知识。</div>
+                    <div class="level-stats">
+                        <div class="stat">
+                            <span class="stat-icon">🎯</span>
+                            <span>5个级别</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-icon">📝</span>
+                            <span>50+题目</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-icon">🎮</span>
+                            <span>3种游戏</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 课程结构表 -->
+        <div class="section">
+            <div class="section-title">📋 课程结构详解</div>
+            <table class="curriculum-table">
+                <thead>
+                    <tr>
+                        <th>Level</th>
+                        <th>核心内容</th>
+                        <th>规则类型</th>
+                        <th>周数</th>
+                        <th>词汇量</th>
+                        <th>学习目标</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Level 1</strong></td>
+                        <td>26个字母音值</td>
+                        <td>单字母音</td>
+                        <td>26周</td>
+                        <td>≈50词</td>
+                        <td>建立字母与声音的联系</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Level 2</strong></td>
+                        <td>辅音组合</td>
+                        <td>L/R/S/词尾组合</td>
+                        <td>20周</td>
+                        <td>≈150词</td>
+                        <td>掌握辅音组合发音</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Level 3</strong></td>
+                        <td>短元音家族</td>
+                        <td>CVC词族</td>
+                        <td>20周</td>
+                        <td>≈300词</td>
+                        <td>掌握短元音发音</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Level 4</strong></td>
+                        <td>长元音规则</td>
+                        <td>CVCe/元音组合</td>
+                        <td>20周</td>
+                        <td>≈500词</td>
+                        <td>掌握长元音发音</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Level 5</strong></td>
+                        <td>高级规则</td>
+                        <td>双元音/R控元音</td>
+                        <td>24周</td>
+                        <td>≈800词</td>
+                        <td>自主阅读能力建立</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 课堂结构 -->
+        <div class="section">
+            <div class="section-title">⏱️ 课堂结构（90分钟）</div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-title">1️⃣ Review & Warm-up 复习热身</div>
+                        <div class="timeline-time">10 分钟</div>
+                    </div>
+                    <div class="timeline-desc">激活旧知识，营造学习氛围</div>
+                    <div class="timeline-activity">
+                        • Phonics歌曲齐唱<br>
+                        • Flash card快速认读游戏<br>
+                        • 上节拼读内容快速回顾<br>
+                        • 字母歌复习
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-title">2️⃣ New Phonics 新音组引入</div>
+                        <div class="timeline-time">15 分钟</div>
+                    </div>
+                    <div class="timeline-desc">系统讲解新发音规则</div>
+                    <div class="timeline-activity">
+                        • 引入新字母/音组<br>
+                        • 发音示范（嘴型+手势辅助）<br>
+                        • 例词展示（图片+文字）<br>
+                        • 师生互动练习
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-title">3️⃣ Blending Practice 拼读练习</div>
+                        <div class="timeline-time">15 分钟</div>
+                    </div>
+                    <div class="timeline-desc">培养拼读能力，拆音合音训练</div>
+                    <div class="timeline-activity">
+                        • 拆音→合音→读词<br>
+                        • 老师领读 → 全班齐读 → 个人挑战<br>
+                        • 三指法拼读训练<br>
+                        • 速度拼读游戏
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-title">4️⃣ Word Work 词汇积累</div>
+                        <div class="timeline-time">20 分钟</div>
+                    </div>
+                    <div class="timeline-desc">巩固词汇，趣味练习</div>
+                    <div class="timeline-activity">
+                        • 配对游戏（音-词-图）<br>
+                        • 填字游戏<br>
+                        • 词卡排序练习<br>
+                        • 同音族词积累（cat/bat/hat）
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-title">5️⃣ Reading Application 阅读应用</div>
+                        <div class="timeline-time">20 分钟</div>
+                    </div>
+                    <div class="timeline-desc">实际应用，培养阅读兴趣</div>
+                    <div class="timeline-activity">
+                        • OPW Reader分级读本阅读<br>
+                        • 听音圈词练习<br>
+                        • 读句子/读故事<br>
+                        • 角色扮演表演
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-title">6️⃣ Wrap-up & Homework 总结布置</div>
+                        <div class="timeline-time">10 分钟</div>
+                    </div>
+                    <div class="timeline-desc">总结回顾，布置作业</div>
+                    <div class="timeline-activity">
+                        • 今日词汇回顾卡<br>
+                        • 重点规则总结<br>
+                        • 布置线上复习任务<br>
+                        • 鼓励与表扬
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 教学特色 -->
+        <div class="section">
+            <div class="section-title">✨ 教学特色</div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-content">
+                        <h4>系统性强</h4>
+                        <p>从字母音到高级规则，5册教材完整覆盖自然拼读体系，循序渐进，螺旋上升。</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎮</div>
+                    <div class="feature-content">
+                        <h4>趣味互动</h4>
+                        <p>大量游戏和互动活动，激发学习兴趣，让孩子在快乐中学习拼读。</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📚</div>
+                    <div class="feature-content">
+                        <h4>阅读导向</h4>
+                        <p>配套OPW Reader分级读本，学完即读，快速建立自主阅读能力。</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                    <div class="feature-content">
+                        <h4>家庭辅助</h4>
+                        <p>提供详细的家庭学习指导和在线练习资源，家校配合更高效。</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎨</div>
+                    <div class="feature-content">
+                        <h4>视觉丰富</h4>
+                        <p>精美的图片和卡片设计，符合儿童认知特点，视觉记忆更深刻。</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-content">
+                        <h4>进度可控</h4>
+                        <p>明确的周次计划和词汇量目标，老师可灵活调整教学进度。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 教学资源 -->
+        <div class="section">
+            <div class="section-title">🛠️ 教学资源</div>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">🃏</div>
+                    <div class="resource-title">词汇卡片</div>
+                    <div class="resource-desc">可打印的词汇卡片，包含发音提示和图片，适合课堂和家庭使用。</div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">🎵</div>
+                    <div class="resource-title">歌曲资源</div>
+                    <div class="resource-desc">Phonics歌曲和儿歌，帮助孩子在音乐中记忆发音规则。</div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">🎮</div>
+                    <div class="resource-title">游戏资源</div>
+                    <div class="resource-desc">互动游戏和拼读游戏，增加课堂趣味性，巩固学习效果。</div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">🖨️</div>
+                    <div class="resource-title">可打印教具</div>
+                    <div class="resource-desc">练习单、工作表、拼读卡等可打印材料，满足不同学习需求。</div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">📖</div>
+                    <div class="resource-title">分级读本</div>
+                    <div class="resource-desc">OPW Reader系列分级读本，与课程配套，培养阅读能力。</div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">🔧</div>
+                    <div class="resource-title">在线工具</div>
+                    <div class="resource-desc">在线发音练习、互动测验、学习进度追踪等数字化工具。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 教学建议 -->
+        <div class="section">
+            <div class="section-title">💡 教学建议</div>
+            <div class="tips-box">
+                <div class="tips-title">💡 教学成功的关键</div>
+                <ul class="tips-list">
+                    <li><strong>多感官参与：</strong>结合视觉、听觉、动觉，使用手势、动作辅助发音学习。</li>
+                    <li><strong>及时反馈：</strong>对学生的发音和拼读给予及时、正面的反馈和纠正。</li>
+                    <li><strong>重复练习：</strong>拼读需要大量重复练习，每日坚持，积少成多。</li>
+                    <li><strong>游戏化教学：</strong>将枯燥的拼读练习融入游戏，提高学习兴趣。</li>
+                    <li><strong>循序渐进：</strong>严格按照教材顺序，不要跳级，确保基础扎实。</li>
+                    <li><strong>阅读实践：</strong>每学完一个规则，立即进行阅读实践，巩固应用。</li>
+                    <li><strong>家校配合：</strong>布置家庭作业，鼓励家长参与孩子的拼读学习。</li>
+                    <li><strong>因材施教：</strong>根据学生的接受能力调整教学节奏，分层教学。</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Oxford Phonics World · 牛津自然拼读教材体系</p>
+            <p>British English for Young Learners · 🇬🇧</p>
+            <div class="footer-links">
+                <a href="opw-lesson-template.html">教案模板</a>
+                <a href="materials-preview.html">返回预览</a>
+                <a href="index.html">返回主页</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

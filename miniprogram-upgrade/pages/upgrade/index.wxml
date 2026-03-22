@@ -1,0 +1,28 @@
+<!-- pages/upgrade/index.wxml — 英语启蒙总页 -->
+<view class="page">
+  <view class="hero" style="background: linear-gradient(135deg,#FF6B6B,#a18cd1)">
+    <text class="hero-title">🎨 英语启蒙</text>
+    <text class="hero-sub">UpGrade · 0-8岁快乐英语</text>
+  </view>
+
+  <view class="modules">
+    <view class="module-item" wx:for="{{modules}}" wx:key="id"
+          bindtap="goToModule" data-path="{{item.path}}">
+      <view class="module-icon" style="background: {{item.bg}}">
+        <text class="module-emoji">{{item.emoji}}</text>
+      </view>
+      <view class="module-info">
+        <text class="module-title">{{item.title}}</text>
+        <text class="module-desc">{{item.desc}}</text>
+      </view>
+      <view class="module-meta">
+        <text class="module-count">{{item.count}}个词</text>
+        <view class="prog-bar">
+          <view class="prog-fill" style="width:{{item.progress}}%"></view>
+        </view>
+        <text class="prog-text">{{item.progress}}%</text>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+</view>

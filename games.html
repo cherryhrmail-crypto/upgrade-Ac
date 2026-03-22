@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎮 大游戏 | 小星星英语</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);min-height:100vh;overflow-x:hidden;color:white;}
+
+/* Floating particles */
+.particles{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.particle{position:absolute;border-radius:50%;animation:float linear infinite;opacity:.4;}
+@keyframes float{0%{transform:translateY(100vh) rotate(0deg);}100%{transform:translateY(-100px) rotate(720deg);}}
+
+.back-btn{position:fixed;left:18px;top:18px;z-index:200;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);color:white;font-family:'Nunito',sans-serif;font-weight:900;padding:9px 20px;border-radius:30px;cursor:pointer;font-size:1rem;text-decoration:none;transition:all .2s;backdrop-filter:blur(6px);}
+.back-btn:hover{background:rgba(255,255,255,.3);}
+
+header{text-align:center;padding:70px 20px 20px;position:relative;z-index:10;}
+.page-title{font-family:'Fredoka One',cursive;font-size:clamp(2rem,8vw,3.8rem);background:linear-gradient(90deg,#FFD700,#FF6B9D,#4facfe,#2EC4B6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-sub{color:rgba(255,255,255,.7);font-size:1rem;margin-top:4px;}
+
+/* Game selector */
+.game-selector{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:16px auto 26px;padding:0 16px;position:relative;z-index:10;}
+.game-tab{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);font-family:'Nunito',sans-serif;font-weight:900;font-size:.9rem;padding:9px 20px;border-radius:30px;cursor:pointer;transition:all .22s;}
+.game-tab.active{background:linear-gradient(90deg,#FFD700,#FF8C42);color:#1a1a2e;border-color:transparent;transform:scale(1.06);}
+.game-tab:hover:not(.active){background:rgba(255,255,255,.2);}
+
+/* Score / lives */
+.hud{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:0 auto 20px;position:relative;z-index:10;}
+.hud-pill{background:rgba(255,255,255,.12);backdrop-filter:blur(6px);border-radius:20px;padding:8px 20px;font-weight:900;font-size:1rem;border:1.5px solid rgba(255,255,255,.2);}
+.hud-pill span{color:#FFD700;}
+
+/* All game sections */
+.game-section{display:none;position:relative;z-index:10;max-width:860px;margin:0 auto;padding:0 16px 80px;}
+.game-section.active{display:block;}
+
+/* ===== BUBBLE POP ===== */
+.bubble-arena{position:relative;width:100%;height:420px;background:rgba(255,255,255,.05);border-radius:28px;border:2px solid rgba(255,255,255,.1);overflow:hidden;}
+.bubble{position:absolute;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform .15s;user-select:none;box-shadow:0 4px 20px rgba(0,0,0,.3);animation:bubbleFloat ease-in-out infinite;}
+.bubble:hover{transform:scale(1.12);}
+@keyframes bubbleFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+.bubble-emoji{font-size:2rem;line-height:1;}
+.bubble-word{font-family:'Fredoka One',cursive;font-size:.75rem;margin-top:2px;color:white;text-shadow:0 1px 3px rgba(0,0,0,.5);}
+.bubble-prompt{text-align:center;background:rgba(255,255,255,.12);border-radius:20px;padding:14px 24px;margin-bottom:16px;border:2px solid rgba(255,255,255,.2);}
+.bubble-q{font-family:'Fredoka One',cursive;font-size:1.7rem;color:#FFD700;}
+.bubble-q-cn{color:rgba(255,255,255,.6);font-size:.9rem;margin-top:3px;}
+
+/* ===== MEMORY CARD ===== */
+.memory-controls{text-align:center;margin-bottom:16px;}
+.mem-btn{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);color:white;font-family:'Nunito',sans-serif;font-weight:900;padding:9px 24px;border-radius:24px;cursor:pointer;transition:all .2s;font-size:.95rem;}
+.mem-btn:hover{background:rgba(255,255,255,.3);}
+.memory-grid{display:grid;gap:10px;max-width:600px;margin:0 auto;}
+.mem-card{aspect-ratio:1;border-radius:18px;cursor:pointer;perspective:600px;user-select:none;}
+.mem-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .45s;}
+.mem-card.flipped .mem-inner{transform:rotateY(180deg);}
+.mem-card.matched .mem-inner{transform:rotateY(180deg);}
+.mem-card.matched .mem-back{background:rgba(46,204,113,.4);border-color:#2ECC71;}
+.mem-front,.mem-back{position:absolute;inset:0;border-radius:18px;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;border:3px solid rgba(255,255,255,.2);}
+.mem-front{background:rgba(255,255,255,.1);font-size:2.2rem;color:rgba(255,255,255,.3);}
+.mem-front-icon{font-size:2.5rem;}
+.mem-back{background:rgba(255,255,255,.18);transform:rotateY(180deg);}
+.mem-back-emoji{font-size:2rem;}
+.mem-back-word{font-family:'Fredoka One',cursive;font-size:.8rem;color:white;margin-top:3px;}
+
+/* ===== SPELLING BEE ===== */
+.spell-card{background:rgba(255,255,255,.1);border-radius:28px;padding:28px;border:2px solid rgba(255,255,255,.15);text-align:center;}
+.spell-emoji-big{font-size:6rem;animation:spellBounce 2s ease-in-out infinite;display:inline-block;}
+@keyframes spellBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+.spell-hint{color:rgba(255,255,255,.6);font-size:.95rem;margin:8px 0 16px;}
+.spell-blanks{display:flex;justify-content:center;gap:8px;margin:16px 0;flex-wrap:wrap;}
+.spell-blank{width:46px;height:52px;border-bottom:4px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:1.8rem;color:white;transition:border-color .2s;}
+.spell-blank.filled{border-color:#FFD700;}
+.spell-blank.correct-letter{border-color:#2ECC71;}
+.spell-letter-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:480px;margin:16px auto;}
+.letter-btn{width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.12);border:2.5px solid rgba(255,255,255,.3);color:white;font-family:'Fredoka One',cursive;font-size:1.4rem;cursor:pointer;transition:all .2s;}
+.letter-btn:hover{background:rgba(255,255,255,.3);transform:scale(1.1);}
+.letter-btn:disabled{opacity:.35;cursor:not-allowed;}
+.spell-controls{display:flex;justify-content:center;gap:12px;margin-top:14px;}
+.spell-btn{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);color:white;font-family:'Nunito',sans-serif;font-weight:900;padding:9px 22px;border-radius:24px;cursor:pointer;transition:all .2s;font-size:.95rem;}
+.spell-btn:hover{background:rgba(255,255,255,.3);}
+.spell-btn.submit{background:linear-gradient(90deg,#FFD700,#FF8C42);color:#1a1a2e;border-color:transparent;}
+
+/* ===== RACE GAME ===== */
+.race-card{background:rgba(255,255,255,.1);border-radius:28px;padding:24px;border:2px solid rgba(255,255,255,.15);}
+.race-track{background:rgba(255,255,255,.05);border-radius:20px;padding:16px;margin-bottom:20px;overflow:hidden;}
+.race-lane{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.racer-emoji{font-size:2rem;transition:margin-left .5s cubic-bezier(.34,1.56,.64,1);}
+.racer-name{color:rgba(255,255,255,.6);font-size:.85rem;width:60px;text-align:right;}
+.race-finish{color:#FFD700;font-size:.9rem;font-weight:700;margin-left:auto;opacity:.5;}
+.race-q{background:rgba(255,255,255,.12);border-radius:20px;padding:16px;text-align:center;margin-bottom:16px;border:2px solid rgba(255,255,255,.2);}
+.race-question{font-family:'Fredoka One',cursive;font-size:1.5rem;color:#FFD700;margin-bottom:4px;}
+.race-q-cn{color:rgba(255,255,255,.6);font-size:.9rem;}
+.race-opts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:420px;margin:0 auto;}
+.race-opt{background:rgba(255,255,255,.1);border:3px solid rgba(255,255,255,.25);border-radius:18px;padding:14px;color:white;font-family:'Fredoka One',cursive;font-size:1.3rem;cursor:pointer;transition:all .22s;text-align:center;}
+.race-opt:hover{background:rgba(255,255,255,.25);transform:scale(1.06);}
+.race-opt.correct{background:#2ECC71;border-color:#2ECC71;}
+.race-opt.wrong{background:#E74C3C;border-color:#E74C3C;}
+.race-progress{display:flex;justify-content:center;gap:6px;margin-top:14px;flex-wrap:wrap;}
+.progress-dot{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.2);transition:background .3s;}
+.progress-dot.done{background:#FFD700;}
+.progress-dot.current{background:#FF6B9D;animation:dotPulse .8s ease-in-out infinite;}
+@keyframes dotPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.4);}}
+
+/* Result modal */
+.result-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;justify-content:center;align-items:center;}
+.result-modal.show{display:flex;}
+.result-box{background:linear-gradient(135deg,#1a1a2e,#16213e);border:3px solid #FFD700;border-radius:30px;padding:40px 50px;text-align:center;animation:popIn .4s ease;max-width:360px;width:90%;}
+@keyframes popIn{from{transform:scale(.5);opacity:0;}to{transform:scale(1);opacity:1;}}
+.result-emoji{font-size:72px;}
+.result-title{font-family:'Fredoka One',cursive;font-size:2rem;color:#FFD700;margin:10px 0 6px;}
+.result-sub{color:rgba(255,255,255,.7);font-size:1rem;margin-bottom:20px;}
+.result-btn{background:linear-gradient(90deg,#FFD700,#FF8C42);border:none;border-radius:30px;padding:12px 36px;font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;color:#1a1a2e;cursor:pointer;transition:transform .2s;}
+.result-btn:hover{transform:scale(1.08);}
+
+/* Toast */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);background:white;border-radius:20px;padding:14px 28px;font-weight:900;font-size:1.1rem;color:#333;box-shadow:0 8px 30px rgba(0,0,0,.2);z-index:9999;transition:transform .3s;pointer-events:none;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.toast.good{border-left:6px solid #2ECC71;}
+.toast.bad{border-left:6px solid #E74C3C;}
+</style>
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+<a class="back-btn" href="index.html">← 返回</a>
+
+<header>
+  <div class="page-title">🎮 Super Games!</div>
+  <div class="page-sub">综合大游戏 · 挑战自我！</div>
+</header>
+
+<div class="hud">
+  <div class="hud-pill">⭐ 积分 <span id="totalScore">0</span></div>
+  <div class="hud-pill">❤️ 生命 <span id="livesDisplay">3</span></div>
+  <div class="hud-pill">🏆 最高 <span id="bestScore">0</span></div>
+</div>
+
+<div class="game-selector">
+  <button class="game-tab active" onclick="selectGame('bubble')">🫧 泡泡消消</button>
+  <button class="game-tab" onclick="selectGame('memory')">🎴 翻牌记忆</button>
+  <button class="game-tab" onclick="selectGame('spell')">🐝 拼拼单词</button>
+  <button class="game-tab" onclick="selectGame('race')">🏎 知识赛跑</button>
+</div>
+
+<!-- ===== BUBBLE POP ===== -->
+<div class="game-section active" id="game-bubble">
+  <div class="bubble-prompt">
+    <div class="bubble-q" id="bubbleQ">🍎 Apple</div>
+    <div class="bubble-q-cn" id="bubbleQCn">找到苹果！点击正确的泡泡！</div>
+  </div>
+  <div class="bubble-arena" id="bubbleArena"></div>
+</div>
+
+<!-- ===== MEMORY ===== -->
+<div class="game-section" id="game-memory">
+  <div class="memory-controls">
+    <button class="mem-btn" onclick="setupMemory()">🔄 重新开始 New Game</button>
+    <span style="color:rgba(255,255,255,.5);font-size:.85rem;margin-left:14px;">翻开相同的图案！Find the pairs!</span>
+  </div>
+  <div class="memory-grid" id="memoryGrid"></div>
+  <div id="memoryResult" style="text-align:center;margin-top:16px;font-size:1.1rem;color:rgba(255,255,255,.7);"></div>
+</div>
+
+<!-- ===== SPELLING BEE ===== -->
+<div class="game-section" id="game-spell">
+  <div class="spell-card">
+    <div class="spell-emoji-big" id="spellEmoji">🍎</div>
+    <div class="spell-hint" id="spellHint">拼出这个单词！Spell the word!</div>
+    <div class="spell-blanks" id="spellBlanks"></div>
+    <div class="spell-letter-btns" id="spellLetters"></div>
+    <div class="spell-controls">
+      <button class="spell-btn" onclick="clearSpell()">🗑 清除</button>
+      <button class="spell-btn" onclick="hintSpell()">💡 提示</button>
+      <button class="spell-btn submit" onclick="checkSpell()">✅ 确认</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RACE ===== -->
+<div class="game-section" id="game-race">
+  <div class="race-card">
+    <div class="race-track" id="raceTrack"></div>
+    <div class="race-q">
+      <div class="race-question" id="raceQuestion">What is this? 🍎</div>
+      <div class="race-q-cn" id="raceQCn">这是什么？</div>
+    </div>
+    <div class="race-opts" id="raceOpts"></div>
+    <div class="race-progress" id="raceProgress"></div>
+  </div>
+</div>
+
+<div class="result-modal" id="resultModal">
+  <div class="result-box">
+    <div class="result-emoji" id="resultEmoji">🏆</div>
+    <div class="result-title" id="resultTitle">Amazing!</div>
+    <div class="result-sub" id="resultSub">你真棒！</div>
+    <button class="result-btn" onclick="closeResult()">再玩一次 Play Again!</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ---- SHARED DATA ----
+const ALL_ITEMS = [
+  {en:'Apple',e:'🍎'},{en:'Banana',e:'🍌'},{en:'Cat',e:'🐱'},{en:'Dog',e:'🐶'},
+  {en:'Red',e:'🔴'},{en:'Blue',e:'🔵'},{en:'Sun',e:'☀️'},{en:'Moon',e:'🌙'},
+  {en:'One',e:'1️⃣'},{en:'Two',e:'2️⃣'},{en:'Star',e:'⭐'},{en:'Fish',e:'🐟'},
+  {en:'Bird',e:'🐦'},{en:'Frog',e:'🐸'},{en:'Cake',e:'🎂'},{en:'Milk',e:'🥛'},
+];
+const COLORS_HEX=['#FF6B9D','#FF8C42','#FFD700','#2EC4B6','#3498DB','#9B59B6','#E74C3C','#2ECC71'];
+
+let totalScore=0, lives=3, bestScore=0;
+
+// ---- PARTICLES ----
+(function(){
+  const p=document.getElementById('particles');
+  for(let i=0;i<20;i++){
+    const d=document.createElement('div');d.className='particle';
+    const sz=Math.random()*12+4;
+    d.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;background:${COLORS_HEX[Math.floor(Math.random()*8)]};animation-duration:${6+Math.random()*8}s;animation-delay:${Math.random()*8}s;`;
+    p.appendChild(d);
+  }
+})();
+
+function speak(t,r=0.72,p=1.3){
+  if(!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(t);
+  u.lang='en-US';u.rate=r;u.pitch=p;window.speechSynthesis.speak(u);
+}
+function addScore(n){
+  totalScore+=n;
+  document.getElementById('totalScore').textContent=totalScore;
+  if(totalScore>bestScore){bestScore=totalScore;document.getElementById('bestScore').textContent=bestScore;}
+}
+function loseLife(){
+  lives=Math.max(0,lives-1);
+  document.getElementById('livesDisplay').textContent=lives;
+  if(lives===0){showResult(false);}
+}
+function showToast(msg,good){
+  const t=document.getElementById('toast');t.textContent=msg;
+  t.className='toast '+(good?'good':'bad')+' show';
+  setTimeout(()=>t.classList.remove('show'),1800);
+}
+
+function selectGame(id){
+  document.querySelectorAll('.game-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('game-'+id).classList.add('active');
+  document.querySelectorAll('.game-tab').forEach((b,i)=>{
+    b.classList.toggle('active',['bubble','memory','spell','race'][i]===id);
+  });
+  if(id==='bubble')setupBubble();
+  if(id==='memory')setupMemory();
+  if(id==='spell')setupSpell();
+  if(id==='race')setupRace();
+}
+
+// ============================
+// GAME 1: BUBBLE POP
+// ============================
+let bubbleTarget=null, bubbleTimer=null;
+
+function setupBubble(){
+  clearTimeout(bubbleTimer);
+  bubbleTarget=ALL_ITEMS[Math.floor(Math.random()*ALL_ITEMS.length)];
+  document.getElementById('bubbleQ').textContent=`${bubbleTarget.e} ${bubbleTarget.en}`;
+  document.getElementById('bubbleQCn').textContent=`找到 ${bubbleTarget.en}！点击正确的泡泡！`;
+  speak(`Find the ${bubbleTarget.en}!`,0.7,1.3);
+
+  const arena=document.getElementById('bubbleArena');arena.innerHTML='';
+  const items=new Set([ALL_ITEMS.indexOf(bubbleTarget)]);
+  while(items.size<7)items.add(Math.floor(Math.random()*ALL_ITEMS.length));
+
+  [...items].forEach((idx,i)=>{
+    const item=ALL_ITEMS[idx];
+    const bubble=document.createElement('div');
+    bubble.className='bubble';
+    const sz=Math.random()*30+70;
+    const x=Math.random()*(100-20);
+    const y=Math.random()*(100-20);
+    const col=COLORS_HEX[Math.floor(Math.random()*8)];
+    bubble.style.cssText=`width:${sz}px;height:${sz}px;left:${x}%;top:${y}%;background:radial-gradient(circle at 35% 35%,${col}cc,${col}88);animation-duration:${2+Math.random()*2}s;animation-delay:${Math.random()*1}s;`;
+    bubble.innerHTML=`<span class="bubble-emoji">${item.e}</span><span class="bubble-word">${item.en}</span>`;
+    bubble.onclick=()=>checkBubble(item, bubble);
+    arena.appendChild(bubble);
+  });
+
+  // auto next after 20s
+  bubbleTimer=setTimeout(()=>{loseLife();setupBubble();},20000);
+}
+
+function checkBubble(item, el){
+  clearTimeout(bubbleTimer);
+  if(item.en===bubbleTarget.en){
+    el.style.animation='none';
+    el.style.transform='scale(2)';el.style.opacity='0';el.style.transition='all .4s';
+    speak(`Yes! ${item.en}!`,0.7,1.4);addScore(10);
+    showToast(`🎉 ${item.en}! +10`,true);
+    setTimeout(setupBubble,700);
+  }else{
+    el.style.background='#E74C3C';
+    speak('Oops! Try again!',0.7,1.3);loseLife();
+    showToast('❌ 不对哦！再找找！',false);
+    setTimeout(()=>{el.style.background='';},600);
+    if(lives>0)setTimeout(()=>setupBubble(),1000);
+  }
+}
+
+// ============================
+// GAME 2: MEMORY CARD
+// ============================
+let memFlipped=[], memMatched=0, memLocked=false, memMoves=0, memStart=0;
+
+function setupMemory(){
+  memFlipped=[];memMatched=0;memLocked=false;memMoves=0;memStart=Date.now();
+  document.getElementById('memoryResult').textContent='';
+  const pool=[...ALL_ITEMS].sort(()=>Math.random()-.5).slice(0,6);
+  const pairs=[...pool,...pool].sort(()=>Math.random()-.5);
+  const cols=Math.min(4, Math.ceil(Math.sqrt(pairs.length)));
+  const grid=document.getElementById('memoryGrid');
+  grid.style.gridTemplateColumns=`repeat(${cols},1fr)`;
+  grid.innerHTML='';
+  pairs.forEach((item,i)=>{
+    const card=document.createElement('div');card.className='mem-card';
+    card.dataset.key=item.en;
+    card.innerHTML=`<div class="mem-inner"><div class="mem-front"><div class="mem-front-icon">⭐</div></div><div class="mem-back"><div class="mem-back-emoji">${item.e}</div><div class="mem-back-word">${item.en}</div></div></div>`;
+    card.onclick=()=>flipMemCard(card,item);
+    grid.appendChild(card);
+  });
+  speak('Find the matching pairs!',0.7,1.3);
+}
+
+function flipMemCard(card,item){
+  if(memLocked||card.classList.contains('flipped')||card.classList.contains('matched'))return;
+  card.classList.add('flipped');
+  speak(item.en,0.8,1.3);
+  memFlipped.push(card);
+  if(memFlipped.length===2){
+    memLocked=true;memMoves++;
+    const [a,b]=memFlipped;
+    if(a.dataset.key===b.dataset.key){
+      a.classList.add('matched');b.classList.add('matched');
+      memMatched++;addScore(12);
+      speak('Match!',0.8,1.4);
+      memFlipped=[];memLocked=false;
+      if(memMatched===6){
+        const secs=Math.round((Date.now()-memStart)/1000);
+        setTimeout(()=>{showResult(true,`用了 ${secs} 秒，翻了 ${memMoves} 次！`);speak('Amazing! You found all pairs!',0.7,1.3);},400);
+      }
+    }else{
+      setTimeout(()=>{a.classList.remove('flipped');b.classList.remove('flipped');memFlipped=[];memLocked=false;},900);
+    }
+  }
+}
+
+// ============================
+// GAME 3: SPELLING BEE
+// ============================
+let spellItem=null, spellInput=[], spellHintCount=0;
+
+function setupSpell(){
+  spellHintCount=0;
+  const easy=ALL_ITEMS.filter(x=>x.en.length<=5);
+  spellItem=easy[Math.floor(Math.random()*easy.length)];
+  document.getElementById('spellEmoji').textContent=spellItem.e;
+  document.getElementById('spellHint').textContent=`拼出这个单词！Spell the word: ${spellItem.e}`;
+  spellInput=[];
+  renderSpellBlanks();
+  renderLetterBtns();
+  speak(spellItem.en,0.65,1.3);
+}
+
+function renderSpellBlanks(){
+  const div=document.getElementById('spellBlanks');div.innerHTML='';
+  const word=spellItem.en.toUpperCase();
+  for(let i=0;i<word.length;i++){
+    const b=document.createElement('div');b.className='spell-blank'+(spellInput[i]?' filled':'');
+    b.textContent=spellInput[i]||'';
+    div.appendChild(b);
+  }
+}
+
+function renderLetterBtns(){
+  // shuffled letters: correct + extras
+  const correct=[...new Set(spellItem.en.toUpperCase())];
+  const extras='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').filter(c=>!correct.includes(c));
+  const extra=extras.sort(()=>Math.random()-.5).slice(0,Math.max(0,8-correct.length));
+  const all=[...correct,...extra].sort(()=>Math.random()-.5);
+  const div=document.getElementById('spellLetters');div.innerHTML='';
+  all.forEach(ch=>{
+    const btn=document.createElement('button');btn.className='letter-btn';btn.textContent=ch;
+    btn.onclick=()=>{
+      if(spellInput.length<spellItem.en.length){spellInput.push(ch);renderSpellBlanks();}
+    };
+    div.appendChild(btn);
+  });
+}
+
+function clearSpell(){spellInput=[];renderSpellBlanks();}
+function hintSpell(){
+  if(spellHintCount<spellItem.en.length){
+    spellInput[spellHintCount]=spellItem.en.toUpperCase()[spellHintCount];
+    spellHintCount++;renderSpellBlanks();
+    speak(spellItem.en[spellHintCount-1],0.7,1.3);
+  }
+}
+function checkSpell(){
+  const typed=spellInput.join('');
+  const target=spellItem.en.toUpperCase();
+  if(typed===target){
+    speak(`Yes! ${spellItem.en}! Great spelling!`,0.7,1.4);
+    const bonus=Math.max(2,8-spellHintCount);addScore(bonus*3);
+    showToast(`🎉 ${spellItem.en}! 拼写正确！+${bonus*3}`,true);
+    // highlight all green
+    document.querySelectorAll('.spell-blank').forEach(b=>b.classList.add('correct-letter'));
+    setTimeout(setupSpell,1500);
+  }else{
+    speak('Oops! Try again!',0.7,1.3);loseLife();
+    showToast(`💡 提示: ${target}`,false);
+    if(lives>0)setTimeout(setupSpell,1800);
+  }
+}
+
+// ============================
+// GAME 4: KNOWLEDGE RACE
+// ============================
+const RACE_QS = [
+  ...ALL_ITEMS.map(it=>({q:`What is this? ${it.e}`,qcn:`这是什么？`,answer:it.en,opts:[it,...[...ALL_ITEMS].filter(x=>x.en!==it.en).sort(()=>Math.random()-.5).slice(0,3)].sort(()=>Math.random()-.5)})),
+].slice(0,10);
+let raceQ=0, racePlayers=[], raceAnswered=false;
+const RACERS=[{n:'Leo 🦁',e:'🏎️'},{n:'Bella 🐰',e:'🚗'},{n:'You ⭐',e:'🚀'}];
+
+function setupRace(){
+  raceQ=0;raceAnswered=false;
+  racePlayers=RACERS.map(r=>({...r,pos:0}));
+  renderRaceTrack();
+  renderRaceProgress();
+  nextRaceQ();
+}
+function renderRaceTrack(){
+  const t=document.getElementById('raceTrack');t.innerHTML='';
+  racePlayers.forEach(p=>{
+    const lane=document.createElement('div');lane.className='race-lane';
+    lane.innerHTML=`<span class="racer-name">${p.n}</span><span class="racer-emoji" id="racer-${p.n.replace(/\s.*/,'')}" style="margin-left:${p.pos*3}%">${p.e}</span><span class="race-finish">🏁</span>`;
+    t.appendChild(lane);
+  });
+}
+function renderRaceProgress(){
+  const qs=RACE_QS.slice(0,10);
+  const div=document.getElementById('raceProgress');div.innerHTML='';
+  qs.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='progress-dot'+(i<raceQ?'done':i===raceQ?' current':'');
+    if(i<raceQ)d.classList.add('done');
+    if(i===raceQ)d.classList.add('current');
+    div.appendChild(d);
+  });
+}
+function nextRaceQ(){
+  if(raceQ>=10){showResult(true,'你完成了所有题目！Finished!');return;}
+  raceAnswered=false;
+  const qData=RACE_QS[raceQ]||RACE_QS[Math.floor(Math.random()*RACE_QS.length)];
+  document.getElementById('raceQuestion').textContent=qData.q;
+  document.getElementById('raceQCn').textContent=qData.qcn;
+  speak(qData.q.replace(/[^\w\s]/gi,''),0.7,1.3);
+
+  const pool=[qData.answer,...[...ALL_ITEMS].filter(x=>x.en!==qData.answer).sort(()=>Math.random()-.5).slice(0,3).map(x=>x.en)].sort(()=>Math.random()-.5);
+  const div=document.getElementById('raceOpts');div.innerHTML='';
+  pool.forEach(ans=>{
+    const item=ALL_ITEMS.find(x=>x.en===ans)||{en:ans,e:'❓'};
+    const btn=document.createElement('button');btn.className='race-opt';
+    btn.innerHTML=`${item.e}<div style="font-size:.85rem;margin-top:2px;">${ans}</div>`;
+    btn.onclick=()=>checkRace(ans,qData.answer,btn);
+    div.appendChild(btn);
+  });
+  renderRaceProgress();
+}
+function checkRace(ans,correct,btn){
+  if(raceAnswered)return;raceAnswered=true;
+  document.querySelectorAll('.race-opt').forEach(b=>b.onclick=null);
+  if(ans===correct){
+    btn.classList.add('correct');speak(`Yes! ${correct}!`,0.7,1.4);addScore(10);
+    racePlayers[2].pos=Math.min(30,racePlayers[2].pos+10);
+    showToast(`🎉 Correct! +10`,true);
+  }else{
+    btn.classList.add('wrong');
+    document.querySelectorAll('.race-opt').forEach(b=>{if(b.textContent.includes(correct))b.classList.add('correct');});
+    speak(`Oops! It is ${correct}!`,0.7,1.3);loseLife();
+    showToast(`💡 答案: ${correct}`,false);
+  }
+  // AI racers move
+  racePlayers[0].pos=Math.min(30,racePlayers[0].pos+(Math.random()>0.45?8:3));
+  racePlayers[1].pos=Math.min(30,racePlayers[1].pos+(Math.random()>0.5?6:4));
+  renderRaceTrack();
+  raceQ++;
+  if(lives>0)setTimeout(nextRaceQ,1500);
+}
+
+// ---- RESULT ----
+function showResult(win, sub=''){
+  const modal=document.getElementById('resultModal');
+  document.getElementById('resultEmoji').textContent=win?'🏆':'💪';
+  document.getElementById('resultTitle').textContent=win?'Amazing! 太棒了！':'Keep going! 加油！';
+  document.getElementById('resultSub').textContent=sub||`积分: ${totalScore}`;
+  modal.classList.add('show');
+  speak(win?'Amazing! You are a champion!':'Keep going! You can do it!',0.7,1.3);
+}
+function closeResult(){
+  document.getElementById('resultModal').classList.remove('show');
+  lives=3;document.getElementById('livesDisplay').textContent=3;
+  setupBubble();
+}
+
+// Init
+setupBubble();
+window.onload=()=>setTimeout(()=>speak('Super games! Let\'s play!',0.7,1.3),700);
+</script>
+</body>
+</html>

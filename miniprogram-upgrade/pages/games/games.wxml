@@ -1,0 +1,98 @@
+<!-- pages/games/games.wxml — 游戏中心 -->
+<view class="page">
+  <view class="hero">
+    <text class="hero-title">🏆 游戏中心</text>
+    <text class="hero-sub">寓教于乐 · 边玩边学</text>
+    <view class="total-score">累计得分 <text class="tscore">{{totalScore}}</text> ⭐</view>
+  </view>
+
+  <view class="games-grid">
+    <!-- 记忆翻牌 -->
+    <view class="game-card" bindtap="startMemory" style="background: linear-gradient(135deg,#667eea,#764ba2)">
+      <text class="gc-emoji">🃏</text>
+      <text class="gc-title">记忆翻牌</text>
+      <text class="gc-desc">找出相同的单词对</text>
+      <text class="gc-best">最高: {{bestMemory}}分</text>
+    </view>
+
+    <!-- 打字速度 -->
+    <view class="game-card" bindtap="startTyping" style="background: linear-gradient(135deg,#f093fb,#f5576c)">
+      <text class="gc-emoji">⌨️</text>
+      <text class="gc-title">拼写挑战</text>
+      <text class="gc-desc">看图猜单词拼写</text>
+      <text class="gc-best">最高: {{bestTyping}}分</text>
+    </view>
+
+    <!-- 掉落接词 -->
+    <view class="game-card" bindtap="startFalling" style="background: linear-gradient(135deg,#4ECDC4,#44A08D)">
+      <text class="gc-emoji">🎯</text>
+      <text class="gc-title">单词接龙</text>
+      <text class="gc-desc">选出正确翻译</text>
+      <text class="gc-best">最高: {{bestFalling}}分</text>
+    </view>
+
+    <!-- 听音选词 -->
+    <view class="game-card" bindtap="startListening" style="background: linear-gradient(135deg,#FFD93D,#FF6B35)">
+      <text class="gc-emoji">👂</text>
+      <text class="gc-title">听音选词</text>
+      <text class="gc-desc">听发音选正确单词</text>
+      <text class="gc-best">最高: {{bestListening}}分</text>
+    </view>
+  </view>
+
+  <!-- 内联游戏区 -->
+  <view class="game-area" wx:if="{{activeGame}}">
+    <view class="game-header">
+      <text class="game-title">{{gameTitle}}</text>
+      <text class="game-score">⭐ {{gameScore}}</text>
+      <view class="game-close" bindtap="closeGame">✕</view>
+    </view>
+
+    <!-- 翻牌游戏 -->
+    <block wx:if="{{activeGame==='memory'}}">
+      <view class="memory-grid">
+        <view class="memory-card {{item.flipped?'flipped':''}} {{item.matched?'matched':''}}"
+              wx:for="{{memoryCards}}" wx:key="id"
+              bindtap="flipCard" data-index="{{index}}">
+          <view class="mc-front">?</view>
+          <view class="mc-back">{{item.content}}</view>
+        </view>
+      </view>
+      <text class="game-tip">翻出相同单词/中文配对</text>
+    </block>
+
+    <!-- 拼写挑战 -->
+    <block wx:if="{{activeGame==='typing'}}">
+      <view class="typing-area">
+        <text class="typing-emoji">{{currentWord.emoji}}</text>
+        <text class="typing-cn">{{currentWord.cn}}</text>
+        <input class="typing-input" placeholder="输入英文单词..."
+               bindinput="onTyping" value="{{typingInput}}"
+               auto-focus="true" confirm-type="next" bindconfirm="checkTyping"/>
+        <view class="typing-hint" wx:if="{{showHint}}">提示: {{currentWord.word[0]}}___</view>
+        <view class="typing-submit" bindtap="checkTyping">确认 ✓</view>
+      </view>
+    </block>
+
+    <!-- 单词接龙（快答模式） -->
+    <block wx:if="{{activeGame==='falling'}}">
+      <view class="falling-area">
+        <view class="fall-question">
+          <text class="fall-word">{{fallWord.word}}</text>
+          <text class="fall-emoji">{{fallWord.emoji}}</text>
+        </view>
+        <text class="fall-label">这个单词是什么意思？</text>
+        <view class="fall-opts">
+          <view class="fall-opt {{fallAnswered?(opt.cn===fallWord.cn?'correct':(opt.cn===fallPicked?'wrong':'')):''}}"
+                wx:for="{{fallOptions}}" wx:key="cn"
+                bindtap="{{fallAnswered?'':'pickFall'}}" data-cn="{{item.cn}}">
+            {{item.cn}}
+          </view>
+        </view>
+        <view wx:if="{{fallAnswered}}" class="fall-next" bindtap="nextFall">下一题 ▶</view>
+      </view>
+    </block>
+
+  </view>
+
+</view>

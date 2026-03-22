@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yummy! 美食世界 | 小星星英语</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito',sans-serif;background:linear-gradient(160deg,#f7971e,#ffd200 40%,#fc5c7d 80%,#6a3093 100%);min-height:100vh;overflow-x:hidden;}
+
+.back-btn{position:fixed;left:18px;top:18px;z-index:200;background:rgba(255,255,255,.9);border:none;border-radius:30px;padding:9px 20px;font-family:'Nunito',sans-serif;font-weight:900;color:#f7971e;font-size:1rem;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.15);text-decoration:none;transition:transform .2s;}
+.back-btn:hover{transform:scale(1.07);}
+
+header{text-align:center;padding:70px 20px 16px;position:relative;z-index:10;}
+.page-title{font-family:'Fredoka One',cursive;font-size:clamp(2rem,8vw,3.8rem);color:white;text-shadow:0 3px 14px rgba(0,0,0,.25);}
+.page-sub{color:rgba(255,255,255,.85);font-size:1rem;margin-top:4px;}
+
+.mode-tabs{display:flex;justify-content:center;gap:12px;margin:14px auto 20px;flex-wrap:wrap;position:relative;z-index:10;padding:0 16px;}
+.tab-btn{background:rgba(255,255,255,.25);border:2.5px solid rgba(255,255,255,.5);color:white;font-family:'Nunito',sans-serif;font-weight:900;font-size:.95rem;padding:9px 22px;border-radius:30px;cursor:pointer;transition:all .22s;}
+.tab-btn.active,.tab-btn:hover{background:white;color:#f7971e;transform:scale(1.06);}
+
+.score-bar{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:0 auto 14px;position:relative;z-index:10;}
+.score-pill{background:rgba(255,255,255,.25);border-radius:20px;padding:7px 18px;font-weight:900;font-size:.95rem;color:white;}
+
+.section{position:relative;z-index:10;max-width:960px;margin:0 auto;padding:0 16px 80px;}
+#section-learn{display:block;}
+#section-cafe{display:none;}
+#section-quiz{display:none;}
+
+/* Food cards */
+.food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:16px;}
+.food-card{background:white;border-radius:24px;padding:20px 12px 16px;text-align:center;cursor:pointer;transition:transform .25s,box-shadow .25s;box-shadow:0 5px 18px rgba(0,0,0,.12);border:3px solid transparent;user-select:none;}
+.food-card:hover,.food-card.lit{transform:translateY(-10px) scale(1.06);box-shadow:0 16px 36px rgba(247,151,30,.35);}
+.food-emoji{font-size:3.8rem;display:block;transition:transform .3s;}
+.food-card:hover .food-emoji{transform:rotate(-8deg) scale(1.15);}
+.food-en{font-family:'Fredoka One',cursive;font-size:1.25rem;color:#333;margin:6px 0 2px;}
+.food-cn{font-size:.82rem;color:#aaa;}
+.food-adj{font-size:.75rem;font-style:italic;color:#fc5c7d;margin-top:3px;}
+
+/* Cafe game */
+.cafe-scene{background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border-radius:28px;padding:28px;border:2px solid rgba(255,255,255,.25);}
+.cafe-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap;}
+.cafe-chef{font-size:4.5rem;animation:chefBounce 2s ease-in-out infinite;}
+@keyframes chefBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.cafe-speech{background:white;border-radius:20px;padding:12px 20px;flex:1;color:#333;}
+.cafe-order{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#f7971e;}
+.cafe-order-cn{color:#888;font-size:.9rem;margin-top:2px;}
+.cafe-tray{background:rgba(255,255,255,.08);border:2px dashed rgba(255,255,255,.4);border-radius:20px;min-height:80px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:14px;margin-bottom:16px;}
+.tray-item{font-size:2.8rem;animation:trayPop .3s ease both;}
+@keyframes trayPop{from{transform:scale(0) rotate(-20deg);opacity:0;}to{transform:scale(1) rotate(0);opacity:1;}}
+.cafe-tray-label{color:rgba(255,255,255,.5);font-size:.9rem;}
+.cafe-food-choices{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:18px;}
+.cafe-choice{background:rgba(255,255,255,.15);border:3px solid rgba(255,255,255,.3);border-radius:20px;padding:12px 18px;font-size:2.2rem;cursor:pointer;transition:all .22s;color:white;text-align:center;}
+.cafe-choice:hover{background:rgba(255,255,255,.3);transform:scale(1.1);}
+.cafe-choice .choice-label{font-size:.72rem;display:block;margin-top:3px;font-weight:700;}
+.cafe-controls{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+.cafe-btn{border:none;border-radius:24px;padding:11px 28px;font-family:'Nunito',sans-serif;font-weight:900;font-size:1rem;cursor:pointer;transition:transform .2s;}
+.cafe-btn.serve{background:linear-gradient(90deg,#f7971e,#ffd200);color:#333;}
+.cafe-btn.clear{background:rgba(255,255,255,.2);color:white;border:2px solid rgba(255,255,255,.4);}
+.cafe-btn:hover{transform:scale(1.07);}
+
+/* Quiz */
+.quiz-card{background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border-radius:28px;padding:30px;text-align:center;border:2px solid rgba(255,255,255,.25);}
+.quiz-q{color:rgba(255,255,255,.85);font-size:1.1rem;margin-bottom:10px;}
+.quiz-emoji-big{font-size:6.5rem;animation:foodPulse 2s ease-in-out infinite;display:inline-block;}
+@keyframes foodPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:400px;margin:20px auto 0;}
+.q-opt{background:rgba(255,255,255,.12);border:3px solid rgba(255,255,255,.3);border-radius:20px;padding:13px;font-family:'Fredoka One',cursive;font-size:1.4rem;cursor:pointer;color:white;transition:all .22s;}
+.q-opt:hover{background:rgba(255,255,255,.28);transform:scale(1.06);}
+.q-opt.correct{background:#2ECC71;border-color:#2ECC71;animation:pop .5s ease;}
+.q-opt.wrong{background:#E74C3C;border-color:#E74C3C;animation:shk .4s ease;}
+@keyframes pop{0%{transform:scale(1);}50%{transform:scale(1.3);}100%{transform:scale(1);}}
+@keyframes shk{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}
+
+/* Toast */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);background:white;border-radius:20px;padding:14px 28px;font-weight:900;font-size:1.1rem;color:#333;box-shadow:0 8px 30px rgba(0,0,0,.2);z-index:9999;transition:transform .3s;pointer-events:none;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.toast.good{border-left:6px solid #2ECC71;}
+.toast.bad{border-left:6px solid #E74C3C;}
+
+@media(max-width:480px){.food-grid{grid-template-columns:repeat(3,1fr);gap:10px;}.food-emoji{font-size:2.5rem;}}
+</style>
+</head>
+<body>
+<a class="back-btn" href="index.html">← 返回</a>
+
+<header>
+  <div class="page-title">🍎 Yummy! 美食世界</div>
+  <div class="page-sub">认识美味食物，开小餐厅！</div>
+</header>
+
+<div class="score-bar">
+  <div class="score-pill">⭐ 积分: <span id="scoreNum">0</span></div>
+  <div class="score-pill" id="starPill">☆☆☆☆☆</div>
+</div>
+
+<div class="mode-tabs">
+  <button class="tab-btn active" onclick="switchMode('learn')">🍽 认识食物</button>
+  <button class="tab-btn" onclick="switchMode('cafe')">👨‍🍳 小厨师游戏</button>
+  <button class="tab-btn" onclick="switchMode('quiz')">🎯 猜食物</button>
+</div>
+
+<!-- LEARN -->
+<div class="section" id="section-learn">
+  <div class="food-grid" id="foodGrid"></div>
+</div>
+
+<!-- CAFE GAME -->
+<div class="section" id="section-cafe">
+  <div class="cafe-scene">
+    <div class="cafe-header">
+      <div class="cafe-chef">👨‍🍳</div>
+      <div class="cafe-speech">
+        <div class="cafe-order" id="cafeOrder">Please bring me an Apple! 🍎</div>
+        <div class="cafe-order-cn" id="cafeOrderCn">请给我拿一个苹果！</div>
+      </div>
+    </div>
+    <p style="color:rgba(255,255,255,.6);font-size:.85rem;text-align:center;margin-bottom:10px;">把正确的食物放到餐盘里！Put the right food on the tray!</p>
+    <div class="cafe-tray" id="cafeTray">
+      <span class="cafe-tray-label">餐盘 Tray 🪄</span>
+    </div>
+    <div class="cafe-food-choices" id="cafeFoodChoices"></div>
+    <div class="cafe-controls">
+      <button class="cafe-btn clear" onclick="clearTray()">🗑 清空</button>
+      <button class="cafe-btn serve" onclick="serveTray()">✅ 上菜 Serve!</button>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="section" id="section-quiz">
+  <div class="quiz-card">
+    <div class="quiz-q" id="quizQ">这是什么食物？ What food is this?</div>
+    <div class="quiz-emoji-big" id="quizEmoji">🍎</div>
+    <div class="quiz-opts" id="quizOpts"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const FOODS = [
+  {en:'Apple',      cn:'苹果',   e:'🍎', adj:'Sweet! 甜甜的',   color:'#E74C3C'},
+  {en:'Banana',     cn:'香蕉',   e:'🍌', adj:'Yummy! 香香的',   color:'#F1C40F'},
+  {en:'Strawberry', cn:'草莓',   e:'🍓', adj:'Yummy! 好吃的',   color:'#E91E8C'},
+  {en:'Orange',     cn:'橙子',   e:'🍊', adj:'Juicy! 多汁的',   color:'#FF8C42'},
+  {en:'Watermelon', cn:'西瓜',   e:'🍉', adj:'Cool! 清凉的',    color:'#2ECC71'},
+  {en:'Grapes',     cn:'葡萄',   e:'🍇', adj:'Sweet! 甜甜的',   color:'#9B59B6'},
+  {en:'Milk',       cn:'牛奶',   e:'🥛', adj:'Healthy! 健康的', color:'#BDC3C7'},
+  {en:'Bread',      cn:'面包',   e:'🍞', adj:'Soft! 软软的',    color:'#8B4513'},
+  {en:'Rice',       cn:'米饭',   e:'🍚', adj:'Warm! 热乎乎的',  color:'#F8F9FA'},
+  {en:'Egg',        cn:'鸡蛋',   e:'🥚', adj:'Yummy! 美味的',   color:'#F1C40F'},
+  {en:'Cake',       cn:'蛋糕',   e:'🎂', adj:'Sweet! 超甜的',   color:'#FF6B9D'},
+  {en:'Cookie',     cn:'饼干',   e:'🍪', adj:'Crunchy! 脆脆的', color:'#D2691E'},
+];
+
+let score=0, cafeTarget=null, trayItems=[];
+
+function speak(t,r=0.72,p=1.3){
+  if(!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(t);
+  u.lang='en-US';u.rate=r;u.pitch=p;window.speechSynthesis.speak(u);
+}
+function addScore(n){
+  score+=n;document.getElementById('scoreNum').textContent=score;
+  const s=Math.min(5,Math.floor(score/10));
+  document.getElementById('starPill').textContent='★'.repeat(s)+'☆'.repeat(5-s);
+}
+function showToast(msg,good){
+  const t=document.getElementById('toast');t.textContent=msg;
+  t.className='toast '+(good?'good':'bad')+' show';setTimeout(()=>t.classList.remove('show'),1800);
+}
+
+function switchMode(m){
+  ['learn','cafe','quiz'].forEach(id=>{
+    document.getElementById('section-'+id).style.display=m===id?'block':'none';
+  });
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
+    b.classList.toggle('active',['learn','cafe','quiz'][i]===m);
+  });
+  if(m==='cafe')setupCafe();
+  if(m==='quiz')setupQuiz();
+}
+
+// ---- LEARN ----
+function buildFoodGrid(){
+  const g=document.getElementById('foodGrid');
+  FOODS.forEach(item=>{
+    const c=document.createElement('div');
+    c.className='food-card';
+    c.style.borderColor=item.color+'55';
+    c.innerHTML=`<span class="food-emoji">${item.e}</span><div class="food-en" style="color:${item.color}">${item.en}</div><div class="food-cn">${item.cn}</div><div class="food-adj">${item.adj}</div>`;
+    c.onclick=()=>{
+      document.querySelectorAll('.food-card').forEach(x=>x.classList.remove('lit'));
+      c.classList.add('lit');
+      speak(`${item.en}. ${item.adj.split('!')[0]}!`,0.7,1.35);
+    };
+    g.appendChild(c);
+  });
+}
+
+// ---- CAFE GAME ----
+function setupCafe(){
+  trayItems=[];
+  renderTray();
+  cafeTarget=FOODS[Math.floor(Math.random()*FOODS.length)];
+  document.getElementById('cafeOrder').textContent=`Please bring me ${/^[AEIOU]/i.test(cafeTarget.en)?'an':'a'} ${cafeTarget.en}! ${cafeTarget.e}`;
+  document.getElementById('cafeOrderCn').textContent=`请给我拿${/^[AEIOU]/i.test(cafeTarget.cn)?'一个':'一个'}${cafeTarget.cn}！`;
+  speak(`Please bring me ${cafeTarget.en}!`,0.7,1.3);
+
+  // Show 6 random food choices including target
+  const pool=new Set([FOODS.indexOf(cafeTarget)]);
+  while(pool.size<6)pool.add(Math.floor(Math.random()*FOODS.length));
+  const div=document.getElementById('cafeFoodChoices');div.innerHTML='';
+  [...pool].sort(()=>Math.random()-.5).forEach(i=>{
+    const f=FOODS[i];
+    const btn=document.createElement('div');
+    btn.className='cafe-choice';
+    btn.innerHTML=`${f.e}<span class="choice-label">${f.en}</span>`;
+    btn.onclick=()=>{
+      trayItems.push(f);renderTray();
+      speak(f.en,0.7,1.3);
+    };
+    div.appendChild(btn);
+  });
+}
+function renderTray(){
+  const tray=document.getElementById('cafeTray');
+  if(trayItems.length===0){
+    tray.innerHTML='<span class="cafe-tray-label">餐盘 Tray 🪄</span>';return;
+  }
+  tray.innerHTML=trayItems.map((f,i)=>`<span class="tray-item" style="animation-delay:${i*.08}s">${f.e}</span>`).join('');
+}
+function clearTray(){trayItems=[];renderTray();}
+function serveTray(){
+  if(trayItems.length===0){showToast('把食物放到餐盘里再上菜！',false);return;}
+  const hasTarget=trayItems.some(f=>f.en===cafeTarget.en);
+  if(hasTarget){
+    speak(`Thank you! ${cafeTarget.en}! Yummy!`,0.7,1.4);addScore(8);
+    showToast(`🎉 正确！${cafeTarget.en} — ${cafeTarget.cn}`,true);
+  }else{
+    speak(`Hmm, I wanted ${cafeTarget.en}! Try again!`,0.7,1.3);
+    showToast(`💡 厨师要的是: ${cafeTarget.en} ${cafeTarget.e}`,false);
+  }
+  setTimeout(setupCafe,2000);
+}
+
+// ---- QUIZ ----
+let quizItem=null;
+function setupQuiz(){
+  quizItem=FOODS[Math.floor(Math.random()*FOODS.length)];
+  document.getElementById('quizEmoji').textContent=quizItem.e;
+  speak(quizItem.en,0.7,1.3);
+
+  const opts=new Set([FOODS.indexOf(quizItem)]);
+  while(opts.size<4)opts.add(Math.floor(Math.random()*FOODS.length));
+  const div=document.getElementById('quizOpts');div.innerHTML='';
+  [...opts].sort(()=>Math.random()-.5).forEach(i=>{
+    const f=FOODS[i];
+    const btn=document.createElement('button');
+    btn.className='q-opt';
+    btn.style.color=f.color;
+    btn.textContent=f.en;
+    btn.onclick=()=>checkQuiz(i,btn);
+    div.appendChild(btn);
+  });
+}
+function checkQuiz(i,btn){
+  document.querySelectorAll('.q-opt').forEach(b=>b.onclick=null);
+  if(FOODS[i]===quizItem){
+    btn.classList.add('correct');speak(`Yes! ${quizItem.en}! Yummy!`,0.7,1.4);addScore(8);
+    showToast(`🎉 ${quizItem.en}! 正确！`,true);
+  }else{
+    btn.classList.add('wrong');
+    document.querySelectorAll('.q-opt').forEach(b=>{if(b.textContent===quizItem.en)b.classList.add('correct');});
+    speak(`Oops! It is ${quizItem.en}!`,0.7,1.3);
+    showToast(`💡 正确答案: ${quizItem.en} — ${quizItem.cn}`,false);
+  }
+  setTimeout(setupQuiz,2000);
+}
+
+buildFoodGrid();
+window.onload=()=>setTimeout(()=>speak('Yummy! Let\'s learn about food!',0.7,1.3),700);
+</script>
+</body>
+</html>

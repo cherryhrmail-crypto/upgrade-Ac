@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Team – UpGrade English</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0D1B2A;--royal:#1B4FD8;--gold:#F5C518;--teal:#00B4D8;--rose:#FF6B9D;--green:#27AE60;--orange:#FF8C42;--purple:#7B2FBE}
+body{font-family:'Nunito',sans-serif;background:var(--navy);min-height:100vh;color:white;overflow-x:hidden}
+.back-btn{position:fixed;top:18px;left:18px;z-index:999;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);color:white;padding:8px 18px;border-radius:30px;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;text-decoration:none;transition:.2s;backdrop-filter:blur(8px)}
+.back-btn:hover{background:var(--gold);color:var(--navy)}
+header{text-align:center;padding:70px 20px 30px;background:linear-gradient(135deg,#1a0533,var(--purple))}
+header .badge{display:inline-block;background:var(--gold);color:var(--navy);font-family:'Fredoka One',cursive;font-size:.9rem;padding:4px 16px;border-radius:20px;margin-bottom:12px}
+header h1{font-family:'Fredoka One',cursive;font-size:3rem;color:var(--gold);text-shadow:0 4px 15px rgba(0,0,0,.3)}
+header p{color:rgba(255,255,255,.75);font-size:1.1rem;margin-top:8px}
+
+/* Team members */
+.team-section{padding:36px 24px;max-width:1100px;margin:0 auto}
+.section-title{font-family:'Fredoka One',cursive;font-size:1.7rem;color:var(--teal);text-align:center;margin-bottom:24px}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.member-card{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:22px;padding:24px 18px;text-align:center;cursor:pointer;transition:.3s;position:relative;overflow:hidden}
+.member-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.3)}
+.member-avatar{font-size:4rem;display:block;margin-bottom:12px;transition:.3s}
+.member-card:hover .member-avatar{transform:scale(1.15) rotate(-5deg)}
+.member-name{font-family:'Fredoka One',cursive;font-size:1.4rem;color:var(--gold)}
+.member-role{font-size:.85rem;color:rgba(255,255,255,.6);margin-top:4px;margin-bottom:10px}
+.member-phrase{background:rgba(255,255,255,.08);border-radius:10px;padding:8px;font-size:.9rem;color:var(--teal)}
+.member-phrase .cn{font-size:.78rem;color:rgba(255,255,255,.5);margin-top:4px}
+.speak-btn{margin-top:10px;background:var(--royal);border:none;color:white;padding:7px 18px;border-radius:20px;font-family:'Fredoka One',cursive;font-size:.85rem;cursor:pointer;transition:.2s}
+.speak-btn:hover{background:var(--teal)}
+
+/* Roles vocab */
+.vocab-section{padding:0 24px 36px;max-width:1100px;margin:0 auto}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.vocab-card{background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.12);border-radius:16px;padding:16px 12px;text-align:center;cursor:pointer;transition:.25s}
+.vocab-card:hover{background:rgba(255,255,255,.12);border-color:var(--gold);transform:scale(1.04)}
+.vocab-emoji{font-size:2.2rem;display:block;margin-bottom:8px}
+.vocab-en{font-family:'Fredoka One',cursive;font-size:1.1rem;color:var(--gold)}
+.vocab-cn{font-size:.8rem;color:rgba(255,255,255,.55);margin-top:3px}
+
+/* Team values */
+.values-section{padding:0 24px 36px;max-width:1100px;margin:0 auto}
+.values-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.value-card{background:linear-gradient(135deg,rgba(27,79,216,.25),rgba(123,47,190,.25));border:2px solid rgba(255,255,255,.12);border-radius:20px;padding:20px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:.25s}
+.value-card:hover{transform:translateY(-3px);border-color:var(--gold)}
+.value-icon{font-size:2.5rem;flex-shrink:0}
+.value-text .en{font-family:'Fredoka One',cursive;font-size:1.1rem;color:var(--gold)}
+.value-text .cn{font-size:.8rem;color:rgba(255,255,255,.55);margin-top:3px}
+.value-text .desc{font-size:.82rem;color:rgba(255,255,255,.7);margin-top:5px;line-height:1.4}
+
+/* Cooperation game */
+.game-section{padding:0 24px 60px;max-width:900px;margin:0 auto}
+.game-box{background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.12);border-radius:24px;padding:30px;text-align:center}
+.game-box h2{font-family:'Fredoka One',cursive;font-size:1.6rem;color:var(--rose);margin-bottom:8px}
+.game-box p{color:rgba(255,255,255,.65);margin-bottom:24px}
+.task-display{background:rgba(255,255,255,.08);border-radius:16px;padding:24px;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;margin-bottom:20px}
+.task-emoji{font-size:3.5rem}
+.task-q{font-family:'Fredoka One',cursive;font-size:1.25rem;color:white}
+.task-hint{font-size:.85rem;color:rgba(255,255,255,.5)}
+.opts-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.opt-btn{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.2);color:white;padding:14px;border-radius:14px;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;transition:.2s}
+.opt-btn:hover{background:rgba(255,255,255,.18);transform:scale(1.02)}
+.opt-btn.correct{background:rgba(39,174,96,.4);border-color:var(--green)}
+.opt-btn.wrong{background:rgba(255,50,50,.3);border-color:#ff4444}
+.fb{font-family:'Fredoka One',cursive;font-size:1.15rem;min-height:34px;color:var(--gold);margin-bottom:10px}
+.bottom-bar{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.08);border-radius:12px;padding:10px 18px}
+.bottom-bar span{font-family:'Fredoka One',cursive;font-size:1rem;color:var(--gold)}
+.nxt{background:var(--royal);border:none;color:white;padding:10px 26px;border-radius:20px;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;transition:.2s}
+.nxt:hover{background:var(--teal)}
+</style>
+</head>
+<body>
+
+<a class="back-btn" href="index.html">← Home</a>
+
+<header>
+  <div class="badge">UpGrade English</div>
+  <h1>🤝 Our Team</h1>
+  <p>Learn how to work together, share, and be kind!</p>
+</header>
+
+<!-- Meet the Team -->
+<div class="team-section">
+  <div class="section-title">👋 Meet Our Classmates</div>
+  <div class="team-grid" id="teamGrid"></div>
+</div>
+
+<!-- Roles Vocabulary -->
+<div class="vocab-section">
+  <div class="section-title" style="color:var(--orange)">🏷️ Team Roles</div>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</div>
+
+<!-- Team Values -->
+<div class="values-section">
+  <div class="section-title" style="color:var(--rose)">💛 Team Values</div>
+  <div class="values-grid" id="valuesGrid"></div>
+</div>
+
+<!-- Game -->
+<div class="game-section">
+  <div class="game-box">
+    <h2>🎮 Team Quiz</h2>
+    <p>Choose the right answer to show you are a great team player!</p>
+    <div class="task-display">
+      <div class="task-emoji" id="taskEmoji">🤝</div>
+      <div class="task-q" id="taskQ">Loading…</div>
+      <div class="task-hint" id="taskHint"></div>
+    </div>
+    <div class="opts-grid" id="optsGrid"></div>
+    <div class="fb" id="fb"></div>
+    <div class="bottom-bar">
+      <span>⭐ Score: <span id="gScore">0</span></span>
+      <button class="nxt" id="nxtBtn" onclick="nextQ()" style="display:none">Next →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Data ──────────────────────────────────────────────
+const members = [
+  {emoji:'👧',name:'Emma',role:'Team Captain',phrase:"Let's work together!",cn:'我们一起努力吧！',color:'#FF6B9D'},
+  {emoji:'👦',name:'Tom',role:'Helper',phrase:'I can help you!',cn:'我来帮你！',color:'#1B4FD8'},
+  {emoji:'👧🏾',name:'Amara',role:'Artist',phrase:'Look at my drawing!',cn:'看我的画！',color:'#27AE60'},
+  {emoji:'👦🏻',name:'Oliver',role:'Reader',phrase:'I love reading books!',cn:'我喜欢读书！',color:'#FF8C42'},
+  {emoji:'👩',name:'Sophie',role:'Singer',phrase:'Let\'s sing a song!',cn:'我们来唱歌吧！',color:'#7B2FBE'},
+  {emoji:'👦🏿',name:'Max',role:'Builder',phrase:'I can build it!',cn:'我来建造它！',color:'#00B4D8'},
+];
+
+const roles = [
+  {emoji:'👑',en:'Team Leader',cn:'队长'},
+  {emoji:'🤝',en:'Helper',cn:'助手'},
+  {emoji:'🎨',en:'Artist',cn:'艺术家'},
+  {emoji:'📚',en:'Reader',cn:'阅读者'},
+  {emoji:'🔬',en:'Scientist',cn:'科学家'},
+  {emoji:'🎵',en:'Singer',cn:'歌手'},
+  {emoji:'🏗️',en:'Builder',cn:'建造者'},
+  {emoji:'✍️',en:'Writer',cn:'写作者'},
+  {emoji:'🧹',en:'Tidier',cn:'整理员'},
+  {emoji:'📣',en:'Presenter',cn:'展示者'},
+];
+
+const values = [
+  {icon:'🤝',en:'Share',cn:'分享',desc:'Give some to your friends. "Here, have some!"'},
+  {icon:'👂',en:'Listen',cn:'倾听',desc:'Be quiet when others speak. "I am listening!"'},
+  {icon:'😊',en:'Be Kind',cn:'友善',desc:'Say nice things. "You are doing great!"'},
+  {icon:'💪',en:'Help Each Other',cn:'互相帮助',desc:'If a friend needs help, offer support!'},
+  {icon:'🙌',en:'Celebrate',cn:'庆祝',desc:'Clap for your team. "Well done, everyone!"'},
+  {icon:'🔄',en:'Take Turns',cn:'轮流',desc:'Wait patiently. "It is my turn next."'},
+];
+
+const quizQ = [
+  {emoji:'🤝',q:'Your friend drops their pencil. What do you do?',hint:'朋友的铅笔掉了，你怎么做？',correct:'Help them pick it up!',opts:['Help them pick it up!','Walk away','Laugh at them','Ignore them']},
+  {emoji:'👂',q:'The teacher is speaking. What should you do?',hint:'老师在说话，你应该怎么做？',correct:'Listen quietly',opts:['Listen quietly','Talk to friends','Play with toys','Go to sleep']},
+  {emoji:'🎁',q:'You have 4 stickers. Your friend has none. What do you do?',hint:'你有4个贴纸，朋友没有，你怎么做？',correct:'Share some stickers',opts:['Share some stickers','Keep them all','Hide them','Eat them']},
+  {emoji:'🙌',q:'Your teammate wins a game. What do you say?',hint:'队友赢了比赛，你说什么？',correct:'Well done! Brilliant!',opts:['Well done! Brilliant!','I am better than you!','It was easy!','Nothing']},
+  {emoji:'🔄',q:'There is only one toy. Two children want it. What should you do?',hint:'只有一个玩具，两个小朋友都想玩，怎么办？',correct:'Take turns!',opts:['Take turns!','Fight for it','Cry','Hide it']},
+  {emoji:'😢',q:'Your friend is sad. What do you say?',hint:'朋友很难过，你说什么？',correct:"Are you okay? I am here for you.",opts:["Are you okay? I am here for you.",'Go away!','Ha ha!','I do not care.']},
+];
+
+// ── Speech ────────────────────────────────────────────
+function speak(text,cb){
+  if(!window.speechSynthesis)return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-GB';u.rate=0.8;u.pitch=1.1;
+  if(cb)u.onend=cb;
+  speechSynthesis.speak(u);
+}
+
+// ── Render ────────────────────────────────────────────
+function renderTeam(){
+  document.getElementById('teamGrid').innerHTML = members.map(m=>`
+    <div class="member-card" style="border-color:${m.color}44">
+      <span class="member-avatar">${m.emoji}</span>
+      <div class="member-name" style="color:${m.color}">${m.name}</div>
+      <div class="member-role">${m.role}</div>
+      <div class="member-phrase">${m.phrase}<div class="cn">${m.cn}</div></div>
+      <button class="speak-btn" onclick="speak('${m.phrase}')">🔊 Listen</button>
+    </div>
+  `).join('');
+}
+
+function renderVocab(){
+  document.getElementById('vocabGrid').innerHTML = roles.map(r=>`
+    <div class="vocab-card" onclick="speak('${r.en}')">
+      <span class="vocab-emoji">${r.emoji}</span>
+      <div class="vocab-en">${r.en}</div>
+      <div class="vocab-cn">${r.cn}</div>
+    </div>
+  `).join('');
+}
+
+function renderValues(){
+  document.getElementById('valuesGrid').innerHTML = values.map(v=>`
+    <div class="value-card" onclick="speak('${v.en}. ${v.desc}')">
+      <div class="value-icon">${v.icon}</div>
+      <div class="value-text">
+        <div class="en">${v.en}</div>
+        <div class="cn">${v.cn}</div>
+        <div class="desc">${v.desc}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── Quiz ──────────────────────────────────────────────
+let qi=0,gs=0;
+function loadQ(){
+  const q=quizQ[qi%quizQ.length];
+  document.getElementById('taskEmoji').textContent=q.emoji;
+  document.getElementById('taskQ').textContent=q.q;
+  document.getElementById('taskHint').textContent=q.hint;
+  document.getElementById('fb').textContent='';
+  document.getElementById('nxtBtn').style.display='none';
+  const opts=q.opts.sort(()=>Math.random()-.5);
+  document.getElementById('optsGrid').innerHTML=opts.map(o=>`
+    <button class="opt-btn" onclick="checkQ(this,'${o.replace(/'/g,"\\'")}','${q.correct.replace(/'/g,"\\'")}')">
+      ${o}
+    </button>`).join('');
+}
+function checkQ(btn,chosen,correct){
+  document.querySelectorAll('.opt-btn').forEach(b=>b.onclick=null);
+  if(chosen===correct){
+    btn.classList.add('correct');
+    gs++;document.getElementById('gScore').textContent=gs;
+    document.getElementById('fb').textContent='⭐ Brilliant! That\'s the spirit!';
+    speak('Brilliant! That is the team spirit!');
+  }else{
+    btn.classList.add('wrong');
+    document.querySelectorAll('.opt-btn').forEach(b=>{if(b.textContent.trim()===correct)b.classList.add('correct');});
+    document.getElementById('fb').textContent='💪 Good try! The answer is: '+correct;
+    speak('Good try! The answer is: '+correct);
+  }
+  qi++;
+  document.getElementById('nxtBtn').style.display='inline-block';
+}
+function nextQ(){loadQ();}
+
+renderTeam();renderVocab();renderValues();loadQ();
+</script>
+</body>
+</html>

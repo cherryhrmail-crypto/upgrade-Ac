@@ -1,0 +1,97 @@
+<!-- pages/phonics/interactive/interactive.wxml — 拼读互动练习 -->
+<view class="page">
+  <!-- 顶部选关 -->
+  <view class="level-tabs">
+    <view class="ltab {{activeLevel===item?'active':''}}"
+          wx:for="{{[1,2,3,4,5]}}" wx:key="*this"
+          bindtap="switchLevel" data-level="{{item}}">L{{item}}</view>
+  </view>
+
+  <!-- 模式切换 -->
+  <view class="mode-tabs">
+    <view class="mtab {{mode==='quiz'?'active':''}}" bindtap="setMode" data-mode="quiz">📝 拼读测验</view>
+    <view class="mtab {{mode==='build'?'active':''}}" bindtap="setMode" data-mode="build">🔤 构词游戏</view>
+    <view class="mtab {{mode==='blend'?'active':''}}" bindtap="setMode" data-mode="blend">🔊 音素拼读</view>
+  </view>
+
+  <!-- 得分 -->
+  <view class="score-row">
+    <text class="score-text">⭐ {{score}}分</text>
+    <text class="combo-text" wx:if="{{combo>1}}">🔥 连对 x{{combo}}</text>
+    <text class="progress-text">{{qIndex+1}}/{{qTotal}}</text>
+  </view>
+
+  <!-- ── 拼读测验 ── -->
+  <block wx:if="{{mode==='quiz'}}">
+    <view class="quiz-card">
+      <view class="quiz-q">
+        <text class="quiz-q-label">以下哪个单词含有 "{{question.sound}}" 音？</text>
+        <view class="sound-show">{{question.sound}}</view>
+      </view>
+      <view class="quiz-opts">
+        <view class="quiz-opt {{answered?(opt===question.answer?'correct':(opt===picked?'wrong':'')):''}}"
+              wx:for="{{question.options}}" wx:key="*this"
+              bindtap="{{answered?'':'answerQuiz'}}" data-opt="{{item}}">
+          <text class="opt-word">{{item}}</text>
+        </view>
+      </view>
+      <view wx:if="{{answered}}" class="next-btn" bindtap="nextQ">下一题 ▶</view>
+    </view>
+  </block>
+
+  <!-- ── 构词游戏 ── -->
+  <block wx:if="{{mode==='build'}}">
+    <view class="build-card">
+      <text class="build-hint">用下面的字母拼出单词</text>
+      <text class="build-emoji">{{buildWord.emoji}}</text>
+      <text class="build-meaning">{{buildWord.cn}}</text>
+
+      <view class="build-answer">
+        <view class="build-slot" wx:for="{{buildSlots}}" wx:key="index"
+              style="border-color: {{item?'#1976D2':'#ddd'}}; color: #1976D2"
+              bindtap="removeSlot" data-index="{{index}}">
+          {{item}}
+        </view>
+      </view>
+
+      <view class="build-letters">
+        <view class="build-letter {{item.used?'used':''}}"
+              wx:for="{{buildLetters}}" wx:key="index"
+              bindtap="{{item.used?'':'pickLetter'}}" data-index="{{index}}">
+          {{item.char}}
+        </view>
+      </view>
+
+      <view class="build-actions">
+        <view class="build-clear" bindtap="clearBuild">清空</view>
+        <view class="build-check" bindtap="checkBuild">检查 ✓</view>
+      </view>
+    </view>
+  </block>
+
+  <!-- ── 音素拼读 ── -->
+  <block wx:if="{{mode==='blend'}}">
+    <view class="blend-card">
+      <text class="blend-word">{{blendWord.word}}</text>
+      <text class="blend-cn">{{blendWord.cn}}</text>
+
+      <view class="blend-phonemes">
+        <view class="blend-ph" wx:for="{{blendPhonemes}}" wx:key="index"
+              bindtap="speakPhoneme" data-ph="{{item}}">
+          <text class="ph-text">{{item}}</text>
+          <text class="ph-icon">🔊</text>
+        </view>
+      </view>
+
+      <view class="blend-eq">
+        <text wx:for="{{blendPhonemes}}" wx:key="index" class="blend-ph-text">{{item}}</text>
+        <text class="blend-plus"> = </text>
+        <text class="blend-result">{{blendWord.word}}</text>
+      </view>
+
+      <view class="blend-say" bindtap="speakBlendWord">🔊 完整发音</view>
+      <view class="blend-next" bindtap="nextBlend">换一个词 🔄</view>
+    </view>
+  </block>
+
+</view>

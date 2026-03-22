@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 4 - 长元音规则 | Oxford Phonics World</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-info h1 {
+            font-size: 2.2em;
+            color: #f093fb;
+            margin-bottom: 8px;
+        }
+        .header-info p {
+            color: #666;
+            font-size: 1.05em;
+        }
+        .header-badge {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .header-badge .level {
+            font-size: 1.5em;
+            font-weight: bold;
+            display: block;
+        }
+        .header-badge .desc {
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            gap: 10px;
+        }
+        .tab {
+            padding: 12px 25px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            color: #666;
+            border-radius: 8px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .tab.active {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            box-shadow: 0 4px 12px rgba(240, 147, 251, 0.4);
+        }
+        .tab:hover:not(.active) {
+            background: #f0f0f0;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            color: #2c3e50;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #f093fb;
+        }
+        .rule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .rule-card {
+            background: linear-gradient(135deg, #fef5ff 0%, #ffe5f0 100%);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid #f093fb;
+        }
+        .rule-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(240, 147, 251, 0.3);
+        }
+        .rule-card .type {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #f093fb;
+            margin-bottom: 10px;
+        }
+        .rule-card .pattern {
+            font-size: 1.2em;
+            color: #666;
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 4px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .rule-card .example {
+            color: #333;
+            font-size: 0.95em;
+        }
+        .rule-card .mnemonic {
+            color: #666;
+            font-size: 0.85em;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        .lesson-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .lesson-table th {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .lesson-table th:first-child { border-radius: 8px 0 0 0; }
+        .lesson-table th:last-child { border-radius: 0 8px 0 0; }
+        .lesson-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .lesson-table tr:hover td {
+            background: #fef5ff;
+        }
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .activity-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #f093fb;
+        }
+        .activity-card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .activity-card p {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        .word-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+        }
+        .word-card {
+            background: white;
+            border: 2px solid #f093fb;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .word-card:hover {
+            background: #f093fb;
+            color: white;
+            transform: scale(1.05);
+        }
+        .word-card .word {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .rule-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #f093fb;
+        }
+        .rule-section h3 {
+            color: #f093fb;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .rule-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .rule-word {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1em;
+            font-weight: 600;
+        }
+        .tip-box {
+            background: #e3f2fd;
+            border: 2px solid #2196F3;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .tip-box h3 {
+            color: #2196F3;
+            margin-bottom: 10px;
+        }
+        .tip-box ul {
+            color: #666;
+            padding-left: 20px;
+            line-height: 1.8;
+        }
+        .resources-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .resource-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .resource-item:hover {
+            transform: translateX(5px);
+        }
+        .resource-icon {
+            font-size: 1.8em;
+        }
+        .resource-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .mnemonic-card {
+            background: #fff9c4;
+            border: 2px solid #FFD700;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .mnemonic-card h3 {
+            color: #FFD700;
+            margin-bottom: 15px;
+        }
+        .mnemonic-content {
+            font-size: 1.2em;
+            color: #333;
+            font-weight: 600;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-info">
+                <h1>🔤 Level 4 - 长元音规则</h1>
+                <p>掌握CVCe和元音组合规则，拓展拼读范围</p>
+            </div>
+            <div class="header-badge">
+                <span class="level">Level 4</span>
+                <span class="desc">6.5岁 · 第4学期</span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('rules')">🔤 长元音规则</button>
+            <button class="tab" onclick="showTab('schedule')">📅 课程安排</button>
+            <button class="tab" onclick="showTab('activities')">🎮 教学活动</button>
+            <button class="tab" onclick="showTab('words')">📖 词汇表</button>
+            <button class="tab" onclick="showTab('resources')">🛠️ 教学资源</button>
+        </div>
+
+        <div id="rules" class="tab-content active">
+            <div class="card">
+                <h2>长元音两大规则</h2>
+                <div class="rule-grid" id="ruleCards"></div>
+
+                <div class="mnemonic-card">
+                    <h3>💡 魔法e口诀</h3>
+                    <div class="mnemonic-content">
+                        When e's at the end<br>
+                        And makes the vowel say its name<br>
+                        It's the magic e!<br>
+                        A says /a/ in <strong>cake</strong><br>
+                        E says /e/ in <strong>theme</strong><br>
+                        I says /i/ in <strong>like</strong><br>
+                        O says /o/ in <strong>home</strong><br>
+                        U says /u/ in <strong>cute</strong>
+                    </div>
+                </div>
+
+                <div id="rulesDetail"></div>
+            </div>
+        </div>
+
+        <div id="schedule" class="tab-content">
+            <div class="card">
+                <h2>20周课程安排表</h2>
+                <table class="lesson-table">
+                    <thead>
+                        <tr>
+                            <th>周次</th>
+                            <th>长元音</th>
+                            <th>规则</th>
+                            <th>例词</th>
+                            <th>活动重点</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scheduleBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="activities" class="tab-content">
+            <div class="card">
+                <h2>教学活动设计</h2>
+                <div class="activity-grid">
+                    <div class="activity-card">
+                        <h3>🎵 魔法e歌谣</h3>
+                        <p>"Magic e, magic e, makes the vowel say its name!" 用朗朗上口的歌谣帮助学生记忆魔法e规则。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🔊 元音组合拼读</h3>
+                        <p>ai, ea, ie, oa, oo 等组合发音练习，强调两个字母一起发一个音。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🃏 魔法e配对</h3>
+                        <p>将CVC词与对应的CVCe词配对：cap→cape, kit→kite, hop→hope。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🔍 听音辨词</h3>
+                        <p>听单词，判断是长元音还是短元音，并说明理由。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🎤 造句挑战</h3>
+                        <p>用长元音词汇造句，如 "I see a boat on the lake."</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>📝 拼写竞赛</h3>
+                        <p>听写含长元音的单词，强调正确的拼写规则。</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h3>💡 教学提示</h3>
+                    <ul>
+                        <li>强调长元音与短元音的对比，用音长和音高区分</li>
+                        <li>使用手势辅助：长元音拉长手势，短元音短促手势</li>
+                        <li>先练习CVCe规则，再学习元音组合</li>
+                        <li>提供大量对比练习，如 cap/cape, kit/kite</li>
+                        <li>注意易混淆的组合：ea（/e:/或/eɪ/）、oo（/u:/或/ʊ/）</li>
+                        <li>结合长元音读本进行阅读实践，巩固拼读规则</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="words" class="tab-content">
+            <div class="card">
+                <h2>Level 4 核心词汇表（约500词）</h2>
+                <div class="word-list" id="wordList"></div>
+            </div>
+        </div>
+
+        <div id="resources" class="tab-content">
+            <div class="card">
+                <h2>教学资源</h2>
+                <div class="resources-list">
+                    <div class="resource-item">
+                        <span class="resource-icon">🎵</span>
+                        <span class="resource-name">Magic e Song - Phonics Song</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎵</span>
+                        <span class="resource-name">Long Vowels Song - Jack Hartmann</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎵</span>
+                        <span class="resource-name">Vowel Team Song - Alphablocks</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎮</span>
+                        <span class="resource-name">Magic e Game - Starfall</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎮</span>
+                        <span class="resource-name">Long Vowel Bingo - ABCya</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎮</span>
+                        <span class="resource-name">Vowel Team Sort - Reading Eggs</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🖨️</span>
+                        <span class="resource-name">Magic e Worksheets</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🖨️</span>
+                        <span class="resource-name">Long Vowel Flash Cards</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🖨️</span>
+                        <span class="resource-name">Vowel Team Printables</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">📖</span>
+                        <span class="resource-name">OPW Level 4 Reader Set</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="opw-overview.html" class="back-link">🏠 返回概览</a>
+        </div>
+    </div>
+
+    <script>
+        const rules = [
+            { type: 'CVCe', pattern: 'a-e', example: 'cake, name, make', mnemonic: 'Magic e makes A say /eɪ/' },
+            { type: 'CVCe', pattern: 'e-e', example: 'theme, these, eve', mnemonic: 'Magic e makes E say /i:/' },
+            { type: 'CVCe', pattern: 'i-e', example: 'like, kite, time', mnemonic: 'Magic e makes I say /aɪ/' },
+            { type: 'CVCe', pattern: 'o-e', example: 'home, bone, rose', mnemonic: 'Magic e makes O say /əʊ/' },
+            { type: 'CVCe', pattern: 'u-e', example: 'cute, tube, mule', mnemonic: 'Magic e makes U say /ju:/' },
+            { type: 'Vowel Team', pattern: 'ai/ay', example: 'rain, day, play', mnemonic: 'ai in word, ay at end' },
+            { type: 'Vowel Team', pattern: 'ee/ea', example: 'tree, sea, leaf', mnemonic: 'Double ee or ea makes /i:/' },
+            { type: 'Vowel Team', pattern: 'ie/igh', example: 'pie, high, light', mnemonic: 'ie or igh makes /aɪ/' },
+            { type: 'Vowel Team', pattern: 'oa/ow', example: 'boat, snow, show', mnemonic: 'oa in word, ow at end' },
+            { type: 'Vowel Team', pattern: 'oo', example: 'moon, book, cool', mnemonic: 'oo makes /u:/ or /ʊ/' }
+        ];
+
+        const rulesDetail = [
+            { vowel: 'a', name: 'A says /eɪ/ in CVCe', words: ['cake', 'name', 'make', 'lake', 'gate', 'late'] },
+            { vowel: 'e', name: 'E says /i:/ in CVCe', words: ['theme', 'these', 'eve', 'gene', 'kite', 'bite'] },
+            { vowel: 'i', name: 'I says /aɪ/ in CVCe', words: ['like', 'kite', 'time', 'bike', 'white', 'site'] },
+            { vowel: 'o', name: 'O says /əʊ/ in CVCe', words: ['home', 'bone', 'rose', 'nose', 'hope', 'joke'] },
+            { vowel: 'u', name: 'U says /ju:/ in CVCe', words: ['cute', 'tube', 'mule', 'rude', 'huge', 'dune'] },
+            { vowel: 'ai', name: 'ai says /eɪ/', words: ['rain', 'day', 'play', 'say', 'way', 'may'] },
+            { vowel: 'ee', name: 'ee says /i:/', words: ['tree', 'see', 'green', 'sleep', 'deep', 'keep'] },
+            { vowel: 'ea', name: 'ea says /i:/', words: ['sea', 'leaf', 'tea', 'pea', 'eat', 'heat'] },
+            { vowel: 'ie', name: 'ie says /aɪ/', words: ['pie', 'tie', 'lie', 'die', 'field', 'chief'] },
+            { vowel: 'igh', name: 'igh says /aɪ/', words: ['high', 'light', 'night', 'right', 'bright', 'fight'] },
+            { vowel: 'oa', name: 'oa says /əʊ/', words: ['boat', 'coat', 'goat', 'road', 'load', 'toad'] },
+            { vowel: 'ow', name: 'ow says /əʊ/', words: ['snow', 'show', 'low', 'slow', 'grow', 'know'] },
+            { vowel: 'oo(u:)', name: 'oo says /u:/', words: ['moon', 'cool', 'pool', 'tool', 'school', 'food'] },
+            { vowel: 'oo(ʊ)', name: 'oo says /ʊ/', words: ['book', 'look', 'good', 'wood', 'foot', 'cook'] }
+        ];
+
+        const schedule = [
+            { week: 1, vowel: 'a', rule: 'a-e (CVCe)', words: 'cake, name', focus: 'a族引入' },
+            { week: 2, vowel: 'a', rule: 'a-e words', words: 'lake, gate, late', focus: 'a族扩展' },
+            { week: 3, vowel: 'e', rule: 'e-e (CVCe)', words: 'theme, these', focus: 'e族引入' },
+            { week: 4, vowel: 'i', rule: 'i-e (CVCe)', words: 'like, kite', focus: 'i族引入' },
+            { week: 5, vowel: 'i', rule: 'i-e words', words: 'time, bike, white', focus: 'i族扩展' },
+            { week: 6, vowel: 'o', rule: 'o-e (CVCe)', words: 'home, bone', focus: 'o族引入' },
+            { week: 7, vowel: 'o', rule: 'o-e words', words: 'rose, nose, hope', focus: 'o族扩展' },
+            { week: 8, vowel: 'u', rule: 'u-e (CVCe)', words: 'cute, tube', focus: 'u族引入' },
+            { week: 9, vowel: 'ai/ay', rule: 'Vowel Team', words: 'rain, day, play', focus: 'ai/ay引入' },
+            { week: 10, vowel: 'ee', rule: 'Vowel Team', words: 'tree, see, green', focus: 'ee引入' },
+            { week: 11, vowel: 'ea', rule: 'Vowel Team', words: 'sea, leaf, tea', focus: 'ea引入' },
+            { week: 12, vowel: 'ie/igh', rule: 'Vowel Team', words: 'pie, high, light', focus: 'ie/igh引入' },
+            { week: 13, vowel: 'oa', rule: 'Vowel Team', words: 'boat, coat, goat', focus: 'oa引入' },
+            { week: 14, vowel: 'ow', rule: 'Vowel Team', words: 'snow, show, low', focus: 'ow引入' },
+            { week: 15, vowel: 'oo(u:)', rule: 'Vowel Team', words: 'moon, cool, pool', focus: 'oo长音' },
+            { week: 16, vowel: 'oo(ʊ)', rule: 'Vowel Team', words: 'book, look, good', focus: 'oo短音' },
+            { week: 17, vowel: 'Mixed', rule: 'Mixed patterns', words: 'Mixed practice', focus: '混合练习' },
+            { week: 18, vowel: 'Review', rule: 'All patterns', words: 'All words', focus: '综合复习' },
+            { week: 19, vowel: 'Reading', rule: 'Application', words: 'Reading practice', focus: '阅读应用' },
+            { week: 20, vowel: 'Assessment', rule: 'Test', words: 'Final test', focus: '阶段评估' }
+        ];
+
+        const words = [
+            'cake', 'name', 'make', 'lake', 'gate', 'late', 'date', 'hate', 'mate', 'plate',
+            'theme', 'these', 'eve', 'gene', 'kite', 'bite', 'like', 'bike', 'white', 'site',
+            'home', 'bone', 'rose', 'nose', 'hope', 'joke', 'rope', 'mole', 'pole', 'hole',
+            'cute', 'tube', 'mule', 'rude', 'huge', 'dune', 'tune', 'cube', 'lute', 'flute',
+            'rain', 'day', 'play', 'say', 'way', 'may', 'stay', 'pay', 'slay', 'tray',
+            'tree', 'see', 'green', 'sleep', 'deep', 'keep', 'feet', 'meet', 'sweet', 'street',
+            'sea', 'leaf', 'tea', 'pea', 'eat', 'heat', 'meat', 'beat', 'seat', 'neat',
+            'pie', 'tie', 'lie', 'die', 'field', 'chief', 'high', 'light', 'night', 'right',
+            'bright', 'fight', 'might', 'sight', 'tight', 'boat', 'coat', 'goat', 'road', 'load',
+            'toad', 'snow', 'show', 'low', 'slow', 'grow', 'know', 'blow', 'flow', 'glow',
+            'moon', 'cool', 'pool', 'tool', 'school', 'food', 'room', 'bloom', 'gloom', 'spoon',
+            'book', 'look', 'good', 'wood', 'foot', 'cook', 'took', 'hook', 'nook', 'brook'
+        ];
+
+        // 生成长元音规则卡片
+        function generateRuleCards() {
+            const container = document.getElementById('ruleCards');
+            container.innerHTML = rules.map(rule => `
+                <div class="rule-card" onclick="playSound('${rule.pattern}')">
+                    <div class="type">${rule.type}</div>
+                    <div class="pattern">${rule.pattern}</div>
+                    <div class="example">${rule.example}</div>
+                    <div class="mnemonic">${rule.mnemonic}</div>
+                </div>
+            `).join('');
+        }
+
+        // 生成规则详情
+        function generateRulesDetail() {
+            const container = document.getElementById('rulesDetail');
+            container.innerHTML = rulesDetail.map(rule => `
+                <div class="rule-section">
+                    <h3>${rule.name}</h3>
+                    <div class="rule-examples">
+                        ${rule.words.map(word => `
+                            <div class="rule-word" onclick="playSound('${word}')">${word}</div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 生成课程表
+        function generateSchedule() {
+            const tbody = document.getElementById('scheduleBody');
+            tbody.innerHTML = schedule.map(item => `
+                <tr>
+                    <td>第 ${item.week} 周</td>
+                    <td><strong>${item.vowel}</strong></td>
+                    <td>${item.rule}</td>
+                    <td>${item.words}</td>
+                    <td>${item.focus}</td>
+                </tr>
+            `).join('');
+        }
+
+        // 生成词汇表
+        function generateWordList() {
+            const container = document.getElementById('wordList');
+            container.innerHTML = words.map(word => `
+                <div class="word-card" onclick="playSound('${word}')">
+                    <div class="word">${word}</div>
+                </div>
+            `).join('');
+        }
+
+        // 切换标签页
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // 播放发音
+        function playSound(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.8;
+                speechSynthesis.speak(utterance);
+            } else {
+                alert(`发音: ${text}`);
+            }
+        }
+
+        // 初始化
+        generateRuleCards();
+        generateRulesDetail();
+        generateSchedule();
+        generateWordList();
+    </script>
+</body>
+</html>

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1 2 3 数字乐园 | 小星星英语</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: white;
+  }
+
+  /* ===== STARS BG ===== */
+  .stars-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .star-dot {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkleDot ease-in-out infinite;
+  }
+  @keyframes twinkleDot {
+    0%,100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 30px 20px 10px;
+  }
+
+  .back-btn {
+    position: absolute;
+    left: 20px;
+    top: 30px;
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.4);
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    font-family: 'Nunito', sans-serif;
+  }
+  .back-btn:hover { background: rgba(255,255,255,0.3); }
+
+  .page-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2rem, 7vw, 3.5rem);
+    background: linear-gradient(90deg, #FFD700, #FF8C42, #FF6B9D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+  }
+  .page-subtitle {
+    color: rgba(255,255,255,0.7);
+    font-size: 1rem;
+    margin-top: 4px;
+  }
+
+  /* ===== MODE TABS ===== */
+  .mode-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 20px auto;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 10;
+  }
+  .tab-btn {
+    background: rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.25);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background: #FFD700;
+    color: #1a1a2e;
+    border-color: #FFD700;
+    transform: scale(1.05);
+  }
+
+  /* ===== LEARN SECTION ===== */
+  #section-learn { display: block; }
+  #section-count { display: none; }
+  #section-quiz  { display: none; }
+
+  .section {
+    position: relative;
+    z-index: 10;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* Number Cards Grid */
+  .num-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 18px;
+  }
+
+  .num-card {
+    background: rgba(255,255,255,0.08);
+    border: 3px solid rgba(255,255,255,0.15);
+    border-radius: 24px;
+    padding: 20px 12px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .num-card:hover, .num-card.active {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 16px 40px rgba(255,215,0,0.3);
+    background: rgba(255,215,0,0.15);
+    border-color: #FFD700;
+  }
+
+  .num-big {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3.5rem;
+    line-height: 1;
+    display: block;
+  }
+  .num-word {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    margin: 6px 0 4px;
+    color: #FFD700;
+  }
+  .num-cn {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+  }
+  .num-dots {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+  .dot {
+    font-size: 16px;
+    animation: dotPop 0.3s ease both;
+  }
+  @keyframes dotPop {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  /* ===== COUNT GAME ===== */
+  .count-arena {
+    background: rgba(255,255,255,0.07);
+    border-radius: 30px;
+    padding: 30px;
+    text-align: center;
+    border: 2px solid rgba(255,255,255,0.15);
+  }
+  .count-question {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.6rem;
+    color: #FFD700;
+    margin-bottom: 20px;
+  }
+  .count-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    min-height: 80px;
+  }
+  .count-item {
+    font-size: 42px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    animation: itemAppear 0.4s ease both;
+    user-select: none;
+  }
+  .count-item:hover { transform: scale(1.2) rotate(10deg); }
+  @keyframes itemAppear {
+    from { transform: scale(0) rotate(-20deg); opacity: 0; }
+    to { transform: scale(1) rotate(0); opacity: 1; }
+  }
+  .count-input-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .count-answer-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1);
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .count-answer-btn:hover {
+    background: #FFD700;
+    color: #1a1a2e;
+    border-color: #FFD700;
+    transform: scale(1.15);
+  }
+  .count-answer-btn.correct {
+    background: #2ECC71;
+    border-color: #2ECC71;
+    animation: correctPop 0.5s ease;
+  }
+  .count-answer-btn.wrong {
+    background: #E74C3C;
+    border-color: #E74C3C;
+    animation: shake 0.4s ease;
+  }
+  @keyframes correctPop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.4); }
+    100% { transform: scale(1); }
+  }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20%,60% { transform: translateX(-8px); }
+    40%,80% { transform: translateX(8px); }
+  }
+
+  /* ===== QUIZ SECTION ===== */
+  .quiz-card {
+    background: rgba(255,255,255,0.07);
+    border: 2px solid rgba(255,255,255,0.15);
+    border-radius: 30px;
+    padding: 30px;
+    text-align: center;
+  }
+  .quiz-prompt {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(3rem,12vw,6rem);
+    margin: 10px 0 20px;
+    animation: numPulse 2s ease-in-out infinite;
+  }
+  @keyframes numPulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+  .quiz-label {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 20px;
+  }
+  .quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .quiz-opt-btn {
+    background: rgba(255,255,255,0.1);
+    border: 3px solid rgba(255,255,255,0.25);
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    padding: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .quiz-opt-btn:hover { background: rgba(255,215,0,0.2); border-color: #FFD700; transform: scale(1.05); }
+  .quiz-opt-btn.correct { background: #2ECC71; border-color: #2ECC71; animation: correctPop 0.5s ease; }
+  .quiz-opt-btn.wrong   { background: #E74C3C; border-color: #E74C3C; animation: shake 0.4s ease; }
+
+  /* Score */
+  .score-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 0 auto 20px;
+    flex-wrap: wrap;
+  }
+  .score-item {
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .score-stars { font-size: 1.4rem; }
+
+  /* Feedback */
+  .feedback-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+  }
+  .feedback-overlay.show { display: flex; }
+  .feedback-box {
+    background: white;
+    border-radius: 30px;
+    padding: 40px 50px;
+    text-align: center;
+    animation: popIn 0.4s ease;
+  }
+  @keyframes popIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .feedback-emoji { font-size: 72px; }
+  .feedback-text { font-size: 1.8rem; font-weight: 900; color: #333; margin: 10px 0 6px; }
+  .feedback-sub  { color: #888; font-size: 1rem; }
+  .feedback-btn {
+    margin-top: 20px;
+    background: #FFD700;
+    border: none;
+    padding: 12px 36px;
+    border-radius: 30px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: #333;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .feedback-btn:hover { transform: scale(1.08); }
+
+  @media (max-width: 480px) {
+    .num-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .num-big { font-size: 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Stars background -->
+<div class="stars-bg" id="starsBg"></div>
+
+<header>
+  <a class="back-btn" href="index.html">← 返回</a>
+  <div class="page-title">🔢 1 2 3 Numbers</div>
+  <div class="page-subtitle">数字乐园 · 一起来数数吧！</div>
+</header>
+
+<!-- Score bar -->
+<div class="score-bar" style="position:relative;z-index:10;">
+  <div class="score-item">⭐ 积分: <span id="scoreNum">0</span></div>
+  <div class="score-item score-stars" id="starDisplay">☆☆☆☆☆</div>
+</div>
+
+<!-- Mode Tabs -->
+<div class="mode-tabs">
+  <button class="tab-btn active" onclick="switchMode('learn')">📖 认识数字</button>
+  <button class="tab-btn" onclick="switchMode('count')">🖐 数数游戏</button>
+  <button class="tab-btn" onclick="switchMode('quiz')">🎯 猜一猜</button>
+</div>
+
+<!-- SECTION: LEARN -->
+<div class="section" id="section-learn">
+  <div class="num-grid" id="numGrid"></div>
+</div>
+
+<!-- SECTION: COUNT GAME -->
+<div class="section" id="section-count">
+  <div class="count-arena">
+    <div class="count-question" id="countQuestion">有多少个 🍎 ？ How many?</div>
+    <div class="count-items" id="countItems"></div>
+    <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;margin-bottom:10px;">点击正确的数字 Click the right number!</p>
+    <div class="count-input-row" id="countBtns"></div>
+  </div>
+</div>
+
+<!-- SECTION: QUIZ -->
+<div class="section" id="section-quiz">
+  <div class="quiz-card">
+    <div class="quiz-label">这个单词是哪个数字？ Which number is this?</div>
+    <div class="quiz-prompt" id="quizPrompt">one</div>
+    <div class="quiz-options" id="quizOptions"></div>
+  </div>
+</div>
+
+<!-- Feedback overlay -->
+<div class="feedback-overlay" id="feedbackOverlay">
+  <div class="feedback-box">
+    <div class="feedback-emoji" id="feedbackEmoji">🎉</div>
+    <div class="feedback-text" id="feedbackText">Excellent!</div>
+    <div class="feedback-sub" id="feedbackSub">棒棒的！</div>
+    <button class="feedback-btn" onclick="closeFeedback()">继续 Continue →</button>
+  </div>
+</div>
+
+<script>
+const NUMBERS = [
+  { n:1,  word:'one',   cn:'一', emoji:'⭐', color:'#FF6B9D' },
+  { n:2,  word:'two',   cn:'二', emoji:'🍎', color:'#FF8C42' },
+  { n:3,  word:'three', cn:'三', emoji:'🌸', color:'#FFD700' },
+  { n:4,  word:'four',  cn:'四', emoji:'🦋', color:'#2EC4B6' },
+  { n:5,  word:'five',  cn:'五', emoji:'🐸', color:'#3498DB' },
+  { n:6,  word:'six',   cn:'六', emoji:'🍓', color:'#9B59B6' },
+  { n:7,  word:'seven', cn:'七', emoji:'🌈', color:'#E74C3C' },
+  { n:8,  word:'eight', cn:'八', emoji:'🐠', color:'#FF6B9D' },
+  { n:9,  word:'nine',  cn:'九', emoji:'🌟', color:'#FF8C42' },
+  { n:10, word:'ten',   cn:'十', emoji:'🎈', color:'#FFD700' },
+];
+
+let score = 0;
+let currentMode = 'learn';
+let countAnswer = 0;
+let quizAnswer = 0;
+
+// ---- STARS BG ----
+(function createStars() {
+  const bg = document.getElementById('starsBg');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    s.className = 'star-dot';
+    const sz = Math.random() * 3 + 1;
+    s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-duration:${2+Math.random()*3}s;animation-delay:${Math.random()*3}s;`;
+    bg.appendChild(s);
+  }
+})();
+
+// ---- SPEECH ----
+function speak(text, rate=0.72, pitch=1.3) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US'; u.rate = rate; u.pitch = pitch;
+  window.speechSynthesis.speak(u);
+}
+
+// ---- SCORE ----
+function addScore(pts) {
+  score += pts;
+  document.getElementById('scoreNum').textContent = score;
+  const stars = Math.min(5, Math.floor(score / 10));
+  document.getElementById('starDisplay').textContent = '★'.repeat(stars) + '☆'.repeat(5-stars);
+}
+
+// ---- MODE SWITCH ----
+function switchMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.tab-btn').forEach((b,i) => {
+    b.classList.toggle('active', ['learn','count','quiz'][i] === mode);
+  });
+  document.getElementById('section-learn').style.display = mode==='learn' ? 'block' : 'none';
+  document.getElementById('section-count').style.display = mode==='count' ? 'block' : 'none';
+  document.getElementById('section-quiz').style.display  = mode==='quiz'  ? 'block' : 'none';
+  if (mode==='count') setupCount();
+  if (mode==='quiz')  setupQuiz();
+}
+
+// ---- LEARN CARDS ----
+function buildLearnCards() {
+  const grid = document.getElementById('numGrid');
+  grid.innerHTML = '';
+  NUMBERS.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'num-card';
+    const dots = item.emoji.repeat(item.n);
+    const dotsHtml = [...Array(item.n)].map((_,i) =>
+      `<span class="dot" style="animation-delay:${i*0.07}s">${item.emoji}</span>`
+    ).join('');
+    card.innerHTML = `
+      <span class="num-big" style="color:${item.color}">${item.n}</span>
+      <div class="num-word">${item.word}</div>
+      <div class="num-cn">${item.cn}</div>
+      <div class="num-dots">${dotsHtml}</div>
+    `;
+    card.onclick = () => {
+      speak(`${item.n}. ${item.word}`, 0.65, 1.35);
+      document.querySelectorAll('.num-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+    };
+    grid.appendChild(card);
+  });
+}
+
+// ---- COUNT GAME ----
+const COUNT_EMOJIS = ['🍎','🌟','🐸','🦋','🍓','🌸','🐥','⭐','🎈','🍊'];
+function setupCount() {
+  const target = Math.floor(Math.random() * 9) + 1; // 1-9
+  countAnswer = target;
+  const emojiChar = COUNT_EMOJIS[Math.floor(Math.random()*COUNT_EMOJIS.length)];
+  const numInfo = NUMBERS[target-1];
+
+  document.getElementById('countQuestion').textContent =
+    `有多少个 ${emojiChar}？ How many ${numInfo.word}?`;
+
+  const itemsDiv = document.getElementById('countItems');
+  itemsDiv.innerHTML = '';
+  for (let i = 0; i < target; i++) {
+    const span = document.createElement('span');
+    span.className = 'count-item';
+    span.textContent = emojiChar;
+    span.style.animationDelay = (i * 0.1) + 's';
+    span.onclick = () => speak(`${i+1}`, 0.7, 1.4);
+    itemsDiv.appendChild(span);
+  }
+
+  // Answer buttons: correct + 3 wrong
+  const opts = new Set([target]);
+  while (opts.size < 4) {
+    opts.add(Math.floor(Math.random()*10)+1);
+  }
+  const shuffled = [...opts].sort(() => Math.random()-0.5);
+  const btnsDiv = document.getElementById('countBtns');
+  btnsDiv.innerHTML = '';
+  shuffled.forEach(num => {
+    const btn = document.createElement('button');
+    btn.className = 'count-answer-btn';
+    btn.textContent = num;
+    btn.onclick = () => checkCountAnswer(num, btn);
+    btnsDiv.appendChild(btn);
+  });
+}
+
+function checkCountAnswer(num, btn) {
+  const allBtns = document.querySelectorAll('.count-answer-btn');
+  allBtns.forEach(b => b.onclick = null);
+  if (num === countAnswer) {
+    btn.classList.add('correct');
+    speak(`Yes! ${NUMBERS[countAnswer-1].word}!`, 0.7, 1.4);
+    addScore(5);
+    showFeedback(true, `${countAnswer} = ${NUMBERS[countAnswer-1].word}!`);
+  } else {
+    btn.classList.add('wrong');
+    speak('Try again!', 0.7, 1.3);
+    showFeedback(false, `正确答案是 ${countAnswer} — ${NUMBERS[countAnswer-1].word}`);
+  }
+  setTimeout(() => setupCount(), 2000);
+}
+
+// ---- QUIZ ----
+function setupQuiz() {
+  const idx = Math.floor(Math.random() * NUMBERS.length);
+  const item = NUMBERS[idx];
+  quizAnswer = item.n;
+
+  // show word or number randomly
+  const showWord = Math.random() > 0.5;
+  document.querySelector('.quiz-label').textContent = showWord
+    ? '这个单词是哪个数字？ Which number?'
+    : '这个数字怎么说？ What is the word?';
+  document.getElementById('quizPrompt').textContent = showWord ? item.word : item.n;
+  document.getElementById('quizPrompt').style.color = item.color;
+
+  // options
+  const opts = new Set([idx]);
+  while (opts.size < 4) opts.add(Math.floor(Math.random()*NUMBERS.length));
+  const shuffled = [...opts].sort(() => Math.random()-0.5);
+  const optDiv = document.getElementById('quizOptions');
+  optDiv.innerHTML = '';
+  shuffled.forEach(i => {
+    const n = NUMBERS[i];
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt-btn';
+    btn.textContent = showWord ? n.n : n.word;
+    btn.style.color = n.color;
+    btn.onclick = () => checkQuiz(n.n, btn, item);
+    optDiv.appendChild(btn);
+  });
+}
+
+function checkQuiz(selected, btn, item) {
+  document.querySelectorAll('.quiz-opt-btn').forEach(b => b.onclick = null);
+  if (selected === item.n) {
+    btn.classList.add('correct');
+    speak(`${item.n}! ${item.word}! Great job!`, 0.7, 1.4);
+    addScore(8);
+    showFeedback(true, `${item.n} = ${item.word} ${item.emoji}`);
+  } else {
+    btn.classList.add('wrong');
+    speak('Oops! Try again!', 0.7, 1.3);
+    // highlight correct
+    document.querySelectorAll('.quiz-opt-btn').forEach(b => {
+      const txt = b.textContent;
+      if (txt == item.n || txt === item.word) b.classList.add('correct');
+    });
+    showFeedback(false, `正确是 ${item.n} — ${item.word}`);
+  }
+  setTimeout(() => setupQuiz(), 2000);
+}
+
+// ---- FEEDBACK ----
+function showFeedback(correct, sub) {
+  const goodEmoji = ['🎉','🌟','🏆','👏','🥳'];
+  const badEmoji  = ['😅','💪','🤔','😮'];
+  document.getElementById('feedbackEmoji').textContent = correct
+    ? goodEmoji[Math.floor(Math.random()*goodEmoji.length)]
+    : badEmoji[Math.floor(Math.random()*badEmoji.length)];
+  document.getElementById('feedbackText').textContent = correct ? 'Excellent! 棒棒哒！' : 'Keep trying! 再试试！';
+  document.getElementById('feedbackSub').textContent = sub;
+  // Auto-dismiss
+  setTimeout(closeFeedback, 1800);
+}
+function closeFeedback() {
+  document.getElementById('feedbackOverlay').classList.remove('show');
+}
+
+// ---- INIT ----
+buildLearnCards();
+</script>
+</body>
+</html>

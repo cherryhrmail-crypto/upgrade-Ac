@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 3 - 短元音家族 | Oxford Phonics World</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-info h1 {
+            font-size: 2.2em;
+            color: #764ba2;
+            margin-bottom: 8px;
+        }
+        .header-info p {
+            color: #666;
+            font-size: 1.05em;
+        }
+        .header-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .header-badge .level {
+            font-size: 1.5em;
+            font-weight: bold;
+            display: block;
+        }
+        .header-badge .desc {
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            gap: 10px;
+        }
+        .tab {
+            padding: 12px 25px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            color: #666;
+            border-radius: 8px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 4px 12px rgba(118, 75, 162, 0.4);
+        }
+        .tab:hover:not(.active) {
+            background: #f0f0f0;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            color: #2c3e50;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        .family-section {
+            margin-bottom: 35px;
+        }
+        .family-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f3e7ff 0%, #e8f0ff 100%);
+        }
+        .vowel-icon {
+            font-size: 4em;
+            font-weight: bold;
+            color: #764ba2;
+            width: 80px;
+            text-align: center;
+            line-height: 1;
+        }
+        .vowel-info h3 {
+            font-size: 1.4em;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        .vowel-info p {
+            color: #666;
+            font-size: 0.95em;
+        }
+        .mouth-shape {
+            margin-top: 10px;
+            font-size: 1.5em;
+        }
+        .word-family-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .family-card {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid #667eea;
+        }
+        .family-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+        .family-card .rime {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 8px;
+        }
+        .family-card .example {
+            color: #333;
+            font-size: 0.95em;
+        }
+        .word-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+        }
+        .word-card {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .word-card:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.05);
+        }
+        .word-card .word {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .activity-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #764ba2;
+        }
+        .activity-card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .activity-card p {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .cvc-demo {
+            background: linear-gradient(135deg, #FFF9E6 0%, #FFE6CC 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .cvc-demo h3 {
+            color: #D35400;
+            margin-bottom: 15px;
+        }
+        .cvc-structure {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+            font-size: 1.3em;
+        }
+        .cvc-part {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .cvc-part.c {
+            color: #E74C3C;
+        }
+        .cvc-part.v {
+            color: #3498DB;
+        }
+        .cvc-part.c2 {
+            color: #27AE60;
+        }
+        .arrow {
+            color: #999;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-info">
+                <h1>🔤 Level 3 - 短元音家族</h1>
+                <p>学习CVC词族，掌握短元音发音规律</p>
+            </div>
+            <div class="header-badge">
+                <span class="level">Level 3</span>
+                <span class="desc">6岁 · 第3学期</span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('families')">🔤 短元音家族</button>
+            <button class="tab" onclick="showTab('activities')">🎮 教学活动</button>
+            <button class="tab" onclick="showTab('words')">📖 词汇表</button>
+        </div>
+
+        <div id="families" class="tab-content active">
+            <div class="card">
+                <h2>CVC词族学习</h2>
+                
+                <div class="cvc-demo">
+                    <h3>📖 什么是CVC？</h3>
+                    <p style="color: #666; margin-bottom: 10px;">CVC = 辅音 + 元音 + 辅音，是最基础的英语单词结构</p>
+                    <div class="cvc-structure">
+                        <div class="cvc-part c">C</div>
+                        <div class="arrow">→</div>
+                        <div class="cvc-part v">V</div>
+                        <div class="arrow">→</div>
+                        <div class="cvc-part c2">C</div>
+                    </div>
+                    <p style="color: #666; margin-top: 15px;">示例：c-a-t = cat, b-e-d = bed, h-i-t = hit</p>
+                </div>
+
+                <!-- Short a -->
+                <div class="family-section">
+                    <div class="family-header">
+                        <div class="vowel-icon">a</div>
+                        <div class="vowel-info">
+                            <h3>Short a /æ/ - 短元音a</h3>
+                            <p>嘴张大，像咬大苹果 /æ/</p>
+                            <div class="mouth-shape">👄 张大嘴巴</div>
+                        </div>
+                    </div>
+                    <div class="word-family-grid">
+                        <div class="family-card" onclick="playSound('at')">
+                            <div class="rime">-at</div>
+                            <div class="example">cat, bat, hat, rat, mat</div>
+                        </div>
+                        <div class="family-card" onclick="playSound('an')">
+                            <div class="rime">-an</div>
+                            <div class="example">can, fan, man, pan, ran</div>
+                        </div>
+                        <div class="family-card" onclick="playSound('ap')">
+                            <div class="rime">-ap</div>
+                            <div class="example">cap, map, lap, nap, tap</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Short e -->
+                <div class="family-section">
+                    <div class="family-header">
+                        <div class="vowel-icon">e</div>
+                        <div class="vowel-info">
+                            <h3>Short e /e/ - 短元音e</h3>
+                            <p>嘴巴微张，短促有力 /e/</p>
+                            <div class="mouth-shape">👄 微微张开</div>
+                        </div>
+                    </div>
+                    <div class="word-family-grid">
+                        <div class="family-card" onclick="playSound('et')">
+                            <div class="rime">-et</div>
+                            <div class="example">pet, wet, net, jet, set</div>
+                        </div>
+                        <div class="family-card" onclick="playSound('en')">
+                            <div class="rime">-en</div>
+                            <div class="example">pen, hen, ten, den, men</div>
+                        </div>
+                        <div class="family-card" onclick="playSound('ed')">
+                            <div class="rime">-ed</div>
+                            <div class="example">bed, red, fed, led, wed</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Short i -->
+                <div class="family-section">
+                    <div class="family-header">
+                        <div class="vowel-icon">i</div>
+                        <div class="vowel-info">
+                            <h3>Short i /ɪ/ - 短元音i</h3>
+                            <p>嘴角向两边拉，像微笑 /ɪ/</p>
+                            <div class="mouth-shape">👄 嘴角拉伸</div>
+                        </div>
+                    </div>
+                    <div class="word-family-grid">
+                        <div class="family-card" onclick="playSound('it')">
+                            <div class="rime">-it</div>
+                            <div class="example">sit, fit, hit, kit, bit</div>
+                        </div>
+                        <div class="family-card" onclick="playSound('in')">
+                            <div class="rime">-in</div>
+                            <div class="example">pin, win, fin, bin, tin</div>
+                        </div>
+                        <div class="family-card" onclick="playSound('ig')">
+                            <div class="rime">-ig</div>
+                            <div class="example">pig, dig, wig, big, rig</div>
+                        </div>
+                        <div class="family-card" onclick="playSound('ip')">
+                            <div class="rime">-ip</div>
+                            <div class="example">lip, dip, rip, tip, sip</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Short o -->
+                <div class="family-section">
+                    <div class="family-header">
+                        <div class="vowel-icon">o</div>
+                        <div class="vowel-info">
+                            <h3>Short o /ɒ/ - 短元音o</h3>
+                            <p>嘴巴圆成O形，短促 /ɒ/</p>
+                            <div class="mouth-shape">👄 圆成O形</div>
+                        </div>
+                    </div>
+                    <div class="word-family-grid">
+                        <div class="family-card" onclick="playSound('ot')">
+                            <div class="rime">-ot</div>
+                            <div class="example">hot, pot, dot, lot, got</div>
+                        </div>
+                        <div class="family-card" onclick="playSound('op')">
+                            <div class="rime">-op</div>
+                            <div class="example">hop, top, pop, mop, cop</div>
+                        </div>
+                        <div class="family-card" onclick="playSound('og')">
+                            <div class="rime">-og</div>
+                            <div class="example">dog, log, fog, jog, bog</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Short u -->
+                <div class="family-section">
+                    <div class="family-header">
+                        <div class="vowel-icon">u</div>
+                        <div class="vowel-info">
+                            <h3>Short u /ʌ/ - 短元音u</h3>
+                            <p>嘴巴微张，短促放松 /ʌ/</p>
+                            <div class="mouth-shape">👄 自然放松</div>
+                        </div>
+                    </div>
+                    <div class="word-family-grid">
+                        <div class="family-card" onclick="playSound('ut')">
+                            <div class="rime">-ut</div>
+                            <div class="example">cut, but, nut, hut, gut</div>
+                        </div>
+                        <div class="family-card" onclick="playSound('ug')">
+                            <div class="rime">-ug</div>
+                            <div class="example">bug, hug, mug, rug, jug</div>
+                        </div>
+                        <div class="family-card" onclick="playSound('un')">
+                            <div class="rime">-un</div>
+                            <div class="example">sun, run, fun, bun, gun</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="activities" class="tab-content">
+            <div class="card">
+                <h2>教学活动设计</h2>
+                <div class="activity-grid">
+                    <div class="activity-card">
+                        <h3>🎵 短元音歌谣</h3>
+                        <p>为每个短元音编写歌谣，如：/æ/ /æ/ apple, cat and hat，配合动作加深记忆。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🔊 嘴型模仿游戏</h3>
+                        <p>教师展示不同短元音的嘴型，学生模仿。可以照镜子观察自己的嘴型变化。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🃏 词族分类卡片</h3>
+                        <p>准备CVC单词卡片，学生需要根据词族将单词分类到-at, -et, -it等不同组别。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🎨 词族绘画创作</h3>
+                        <p>让学生为每个词族绘制思维导图，如-at家族画cat、bat、hat等，加深视觉记忆。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🔍 CVC拼读接力</h3>
+                        <p>学生接力拼读CVC单词，c-a-t → cat，训练拼读速度和准确性。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🎤 词族故事创作</h3>
+                        <p>使用同一词族的词汇编故事，如：The cat sat on the mat with the rat。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="words" class="tab-content">
+            <div class="card">
+                <h2>Level 3 核心词汇表（约300词）</h2>
+                <div class="word-list" id="wordList"></div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="opw-overview.html" class="back-link">🏠 返回概览</a>
+        </div>
+    </div>
+
+    <script>
+        const words = [
+            'cat', 'bat', 'hat', 'rat', 'mat', 'fat', 'sat', 'vat', 'pat',
+            'can', 'fan', 'man', 'pan', 'ran', 'van', 'tan', 'ban', 'dan',
+            'cap', 'map', 'lap', 'nap', 'tap', 'gap', 'rap', 'zap', 'sap',
+            'pet', 'wet', 'net', 'jet', 'set', 'let', 'bet', 'get', 'met',
+            'pen', 'hen', 'ten', 'den', 'men', 'ben', 'yen', 'ken', 'fen',
+            'bed', 'red', 'fed', 'led', 'wed', 'ted', 'shed', 'sled',
+            'sit', 'fit', 'hit', 'kit', 'bit', 'lit', 'pit', 'wit', 'nit',
+            'pin', 'win', 'fin', 'bin', 'tin', 'din', 'kin', 'sin', 'gin',
+            'pig', 'dig', 'wig', 'big', 'rig', 'fig', 'jig', 'lig', 'sig',
+            'lip', 'dip', 'rip', 'tip', 'sip', 'nip', 'kip', 'pip', 'hip',
+            'hot', 'pot', 'dot', 'lot', 'got', 'not', 'rot', 'tot', 'cot',
+            'hop', 'top', 'pop', 'mop', 'cop', 'bop', 'lop', 'sop', 'fop',
+            'dog', 'log', 'fog', 'jog', 'bog', 'cog', 'hog', 'tog', 'sog',
+            'cut', 'but', 'nut', 'hut', 'gut', 'put', 'rut', 'mut', 'lut',
+            'bug', 'hug', 'mug', 'rug', 'jug', 'pug', 'tug', 'dug', 'lug',
+            'sun', 'run', 'fun', 'bun', 'gun', 'pun', 'tun', 'dun', 'nun',
+            'back', 'pack', 'sack', 'lack', 'tack', 'rack', 'black', 'crack',
+            'neck', 'deck', 'check', 'peck', 'wreck', 'speck', 'kick', 'lick',
+            'sick', 'tick', 'pick', 'wick', 'thick', 'brick', 'truck', 'stuck',
+            'duck', 'luck', 'buck', 'muck', 'suck', 'puck', 'tuck', 'block',
+            'clock', 'flock', 'stock', 'shock', 'rock', 'dock', 'lock', 'sock',
+            'shop', 'chop', 'drop', 'crop', 'flop', 'stop', 'top', 'mop', 'hop',
+            'milk', 'silk', 'jerk', 'perk', 'work', 'dark', 'park', 'lark', 'mark',
+            'bark', 'shark', 'spark', 'desk', 'mask', 'task', 'flask', 'best', 'test',
+            'rest', 'west', 'nest', 'pest', 'vest', 'chest', 'quest', 'guest',
+            'fast', 'last', 'past', 'cast', 'blast', 'mast', 'vast', 'clast',
+            'list', 'mist', 'fist', 'wrist', 'twist', 'cost', 'lost', 'post',
+            'most', 'host', 'ghost', 'toast', 'roast', 'boost', 'just', 'must',
+            'rust', 'trust', 'dust', 'crust', 'bust', 'haste', 'taste', 'waste',
+            'paste', 'haste', 'chaste', 'east', 'beast', 'feast', 'least', 'yeast',
+            'nest', 'test', 'rest', 'west', 'best', 'quest', 'fest', 'chest'
+        ];
+
+        // 生成词汇表
+        function generateWordList() {
+            const container = document.getElementById('wordList');
+            container.innerHTML = words.map(word => `
+                <div class="word-card" onclick="playSound('${word}')">
+                    <div class="word">${word}</div>
+                </div>
+            `).join('');
+        }
+
+        // 切换标签页
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // 播放发音
+        function playSound(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.8;
+                speechSynthesis.speak(utterance);
+            } else {
+                alert(`发音: ${text}`);
+            }
+        }
+
+        // 初始化
+        generateWordList();
+    </script>
+</body>
+</html>

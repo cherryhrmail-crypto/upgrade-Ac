@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPW 90分钟教案模板 | Oxford Phonics World</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-info h1 {
+            font-size: 2.2em;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        .header-info p {
+            color: #666;
+            font-size: 1.05em;
+        }
+        .header-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .header-badge .time {
+            font-size: 1.5em;
+            font-weight: bold;
+            display: block;
+        }
+        .header-badge .desc {
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            color: #2c3e50;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 20px;
+            bottom: 20px;
+            width: 3px;
+            background: linear-gradient(180deg, #667eea, #764ba2, #f093fb, #FFD200, #4ECDC4);
+        }
+        .step {
+            position: relative;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+        }
+        .step::before {
+            content: '';
+            position: absolute;
+            left: -19px;
+            top: 25px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .step-1 { border-left-color: #667eea; }
+        .step-1::before { background: #667eea; }
+        .step-2 { border-left-color: #764ba2; }
+        .step-2::before { background: #764ba2; }
+        .step-3 { border-left-color: #f093fb; }
+        .step-3::before { background: #f093fb; }
+        .step-4 { border-left-color: #FFD200; }
+        .step-4::before { background: #FFD200; }
+        .step-5 { border-left-color: #4ECDC4; }
+        .step-5::before { background: #4ECDC4; }
+        .step-6 { border-left-color: #FF6B6B; }
+        .step-6::before { background: #FF6B6B; }
+        .step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .step-header h3 {
+            font-size: 1.2em;
+            color: #2c3e50;
+            margin: 0;
+        }
+        .step-time {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        .step-desc {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .step-activities {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 10px;
+        }
+        .step-activities h4 {
+            color: #333;
+            font-size: 1em;
+            margin-bottom: 8px;
+        }
+        .step-activities ul {
+            color: #666;
+            padding-left: 20px;
+            line-height: 1.6;
+            font-size: 0.9em;
+        }
+        .material-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .material-item {
+            background: #f8f9fa;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+        .material-item .icon {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+        .material-item .name {
+            font-weight: 600;
+            color: #333;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .tips-section {
+            background: #fff9e6;
+            border: 2px solid #FFD700;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .tips-section h3 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .tips-section ul {
+            color: #666;
+            padding-left: 20px;
+            line-height: 1.8;
+        }
+        .level-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .level-btn {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .level-btn.active, .level-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+        .example-box {
+            background: #e3f2fd;
+            border: 2px solid #2196F3;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        .example-box h4 {
+            color: #2196F3;
+            margin-bottom: 10px;
+        }
+        .example-box p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-info">
+                <h1>📋 OPW 90分钟教案模板</h1>
+                <p>Oxford Phonics World 统一课堂教学结构</p>
+            </div>
+            <div class="header-badge">
+                <span class="time">90分钟</span>
+                <span class="desc">每节课时长</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🎯 适用Level</h2>
+            <div class="level-selector">
+                <button class="level-btn active" onclick="selectLevel(0)">Level 1</button>
+                <button class="level-btn" onclick="selectLevel(1)">Level 2</button>
+                <button class="level-btn" onclick="selectLevel(2)">Level 3</button>
+                <button class="level-btn" onclick="selectLevel(3)">Level 4</button>
+                <button class="level-btn" onclick="selectLevel(4)">Level 5</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>⏱️ 90分钟课堂结构</h2>
+            <div class="timeline">
+                <div class="step step-1">
+                    <div class="step-header">
+                        <h3>🔁 Review & Warm-up 复习热身</h3>
+                        <span class="step-time">10 min</span>
+                    </div>
+                    <p class="step-desc">复习上节内容，激活已有知识，营造学习氛围</p>
+                    <div class="step-activities">
+                        <h4>活动内容：</h4>
+                        <ul>
+                            <li>字母歌/Phonics歌曲复习</li>
+                            <li>Flash card快速认读游戏</li>
+                            <li>上节拼读内容回顾</li>
+                            <li>学生轮流展示所学词汇</li>
+                        </ul>
+                    </div>
+                    <div class="example-box">
+                        <h4>💡 示例：</h4>
+                        <p>播放"Phonics Song"，学生跟着唱跳。然后快速闪示字母卡片，学生大声读出发音。</p>
+                    </div>
+                </div>
+
+                <div class="step step-2">
+                    <div class="step-header">
+                        <h3>✨ New Phonics 新音组引入</h3>
+                        <span class="step-time">15 min</span>
+                    </div>
+                    <p class="step-desc">引入新的字母/音组，示范正确发音，展示例词</p>
+                    <div class="step-activities">
+                        <h4>活动内容：</h4>
+                        <ul>
+                            <li>展示新字母/音组卡片</li>
+                            <li>教师发音示范（嘴型+手势）</li>
+                            <li>学生模仿发音，教师纠正</li>
+                            <li>展示3-5个例词（图片+文字）</li>
+                            <li>建立字母-发音-词汇的关联</li>
+                        </ul>
+                    </div>
+                    <div class="example-box">
+                        <h4>💡 示例：</h4>
+                        <p>展示"bl"卡片，示范/bl/发音，展示"blue, black, block"图片，建立关联。</p>
+                    </div>
+                </div>
+
+                <div class="step step-3">
+                    <div class="step-header">
+                        <h3>🔤 Blending Practice 拼读练习</h3>
+                        <span class="step-time">15 min</span>
+                    </div>
+                    <p class="step-desc">将所学音素组合起来，练习完整单词拼读</p>
+                    <div class="step-activities">
+                        <h4>活动内容：</h4>
+                        <ul>
+                            <li>拆音练习：c - a - t → cat</li>
+                            <li>合音练习：bl + ack → black</li>
+                            <li>教师领读 → 全班齐读 → 个人挑战</li>
+                            <li>使用手指拼读法（三指法）</li>
+                            <li>学生轮流上台拼读</li>
+                        </ul>
+                    </div>
+                    <div class="example-box">
+                        <h4>💡 示例：</h4>
+                        <p>教师示范：用三指分别指向c、a、t，依次发音再合成为"cat"。学生模仿练习。</p>
+                    </div>
+                </div>
+
+                <div class="step step-4">
+                    <div class="step-header">
+                        <h3>📖 Word Work 词汇积累</h3>
+                        <span class="step-time">20 min</span>
+                    </div>
+                    <p class="step-desc">通过游戏和练习，巩固新学词汇，扩展同音族词</p>
+                    <div class="step-activities">
+                        <h4>活动内容：</h4>
+                        <ul>
+                            <li>配对游戏：音组-单词配对</li>
+                            <li>填字练习：缺失字母填空</li>
+                            <li>词卡排序：按字母顺序排列</li>
+                            <li>同音族词积累：cat/bat/hat/mat</li>
+                            <li>词汇分类游戏</li>
+                        </ul>
+                    </div>
+                    <div class="example-box">
+                        <h4>💡 示例：</h4>
+                        <p>将"at, at, at, at"与"cat, bat, hat, mat"配对。然后学生造句："The cat sat on the mat."</p>
+                    </div>
+                </div>
+
+                <div class="step step-5">
+                    <div class="step-header">
+                        <h3>📚 Reading Application 阅读应用</h3>
+                        <span class="step-time">20 min</span>
+                    </div>
+                    <p class="step-desc">使用配套分级读本，将拼读技能应用于真实阅读</p>
+                    <div class="step-activities">
+                        <h4>活动内容：</h4>
+                        <ul>
+                            <li>OPW Reader集体阅读</li>
+                            <li>听音圈词练习</li>
+                            <li>读句子/短文</li>
+                            <li>角色扮演对话</li>
+                            <li>阅读理解问答</li>
+                        </ul>
+                    </div>
+                    <div class="example-box">
+                        <h4>💡 示例：</h4>
+                        <p>阅读OPW Level 1 Reader中的"The Cat"故事，学生圈出含新学音组的单词。</p>
+                    </div>
+                </div>
+
+                <div class="step step-6">
+                    <div class="step-header">
+                        <h3>✅ Wrap-up & Homework 总结布置</h3>
+                        <span class="step-time">10 min</span>
+                    </div>
+                    <p class="step-desc">总结今日所学，布置课后作业，鼓励自主学习</p>
+                    <div class="step-activities">
+                        <h4>活动内容：</h4>
+                        <ul>
+                            <li>今日词汇回顾卡展示</li>
+                            <li>学生总结今日收获</li>
+                            <li>布置线上复习任务</li>
+                            <li>发放练习单/词汇卡</li>
+                            <li>预告下节课内容</li>
+                        </ul>
+                    </div>
+                    <div class="example-box">
+                        <h4>💡 示例：</h4>
+                        <p>展示今日学的10个词汇卡，学生齐读。布置回家用APP复习20分钟，完成练习单。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🎒 教学材料清单</h2>
+            <div class="material-grid">
+                <div class="material-item">
+                    <div class="material-icon icon">🃏</div>
+                    <div class="material-name">Flash Cards</div>
+                </div>
+                <div class="material-item">
+                    <div class="material-icon icon">📖</div>
+                    <div class="material-name">OPW Reader</div>
+                </div>
+                <div class="material-item">
+                    <div class="material-icon icon">✏️</div>
+                    <div class="material-name">白板/黑板</div>
+                </div>
+                <div class="material-item">
+                    <div class="material-icon icon">🖍️</div>
+                    <div class="material-name">彩色笔</div>
+                </div>
+                <div class="material-item">
+                    <div class="material-icon icon">📄</div>
+                    <div class="material-name">练习单</div>
+                </div>
+                <div class="material-item">
+                    <div class="material-icon icon">🎵</div>
+                    <div class="material-name">Phonics歌曲</div>
+                </div>
+                <div class="material-item">
+                    <div class="material-icon icon">🎮</div>
+                    <div class="material-name">游戏道具</div>
+                </div>
+                <div class="material-item">
+                    <div class="material-icon icon">📱</div>
+                    <div class="material-name">录音设备</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="tips-section">
+                <h3>💡 教学提示</h3>
+                <ul>
+                    <li><strong>时间分配灵活调整：</strong>根据学生掌握情况，适当调整各环节时间</li>
+                    <li><strong>多感官参与：</strong>结合视觉（卡片）、听觉（发音）、动觉（手势）</li>
+                    <li><strong>游戏化教学：</strong>每10分钟切换一种活动，保持学生注意力</li>
+                    <li><strong>及时反馈：</strong>对学生的发音和回答给予正面鼓励和纠正</li>
+                    <li><strong>分层教学：</strong>为不同水平的学生提供不同程度的任务</li>
+                    <li><strong>家校合作：</strong>定期向家长反馈学习进度，建议家庭练习</li>
+                    <li><strong>录音评估：</strong>定期录下学生拼读，分析进步和问题</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="opw-overview.html" class="back-link">🏠 返回OPW概览</a>
+        </div>
+    </div>
+
+    <script>
+        function selectLevel(level) {
+            document.querySelectorAll('.level-btn').forEach((btn, index) => {
+                btn.classList.toggle('active', index === level);
+            });
+            // 可以根据不同Level显示不同的示例
+        }
+    </script>
+</body>
+</html>

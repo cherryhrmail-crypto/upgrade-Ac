@@ -1,0 +1,67 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/upgrade/index",
+    "pages/upgrade/abc/abc",
+    "pages/upgrade/numbers/numbers",
+    "pages/upgrade/colors/colors",
+    "pages/upgrade/animals/animals",
+    "pages/upgrade/body/body",
+    "pages/upgrade/food/food",
+    "pages/upgrade/greetings/greetings",
+    "pages/phonics/overview/overview",
+    "pages/phonics/level/level",
+    "pages/phonics/interactive/interactive",
+    "pages/games/games",
+    "pages/profile/profile"
+  ],
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#1976D2",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/icons/home.png",
+        "selectedIconPath": "images/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/upgrade/index",
+        "text": "启蒙",
+        "iconPath": "images/icons/star.png",
+        "selectedIconPath": "images/icons/star-active.png"
+      },
+      {
+        "pagePath": "pages/phonics/overview/overview",
+        "text": "拼读",
+        "iconPath": "images/icons/book.png",
+        "selectedIconPath": "images/icons/book-active.png"
+      },
+      {
+        "pagePath": "pages/games/games",
+        "text": "游戏",
+        "iconPath": "images/icons/game.png",
+        "selectedIconPath": "images/icons/game-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/icons/user.png",
+        "selectedIconPath": "images/icons/user-active.png"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#1976D2",
+    "navigationBarTitleText": "优格德幼儿英语",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F5F7FA"
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

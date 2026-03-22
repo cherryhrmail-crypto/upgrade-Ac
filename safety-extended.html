@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety First - 安全教育 (4-12岁)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #E74C3C 0%, #FF8C42 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-info h1 {
+            font-size: 2.2em;
+            color: #E74C3C;
+            margin-bottom: 8px;
+        }
+        .header-info p {
+            color: #666;
+            font-size: 1.05em;
+        }
+        .header-badge {
+            background: linear-gradient(135deg, #E74C3C, #FF8C42);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .header-badge .age {
+            font-size: 1.5em;
+            font-weight: bold;
+            display: block;
+        }
+        .header-badge .desc {
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+        .age-selector {
+            display: flex;
+            gap: 15px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .age-btn {
+            padding: 12px 25px;
+            border: 2px solid #E74C3C;
+            background: white;
+            color: #E74C3C;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .age-btn.active, .age-btn:hover {
+            background: #E74C3C;
+            color: white;
+        }
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            gap: 10px;
+        }
+        .tab {
+            padding: 12px 25px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            color: #666;
+            border-radius: 8px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .tab.active {
+            background: linear-gradient(135deg, #E74C3C, #FF8C42);
+            color: white;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+        }
+        .tab:hover:not(.active) {
+            background: #f0f0f0;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            color: #2c3e50;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #E74C3C;
+        }
+        .safety-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .safety-card {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%);
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #E74C3C;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .safety-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+        }
+        .safety-card .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        .safety-card h3 {
+            color: #E74C3C;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        .safety-card ul {
+            color: #666;
+            padding-left: 20px;
+            line-height: 1.8;
+        }
+        .scenario-box {
+            background: #f8f9fa;
+            border-left: 4px solid #E74C3C;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .scenario-box h4 {
+            color: #E74C3C;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        .scenario-box p {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        .quiz-section {
+            background: #e3f2fd;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .quiz-section h3 {
+            color: #2196F3;
+            margin-bottom: 15px;
+        }
+        .quiz-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .quiz-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .quiz-item .question {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .quiz-item .options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .quiz-item .option {
+            padding: 6px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .quiz-item .option:hover {
+            background: #e3f2fd;
+            border-color: #2196F3;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .emergency-contacts {
+            background: #fff3e0;
+            border: 2px solid #FF9800;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .emergency-contacts h3 {
+            color: #FF9800;
+            margin-bottom: 15px;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .contact-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .contact-card .number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #FF9800;
+            margin-bottom: 5px;
+        }
+        .contact-card .label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .resources-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .resource-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .resource-item:hover {
+            transform: translateX(5px);
+        }
+        .resource-icon {
+            font-size: 1.8em;
+        }
+        .resource-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-info">
+                <h1>🦺 Safety First</h1>
+                <p>安全教育 · 保护自己 · 健康成长</p>
+            </div>
+            <div class="header-badge">
+                <span class="age">4-12岁</span>
+                <span class="desc">全年龄段安全教育</span>
+            </div>
+        </div>
+
+        <div class="age-selector">
+            <button class="age-btn active" onclick="selectAge(0)">👶 4-6岁（幼儿）</button>
+            <button class="age-btn" onclick="selectAge(1)">👦 7-9岁（小学低年级）</button>
+            <button class="age-btn" onclick="selectAge(2)">👧 10-12岁（小学高年级）</button>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('topics')">🛡️ 安全主题</button>
+            <button class="tab" onclick="showTab('scenarios')">🎭 安全情景</button>
+            <button class="tab" onclick="showTab('quiz')">❓ 安全测验</button>
+            <button class="tab" onclick="showTab('contacts')">📞 紧急联系</button>
+            <button class="tab" onclick="showTab('resources')">🛠️ 教学资源</button>
+        </div>
+
+        <div id="topics" class="tab-content active">
+            <div class="card">
+                <h2>安全主题分类</h2>
+                <div class="safety-grid" id="safetyTopics"></div>
+            </div>
+        </div>
+
+        <div id="scenarios" class="tab-content">
+            <div class="card">
+                <h2>安全情景教学</h2>
+                <div id="scenarioContent"></div>
+            </div>
+        </div>
+
+        <div id="quiz" class="tab-content">
+            <div class="card">
+                <h2>安全知识测验</h2>
+                <div class="quiz-section" id="quizContent"></div>
+            </div>
+        </div>
+
+        <div id="contacts" class="tab-content">
+            <div class="card">
+                <h2>紧急联系方式</h2>
+                <div class="emergency-contacts">
+                    <h3>📞 紧急电话（中国）</h3>
+                    <div class="contact-grid">
+                        <div class="contact-card">
+                            <div class="number">110</div>
+                            <div class="label">报警电话</div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="number">120</div>
+                            <div class="label">急救电话</div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="number">119</div>
+                            <div class="label">火警电话</div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="number">12395</div>
+                            <div class="label">食品安全</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="emergency-contacts" style="border-color: #2196F3; background: #e3f2fd; margin-top: 20px;">
+                    <h3 style="color: #2196F3;">📞 紧急电话（国际/英国）</h3>
+                    <div class="contact-grid">
+                        <div class="contact-card">
+                            <div class="number">999</div>
+                            <div class="label">紧急服务（英国）</div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="number">911</div>
+                            <div class="label">紧急服务（美国）</div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="number">112</div>
+                            <div class="label">欧盟紧急</div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="number">12320</div>
+                            <div class="label">公共卫生热线</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="resources" class="tab-content">
+            <div class="card">
+                <h2>教学资源</h2>
+                <div class="resources-list">
+                    <div class="resource-item">
+                        <span class="resource-icon">🎬</span>
+                        <span class="resource-name">安全动画视频 - Child Safety</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">📖</span>
+                        <span class="resource-name">安全绘本 - 安全故事</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎮</span>
+                        <span class="resource-name">安全互动游戏 - Safe Kids</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🖨️</span>
+                        <span class="resource-name">安全手册 printable</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎵</span>
+                        <span class="resource-name">安全儿歌 - Safety Songs</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">📱</span>
+                        <span class="resource-name">安全APP - Kids Safety</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="back-link">🏠 返回首页</a>
+        </div>
+    </div>
+
+    <script>
+        const safetyData = [
+            // 4-6岁（幼儿）
+            [
+                {
+                    icon: '🚦',
+                    title: '道路安全',
+                    items: [
+                        '认识红绿灯：红灯停、绿灯行、黄灯等待',
+                        '过马路要走斑马线，牵手大人',
+                        '不要在马路上玩耍、追逐',
+                        '认识交通标志：停车、禁止通行、人行道'
+                    ]
+                },
+                {
+                    icon: '🔥',
+                    title: '火灾安全',
+                    items: [
+                        '不玩火柴、打火机',
+                        '不触摸电源插座',
+                        '遇到火灾会大喊"着火了！"',
+                        '认识灭火器和消防栓'
+                    ]
+                },
+                {
+                    icon: '🏊',
+                    title: '水上安全',
+                    items: [
+                        '不要独自去游泳',
+                        '洗澡时要有大人陪伴',
+                        '不玩水、不推人进水池',
+                        '认识救生圈和救生员'
+                    ]
+                },
+                {
+                    icon: '👤',
+                    title: '陌生人安全',
+                    items: [
+                        '不跟陌生人走',
+                        '不吃陌生人给的东西',
+                        '陌生人问话可以不回答',
+                        '认识可信赖的成年人'
+                    ]
+                }
+            ],
+            // 7-9岁（小学低年级）
+            [
+                {
+                    icon: '🚦',
+                    title: '道路安全',
+                    items: [
+                        '骑自行车要戴头盔',
+                        '不在马路中间玩耍',
+                        '乘坐汽车要系安全带',
+                        '认识更多交通标志'
+                    ]
+                },
+                {
+                    icon: '🔥',
+                    title: '火灾安全',
+                    items: [
+                        '学习使用灭火器',
+                        '火灾时弯腰逃生',
+                        '不玩烟花爆竹',
+                        '认识家庭逃生路线'
+                    ]
+                },
+                {
+                    icon: '🏊',
+                    title: '水上安全',
+                    items: [
+                        '不在深水区游泳',
+                        '学习游泳技能',
+                        '不要跳水入深水',
+                        '认识救生设备'
+                    ]
+                },
+                {
+                    icon: '👤',
+                    title: '陌生人安全',
+                    items: [
+                        '遇到危险会大声呼救',
+                        '记住父母电话',
+                        '不接受陌生人的礼物',
+                        '学会向警察求助'
+                    ]
+                },
+                {
+                    icon: '💻',
+                    title: '网络安全',
+                    items: [
+                        '保护个人信息',
+                        '不随便加陌生网友',
+                        '不点陌生链接',
+                        '遇到网络欺凌告诉大人'
+                    ]
+                }
+            ],
+            // 10-12岁（小学高年级）
+            [
+                {
+                    icon: '🚦',
+                    title: '道路安全',
+                    items: [
+                        '学习交通规则',
+                        '骑电动车要戴头盔',
+                        '不酒后驾车（未来提醒）',
+                        '认识交通违规后果'
+                    ]
+                },
+                {
+                    icon: '🔥',
+                    title: '火灾安全',
+                    items: [
+                        '学习家庭消防计划',
+                        '使用电器要小心',
+                        '认识火灾报警器',
+                        '学习逃生技能'
+                    ]
+                },
+                {
+                    icon: '🏊',
+                    title: '水上安全',
+                    items: [
+                        '学习救生技能',
+                        '不在危险水域游泳',
+                        '认识水上运动安全',
+                        '学习心肺复苏'
+                    ]
+                },
+                {
+                    icon: '👤',
+                    title: '陌生人安全',
+                    items: [
+                        '识别危险情境',
+                        '学习自我保护',
+                        '遇到跟踪要及时报警',
+                        '建立安全意识'
+                    ]
+                },
+                {
+                    icon: '💻',
+                    title: '网络安全',
+                    items: [
+                        '保护账号密码',
+                        '识别网络诈骗',
+                        '不分享私密照片',
+                        '合理安排上网时间'
+                    ]
+                },
+                {
+                    icon: '🏥',
+                    title: '健康安全',
+                    items: [
+                        '学习急救知识',
+                        '认识危险物品',
+                        '保护眼睛和牙齿',
+                        '健康饮食和运动'
+                    ]
+                }
+            ]
+        ];
+
+        const scenarios = [
+            // 4-6岁
+            [
+                {
+                    situation: '迷路了怎么办？',
+                    solution: '不要哭泣，站在原地等大人。如果找不到，找穿制服的警察叔叔或商店工作人员求助。'
+                },
+                {
+                    situation: '有陌生人给你糖果',
+                    solution: '礼貌拒绝："谢谢，我不吃。" 然后马上离开，告诉爸爸妈妈。'
+                },
+                {
+                    situation: '家里着火了',
+                    solution: '不要贪心拿玩具，用湿毛巾捂住口鼻，弯腰低姿，沿着墙壁快速逃生。'
+                },
+                {
+                    situation: '朋友推你下水',
+                    solution: '大声说"不！" 告诉老师或大人。不要自己跳下去救朋友，要呼救找大人帮忙。'
+                }
+            ],
+            // 7-9岁
+            [
+                {
+                    situation: '遇到陌生人尾随',
+                    solution: '不要直接回家，去人多的地方，如商店、学校。拨打110报警。'
+                },
+                {
+                    situation: '骑自行车摔倒',
+                    solution: '先检查自己是否受伤。如果受伤严重，不要移动，拨打120急救电话。'
+                },
+                {
+                    situation: '收到陌生网友邀请',
+                    solution: '不要同意，不要告诉对方你的真实姓名、地址、学校。告诉父母并删除对方。'
+                },
+                {
+                    situation: '电梯故障被困',
+                    solution: '保持冷静，按紧急按钮或拨打电话。不要扒门，不要大声尖叫，等待救援。'
+                }
+            ],
+            // 10-12岁
+            [
+                {
+                    situation: '发现有人溺水',
+                    solution: '不要直接跳下去救。寻找救生圈、绳索或长杆，在岸上帮助。同时大声呼救并拨打120。'
+                },
+                {
+                    situation: '遇到网络诈骗',
+                    solution: '不要转账，不要点击链接。截图保存证据，告诉父母并报警。'
+                },
+                {
+                    situation: '同学被欺负',
+                    solution: '上前制止或帮助同学离开，不要袖手旁观。然后报告老师或家长。'
+                },
+                {
+                    situation: '发现电器起火',
+                    solution: '先切断电源。使用干粉灭火器。如果火势太大，立即撤离并拨打119。'
+                }
+            ]
+        ];
+
+        const quizzes = [
+            // 4-6岁
+            [
+                {
+                    question: '过马路时，绿灯亮了应该怎么做？',
+                    options: ['马上跑过去', '左右看，确认安全再走', '等朋友一起走'],
+                    answer: 1
+                },
+                {
+                    question: '陌生人给你糖果，你应该？',
+                    options: ['立刻吃掉', '礼貌拒绝并离开', '拿回家给妈妈看'],
+                    answer: 1
+                },
+                {
+                    question: '着火了应该打什么电话？',
+                    options: ['110', '119', '120'],
+                    answer: 1
+                },
+                {
+                    question: '游泳时最好的朋友喊你跳水，你应该？',
+                    options: ['开心地跳下去', '说"不"并告诉大人', '犹豫一下再跳'],
+                    answer: 1
+                }
+            ],
+            // 7-9岁
+            [
+                {
+                    question: '骑自行车时，应该戴什么？',
+                    options: ['太阳镜', '头盔', '手套'],
+                    answer: 1
+                },
+                {
+                    question: '在网上遇到陌生人问你家地址，你应该？',
+                    options: ['告诉他', '不理他', '告诉他假的地址'],
+                    answer: 1
+                },
+                {
+                    question: '火灾逃生时，应该用什么捂住口鼻？',
+                    options: ['纸巾', '湿毛巾', '手'],
+                    answer: 1
+                },
+                {
+                    question: '遇到陌生人尾随，你应该？',
+                    options: ['跑回家', '去人多的地方', '大喊救命'],
+                    answer: 1
+                }
+            ],
+            // 10-12岁
+            [
+                {
+                    question: '发现有人溺水，你应该？',
+                    options: ['跳下去救他', '在岸上用工具帮助', '叫朋友一起跳下去'],
+                    answer: 1
+                },
+                {
+                    question: '收到中奖短信要你汇款，你应该？',
+                    options: ['马上汇款', '删除并报警', '告诉朋友'],
+                    answer: 1
+                },
+                {
+                    question: '使用灭火器时，应该对准哪里？',
+                    options: ['火苗', '火源根部', '烟雾'],
+                    answer: 1
+                },
+                {
+                    question: '电梯被困时，应该？',
+                    options: ['大声尖叫', '扒门逃生', '按紧急按钮等待'],
+                    answer: 2
+                }
+            ]
+        ];
+
+        let currentAge = 0;
+
+        function selectAge(age) {
+            currentAge = age;
+            document.querySelectorAll('.age-btn').forEach((btn, index) => {
+                btn.classList.toggle('active', index === age);
+            });
+            updateContent();
+        }
+
+        function updateContent() {
+            generateSafetyTopics();
+            generateScenarios();
+            generateQuiz();
+        }
+
+        function generateSafetyTopics() {
+            const container = document.getElementById('safetyTopics');
+            container.innerHTML = safetyData[currentAge].map(topic => `
+                <div class="safety-card">
+                    <div class="icon">${topic.icon}</div>
+                    <h3>${topic.title}</h3>
+                    <ul>
+                        ${topic.items.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+            `).join('');
+        }
+
+        function generateScenarios() {
+            const container = document.getElementById('scenarioContent');
+            container.innerHTML = scenarios[currentAge].map(scenario => `
+                <div class="scenario-box">
+                    <h4>🎭 ${scenario.situation}</h4>
+                    <p><strong>✅ 应对方法：</strong>${scenario.solution}</p>
+                </div>
+            `).join('');
+        }
+
+        function generateQuiz() {
+            const container = document.getElementById('quizContent');
+            container.innerHTML = quizzes[currentAge].map((quiz, index) => `
+                <div class="quiz-item" onclick="checkAnswer(${index}, this)">
+                    <div class="question">${index + 1}. ${quiz.question}</div>
+                    <div class="options">
+                        ${quiz.options.map((opt, optIndex) => `
+                            <span class="option" onclick="event.stopPropagation(); selectOption(${index}, ${optIndex}, this)">${opt}</span>
+                        `).join('')}
+                    </div>
+                    <div class="result" style="display:none; margin-top:10px; font-weight:600;"></div>
+                </div>
+            `).join('');
+        }
+
+        function selectOption(quizIndex, optionIndex, element) {
+            const quiz = quizzes[currentAge][quizIndex];
+            const parent = element.closest('.quiz-item');
+            const resultDiv = parent.querySelector('.result');
+            const options = parent.querySelectorAll('.option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (optionIndex === quiz.answer) {
+                element.style.background = '#4CAF50';
+                element.style.color = 'white';
+                element.style.borderColor = '#4CAF50';
+                resultDiv.textContent = '✅ 正确！';
+                resultDiv.style.color = '#4CAF50';
+            } else {
+                element.style.background = '#f44336';
+                element.style.color = 'white';
+                element.style.borderColor = '#f44336';
+                options[quiz.answer].style.background = '#4CAF50';
+                options[quiz.answer].style.color = 'white';
+                resultDiv.textContent = '❌ 错误，正确答案是：' + quiz.options[quiz.answer];
+                resultDiv.style.color = '#f44336';
+            }
+            resultDiv.style.display = 'block';
+        }
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // 初始化
+        updateContent();
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+/* pages/games/games.wxss */
+.page { background:#F5F7FA; padding-bottom:40rpx; }
+.hero { padding:50rpx 32rpx 40rpx; background:linear-gradient(135deg,#1565C0,#E53935); }
+.hero-title { display:block; font-size:44rpx; font-weight:900; color:#fff; }
+.hero-sub { display:block; font-size:26rpx; color:rgba(255,255,255,0.8); margin-top:8rpx; }
+.total-score { margin-top:20rpx; font-size:26rpx; color:rgba(255,255,255,0.9); }
+.tscore { font-size:36rpx; font-weight:900; color:#FFD700; }
+/* Games Grid */
+.games-grid { display:grid; grid-template-columns:1fr 1fr; gap:20rpx; padding:24rpx; }
+.game-card { border-radius:28rpx; padding:32rpx 24rpx; display:flex; flex-direction:column; gap:10rpx; box-shadow:0 8rpx 24rpx rgba(0,0,0,0.14); }
+.gc-emoji { font-size:60rpx; }
+.gc-title { font-size:32rpx; font-weight:900; color:#fff; }
+.gc-desc { font-size:24rpx; color:rgba(255,255,255,0.85); }
+.gc-best { font-size:22rpx; color:rgba(255,255,255,0.7); margin-top:8rpx; }
+/* Game Area */
+.game-area { margin:0 24rpx; background:#fff; border-radius:28rpx; padding:32rpx; box-shadow:0 8rpx 30rpx rgba(0,0,0,0.1); }
+.game-header { display:flex; align-items:center; margin-bottom:28rpx; }
+.game-title { flex:1; font-size:30rpx; font-weight:800; color:#222; }
+.game-score { font-size:28rpx; color:#F9A825; font-weight:800; margin-right:20rpx; }
+.game-close { width:52rpx; height:52rpx; background:#F5F7FA; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:28rpx; color:#999; }
+/* Memory */
+.memory-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14rpx; }
+.memory-card { height:120rpx; border-radius:16rpx; background:#E3F2FD; display:flex; align-items:center; justify-content:center; font-size:28rpx; font-weight:700; }
+.mc-front { color:#1976D2; font-size:40rpx; }
+.mc-back { color:#333; display:none; }
+.memory-card.flipped .mc-front,.memory-card.matched .mc-front { display:none; }
+.memory-card.flipped .mc-back,.memory-card.matched .mc-back { display:block; }
+.memory-card.matched { background:#E8F5E9; }
+.game-tip { display:block; text-align:center; font-size:24rpx; color:#999; margin-top:16rpx; }
+/* Typing */
+.typing-area { display:flex; flex-direction:column; align-items:center; gap:20rpx; }
+.typing-emoji { font-size:100rpx; }
+.typing-cn { font-size:36rpx; font-weight:700; color:#333; }
+.typing-input { width:100%; background:#F5F7FA; border-radius:16rpx; padding:20rpx 24rpx; font-size:30rpx; border:2rpx solid #E3F2FD; }
+.typing-hint { font-size:26rpx; color:#F9A825; }
+.typing-submit { background:linear-gradient(135deg,#1976D2,#42A5F5); color:#fff; border-radius:50rpx; padding:20rpx 60rpx; font-size:28rpx; font-weight:700; }
+/* Falling */
+.falling-area { display:flex; flex-direction:column; align-items:center; gap:20rpx; }
+.fall-question { display:flex; flex-direction:column; align-items:center; gap:10rpx; }
+.fall-word { font-size:60rpx; font-weight:900; color:#1976D2; }
+.fall-emoji { font-size:64rpx; }
+.fall-label { font-size:26rpx; color:#888; }
+.fall-opts { display:grid; grid-template-columns:1fr 1fr; gap:16rpx; width:100%; }
+.fall-opt { padding:24rpx; background:#F0F4FF; border-radius:20rpx; text-align:center; font-size:28rpx; font-weight:700; color:#333; border:3rpx solid #E3F2FD; }
+.fall-opt.correct { background:#4CAF50; color:#fff; border-color:#4CAF50; }
+.fall-opt.wrong   { background:#E53935; color:#fff; border-color:#E53935; }
+.fall-next { background:linear-gradient(135deg,#1976D2,#42A5F5); color:#fff; border-radius:50rpx; padding:20rpx 60rpx; font-size:28rpx; font-weight:700; }

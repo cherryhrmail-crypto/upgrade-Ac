@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 1 - 字母音值 | Oxford Phonics World</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-info h1 {
+            font-size: 2.2em;
+            color: #FF6B6B;
+            margin-bottom: 8px;
+        }
+        .header-info p {
+            color: #666;
+            font-size: 1.05em;
+        }
+        .header-badge {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .header-badge .level {
+            font-size: 1.5em;
+            font-weight: bold;
+            display: block;
+        }
+        .header-badge .desc {
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            gap: 10px;
+        }
+        .tab {
+            padding: 12px 25px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            color: #666;
+            border-radius: 8px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .tab.active {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+        .tab:hover:not(.active) {
+            background: #f0f0f0;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            color: #2c3e50;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #FF6B6B;
+        }
+        .letters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+        .letter-card {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid #FF6B6B;
+        }
+        .letter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+        }
+        .letter-card .letter {
+            font-size: 3.5em;
+            font-weight: bold;
+            color: #FF6B6B;
+            margin-bottom: 10px;
+        }
+        .letter-card .sound {
+            font-size: 1.3em;
+            color: #666;
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 5px 15px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .letter-card .keyword {
+            color: #333;
+            font-size: 0.95em;
+        }
+        .lesson-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .lesson-table th {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .lesson-table th:first-child { border-radius: 8px 0 0 0; }
+        .lesson-table th:last-child { border-radius: 0 8px 0 0; }
+        .lesson-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .lesson-table tr:hover td {
+            background: #fff5f5;
+        }
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .activity-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #FF6B6B;
+        }
+        .activity-card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .activity-card p {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        .word-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+        }
+        .word-card {
+            background: white;
+            border: 2px solid #FF6B6B;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .word-card:hover {
+            background: #FF6B6B;
+            color: white;
+            transform: scale(1.05);
+        }
+        .word-card .word {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        .word-card .phonetic {
+            font-size: 0.85em;
+            color: #999;
+            margin-top: 3px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .highlight {
+            background: linear-gradient(135deg, #FFD200, #F7971E);
+            color: #333;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .resources-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .resource-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .resource-item:hover {
+            transform: translateX(5px);
+        }
+        .resource-icon {
+            font-size: 1.8em;
+        }
+        .resource-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .printable-section {
+            background: #fff9f0;
+            border: 2px dashed #FF8E53;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .printable-section h3 {
+            color: #FF8E53;
+            margin-bottom: 15px;
+        }
+        .print-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .print-card {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .print-card:hover {
+            border-color: #FF6B6B;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-info">
+                <h1>🔤 Level 1 - 字母音值</h1>
+                <p>掌握26个字母的基础发音，建立字母-发音对应关系</p>
+            </div>
+            <div class="header-badge">
+                <span class="level">Level 1</span>
+                <span class="desc">5岁 · 第1学期</span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('letters')">🔤 字母卡片</button>
+            <button class="tab" onclick="showTab('schedule')">📅 课程安排</button>
+            <button class="tab" onclick="showTab('activities')">🎮 教学活动</button>
+            <button class="tab" onclick="showTab('words')">📖 词汇表</button>
+            <button class="tab" onclick="showTab('resources')">🛠️ 教学资源</button>
+        </div>
+
+        <div id="letters" class="tab-content active">
+            <div class="card">
+                <h2>26个字母音值卡片</h2>
+                <div class="letters-grid" id="letterCards"></div>
+            </div>
+        </div>
+
+        <div id="schedule" class="tab-content">
+            <div class="card">
+                <h2>26周课程安排表</h2>
+                <table class="lesson-table">
+                    <thead>
+                        <tr>
+                            <th>周次</th>
+                            <th>字母</th>
+                            <th>发音</th>
+                            <th>关键词</th>
+                            <th>示例词汇</th>
+                            <th>活动重点</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scheduleBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="activities" class="tab-content">
+            <div class="card">
+                <h2>教学活动设计</h2>
+                <div class="activity-grid">
+                    <div class="activity-card">
+                        <h3>🎵 字母歌热身</h3>
+                        <p>每节课开始播放字母歌，让学生跟着节奏唱跳，增强字母记忆。可以配合手势动作（如A做三角形、B画曲线）。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🔊 发音示范练习</h3>
+                        <p>教师展示嘴型，学生模仿。使用镜子让学生观察自己的嘴型变化。每个字母练习5-10次，确保发音准确。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🃏 闪卡快速认读</h3>
+                        <p>快速展示字母卡片，学生大声读出发音。速度逐渐加快，训练反应能力。可以分组竞赛。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🎨 字母描红涂色</h3>
+                        <p>提供字母描红练习纸，学生用手指或蜡笔描画。同时可以给字母相关的图片涂色（如A画苹果）。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🔍 字母找一找</h3>
+                        <p>在教室环境中寻找含有当周字母的物品，或从绘本中圈出目标字母。培养观察能力和字母识别力。</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🎤 我是小老师</h3>
+                        <p>让学生上台展示字母发音，当小老师教其他同学。增强自信心和表达能力。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="words" class="tab-content">
+            <div class="card">
+                <h2>Level 1 核心词汇表（约50词）</h2>
+                <div class="word-list" id="wordList"></div>
+            </div>
+        </div>
+
+        <div id="resources" class="tab-content">
+            <div class="card">
+                <h2>教学资源</h2>
+                <div class="resources-list">
+                    <div class="resource-item">
+                        <span class="resource-icon">🎵</span>
+                        <span class="resource-name">ABC Song - Dream English Kids</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎵</span>
+                        <span class="resource-name">Phonics Song 2 - KidsTV123</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎵</span>
+                        <span class="resource-name">Letter Sounds A to Z - Jack Hartmann</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎵</span>
+                        <span class="resource-name">The Phonics Song - Alphablocks</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎮</span>
+                        <span class="resource-name">Starfall ABCs - 在线互动</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎮</span>
+                        <span class="resource-name">ABCya! Letter Match - 在线游戏</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🎮</span>
+                        <span class="resource-name">Reading Eggs - Letter Games</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🖨️</span>
+                        <span class="resource-name">Letter Tracing Worksheets</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🖨️</span>
+                        <span class="resource-name">Flash Cards Printable</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🖨️</span>
+                        <span class="resource-name">Alphabet Coloring Pages</span>
+                    </div>
+                </div>
+
+                <div class="printable-section">
+                    <h3>🖨️ 可打印教具预览</h3>
+                    <div class="print-preview">
+                        <div class="print-card">
+                            <div style="font-size: 3em; color: #FF6B6B;">A</div>
+                            <div style="color: #666; margin-top: 10px;">Apple /æ/</div>
+                        </div>
+                        <div class="print-card">
+                            <div style="font-size: 3em; color: #FF8E53;">B</div>
+                            <div style="color: #666; margin-top: 10px;">Ball /b/</div>
+                        </div>
+                        <div class="print-card">
+                            <div style="font-size: 3em; color: #4ECDC4;">C</div>
+                            <div style="color: #666; margin-top: 10px;">Cat /k/</div>
+                        </div>
+                        <div class="print-card">
+                            <div style="font-size: 3em; color: #667eea;">D</div>
+                            <div style="color: #666; margin-top: 10px;">Dog /d/</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="opw-overview.html" class="back-link">🏠 返回概览</a>
+        </div>
+    </div>
+
+    <script>
+        const lettersData = [
+            { letter: 'A', sound: '/æ/', keyword: 'Apple', word: 'apple, ant, alligator' },
+            { letter: 'B', sound: '/b/', keyword: 'Ball', word: 'ball, bear, banana' },
+            { letter: 'C', sound: '/k/', keyword: 'Cat', word: 'cat, car, cake' },
+            { letter: 'D', sound: '/d/', keyword: 'Dog', word: 'dog, duck, door' },
+            { letter: 'E', sound: '/e/', keyword: 'Egg', word: 'egg, elephant, envelope' },
+            { letter: 'F', sound: '/f/', keyword: 'Fish', word: 'fish, frog, flower' },
+            { letter: 'G', sound: '/g/', keyword: 'Goat', word: 'goat, girl, grape' },
+            { letter: 'H', sound: '/h/', keyword: 'House', word: 'house, horse, hat' },
+            { letter: 'I', sound: '/ɪ/', keyword: 'Insect', word: 'insect, igloo, ink' },
+            { letter: 'J', sound: '/dʒ/', keyword: 'Jellyfish', word: 'jellyfish, jacket, juice' },
+            { letter: 'K', sound: '/k/', keyword: 'Kite', word: 'kite, key, king' },
+            { letter: 'L', sound: '/l/', keyword: 'Lion', word: 'lion, lamp, leaf' },
+            { letter: 'M', sound: '/m/', keyword: 'Mouse', word: 'mouse, monkey, moon' },
+            { letter: 'N', sound: '/n/', keyword: 'Nest', word: 'nest, nose, nut' },
+            { letter: 'O', sound: '/ɒ/', keyword: 'Octopus', word: 'octopus, orange, ostrich' },
+            { letter: 'P', sound: '/p/', keyword: 'Pig', word: 'pig, penguin, pear' },
+            { letter: 'Q', sound: '/kw/', keyword: 'Queen', word: 'queen, quilt, question' },
+            { letter: 'R', sound: '/r/', keyword: 'Rabbit', word: 'rabbit, robot, rose' },
+            { letter: 'S', sound: '/s/', keyword: 'Snake', word: 'snake, sun, star' },
+            { letter: 'T', sound: '/t/', keyword: 'Tiger', word: 'tiger, turtle, tree' },
+            { letter: 'U', sound: '/ʌ/', keyword: 'Umbrella', word: 'umbrella, under, up' },
+            { letter: 'V', sound: '/v/', keyword: 'Violin', word: 'violin, vest, van' },
+            { letter: 'W', sound: '/w/', keyword: 'Whale', word: 'whale, window, water' },
+            { letter: 'X', sound: '/ks/', keyword: 'Box', word: 'box, fox, six' },
+            { letter: 'Y', sound: '/j/', keyword: 'Yoyo', word: 'yoyo, yellow, yacht' },
+            { letter: 'Z', sound: '/z/', keyword: 'Zebra', word: 'zebra, zoo, zip' }
+        ];
+
+        const words = [
+            'apple', 'ant', 'ball', 'bear', 'banana', 'cat', 'car', 'cake',
+            'dog', 'duck', 'door', 'egg', 'elephant', 'envelope', 'fish',
+            'frog', 'flower', 'goat', 'girl', 'grape', 'house', 'horse',
+            'hat', 'insect', 'igloo', 'ink', 'jellyfish', 'jacket', 'juice',
+            'kite', 'key', 'king', 'lion', 'lamp', 'leaf', 'mouse', 'monkey',
+            'moon', 'nest', 'nose', 'nut', 'octopus', 'orange', 'ostrich',
+            'pig', 'penguin', 'pear', 'queen', 'quilt', 'rabbit', 'robot',
+            'rose', 'snake', 'sun', 'star', 'tiger', 'turtle', 'tree',
+            'umbrella', 'violin', 'vest', 'whale', 'window', 'water', 'box',
+            'fox', 'yoyo', 'yellow', 'zebra', 'zoo'
+        ];
+
+        // 生成字母卡片
+        function generateLetterCards() {
+            const container = document.getElementById('letterCards');
+            container.innerHTML = lettersData.map(item => `
+                <div class="letter-card" onclick="playSound('${item.letter}')">
+                    <div class="letter">${item.letter}</div>
+                    <div class="sound">${item.sound}</div>
+                    <div class="keyword">${item.keyword}</div>
+                </div>
+            `).join('');
+        }
+
+        // 生成课程表
+        function generateSchedule() {
+            const tbody = document.getElementById('scheduleBody');
+            tbody.innerHTML = lettersData.map((item, index) => `
+                <tr>
+                    <td>第 ${index + 1} 周</td>
+                    <td><strong>${item.letter}</strong></td>
+                    <td>${item.sound}</td>
+                    <td>${item.keyword}</td>
+                    <td>${item.word}</td>
+                    <td>发音练习 + 关键词记忆</td>
+                </tr>
+            `).join('');
+        }
+
+        // 生成词汇表
+        function generateWordList() {
+            const container = document.getElementById('wordList');
+            container.innerHTML = words.map(word => `
+                <div class="word-card" onclick="playSound('${word}')">
+                    <div class="word">${word}</div>
+                </div>
+            `).join('');
+        }
+
+        // 切换标签页
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // 播放发音（模拟）
+        function playSound(text) {
+            // 实际应用中可以使用 Web Speech API
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.8;
+                speechSynthesis.speak(utterance);
+            } else {
+                alert(`发音: ${text}`);
+            }
+        }
+
+        // 初始化
+        generateLetterCards();
+        generateSchedule();
+        generateWordList();
+    </script>
+</body>
+</html>

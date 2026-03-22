@@ -1,0 +1,23 @@
+/* pages/phonics/level/level.wxss */
+.page { background: #F5F7FA; padding-bottom: 60rpx; }
+.hero { padding: 50rpx 32rpx 40rpx; }
+.level-badge { display: inline-block; background: rgba(255,255,255,0.3); color: #fff; font-size: 24rpx; font-weight: 800; padding: 6rpx 20rpx; border-radius: 20rpx; margin-bottom: 16rpx; }
+.level-title { display: block; font-size: 48rpx; font-weight: 900; color: #fff; margin-bottom: 10rpx; }
+.level-desc { display: block; font-size: 26rpx; color: rgba(255,255,255,0.9); margin-bottom: 20rpx; }
+.level-meta { display: flex; gap: 12rpx; flex-wrap: wrap; }
+.meta-pill { background: rgba(255,255,255,0.25); color: #fff; font-size: 24rpx; font-weight: 700; padding: 8rpx 20rpx; border-radius: 20rpx; }
+/* Units */
+.units-section { padding: 24rpx; }
+.sec-title { font-size: 30rpx; font-weight: 800; color: #222; margin-bottom: 20rpx; }
+.unit-card { background: #fff; border-radius: 20rpx; margin-bottom: 16rpx; overflow: hidden; box-shadow: 0 4rpx 14rpx rgba(0,0,0,0.06); }
+.unit-header { display: flex; align-items: center; gap: 20rpx; padding: 24rpx 28rpx; }
+.unit-num { width: 52rpx; height: 52rpx; border-radius: 50%; color: #fff; font-size: 26rpx; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.unit-name { flex: 1; font-size: 28rpx; font-weight: 700; color: #333; }
+.unit-toggle { font-size: 22rpx; color: #bbb; }
+.sounds-row { display: flex; flex-wrap: wrap; gap: 12rpx; padding: 0 28rpx 16rpx; }
+.sound-chip { border: 2rpx solid; border-radius: 20rpx; padding: 10rpx 20rpx; font-size: 26rpx; font-weight: 700; background: #F8FBFF; }
+.words-row { display: flex; flex-wrap: wrap; gap: 12rpx; padding: 0 28rpx 24rpx; }
+.word-chip { background: #F5F7FA; border-radius: 16rpx; padding: 14rpx 24rpx; }
+.wc-word { font-size: 28rpx; font-weight: 700; color: #333; }
+/* Practice Btn */
+.practice-btn { margin: 0 32rpx; padding: 30rpx; border-radius: 50rpx; text-align: center; color: #fff; font-size: 32rpx; font-weight: 800; box-shadow: 0 8rpx 24rpx rgba(0,0,0,0.2); }
