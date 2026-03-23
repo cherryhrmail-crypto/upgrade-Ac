@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>4-5岁幼儿英语教学材料全套</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f0f4ff;color:#333;line-height:1.8}
+/* HERO */
+.hero{background:linear-gradient(135deg,#667eea,#764ba2,#f093fb);color:#fff;padding:60px 32px 48px;text-align:center}
+.hero h1{font-size:2.4rem;font-weight:900;letter-spacing:3px;margin-bottom:12px;text-shadow:0 2px 8px rgba(0,0,0,.2)}
+.hero .sub{font-size:1.05rem;opacity:.92;margin-bottom:24px}
+.hero .notice{background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.5);border-radius:14px;padding:14px 22px;max-width:680px;margin:0 auto;font-size:.92rem;line-height:1.9}
+.hero .notice b{font-size:1rem}
+
+/* NAV TABS */
+.tabs{background:#fff;box-shadow:0 3px 12px rgba(0,0,0,.08);position:sticky;top:0;z-index:200;padding:0 24px}
+.tab-list{display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.tab-list::-webkit-scrollbar{display:none}
+.tab-btn{padding:16px 20px;border:none;background:none;cursor:pointer;font-size:.9rem;font-weight:600;color:#888;border-bottom:3px solid transparent;white-space:nowrap;transition:.2s}
+.tab-btn.active,.tab-btn:hover{color:#764ba2;border-bottom-color:#764ba2}
+
+/* SECTIONS */
+.section{display:none;max-width:1100px;margin:0 auto;padding:36px 20px 80px}
+.section.active{display:block}
+
+/* SECTION TITLE */
+.sec-title{font-size:1.6rem;font-weight:800;color:#333;margin-bottom:8px}
+.sec-desc{color:#666;font-size:.95rem;margin-bottom:32px;line-height:1.8}
+
+/* ═══════════════════════════════
+   SECTION 1: 教材总览
+═══════════════════════════════ */
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-bottom:32px}
+.ov-card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 3px 12px rgba(0,0,0,.06);border-left:5px solid}
+.ov-card h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
+.ov-card p{font-size:.88rem;color:#666;line-height:1.8}
+.ov-card.c1{border-color:#f5576c}
+.ov-card.c2{border-color:#4caf50}
+.ov-card.c3{border-color:#2196f3}
+.ov-card.c4{border-color:#ff9800}
+
+/* ═══════════════════════════════
+   SECTION 2: 词汇卡片
+═══════════════════════════════ */
+.unit-selector{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.unit-btn{padding:8px 18px;border-radius:20px;border:2px solid #ddd;background:#fff;cursor:pointer;font-size:.88rem;font-weight:600;transition:.15s}
+.unit-btn.sel{background:#764ba2;color:#fff;border-color:#764ba2}
+
+.flashcard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+.fc{border-radius:16px;padding:20px 12px;text-align:center;background:#fff;box-shadow:0 3px 10px rgba(0,0,0,.08);cursor:pointer;transition:.2s;position:relative;overflow:hidden}
+.fc:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.fc .fc-emoji{font-size:2.8rem;margin-bottom:6px;display:block}
+.fc .fc-en{font-size:1.1rem;font-weight:800;color:#333;margin-bottom:4px}
+.fc .fc-ph{font-size:.78rem;color:#888;font-style:italic;margin-bottom:4px}
+.fc .fc-cn{font-size:.82rem;color:#aaa}
+.fc .fc-ex{font-size:.78rem;color:#764ba2;margin-top:8px;font-weight:600}
+
+/* print cards */
+@media print{
+  .tabs,.hero,.sec-title,.sec-desc,.unit-selector,.no-print{display:none!important}
+  .section{display:block!important;padding:0}
+  .flashcard-grid{grid-template-columns:repeat(4,1fr);gap:8px}
+  .fc{border:1.5px solid #ddd;break-inside:avoid;box-shadow:none}
+  body{background:#fff}
+}
+
+/* ═══════════════════════════════
+   SECTION 3: 歌曲资源
+═══════════════════════════════ */
+.song-unit{background:#fff;border-radius:18px;margin-bottom:28px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.06)}
+.song-unit-head{padding:18px 24px;display:flex;align-items:center;gap:16px}
+.song-unit-num{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:800;color:#fff;flex-shrink:0}
+.song-unit-info h3{font-size:1.05rem;font-weight:700}
+.song-unit-info p{font-size:.82rem;color:#888}
+.song-list{padding:4px 24px 20px}
+.song-item{display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #f5f5f5}
+.song-item:last-child{border-bottom:none}
+.song-thumb{width:88px;height:60px;border-radius:10px;object-fit:cover;flex-shrink:0;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+.song-info{flex:1}
+.song-title{font-weight:700;font-size:.95rem;margin-bottom:4px}
+.song-channel{font-size:.78rem;color:#888;margin-bottom:6px}
+.song-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.song-tag{font-size:.72rem;background:#f3f0ff;color:#764ba2;border-radius:10px;padding:2px 9px}
+.song-links{display:flex;gap:8px;flex-wrap:wrap}
+.song-link{display:inline-flex;align-items:center;gap:5px;font-size:.8rem;font-weight:600;padding:5px 12px;border-radius:8px;text-decoration:none;transition:.15s}
+.song-link.yt{background:#ff0000;color:#fff}
+.song-link.yt:hover{background:#cc0000}
+.song-link.yku{background:#00a0e9;color:#fff}
+.song-link.yku:hover{background:#0080c0}
+.song-link.bili{background:#fb7299;color:#fff}
+.song-link.bili:hover{background:#d45580}
+.song-usage{background:#f8f0ff;border-radius:10px;padding:10px 14px;font-size:.82rem;color:#5a3d7a;margin-top:8px;line-height:1.7}
+
+/* ═══════════════════════════════
+   SECTION 4: 游戏资源
+═══════════════════════════════ */
+.game-res-card{background:#fff;border-radius:18px;margin-bottom:24px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.06)}
+.game-res-head{padding:18px 24px;background:linear-gradient(135deg,#f5576c15,#764ba215)}
+.game-res-head h3{font-size:1.05rem;font-weight:800;color:#333;margin-bottom:4px}
+.game-res-head p{font-size:.82rem;color:#888}
+.game-res-body{padding:12px 24px 20px}
+.game-platform-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.gp-card{flex:1;min-width:240px;border:2px solid #f0f0f0;border-radius:14px;padding:14px 18px}
+.gp-card h4{font-size:.92rem;font-weight:700;margin-bottom:8px;color:#555}
+.gp-link{display:block;font-size:.85rem;color:#764ba2;text-decoration:none;padding:3px 0;border-bottom:1px dashed #e8e0f0}
+.gp-link:last-child{border-bottom:none}
+.gp-link:hover{color:#f5576c}
+.game-diy-steps{background:#f8f9ff;border-radius:12px;padding:14px 18px;margin-top:8px}
+.game-diy-steps h4{font-size:.88rem;font-weight:700;color:#444;margin-bottom:8px}
+.game-diy-steps ol{padding-left:18px;font-size:.85rem;line-height:1.9;color:#555}
+
+/* ═══════════════════════════════
+   SECTION 5: 可打印教具
+═══════════════════════════════ */
+.printable-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-bottom:24px}
+.pt-card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 3px 12px rgba(0,0,0,.06);border-top:4px solid}
+.pt-card.t1{border-color:#f5576c}
+.pt-card.t2{border-color:#4caf50}
+.pt-card.t3{border-color:#2196f3}
+.pt-card.t4{border-color:#ff9800}
+.pt-card.t5{border-color:#9c27b0}
+.pt-card.t6{border-color:#009688}
+.pt-card h3{font-size:1rem;font-weight:700;margin-bottom:6px}
+.pt-card p{font-size:.82rem;color:#666;line-height:1.8;margin-bottom:12px}
+.print-btn{display:inline-block;padding:7px 18px;background:#764ba2;color:#fff;border-radius:10px;font-size:.82rem;font-weight:600;cursor:pointer;border:none;transition:.15s}
+.print-btn:hover{background:#5a3d7a}
+
+/* ═══════════════════════════════
+   SECTION 6: 在线工具
+═══════════════════════════════ */
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.tool-card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 3px 12px rgba(0,0,0,.06)}
+.tool-card .tool-icon{font-size:2.4rem;margin-bottom:10px}
+.tool-card h3{font-size:1rem;font-weight:700;margin-bottom:6px}
+.tool-card p{font-size:.82rem;color:#666;line-height:1.8;margin-bottom:12px}
+.tool-link{display:inline-block;padding:7px 16px;border-radius:10px;font-size:.82rem;font-weight:600;text-decoration:none;color:#fff;background:#667eea;transition:.15s}
+.tool-link:hover{background:#5a6fd6}
+.tool-free{display:inline-block;font-size:.72rem;background:#e8f5e9;color:#2e7d32;border-radius:8px;padding:2px 8px;margin-left:8px;vertical-align:middle}
+.tool-paid{display:inline-block;font-size:.72rem;background:#fff3e0;color:#e65100;border-radius:8px;padding:2px 8px;margin-left:8px;vertical-align:middle}
+
+/* BADGE */
+.badge{display:inline-block;font-size:.72rem;border-radius:10px;padding:2px 10px;font-weight:700}
+.badge-free{background:#e8f5e9;color:#2e7d32}
+.badge-china{background:#fff3e0;color:#e65100}
+.badge-global{background:#e3f2fd;color:#1565c0}
+
+/* FOOTER */
+.footer-note{background:#fff;border-radius:14px;padding:20px 24px;margin-top:32px;font-size:.85rem;color:#888;line-height:1.9;border-left:4px solid #764ba2}
+
+@media(max-width:640px){
+  .hero h1{font-size:1.6rem}
+  .tab-btn{padding:12px 14px;font-size:.82rem}
+  .song-item{flex-direction:column}
+  .song-thumb{width:100%;height:auto;min-height:50px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>📚 4-5岁幼儿英语·全套教学材料</h1>
+  <p class="sub">词汇卡片 · 歌曲视频资源 · 游戏教学资源 · 可打印教具 · 在线工具推荐</p>
+  <div class="notice">
+    <b>⚠️ 关于"歌曲影片"与"游戏影片"的说明</b><br>
+    AI 无法生成视频文件，但可以为你精选真实可用的免费视频资源（含 YouTube / 优酷 / B站直链）。<br>
+    本文件提供：① 可打印词汇卡片 ② 每单元精选歌曲+视频链接（附使用说明）③ 游戏演示视频+讲解 ④ 完整教案
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab-list">
+    <button class="tab-btn active" onclick="showTab('overview')">📋 教材概览</button>
+    <button class="tab-btn" onclick="showTab('vocab')">🃏 词汇卡片</button>
+    <button class="tab-btn" onclick="showTab('songs')">🎵 歌曲资源</button>
+    <button class="tab-btn" onclick="showTab('games')">🎮 游戏资源</button>
+    <button class="tab-btn" onclick="showTab('printables')">🖨️ 可打印教具</button>
+    <button class="tab-btn" onclick="showTab('tools')">🛠️ 在线工具</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 1: 教材概览
+══════════════════════════════════════════════ -->
+<div id="tab-overview" class="section active">
+  <div class="sec-title">教材体系概览</div>
+  <p class="sec-desc">本套教材涵盖12个主题单元，24课时，专为4-5岁儿童设计，采用TPR全身反应法+游戏化教学，无纸笔考试。</p>
+
+  <div class="overview-grid">
+    <div class="ov-card c1">
+      <h3>📖 教材规模</h3>
+      <p>12个单元 · 24课时 · 36个游戏 · 约100个核心词汇 · 20个核心句型 · 期末家长展示</p>
+    </div>
+    <div class="ov-card c2">
+      <h3>🎵 配套歌曲</h3>
+      <p>每单元1-2首精选儿歌，全部来自 Super Simple Songs、Dream English、Cocomelon 等知名频道，免费可用</p>
+    </div>
+    <div class="ov-card c3">
+      <h3>🎮 游戏设计</h3>
+      <p>每单元3个渐进式游戏（基础版→升级版→进阶版），每个游戏均有教学演示视频参考</p>
+    </div>
+    <div class="ov-card c4">
+      <h3>🖨️ 可打印教具</h3>
+      <p>词汇卡片（A5打印）、游戏骰子、句型提示卡、Progress Star贴纸板、单元评估表</p>
+    </div>
+  </div>
+
+  <table style="width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.06);font-size:.88rem">
+    <thead>
+      <tr style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff">
+        <th style="padding:14px 18px;text-align:left">单元</th>
+        <th style="padding:14px;text-align:left">主题</th>
+        <th style="padding:14px;text-align:left">核心词汇数</th>
+        <th style="padding:14px;text-align:left">推荐歌曲</th>
+        <th style="padding:14px;text-align:left">代表游戏</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:12px 18px;font-weight:700">U1</td><td style="padding:12px">打招呼与道别</td><td style="padding:12px">6词</td><td style="padding:12px">Hello Song · Goodbye Song</td><td style="padding:12px">Greeting Circle</td></tr>
+      <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:12px 18px;font-weight:700">U2</td><td style="padding:12px">课堂指令</td><td style="padding:12px">8词</td><td style="padding:12px">If You're Happy · Clean Up</td><td style="padding:12px">Simon Says</td></tr>
+      <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:12px 18px;font-weight:700">U3</td><td style="padding:12px">认识朋友</td><td style="padding:12px">8词</td><td style="padding:12px">What's Your Name?</td><td style="padding:12px">Name Tag Game</td></tr>
+      <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:12px 18px;font-weight:700">U4</td><td style="padding:12px">情绪感受</td><td style="padding:12px">6词</td><td style="padding:12px">If You're Happy and You Know It</td><td style="padding:12px">Emotion Mirror</td></tr>
+      <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:12px 18px;font-weight:700">U5</td><td style="padding:12px">颜色</td><td style="padding:12px">9词</td><td style="padding:12px">Colors Song · Rainbow Song</td><td style="padding:12px">Color Hunt</td></tr>
+      <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:12px 18px;font-weight:700">U6</td><td style="padding:12px">数字1-10</td><td style="padding:12px">10词</td><td style="padding:12px">Ten Little Fingers · Count to 10</td><td style="padding:12px">Number Jump</td></tr>
+      <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:12px 18px;font-weight:700">U7</td><td style="padding:12px">动物</td><td style="padding:12px">10词</td><td style="padding:12px">Old MacDonald · Animal Sounds</td><td style="padding:12px">Animal Charades</td></tr>
+      <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:12px 18px;font-weight:700">U8</td><td style="padding:12px">家人</td><td style="padding:12px">8词</td><td style="padding:12px">Family Song · Finger Family</td><td style="padding:12px">Family Photo</td></tr>
+      <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:12px 18px;font-weight:700">U9</td><td style="padding:12px">身体部位</td><td style="padding:12px">10词</td><td style="padding:12px">Head Shoulders Knees Toes</td><td style="padding:12px">Body Parts Bingo</td></tr>
+      <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:12px 18px;font-weight:700">U10</td><td style="padding:12px">食物</td><td style="padding:12px">8词</td><td style="padding:12px">Do You Like Broccoli Ice Cream?</td><td style="padding:12px">Food Shop</td></tr>
+      <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:12px 18px;font-weight:700">U11</td><td style="padding:12px">玩具与游戏</td><td style="padding:12px">8词</td><td style="padding:12px">The Toy Song · Let's Play</td><td style="padding:12px">Toy Show &amp; Tell</td></tr>
+      <tr style="background:#fafafa"><td style="padding:12px 18px;font-weight:700">U12</td><td style="padding:12px">综合复习</td><td style="padding:12px">全部词汇</td><td style="padding:12px">综合回顾</td><td style="padding:12px">期末展示</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 2: 词汇卡片
+══════════════════════════════════════════════ -->
+<div id="tab-vocab" class="section">
+  <div class="sec-title">词汇卡片（可打印）</div>
+  <p class="sec-desc">选择单元后，点击卡片可翻转查看例句。打印时请使用浏览器打印功能（Ctrl/Cmd+P），建议A5纸双面打印。</p>
+
+  <div class="unit-selector">
+    <button class="unit-btn sel" onclick="showUnit('u1',this)">U1 打招呼</button>
+    <button class="unit-btn" onclick="showUnit('u2',this)">U2 课堂指令</button>
+    <button class="unit-btn" onclick="showUnit('u3',this)">U3 认识朋友</button>
+    <button class="unit-btn" onclick="showUnit('u4',this)">U4 情绪</button>
+    <button class="unit-btn" onclick="showUnit('u5',this)">U5 颜色</button>
+    <button class="unit-btn" onclick="showUnit('u6',this)">U6 数字</button>
+    <button class="unit-btn" onclick="showUnit('u7',this)">U7 动物</button>
+    <button class="unit-btn" onclick="showUnit('u8',this)">U8 家人</button>
+    <button class="unit-btn" onclick="showUnit('u9',this)">U9 身体</button>
+    <button class="unit-btn" onclick="showUnit('u10',this)">U10 食物</button>
+    <button class="unit-btn" onclick="showUnit('u11',this)">U11 玩具</button>
+    <button class="unit-btn" onclick="showUnit('u12',this)">U12 复习</button>
+  </div>
+
+  <!-- U1 -->
+  <div id="vc-u1" class="flashcard-grid" style="display:grid">
+    <div class="fc" style="border-top:4px solid #f5a623" onclick="flipCard(this)"><span class="fc-emoji">👋</span><div class="fc-en">Hello</div><div class="fc-ph">/həˈloʊ/</div><div class="fc-cn">你好</div><div class="fc-ex" style="display:none">Hello! I'm Emma. 👋</div></div>
+    <div class="fc" style="border-top:4px solid #f5a623" onclick="flipCard(this)"><span class="fc-emoji">👋</span><div class="fc-en">Hi</div><div class="fc-ph">/haɪ/</div><div class="fc-cn">嗨</div><div class="fc-ex" style="display:none">Hi! How are you? 😊</div></div>
+    <div class="fc" style="border-top:4px solid #f5a623" onclick="flipCard(this)"><span class="fc-emoji">👋</span><div class="fc-en">Goodbye</div><div class="fc-ph">/ˌɡʊdˈbaɪ/</div><div class="fc-cn">再见</div><div class="fc-ex" style="display:none">Goodbye! See you tomorrow! 🌟</div></div>
+    <div class="fc" style="border-top:4px solid #f5a623" onclick="flipCard(this)"><span class="fc-emoji">👋</span><div class="fc-en">Bye-bye</div><div class="fc-ph">/ˌbaɪˈbaɪ/</div><div class="fc-cn">拜拜</div><div class="fc-ex" style="display:none">Bye-bye! Have a good day! 🎉</div></div>
+    <div class="fc" style="border-top:4px solid #f5a623" onclick="flipCard(this)"><span class="fc-emoji">🌅</span><div class="fc-en">Good morning</div><div class="fc-ph">/ɡʊd ˈmɔːrnɪŋ/</div><div class="fc-cn">早上好</div><div class="fc-ex" style="display:none">Good morning, teacher! ☀️</div></div>
+    <div class="fc" style="border-top:4px solid #f5a623" onclick="flipCard(this)"><span class="fc-emoji">🌙</span><div class="fc-en">Good night</div><div class="fc-ph">/ɡʊd naɪt/</div><div class="fc-cn">晚安</div><div class="fc-ex" style="display:none">Good night! Sweet dreams! 🌙</div></div>
+  </div>
+
+  <!-- U2 -->
+  <div id="vc-u2" class="flashcard-grid" style="display:none">
+    <div class="fc" style="border-top:4px solid #4caf50" onclick="flipCard(this)"><span class="fc-emoji">🪑</span><div class="fc-en">Sit down</div><div class="fc-ph">/sɪt daʊn/</div><div class="fc-cn">坐下</div><div class="fc-ex" style="display:none">Please sit down. 🪑</div></div>
+    <div class="fc" style="border-top:4px solid #4caf50" onclick="flipCard(this)"><span class="fc-emoji">⬆️</span><div class="fc-en">Stand up</div><div class="fc-ph">/stænd ʌp/</div><div class="fc-cn">站起来</div><div class="fc-ex" style="display:none">Stand up, please! ⬆️</div></div>
+    <div class="fc" style="border-top:4px solid #4caf50" onclick="flipCard(this)"><span class="fc-emoji">🤫</span><div class="fc-en">Listen</div><div class="fc-ph">/ˈlɪsən/</div><div class="fc-cn">听</div><div class="fc-ex" style="display:none">Listen carefully! 👂</div></div>
+    <div class="fc" style="border-top:4px solid #4caf50" onclick="flipCard(this)"><span class="fc-emoji">👀</span><div class="fc-en">Look</div><div class="fc-ph">/lʊk/</div><div class="fc-cn">看</div><div class="fc-ex" style="display:none">Look at the board! 👀</div></div>
+    <div class="fc" style="border-top:4px solid #4caf50" onclick="flipCard(this)"><span class="fc-emoji">🤚</span><div class="fc-en">Stop</div><div class="fc-ph">/stɒp/</div><div class="fc-cn">停</div><div class="fc-ex" style="display:none">Stop! Freeze! 🛑</div></div>
+    <div class="fc" style="border-top:4px solid #4caf50" onclick="flipCard(this)"><span class="fc-emoji">🏃</span><div class="fc-en">Go</div><div class="fc-ph">/ɡoʊ/</div><div class="fc-cn">走/开始</div><div class="fc-ex" style="display:none">Ready? Go! 🏃</div></div>
+    <div class="fc" style="border-top:4px solid #4caf50" onclick="flipCard(this)"><span class="fc-emoji">👏</span><div class="fc-en">Clap</div><div class="fc-ph">/klæp/</div><div class="fc-cn">拍手</div><div class="fc-ex" style="display:none">Clap your hands! 👏</div></div>
+    <div class="fc" style="border-top:4px solid #4caf50" onclick="flipCard(this)"><span class="fc-emoji">🦶</span><div class="fc-en">Jump</div><div class="fc-ph">/dʒʌmp/</div><div class="fc-cn">跳</div><div class="fc-ex" style="display:none">Jump! Jump! Jump! 🦶</div></div>
+  </div>
+
+  <!-- U3 -->
+  <div id="vc-u3" class="flashcard-grid" style="display:none">
+    <div class="fc" style="border-top:4px solid #2196f3" onclick="flipCard(this)"><span class="fc-emoji">👦</span><div class="fc-en">Boy</div><div class="fc-ph">/bɔɪ/</div><div class="fc-cn">男孩</div><div class="fc-ex" style="display:none">He is a boy. 👦</div></div>
+    <div class="fc" style="border-top:4px solid #2196f3" onclick="flipCard(this)"><span class="fc-emoji">👧</span><div class="fc-en">Girl</div><div class="fc-ph">/ɡɜːrl/</div><div class="fc-cn">女孩</div><div class="fc-ex" style="display:none">She is a girl. 👧</div></div>
+    <div class="fc" style="border-top:4px solid #2196f3" onclick="flipCard(this)"><span class="fc-emoji">👤</span><div class="fc-en">Name</div><div class="fc-ph">/neɪm/</div><div class="fc-cn">名字</div><div class="fc-ex" style="display:none">My name is Lily. 👤</div></div>
+    <div class="fc" style="border-top:4px solid #2196f3" onclick="flipCard(this)"><span class="fc-emoji">🤝</span><div class="fc-en">Friend</div><div class="fc-ph">/frend/</div><div class="fc-cn">朋友</div><div class="fc-ex" style="display:none">You are my friend! 🤝</div></div>
+    <div class="fc" style="border-top:4px solid #2196f3" onclick="flipCard(this)"><span class="fc-emoji">🙏</span><div class="fc-en">Please</div><div class="fc-ph">/pliːz/</div><div class="fc-cn">请</div><div class="fc-ex" style="display:none">Please help me. 🙏</div></div>
+    <div class="fc" style="border-top:4px solid #2196f3" onclick="flipCard(this)"><span class="fc-emoji">🙌</span><div class="fc-en">Thank you</div><div class="fc-ph">/θæŋk juː/</div><div class="fc-cn">谢谢</div><div class="fc-ex" style="display:none">Thank you so much! 🙌</div></div>
+    <div class="fc" style="border-top:4px solid #2196f3" onclick="flipCard(this)"><span class="fc-emoji">😊</span><div class="fc-en">Sorry</div><div class="fc-ph">/ˈsɒri/</div><div class="fc-cn">对不起</div><div class="fc-ex" style="display:none">I'm sorry. 😊</div></div>
+    <div class="fc" style="border-top:4px solid #2196f3" onclick="flipCard(this)"><span class="fc-emoji">👍</span><div class="fc-en">OK</div><div class="fc-ph">/ˌoʊˈkeɪ/</div><div class="fc-cn">好的</div><div class="fc-ex" style="display:none">OK! No problem! 👍</div></div>
+  </div>
+
+  <!-- U4 -->
+  <div id="vc-u4" class="flashcard-grid" style="display:none">
+    <div class="fc" style="border-top:4px solid #ff7043" onclick="flipCard(this)"><span class="fc-emoji">😊</span><div class="fc-en">Happy</div><div class="fc-ph">/ˈhæpi/</div><div class="fc-cn">开心</div><div class="fc-ex" style="display:none">I'm so happy today! 😊</div></div>
+    <div class="fc" style="border-top:4px solid #ff7043" onclick="flipCard(this)"><span class="fc-emoji">😢</span><div class="fc-en">Sad</div><div class="fc-ph">/sæd/</div><div class="fc-cn">难过</div><div class="fc-ex" style="display:none">Don't be sad. 😢</div></div>
+    <div class="fc" style="border-top:4px solid #ff7043" onclick="flipCard(this)"><span class="fc-emoji">😠</span><div class="fc-en">Angry</div><div class="fc-ph">/ˈæŋɡri/</div><div class="fc-cn">生气</div><div class="fc-ex" style="display:none">Are you angry? 😠</div></div>
+    <div class="fc" style="border-top:4px solid #ff7043" onclick="flipCard(this)"><span class="fc-emoji">😱</span><div class="fc-en">Scared</div><div class="fc-ph">/skerd/</div><div class="fc-cn">害怕</div><div class="fc-ex" style="display:none">I'm scared! 😱</div></div>
+    <div class="fc" style="border-top:4px solid #ff7043" onclick="flipCard(this)"><span class="fc-emoji">😴</span><div class="fc-en">Tired</div><div class="fc-ph">/ˈtaɪrd/</div><div class="fc-cn">累了</div><div class="fc-ex" style="display:none">I'm very tired. 😴</div></div>
+    <div class="fc" style="border-top:4px solid #ff7043" onclick="flipCard(this)"><span class="fc-emoji">😮</span><div class="fc-en">Surprised</div><div class="fc-ph">/sərˈpraɪzd/</div><div class="fc-cn">惊讶</div><div class="fc-ex" style="display:none">I'm surprised! 😮</div></div>
+  </div>
+
+  <!-- U5 -->
+  <div id="vc-u5" class="flashcard-grid" style="display:none">
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">🔴</span><div class="fc-en">Red</div><div class="fc-ph">/red/</div><div class="fc-cn">红色</div><div class="fc-ex" style="display:none">The apple is red. 🍎</div></div>
+    <div class="fc" style="border-top:4px solid #2196f3" onclick="flipCard(this)"><span class="fc-emoji">🔵</span><div class="fc-en">Blue</div><div class="fc-ph">/bluː/</div><div class="fc-cn">蓝色</div><div class="fc-ex" style="display:none">The sky is blue. 🌈</div></div>
+    <div class="fc" style="border-top:4px solid #4caf50" onclick="flipCard(this)"><span class="fc-emoji">🟢</span><div class="fc-en">Green</div><div class="fc-ph">/ɡriːn/</div><div class="fc-cn">绿色</div><div class="fc-ex" style="display:none">The frog is green. 🐸</div></div>
+    <div class="fc" style="border-top:4px solid #ff9800" onclick="flipCard(this)"><span class="fc-emoji">🟠</span><div class="fc-en">Orange</div><div class="fc-ph">/ˈɔːrɪndʒ/</div><div class="fc-cn">橙色</div><div class="fc-ex" style="display:none">The orange is orange! 🍊</div></div>
+    <div class="fc" style="border-top:4px solid #ffeb3b" onclick="flipCard(this)"><span class="fc-emoji">🟡</span><div class="fc-en">Yellow</div><div class="fc-ph">/ˈjeloʊ/</div><div class="fc-cn">黄色</div><div class="fc-ex" style="display:none">The sun is yellow. ☀️</div></div>
+    <div class="fc" style="border-top:4px solid #9c27b0" onclick="flipCard(this)"><span class="fc-emoji">🟣</span><div class="fc-en">Purple</div><div class="fc-ph">/ˈpɜːrpl/</div><div class="fc-cn">紫色</div><div class="fc-ex" style="display:none">Grapes are purple. 🍇</div></div>
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">🩷</span><div class="fc-en">Pink</div><div class="fc-ph">/pɪŋk/</div><div class="fc-cn">粉色</div><div class="fc-ex" style="display:none">The flower is pink. 🌸</div></div>
+    <div class="fc" style="border-top:4px solid #795548" onclick="flipCard(this)"><span class="fc-emoji">🟤</span><div class="fc-en">Brown</div><div class="fc-ph">/braʊn/</div><div class="fc-cn">棕色</div><div class="fc-ex" style="display:none">The bear is brown. 🐻</div></div>
+    <div class="fc" style="border-top:4px solid #333" onclick="flipCard(this)"><span class="fc-emoji">⚪</span><div class="fc-en">White</div><div class="fc-ph">/waɪt/</div><div class="fc-cn">白色</div><div class="fc-ex" style="display:none">The cloud is white. ☁️</div></div>
+  </div>
+
+  <!-- U6 -->
+  <div id="vc-u6" class="flashcard-grid" style="display:none">
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">1️⃣</span><div class="fc-en">One</div><div class="fc-ph">/wʌn/</div><div class="fc-cn">一</div><div class="fc-ex" style="display:none">One sun in the sky! ☀️</div></div>
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">2️⃣</span><div class="fc-en">Two</div><div class="fc-ph">/tuː/</div><div class="fc-cn">二</div><div class="fc-ex" style="display:none">Two eyes on my face! 👀</div></div>
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">3️⃣</span><div class="fc-en">Three</div><div class="fc-ph">/θriː/</div><div class="fc-cn">三</div><div class="fc-ex" style="display:none">Three little pigs! 🐷</div></div>
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">4️⃣</span><div class="fc-en">Four</div><div class="fc-ph">/fɔːr/</div><div class="fc-cn">四</div><div class="fc-ex" style="display:none">Four wheels on a car! 🚗</div></div>
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">5️⃣</span><div class="fc-en">Five</div><div class="fc-ph">/faɪv/</div><div class="fc-cn">五</div><div class="fc-ex" style="display:none">Five fingers! ✋</div></div>
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">6️⃣</span><div class="fc-en">Six</div><div class="fc-ph">/sɪks/</div><div class="fc-cn">六</div><div class="fc-ex" style="display:none">Six legs on a bug! 🐛</div></div>
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">7️⃣</span><div class="fc-en">Seven</div><div class="fc-ph">/ˈsevn/</div><div class="fc-cn">七</div><div class="fc-ex" style="display:none">Seven colors! 🌈</div></div>
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">8️⃣</span><div class="fc-en">Eight</div><div class="fc-ph">/eɪt/</div><div class="fc-cn">八</div><div class="fc-ex" style="display:none">Eight legs on a spider! 🕷️</div></div>
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">9️⃣</span><div class="fc-en">Nine</div><div class="fc-ph">/naɪn/</div><div class="fc-cn">九</div><div class="fc-ex" style="display:none">Nine planets! 🌍</div></div>
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">🔟</span><div class="fc-en">Ten</div><div class="fc-ph">/ten/</div><div class="fc-cn">十</div><div class="fc-ex" style="display:none">Ten fingers, ten toes! 🙌</div></div>
+  </div>
+
+  <!-- U7 -->
+  <div id="vc-u7" class="flashcard-grid" style="display:none">
+    <div class="fc" style="border-top:4px solid #009688" onclick="flipCard(this)"><span class="fc-emoji">🐶</span><div class="fc-en">Dog</div><div class="fc-ph">/dɒɡ/</div><div class="fc-cn">狗</div><div class="fc-ex" style="display:none">The dog says woof! 🐶</div></div>
+    <div class="fc" style="border-top:4px solid #009688" onclick="flipCard(this)"><span class="fc-emoji">🐱</span><div class="fc-en">Cat</div><div class="fc-ph">/kæt/</div><div class="fc-cn">猫</div><div class="fc-ex" style="display:none">The cat says meow! 🐱</div></div>
+    <div class="fc" style="border-top:4px solid #009688" onclick="flipCard(this)"><span class="fc-emoji">🐦</span><div class="fc-en">Bird</div><div class="fc-ph">/bɜːrd/</div><div class="fc-cn">鸟</div><div class="fc-ex" style="display:none">The bird can fly! 🐦</div></div>
+    <div class="fc" style="border-top:4px solid #009688" onclick="flipCard(this)"><span class="fc-emoji">🐠</span><div class="fc-en">Fish</div><div class="fc-ph">/fɪʃ/</div><div class="fc-cn">鱼</div><div class="fc-ex" style="display:none">The fish lives in water. 🐠</div></div>
+    <div class="fc" style="border-top:4px solid #009688" onclick="flipCard(this)"><span class="fc-emoji">🐘</span><div class="fc-en">Elephant</div><div class="fc-ph">/ˈelɪfənt/</div><div class="fc-cn">大象</div><div class="fc-ex" style="display:none">The elephant is big! 🐘</div></div>
+    <div class="fc" style="border-top:4px solid #009688" onclick="flipCard(this)"><span class="fc-emoji">🦁</span><div class="fc-en">Lion</div><div class="fc-ph">/ˈlaɪən/</div><div class="fc-cn">狮子</div><div class="fc-ex" style="display:none">The lion is strong! 🦁</div></div>
+    <div class="fc" style="border-top:4px solid #009688" onclick="flipCard(this)"><span class="fc-emoji">🐸</span><div class="fc-en">Frog</div><div class="fc-ph">/frɒɡ/</div><div class="fc-cn">青蛙</div><div class="fc-ex" style="display:none">The frog can jump! 🐸</div></div>
+    <div class="fc" style="border-top:4px solid #009688" onclick="flipCard(this)"><span class="fc-emoji">🐢</span><div class="fc-en">Turtle</div><div class="fc-ph">/ˈtɜːrtl/</div><div class="fc-cn">乌龟</div><div class="fc-ex" style="display:none">The turtle is slow. 🐢</div></div>
+    <div class="fc" style="border-top:4px solid #009688" onclick="flipCard(this)"><span class="fc-emoji">🐰</span><div class="fc-en">Rabbit</div><div class="fc-ph">/ˈræbɪt/</div><div class="fc-cn">兔子</div><div class="fc-ex" style="display:none">The rabbit hops! 🐰</div></div>
+    <div class="fc" style="border-top:4px solid #009688" onclick="flipCard(this)"><span class="fc-emoji">🐼</span><div class="fc-en">Panda</div><div class="fc-ph">/ˈpændə/</div><div class="fc-cn">熊猫</div><div class="fc-ex" style="display:none">I love pandas! 🐼</div></div>
+  </div>
+
+  <!-- U8 -->
+  <div id="vc-u8" class="flashcard-grid" style="display:none">
+    <div class="fc" style="border-top:4px solid #00bcd4" onclick="flipCard(this)"><span class="fc-emoji">👨</span><div class="fc-en">Dad</div><div class="fc-ph">/dæd/</div><div class="fc-cn">爸爸</div><div class="fc-ex" style="display:none">My dad is tall. 👨</div></div>
+    <div class="fc" style="border-top:4px solid #00bcd4" onclick="flipCard(this)"><span class="fc-emoji">👩</span><div class="fc-en">Mom</div><div class="fc-ph">/mɒm/</div><div class="fc-cn">妈妈</div><div class="fc-ex" style="display:none">I love my mom! 👩</div></div>
+    <div class="fc" style="border-top:4px solid #00bcd4" onclick="flipCard(this)"><span class="fc-emoji">👦</span><div class="fc-en">Brother</div><div class="fc-ph">/ˈbrʌðər/</div><div class="fc-cn">哥哥/弟弟</div><div class="fc-ex" style="display:none">My brother likes cars. 👦</div></div>
+    <div class="fc" style="border-top:4px solid #00bcd4" onclick="flipCard(this)"><span class="fc-emoji">👧</span><div class="fc-en">Sister</div><div class="fc-ph">/ˈsɪstər/</div><div class="fc-cn">姐姐/妹妹</div><div class="fc-ex" style="display:none">My sister is cute. 👧</div></div>
+    <div class="fc" style="border-top:4px solid #00bcd4" onclick="flipCard(this)"><span class="fc-emoji">👴</span><div class="fc-en">Grandpa</div><div class="fc-ph">/ˈɡrænpɑː/</div><div class="fc-cn">爷爷/外公</div><div class="fc-ex" style="display:none">Grandpa tells stories. 👴</div></div>
+    <div class="fc" style="border-top:4px solid #00bcd4" onclick="flipCard(this)"><span class="fc-emoji">👵</span><div class="fc-en">Grandma</div><div class="fc-ph">/ˈɡrænmɑː/</div><div class="fc-cn">奶奶/外婆</div><div class="fc-ex" style="display:none">Grandma makes food! 👵</div></div>
+    <div class="fc" style="border-top:4px solid #00bcd4" onclick="flipCard(this)"><span class="fc-emoji">🏠</span><div class="fc-en">Family</div><div class="fc-ph">/ˈfæməli/</div><div class="fc-cn">家庭</div><div class="fc-ex" style="display:none">I love my family! 🏠</div></div>
+    <div class="fc" style="border-top:4px solid #00bcd4" onclick="flipCard(this)"><span class="fc-emoji">🐣</span><div class="fc-en">Baby</div><div class="fc-ph">/ˈbeɪbi/</div><div class="fc-cn">宝宝</div><div class="fc-ex" style="display:none">The baby is so small! 🐣</div></div>
+  </div>
+
+  <!-- U9 -->
+  <div id="vc-u9" class="flashcard-grid" style="display:none">
+    <div class="fc" style="border-top:4px solid #607d8b" onclick="flipCard(this)"><span class="fc-emoji">🤯</span><div class="fc-en">Head</div><div class="fc-ph">/hed/</div><div class="fc-cn">头</div><div class="fc-ex" style="display:none">Touch your head! 🤯</div></div>
+    <div class="fc" style="border-top:4px solid #607d8b" onclick="flipCard(this)"><span class="fc-emoji">👀</span><div class="fc-en">Eyes</div><div class="fc-ph">/aɪz/</div><div class="fc-cn">眼睛</div><div class="fc-ex" style="display:none">Close your eyes! 👀</div></div>
+    <div class="fc" style="border-top:4px solid #607d8b" onclick="flipCard(this)"><span class="fc-emoji">👃</span><div class="fc-en">Nose</div><div class="fc-ph">/noʊz/</div><div class="fc-cn">鼻子</div><div class="fc-ex" style="display:none">Point to your nose! 👃</div></div>
+    <div class="fc" style="border-top:4px solid #607d8b" onclick="flipCard(this)"><span class="fc-emoji">👂</span><div class="fc-en">Ears</div><div class="fc-ph">/ɪrz/</div><div class="fc-cn">耳朵</div><div class="fc-ex" style="display:none">Wiggle your ears! 👂</div></div>
+    <div class="fc" style="border-top:4px solid #607d8b" onclick="flipCard(this)"><span class="fc-emoji">👄</span><div class="fc-en">Mouth</div><div class="fc-ph">/maʊθ/</div><div class="fc-cn">嘴巴</div><div class="fc-ex" style="display:none">Open your mouth! 👄</div></div>
+    <div class="fc" style="border-top:4px solid #607d8b" onclick="flipCard(this)"><span class="fc-emoji">🦷</span><div class="fc-en">Teeth</div><div class="fc-ph">/tiːθ/</div><div class="fc-cn">牙齿</div><div class="fc-ex" style="display:none">Brush your teeth! 🦷</div></div>
+    <div class="fc" style="border-top:4px solid #607d8b" onclick="flipCard(this)"><span class="fc-emoji">🖐️</span><div class="fc-en">Hands</div><div class="fc-ph">/hændz/</div><div class="fc-cn">手</div><div class="fc-ex" style="display:none">Clap your hands! 👏</div></div>
+    <div class="fc" style="border-top:4px solid #607d8b" onclick="flipCard(this)"><span class="fc-emoji">🦵</span><div class="fc-en">Legs</div><div class="fc-ph">/leɡz/</div><div class="fc-cn">腿</div><div class="fc-ex" style="display:none">Shake your legs! 🦵</div></div>
+    <div class="fc" style="border-top:4px solid #607d8b" onclick="flipCard(this)"><span class="fc-emoji">🦶</span><div class="fc-en">Feet</div><div class="fc-ph">/fiːt/</div><div class="fc-cn">脚</div><div class="fc-ex" style="display:none">Stomp your feet! 🦶</div></div>
+    <div class="fc" style="border-top:4px solid #607d8b" onclick="flipCard(this)"><span class="fc-emoji">🫶</span><div class="fc-en">Tummy</div><div class="fc-ph">/ˈtʌmi/</div><div class="fc-cn">肚子</div><div class="fc-ex" style="display:none">Rub your tummy! 🫶</div></div>
+  </div>
+
+  <!-- U10 -->
+  <div id="vc-u10" class="flashcard-grid" style="display:none">
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">🍎</span><div class="fc-en">Apple</div><div class="fc-ph">/ˈæpl/</div><div class="fc-cn">苹果</div><div class="fc-ex" style="display:none">I like apples! 🍎</div></div>
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">🍌</span><div class="fc-en">Banana</div><div class="fc-ph">/bəˈnɑːnə/</div><div class="fc-cn">香蕉</div><div class="fc-ex" style="display:none">Monkeys love bananas! 🍌</div></div>
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">🍊</span><div class="fc-en">Orange</div><div class="fc-ph">/ˈɔːrɪndʒ/</div><div class="fc-cn">橙子</div><div class="fc-ex" style="display:none">An orange a day! 🍊</div></div>
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">🥛</span><div class="fc-en">Milk</div><div class="fc-ph">/mɪlk/</div><div class="fc-cn">牛奶</div><div class="fc-ex" style="display:none">Drink your milk! 🥛</div></div>
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">🍞</span><div class="fc-en">Bread</div><div class="fc-ph">/bred/</div><div class="fc-cn">面包</div><div class="fc-ex" style="display:none">Toast and bread! 🍞</div></div>
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">🍚</span><div class="fc-en">Rice</div><div class="fc-ph">/raɪs/</div><div class="fc-cn">米饭</div><div class="fc-ex" style="display:none">I eat rice for lunch. 🍚</div></div>
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">🥗</span><div class="fc-en">Vegetables</div><div class="fc-ph">/ˈvedʒtəblz/</div><div class="fc-cn">蔬菜</div><div class="fc-ex" style="display:none">Eat your vegetables! 🥗</div></div>
+    <div class="fc" style="border-top:4px solid #e91e63" onclick="flipCard(this)"><span class="fc-emoji">🍰</span><div class="fc-en">Cake</div><div class="fc-ph">/keɪk/</div><div class="fc-cn">蛋糕</div><div class="fc-ex" style="display:none">Happy birthday cake! 🎂</div></div>
+  </div>
+
+  <!-- U11 -->
+  <div id="vc-u11" class="flashcard-grid" style="display:none">
+    <div class="fc" style="border-top:4px solid #673ab7" onclick="flipCard(this)"><span class="fc-emoji">🚗</span><div class="fc-en">Car</div><div class="fc-ph">/kɑːr/</div><div class="fc-cn">小汽车</div><div class="fc-ex" style="display:none">Vroom vroom, it's a car! 🚗</div></div>
+    <div class="fc" style="border-top:4px solid #673ab7" onclick="flipCard(this)"><span class="fc-emoji">🪀</span><div class="fc-en">Ball</div><div class="fc-ph">/bɔːl/</div><div class="fc-cn">球</div><div class="fc-ex" style="display:none">Throw the ball! 🪀</div></div>
+    <div class="fc" style="border-top:4px solid #673ab7" onclick="flipCard(this)"><span class="fc-emoji">🪆</span><div class="fc-en">Doll</div><div class="fc-ph">/dɒl/</div><div class="fc-cn">玩偶</div><div class="fc-ex" style="display:none">My doll is pretty! 🪆</div></div>
+    <div class="fc" style="border-top:4px solid #673ab7" onclick="flipCard(this)"><span class="fc-emoji">🧩</span><div class="fc-en">Puzzle</div><div class="fc-ph">/ˈpʌzl/</div><div class="fc-cn">拼图</div><div class="fc-ex" style="display:none">Let's do a puzzle! 🧩</div></div>
+    <div class="fc" style="border-top:4px solid #673ab7" onclick="flipCard(this)"><span class="fc-emoji">🪁</span><div class="fc-en">Kite</div><div class="fc-ph">/kaɪt/</div><div class="fc-cn">风筝</div><div class="fc-ex" style="display:none">Fly your kite! 🪁</div></div>
+    <div class="fc" style="border-top:4px solid #673ab7" onclick="flipCard(this)"><span class="fc-emoji">🎨</span><div class="fc-en">Paint</div><div class="fc-ph">/peɪnt/</div><div class="fc-cn">画画</div><div class="fc-ex" style="display:none">I love to paint! 🎨</div></div>
+    <div class="fc" style="border-top:4px solid #673ab7" onclick="flipCard(this)"><span class="fc-emoji">📚</span><div class="fc-en">Book</div><div class="fc-ph">/bʊk/</div><div class="fc-cn">书</div><div class="fc-ex" style="display:none">Read a book! 📚</div></div>
+    <div class="fc" style="border-top:4px solid #673ab7" onclick="flipCard(this)"><span class="fc-emoji">🎮</span><div class="fc-en">Play</div><div class="fc-ph">/pleɪ/</div><div class="fc-cn">玩</div><div class="fc-ex" style="display:none">Let's play together! 🎮</div></div>
+  </div>
+
+  <!-- U12 -->
+  <div id="vc-u12" class="flashcard-grid" style="display:none">
+    <div class="fc" style="border-top:4px solid #ff5722" onclick="flipCard(this)"><span class="fc-emoji">⭐</span><div class="fc-en">Review</div><div class="fc-ph">/rɪˈvjuː/</div><div class="fc-cn">复习单元</div><div class="fc-ex" style="display:none">I remember everything! ⭐</div></div>
+    <div class="fc" style="border-top:4px solid #ff5722" onclick="flipCard(this)"><span class="fc-emoji">🏆</span><div class="fc-en">Well done!</div><div class="fc-ph">/wel dʌn/</div><div class="fc-cn">做得好</div><div class="fc-ex" style="display:none">Well done, superstar! 🏆</div></div>
+    <div class="fc" style="border-top:4px solid #ff5722" onclick="flipCard(this)"><span class="fc-emoji">🌟</span><div class="fc-en">I can!</div><div class="fc-ph">/aɪ kæn/</div><div class="fc-cn">我能做到</div><div class="fc-ex" style="display:none">I can do it! 🌟</div></div>
+    <div class="fc" style="border-top:4px solid #ff5722" onclick="flipCard(this)"><span class="fc-emoji">🎉</span><div class="fc-en">Excellent!</div><div class="fc-ph">/ˈeksələnt/</div><div class="fc-cn">太棒了</div><div class="fc-ex" style="display:none">Excellent work! 🎉</div></div>
+  </div>
+
+  <div class="footer-note no-print">
+    <b>打印提示：</b>选择单元后，按 <kbd>Ctrl+P</kbd>（Windows）或 <kbd>Cmd+P</kbd>（Mac）打印，建议选择 A5 纸，关闭页眉页脚。彩色打印效果最佳，也可黑白打印后让孩子自己涂色。
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 3: 歌曲资源
+══════════════════════════════════════════════ -->
+<div id="tab-songs" class="section">
+  <div class="sec-title">歌曲视频资源精选</div>
+  <p class="sec-desc">以下所有歌曲均来自知名幼儿英语频道，免费可用。每首歌附有课堂使用建议，点击链接即可直接播放。<br>
+  <b>主要频道：</b>Super Simple Songs（SSS）· Dream English Kids · Cocomelon · Pinkfong · 优酷/B站同步资源</p>
+
+  <!-- U1 -->
+  <div class="song-unit">
+    <div class="song-unit-head" style="background:linear-gradient(135deg,#ffecd2,#fcb69f)">
+      <div class="song-unit-num" style="background:#f5a623">U1</div>
+      <div class="song-unit-info"><h3>打招呼与道别</h3><p>Greetings &amp; Goodbyes</p></div>
+    </div>
+    <div class="song-list">
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">Hello Song</div>
+          <div class="song-channel">Super Simple Songs | 约2分钟</div>
+          <div class="song-tags"><span class="song-tag">开场必备</span><span class="song-tag">每节课用</span><span class="song-tag">TPR动作</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=tVlcKp3bWH8" target="_blank">▶ YouTube</a>
+            <a class="song-link bili" href="https://search.bilibili.com/all?keyword=Super+Simple+Songs+Hello+Song" target="_blank">▶ B站搜索</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>每节课开场，配合挥手动作。歌词：<i>"Hello, hello, hello, how are you? I'm fine, I'm fine, I hope that you are too!"</i> 第1次听，第2次跟唱，第3次起配合动作。</div>
+        </div>
+      </div>
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">Goodbye Song</div>
+          <div class="song-channel">Super Simple Songs | 约2分钟</div>
+          <div class="song-tags"><span class="song-tag">下课必备</span><span class="song-tag">再见动作</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=Bm4CqBvwHiE" target="_blank">▶ YouTube</a>
+            <a class="song-link bili" href="https://search.bilibili.com/all?keyword=Super+Simple+Songs+Goodbye+Song" target="_blank">▶ B站搜索</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>每节课结束前3分钟播放，配合挥手、飞吻动作。强化 Goodbye / See you / Bye-bye 三种表达。</div>
+        </div>
+      </div>
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">Good Morning Song</div>
+          <div class="song-channel">Dream English Kids | 约2分钟</div>
+          <div class="song-tags"><span class="song-tag">早上问候</span><span class="song-tag">简单旋律</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=CuI_p7a9VGs" target="_blank">▶ YouTube</a>
+            <a class="song-link yku" href="https://search.youku.com/search_video/q_Good%20Morning%20Song%20kids%20english" target="_blank">▶ 优酷搜索</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>早班课开场，搭配太阳升起手势。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U2 -->
+  <div class="song-unit">
+    <div class="song-unit-head" style="background:linear-gradient(135deg,#d4fc79,#96e6a1)">
+      <div class="song-unit-num" style="background:#4caf50">U2</div>
+      <div class="song-unit-info"><h3>课堂指令</h3><p>Classroom Commands</p></div>
+    </div>
+    <div class="song-list">
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">If You're Happy and You Know It</div>
+          <div class="song-channel">Super Simple Songs | 约2分钟</div>
+          <div class="song-tags"><span class="song-tag">动作指令</span><span class="song-tag">TPR经典</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=71hqRT9U0wg" target="_blank">▶ YouTube</a>
+            <a class="song-link bili" href="https://search.bilibili.com/all?keyword=If+You%27re+Happy+Super+Simple+Songs" target="_blank">▶ B站搜索</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>练习 clap/stomp/shout/turn around 等动作指令。后续可让孩子自编动作版本。</div>
+        </div>
+      </div>
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">Clean Up Song</div>
+          <div class="song-channel">Super Simple Songs | 约1分30秒</div>
+          <div class="song-tags"><span class="song-tag">收拾整理</span><span class="song-tag">课堂管理</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=EFSsFvMqrqg" target="_blank">▶ YouTube</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>每次游戏结束后播放，孩子跟着收拾道具，建立整理习惯。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U3 -->
+  <div class="song-unit">
+    <div class="song-unit-head" style="background:linear-gradient(135deg,#a1c4fd,#c2e9fb)">
+      <div class="song-unit-num" style="background:#2196f3">U3</div>
+      <div class="song-unit-info"><h3>认识朋友</h3><p>Making Friends</p></div>
+    </div>
+    <div class="song-list">
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">What's Your Name?</div>
+          <div class="song-channel">Super Simple Songs | 约2分钟</div>
+          <div class="song-tags"><span class="song-tag">自我介绍</span><span class="song-tag">互动问答</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=5TSmSY6wFPE" target="_blank">▶ YouTube</a>
+            <a class="song-link bili" href="https://search.bilibili.com/all?keyword=What%27s+your+name+Super+Simple+Songs" target="_blank">▶ B站搜索</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>两人对唱，练习 "What's your name? My name is ___." 老师先用布偶示范，再两两配对。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U4 -->
+  <div class="song-unit">
+    <div class="song-unit-head" style="background:linear-gradient(135deg,#f6d365,#fda085)">
+      <div class="song-unit-num" style="background:#ff7043">U4</div>
+      <div class="song-unit-info"><h3>情绪感受</h3><p>Feelings &amp; Emotions</p></div>
+    </div>
+    <div class="song-list">
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">If You're Happy (Emotions Version)</div>
+          <div class="song-channel">Super Simple Songs | 约2分30秒</div>
+          <div class="song-tags"><span class="song-tag">情绪表达</span><span class="song-tag">面部表情</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=l4WNrvVjiTw" target="_blank">▶ YouTube</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>配合情绪卡片，唱到哪个情绪就举起对应卡片并做出表情。</div>
+        </div>
+      </div>
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">The Feelings Song</div>
+          <div class="song-channel">Pinkfong | 约2分钟</div>
+          <div class="song-tags"><span class="song-tag">情绪单词</span><span class="song-tag">可爱旋律</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=hBd7cFCq3FE" target="_blank">▶ YouTube</a>
+            <a class="song-link bili" href="https://search.bilibili.com/all?keyword=Pinkfong+Feelings+Song" target="_blank">▶ B站搜索</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>课堂中段提神，让孩子随音乐变换表情。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U5 -->
+  <div class="song-unit">
+    <div class="song-unit-head" style="background:linear-gradient(135deg,#e0c3fc,#8ec5fc)">
+      <div class="song-unit-num" style="background:#9c27b0">U5</div>
+      <div class="song-unit-info"><h3>颜色</h3><p>Colors</p></div>
+    </div>
+    <div class="song-list">
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">Colors Song</div>
+          <div class="song-channel">Super Simple Songs | 约2分30秒</div>
+          <div class="song-tags"><span class="song-tag">颜色识别</span><span class="song-tag">经典歌曲</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=yCjJyiqpAuU" target="_blank">▶ YouTube</a>
+            <a class="song-link bili" href="https://search.bilibili.com/all?keyword=Super+Simple+Songs+Colors+Song" target="_blank">▶ B站搜索</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>唱到某颜色时，孩子快速找出身上/教室里同色的东西。</div>
+        </div>
+      </div>
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">Rainbow Song</div>
+          <div class="song-channel">Dream English Kids | 约2分钟</div>
+          <div class="song-tags"><span class="song-tag">彩虹7色</span><span class="song-tag">手工配合</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=7UsoBSObGyk" target="_blank">▶ YouTube</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>配合彩虹手工制作，边唱边涂颜色。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U6 -->
+  <div class="song-unit">
+    <div class="song-unit-head" style="background:linear-gradient(135deg,#fccb90,#d57eeb)">
+      <div class="song-unit-num" style="background:#e91e63">U6</div>
+      <div class="song-unit-info"><h3>数字1-10</h3><p>Numbers 1–10</p></div>
+    </div>
+    <div class="song-list">
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">Ten Little Fingers</div>
+          <div class="song-channel">Super Simple Songs | 约2分钟</div>
+          <div class="song-tags"><span class="song-tag">手指数数</span><span class="song-tag">动作配合</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=ZanHgPprl-0" target="_blank">▶ YouTube</a>
+            <a class="song-link bili" href="https://search.bilibili.com/all?keyword=Ten+Little+Fingers+Super+Simple" target="_blank">▶ B站搜索</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>唱到几就举几根手指，全身参与，无需道具。</div>
+        </div>
+      </div>
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">Count to 10</div>
+          <div class="song-channel">Cocomelon | 约2分30秒</div>
+          <div class="song-tags"><span class="song-tag">倒数10-1</span><span class="song-tag">动画生动</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=RE_JRhz9tso" target="_blank">▶ YouTube</a>
+            <a class="song-link bili" href="https://search.bilibili.com/all?keyword=Cocomelon+Count+to+10" target="_blank">▶ B站搜索</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>游戏倒计时专用，"10, 9, 8..." 孩子在时间内跑回座位。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U7 -->
+  <div class="song-unit">
+    <div class="song-unit-head" style="background:linear-gradient(135deg,#96fbc4,#f9f586)">
+      <div class="song-unit-num" style="background:#009688">U7</div>
+      <div class="song-unit-info"><h3>动物</h3><p>Animals</p></div>
+    </div>
+    <div class="song-list">
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">Old MacDonald Had a Farm</div>
+          <div class="song-channel">Super Simple Songs | 约3分钟</div>
+          <div class="song-tags"><span class="song-tag">动物音效</span><span class="song-tag">模仿叫声</span><span class="song-tag">经典童谣</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=5_sfnQDr1-o" target="_blank">▶ YouTube</a>
+            <a class="song-link bili" href="https://search.bilibili.com/all?keyword=Old+MacDonald+Super+Simple+Songs" target="_blank">▶ B站搜索</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>孩子手持动物卡片，唱到对应动物时举卡+模仿叫声。</div>
+        </div>
+      </div>
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">Walking in the Jungle</div>
+          <div class="song-channel">Super Simple Songs | 约2分30秒</div>
+          <div class="song-tags"><span class="song-tag">野生动物</span><span class="song-tag">故事情节</span><span class="song-tag">TPR</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=sEVUBON9q5E" target="_blank">▶ YouTube</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>全体起立模仿丛林探险，遇到动物做出该动物的动作。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U8 -->
+  <div class="song-unit">
+    <div class="song-unit-head" style="background:linear-gradient(135deg,#fddb92,#d1fdff)">
+      <div class="song-unit-num" style="background:#00bcd4">U8</div>
+      <div class="song-unit-info"><h3>家人</h3><p>Family Members</p></div>
+    </div>
+    <div class="song-list">
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">Finger Family Song</div>
+          <div class="song-channel">Pinkfong | 约2分钟</div>
+          <div class="song-tags"><span class="song-tag">手指游戏</span><span class="song-tag">超级流行</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=BkQ3OWJhreA" target="_blank">▶ YouTube</a>
+            <a class="song-link bili" href="https://search.bilibili.com/all?keyword=Finger+Family+Song+Pinkfong" target="_blank">▶ B站搜索</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>拇指=爸爸，食指=妈妈，中指=哥哥，无名指=姐姐，小指=宝宝。全程手指游戏自然记忆家庭词汇。</div>
+        </div>
+      </div>
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">My Family</div>
+          <div class="song-channel">Super Simple Songs | 约2分钟</div>
+          <div class="song-tags"><span class="song-tag">家庭关系</span><span class="song-tag">情感表达</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=bMwQDLuGEKM" target="_blank">▶ YouTube</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>配合家庭照片讨论，引导孩子说 "This is my dad/mom..."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U9 -->
+  <div class="song-unit">
+    <div class="song-unit-head" style="background:linear-gradient(135deg,#f5f7fa,#c3cfe2)">
+      <div class="song-unit-num" style="background:#607d8b">U9</div>
+      <div class="song-unit-info"><h3>身体部位</h3><p>Body Parts</p></div>
+    </div>
+    <div class="song-list">
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">Head Shoulders Knees and Toes（慢版+快版）</div>
+          <div class="song-channel">Super Simple Songs | 慢版+快版各约2分钟</div>
+          <div class="song-tags"><span class="song-tag">经典必备</span><span class="song-tag">越唱越快</span><span class="song-tag">全身动作</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=ZanHgPprl-0" target="_blank">▶ YouTube 慢版</a>
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=WX8HmogNMzs" target="_blank">▶ YouTube 快版</a>
+            <a class="song-link bili" href="https://search.bilibili.com/all?keyword=Head+Shoulders+Knees+Toes+Super+Simple" target="_blank">▶ B站搜索</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>先慢速跟唱+触摸身体部位，再播快版挑战速度。</div>
+        </div>
+      </div>
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">Shake Your Sillies Out</div>
+          <div class="song-channel">Raffi / Super Simple Songs | 约2分钟</div>
+          <div class="song-tags"><span class="song-tag">释放能量</span><span class="song-tag">中途休息</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=uQ8DI5h1OcQ" target="_blank">▶ YouTube</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>课堂中间休息时用，活动身体，同时复习 shake/wiggle/clap/stamp。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U10 -->
+  <div class="song-unit">
+    <div class="song-unit-head" style="background:linear-gradient(135deg,#ff9a9e,#fecfef)">
+      <div class="song-unit-num" style="background:#e91e63">U10</div>
+      <div class="song-unit-info"><h3>食物</h3><p>Food &amp; Drinks</p></div>
+    </div>
+    <div class="song-list">
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">Do You Like Broccoli Ice Cream?</div>
+          <div class="song-channel">Super Simple Songs | 约2分30秒</div>
+          <div class="song-tags"><span class="song-tag">Yes/No问答</span><span class="song-tag">超受欢迎</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=1kW0OIUo-s8" target="_blank">▶ YouTube</a>
+            <a class="song-link bili" href="https://search.bilibili.com/all?keyword=Do+You+Like+Broccoli+Ice+Cream+Super+Simple" target="_blank">▶ B站搜索</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>唱时配合"Yes/No"举手或蹲起。创意改编：组合奇怪食物让孩子回答 Yes/No。</div>
+        </div>
+      </div>
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">Yummy Yummy</div>
+          <div class="song-channel">Super Simple Songs | 约2分钟</div>
+          <div class="song-tags"><span class="song-tag">食物词汇</span><span class="song-tag">游戏背景音乐</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=B6NFhqwSLaA" target="_blank">▶ YouTube</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>Food Shop 角色扮演游戏的背景音乐。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U11 -->
+  <div class="song-unit">
+    <div class="song-unit-head" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)">
+      <div class="song-unit-num" style="background:#673ab7">U11</div>
+      <div class="song-unit-info"><h3>玩具与游戏</h3><p>Toys &amp; Play</p></div>
+    </div>
+    <div class="song-list">
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">Let's Play</div>
+          <div class="song-channel">Super Simple Songs | 约2分钟</div>
+          <div class="song-tags"><span class="song-tag">玩具词汇</span><span class="song-tag">邀请表达</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=BI1oFXTknTU" target="_blank">▶ YouTube</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>Show &amp; Tell 开场使用，孩子展示玩具时作背景音乐。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U12 -->
+  <div class="song-unit">
+    <div class="song-unit-head" style="background:linear-gradient(135deg,#ffecd2,#fcb69f)">
+      <div class="song-unit-num" style="background:#ff5722">U12</div>
+      <div class="song-unit-info"><h3>综合复习 &amp; 期末展示</h3><p>Review &amp; Final Show</p></div>
+    </div>
+    <div class="song-list">
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">I Can Sing a Rainbow</div>
+          <div class="song-channel">Super Simple Songs | 约2分30秒</div>
+          <div class="song-tags"><span class="song-tag">期末展示</span><span class="song-tag">颜色复习</span><span class="song-tag">家长观摩</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=fCqkB3h24g0" target="_blank">▶ YouTube</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>期末家长展示表演曲目，孩子手持彩色丝巾随音乐挥舞。</div>
+        </div>
+      </div>
+      <div class="song-item">
+        <div class="song-thumb">🎵</div>
+        <div class="song-info">
+          <div class="song-title">You Are My Sunshine</div>
+          <div class="song-channel">Super Simple Songs | 约2分30秒</div>
+          <div class="song-tags"><span class="song-tag">结业典礼</span><span class="song-tag">温馨感人</span></div>
+          <div class="song-links">
+            <a class="song-link yt" href="https://www.youtube.com/watch?v=Nf7mG7wNRbI" target="_blank">▶ YouTube</a>
+          </div>
+          <div class="song-usage">📌 <b>课堂用法：</b>颁奖仪式背景音乐，老师为每位孩子颁发结业证书。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <b>国内访问建议：</b>YouTube 需科学上网，可在 <a href="https://list.youku.com/albumlist/show/id_28739656.html" target="_blank" style="color:#764ba2">优酷·Super Simple Songs合辑</a> 或 B站 搜索 "SSS儿歌" / "Super Simple Songs" 获取完全相同的内容，无需翻墙。
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 4: 游戏资源
+══════════════════════════════════════════════ -->
+<div id="tab-games" class="section">
+  <div class="sec-title">游戏教学资源</div>
+  <p class="sec-desc">教材中36个游戏的演示视频参考 + 在线互动工具 + 零成本DIY操作指南，每个游戏都可在教室零成本复现。</p>
+
+  <div class="game-res-card">
+    <div class="game-res-head"><h3>🎮 Simon Says（西蒙说）— U2·U9 通用</h3><p>课堂指令 / 身体部位最佳练习游戏</p></div>
+    <div class="game-res-body">
+      <div class="game-platform-row">
+        <div class="gp-card">
+          <h4>演示视频参考</h4>
+          <a class="gp-link" href="https://www.youtube.com/watch?v=4sJPbJGDCzs" target="_blank">▶ Simon Says Classroom Demo (YouTube)</a>
+          <a class="gp-link" href="https://www.youtube.com/watch?v=R8z3MVZoWxg" target="_blank">▶ Simon Says with Body Parts (YouTube)</a>
+          <a class="gp-link" href="https://search.bilibili.com/all?keyword=Simon+Says+幼儿英语课堂" target="_blank">▶ B站：Simon Says 幼儿英语</a>
+        </div>
+        <div class="gp-card">
+          <h4>在线互动工具</h4>
+          <a class="gp-link" href="https://wordwall.net/en-us/community/esl/simon-says" target="_blank">▶ Wordwall - Simon Says 互动版（免费）</a>
+          <a class="gp-link" href="https://eslkidsworld.com/interactive.html" target="_blank">▶ ESL Kids World 互动游戏</a>
+        </div>
+      </div>
+      <div class="game-diy-steps"><h4>⚡ 零道具快速玩法</h4><ol>
+        <li>老师说 "Simon says, touch your head!" → 孩子摸头</li>
+        <li>老师说 "Touch your nose!"（没有 Simon says）→ 不动</li>
+        <li>动了的孩子出局，最后1-2位站着的获胜</li>
+        <li>进阶：让孩子轮流当 Simon，练习语言输出</li>
+      </ol></div>
+    </div>
+  </div>
+
+  <div class="game-res-card">
+    <div class="game-res-head"><h3>🃏 Flashcard Games（闪卡游戏）— 全单元通用</h3><p>词汇巩固最有效方式，5种玩法保持新鲜感</p></div>
+    <div class="game-res-body">
+      <div class="game-platform-row">
+        <div class="gp-card">
+          <h4>演示视频参考</h4>
+          <a class="gp-link" href="https://www.youtube.com/watch?v=gkNqP3wk8dc" target="_blank">▶ Flashcard Games for Kids (YouTube)</a>
+          <a class="gp-link" href="https://eslkidstuff.com/esl-kids-games-activities-menu/flashcard-games-activities/" target="_blank">▶ ESL Kids Stuff - 20种闪卡玩法（图文）</a>
+        </div>
+        <div class="gp-card">
+          <h4>免费闪卡下载</h4>
+          <a class="gp-link" href="https://esl-kids.com/" target="_blank">▶ ESL-Kids.com（免费闪卡，含12主题）</a>
+          <a class="gp-link" href="https://eslkidstuff.com/" target="_blank">▶ ESL Kid Stuff（免费资源包）</a>
+        </div>
+      </div>
+      <div class="game-diy-steps"><h4>⚡ 5种零成本闪卡玩法</h4><ol>
+        <li><b>What's Missing?</b> 摆5张卡，孩子闭眼，老师拿走1张，孩子猜缺哪张</li>
+        <li><b>Slap Game</b> 卡片铺桌上，老师说单词，孩子抢拍</li>
+        <li><b>Slow Reveal</b> 用纸慢慢遮住卡片，孩子猜是什么</li>
+        <li><b>Pass the Card</b> 音乐传卡，停时拿着的孩子说出单词</li>
+        <li><b>Find Your Partner</b> 每人1张，找到拥有同款词汇的搭档</li>
+      </ol></div>
+    </div>
+  </div>
+
+  <div class="game-res-card">
+    <div class="game-res-head"><h3>🌈 Color Hunt（颜色寻宝）— U5 专属</h3><p>动态性强，颜色词汇快速记忆</p></div>
+    <div class="game-res-body">
+      <div class="game-platform-row">
+        <div class="gp-card">
+          <h4>演示视频参考</h4>
+          <a class="gp-link" href="https://www.youtube.com/watch?v=NQYfQGvGXnM" target="_blank">▶ Color Hunt Game for Kids (YouTube)</a>
+          <a class="gp-link" href="https://search.bilibili.com/all?keyword=颜色英语教学游戏幼儿" target="_blank">▶ B站：颜色英语教学游戏</a>
+        </div>
+        <div class="gp-card">
+          <h4>材料准备</h4>
+          <a class="gp-link" href="#" style="color:#777;cursor:default">彩色纸板 9张（每色1张，A4大小）</a>
+          <a class="gp-link" href="#" style="color:#777;cursor:default">小彩球/积木（课前藏在教室各处）</a>
+        </div>
+      </div>
+      <div class="game-diy-steps"><h4>⚡ 游戏步骤（10分钟版）</h4><ol>
+        <li>课前将9色小纸片/积木藏在教室各处</li>
+        <li>老师呼出颜色："Find something RED!"</li>
+        <li>孩子快速跑去找，找到放入红色篮子</li>
+        <li>找到最多的孩子获得 "Color Master" 称号</li>
+        <li>升级版：老师说中文，孩子说英文再去找</li>
+      </ol></div>
+    </div>
+  </div>
+
+  <div class="game-res-card">
+    <div class="game-res-head"><h3>🐾 Animal Charades（动物猜猜乐）— U7 专属</h3><p>考验表演力和词汇输出的高峰游戏</p></div>
+    <div class="game-res-body">
+      <div class="game-platform-row">
+        <div class="gp-card">
+          <h4>演示视频参考</h4>
+          <a class="gp-link" href="https://www.youtube.com/watch?v=Hqf4IqYgaxQ" target="_blank">▶ Animal Charades for Kids (YouTube)</a>
+          <a class="gp-link" href="https://www.youtube.com/watch?v=6lBFr-QNMWE" target="_blank">▶ ESL Animal Game Demo (YouTube)</a>
+        </div>
+        <div class="gp-card">
+          <h4>在线音效工具</h4>
+          <a class="gp-link" href="https://www.myinstants.com/en/search/?name=animal" target="_blank">▶ MyInstants - 动物音效库（免费）</a>
+          <a class="gp-link" href="https://www.youtube.com/watch?v=S_p7LiyOLPo" target="_blank">▶ Animal Sounds Video (YouTube)</a>
+        </div>
+      </div>
+      <div class="game-diy-steps"><h4>⚡ 分组赛制（15分钟版）</h4><ol>
+        <li>动物卡片倒扣，1位孩子抽卡不让别人看</li>
+        <li>用动作+叫声表演（不能说任何单词）</li>
+        <li>其他孩子抢答用英文说出动物名</li>
+        <li>答对的孩子成为下一位表演者</li>
+        <li>团队版：3人一队，看哪队猜出最多</li>
+      </ol></div>
+    </div>
+  </div>
+
+  <div class="game-res-card">
+    <div class="game-res-head"><h3>🏪 Food Shop（食物超市）— U10 专属</h3><p>情景化角色扮演，练习完整购买对话</p></div>
+    <div class="game-res-body">
+      <div class="game-platform-row">
+        <div class="gp-card">
+          <h4>演示视频参考</h4>
+          <a class="gp-link" href="https://www.youtube.com/watch?v=B7qPp27BXEM" target="_blank">▶ ESL Role Play Food Shop (YouTube)</a>
+          <a class="gp-link" href="https://search.bilibili.com/all?keyword=幼儿英语角色扮演超市" target="_blank">▶ B站：幼儿英语超市角色扮演</a>
+        </div>
+        <div class="gp-card">
+          <h4>材料准备</h4>
+          <a class="gp-link" href="#" style="color:#777;cursor:default">食物卡片（本文件"词汇卡片"页打印）</a>
+          <a class="gp-link" href="#" style="color:#777;cursor:default">纸板制作"货币"若干张</a>
+          <a class="gp-link" href="#" style="color:#777;cursor:default">小购物篮/袋各1个</a>
+        </div>
+      </div>
+      <div class="game-diy-steps"><h4>⚡ 核心对话模板</h4><ol>
+        <li><b>顾客：</b>"Hello! Can I have an apple, please?"</li>
+        <li><b>店员：</b>"Here you are!"</li>
+        <li><b>顾客：</b>"Thank you! Goodbye!"</li>
+        <li>每位孩子轮流当顾客和店员</li>
+        <li>进阶：加入 "How much?" / "One dollar!" 等表达</li>
+      </ol></div>
+    </div>
+  </div>
+
+  <div class="game-res-card">
+    <div class="game-res-head"><h3>🎯 BINGO（宾果游戏）— 全单元通用复习</h3><p>词汇复习神器，孩子自制Bingo卡增强参与感</p></div>
+    <div class="game-res-body">
+      <div class="game-platform-row">
+        <div class="gp-card">
+          <h4>演示视频参考</h4>
+          <a class="gp-link" href="https://www.youtube.com/watch?v=qC7bFHxJx-4" target="_blank">▶ BINGO ESL Kids Game Demo (YouTube)</a>
+        </div>
+        <div class="gp-card">
+          <h4>免费在线Bingo生成器</h4>
+          <a class="gp-link" href="https://bingobaker.com/" target="_blank">▶ BingoBaker.com（免费制作）</a>
+          <a class="gp-link" href="https://myfreebingocards.com/" target="_blank">▶ MyFreeBingoCards.com</a>
+        </div>
+      </div>
+      <div class="game-diy-steps"><h4>⚡ 快速制作方法</h4><ol>
+        <li>准备3×3空白格子纸（9格）</li>
+        <li>孩子从单元词汇中选9个写入或画图</li>
+        <li>老师随机呼出单词，孩子划掉对应格</li>
+        <li>连成一线喊 "BINGO!"</li>
+        <li>奖励：在Progress Star板上贴一颗星星</li>
+      </ol></div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    以上视频链接均为 YouTube，国内建议在 B站 / 优酷 搜索同名视频作为替代。游戏完整教案（含45分钟时间轴）请参考《4-5岁启蒙英语教材完整版.html》。
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 5: 可打印教具
+══════════════════════════════════════════════ -->
+<div id="tab-printables" class="section">
+  <div class="sec-title">可打印教具清单</div>
+  <p class="sec-desc">以下教具均可从本页面直接打印或通过推荐网站免费下载。建议A4打印后过塑，可重复使用多年。</p>
+
+  <div class="printable-grid">
+    <div class="pt-card t1">
+      <h3>🃏 词汇闪卡（12单元，共约100张）</h3>
+      <p>本文件「词汇卡片」标签已内置全部卡片，选择单元后直接打印。彩色A5打印、过塑后使用效果最佳。</p>
+      <button class="print-btn" onclick="showTab('vocab')">前往词汇卡片标签 →</button>
+    </div>
+    <div class="pt-card t2">
+      <h3>📋 Progress Star 星星奖励板</h3>
+      <p>每位孩子1张，完成任务/游戏获胜贴星星。每20颗星换小礼物，期末按总数评级。A3打印最佳。</p>
+      <a class="print-btn" href="https://www.teacherspayteachers.com/Browse/Search:star+chart+reward+free" target="_blank">免费下载 →</a>
+    </div>
+    <div class="pt-card t3">
+      <h3>🎲 词汇骰子模板</h3>
+      <p>6面骰子，每面写1个单词，孩子自己剪贴折叠。掷骰子说单词，随机练习互不重复。</p>
+      <a class="print-btn" href="https://www.esl-kids.com/worksheets/printable-cubes.html" target="_blank">免费下载 →</a>
+    </div>
+    <div class="pt-card t4">
+      <h3>😊 单元评估笑脸卡</h3>
+      <p>3级笑脸评估（大笑/微笑/难过），老师或家长评估每单元词汇掌握情况，无考试压力。</p>
+      <a class="print-btn" href="https://www.teacherspayteachers.com/Browse/Search:self+assessment+smiley+face+free" target="_blank">免费下载 →</a>
+    </div>
+    <div class="pt-card t5">
+      <h3>😠 情绪卡片（U4专用，6张）</h3>
+      <p>Happy / Sad / Angry / Scared / Tired / Surprised，A5彩印每生1套，游戏和歌曲道具。</p>
+      <a class="print-btn" href="https://www.esl-kids.com/flashcards/feelings.html" target="_blank">免费下载 →</a>
+    </div>
+    <div class="pt-card t6">
+      <h3>🏆 结业小证书</h3>
+      <p>期末展示后人手一张，写上孩子名字和特别称号（Best Singer / Animal Expert / Color Hero…）。</p>
+      <a class="print-btn" href="https://www.teacherspayteachers.com/Browse/Search:certificate+student+free" target="_blank">免费下载 →</a>
+    </div>
+  </div>
+
+  <h3 style="font-size:1.1rem;font-weight:700;margin:28px 0 14px;color:#333">📦 每节课必备材料一览</h3>
+  <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 3px 12px rgba(0,0,0,.06);overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:.88rem;min-width:500px">
+      <thead>
+        <tr style="background:#f3f0ff">
+          <th style="padding:10px 14px;text-align:left;font-weight:700;color:#555">材料</th>
+          <th style="padding:10px 14px;text-align:left;font-weight:700;color:#555">用途</th>
+          <th style="padding:10px 14px;text-align:left;font-weight:700;color:#555">数量</th>
+          <th style="padding:10px 14px;text-align:left;font-weight:700;color:#555">获取方式</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:10px 14px">词汇闪卡（当单元）</td><td style="padding:10px 14px">新词展示、游戏道具</td><td style="padding:10px 14px">1套（约6-10张）</td><td style="padding:10px 14px">本文件打印</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:10px 14px">彩色星星贴纸</td><td style="padding:10px 14px">奖励系统</td><td style="padding:10px 14px">若干</td><td style="padding:10px 14px">文具店购买</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:10px 14px">布偶/玩具 1个</td><td style="padding:10px 14px">对话示范搭档</td><td style="padding:10px 14px">1个</td><td style="padding:10px 14px">教师自备</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:10px 14px">蓝牙音箱</td><td style="padding:10px 14px">播放歌曲</td><td style="padding:10px 14px">1台</td><td style="padding:10px 14px">教室配置</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:10px 14px">Progress Star 板</td><td style="padding:10px 14px">激励系统</td><td style="padding:10px 14px">每生1张</td><td style="padding:10px 14px">打印后过塑</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:10px 14px">彩色纸板/彩笔</td><td style="padding:10px 14px">手工活动</td><td style="padding:10px 14px">每生1套</td><td style="padding:10px 14px">文具店购买</td></tr>
+        <tr><td style="padding:10px 14px">小奖品（贴纸/橡皮等）</td><td style="padding:10px 14px">游戏奖励</td><td style="padding:10px 14px">若干</td><td style="padding:10px 14px">教师自备</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 6: 在线工具
+══════════════════════════════════════════════ -->
+<div id="tab-tools" class="section">
+  <div class="sec-title">推荐在线工具</div>
+  <p class="sec-desc">以下工具专为幼儿英语教学设计，大部分免费，帮助老师制作教材、互动课件和线上复习内容。</p>
+
+  <div class="tool-grid">
+    <div class="tool-card">
+      <div class="tool-icon">🎵</div>
+      <h3>Super Simple Songs <span class="tool-free">免费</span></h3>
+      <p>全球最大幼儿英语歌曲频道，12个单元的所有歌曲均可在此找到，有教师版使用指南和配套下载资源。</p>
+      <a class="tool-link" href="https://supersimple.com/" target="_blank">访问官网</a>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🎮</div>
+      <h3>Wordwall <span class="tool-free">免费基础版</span></h3>
+      <p>制作互动游戏课件（词汇配对、分类、问答、旋转盘等），可在平板/大屏幕上使用，孩子极喜欢。</p>
+      <a class="tool-link" href="https://wordwall.net/" target="_blank">立即使用</a>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🃏</div>
+      <h3>Quizlet <span class="tool-free">免费基础版</span></h3>
+      <p>制作数字闪卡，支持配对游戏模式，家长可分享给孩子在家复习。可上传图片制作图文卡。</p>
+      <a class="tool-link" href="https://quizlet.com/" target="_blank">立即使用</a>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🎯</div>
+      <h3>Kahoot! <span class="tool-free">免费基础版</span></h3>
+      <p>游戏化测验平台，孩子用手机/平板参与抢答，适合期末复习课。4岁以上孩子在家长协助下可操作。</p>
+      <a class="tool-link" href="https://kahoot.com/" target="_blank">立即使用</a>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🖨️</div>
+      <h3>ESL-Kids.com <span class="tool-free">免费</span></h3>
+      <p>专为ESL幼儿教师设计的免费资源网站，提供词汇闪卡、工作表、游戏规则PDF，覆盖所有12个主题。</p>
+      <a class="tool-link" href="https://esl-kids.com/" target="_blank">免费下载</a>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🎨</div>
+      <h3>Canva for Education <span class="tool-free">教师免费</span></h3>
+      <p>制作精美词汇卡片、教案PPT、Progress板模板。有大量幼儿教育模板，5分钟即可完成一套教具。</p>
+      <a class="tool-link" href="https://www.canva.com/education/" target="_blank">教师免费申请</a>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">📺</div>
+      <h3>YouTube Kids <span class="tool-free">免费</span></h3>
+      <p>儿童专用 YouTube，过滤不当内容，可搜索所有 SSS、Cocomelon、Pinkfong 等频道内容。</p>
+      <a class="tool-link" href="https://www.youtubekids.com/" target="_blank">访问</a>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🇨🇳</div>
+      <h3>优酷·SSS合辑 <span class="badge badge-china">国内可用</span></h3>
+      <p>Super Simple Songs 在优酷的官方合辑，无需翻墙，视频内容与 YouTube 完全一致，适合国内课堂直接播放。</p>
+      <a class="tool-link" href="https://list.youku.com/albumlist/show/id_28739656.html" target="_blank">前往优酷</a>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">📱</div>
+      <h3>B站 SSS 资源 <span class="badge badge-china">国内可用</span></h3>
+      <p>在 B站 搜索 "SSS儿歌" 或 "Super Simple Songs" 可找到完整合辑，UP主整理版本附有歌词字幕。</p>
+      <a class="tool-link" href="https://search.bilibili.com/all?keyword=SSS%E5%84%BF%E6%AD%8C+%E8%8B%B1%E8%AF%AD%E5%90%AF%E8%92%99" target="_blank">前往B站</a>
+    </div>
+  </div>
+
+  <div style="background:#fff;border-radius:16px;padding:24px;margin-top:24px;box-shadow:0 3px 12px rgba(0,0,0,.06)">
+    <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px">📱 家长端线上复习建议</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:.88rem">
+      <thead>
+        <tr style="background:#f8f0ff">
+          <th style="padding:10px 14px;text-align:left">复习方式</th>
+          <th style="padding:10px 14px;text-align:left">平台</th>
+          <th style="padding:10px 14px;text-align:left">每次时长</th>
+          <th style="padding:10px 14px;text-align:left">说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:10px 14px">跟唱本周歌曲</td><td style="padding:10px 14px">优酷 / B站</td><td style="padding:10px 14px">5-10分钟</td><td style="padding:10px 14px">每天睡前1-2首，无压力磨耳朵</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0;background:#fafafa"><td style="padding:10px 14px">数字闪卡练习</td><td style="padding:10px 14px">Quizlet</td><td style="padding:10px 14px">5分钟</td><td style="padding:10px 14px">老师分享班级链接给家长</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:10px 14px">生活场景对话</td><td style="padding:10px 14px">日常生活</td><td style="padding:10px 14px">随时随地</td><td style="padding:10px 14px">吃饭说食物名、看到颜色说颜色</td></tr>
+        <tr><td style="padding:10px 14px">亲子Simon Says</td><td style="padding:10px 14px">家里</td><td style="padding:10px 14px">5分钟</td><td style="padding:10px 14px">家长当Simon，孩子做动作</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+function showTab(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  var el=document.getElementById('tab-'+id);
+  if(el)el.classList.add('active');
+  var btns=document.querySelectorAll('.tab-btn');
+  var map={'overview':0,'vocab':1,'songs':2,'games':3,'printables':4,'tools':5};
+  if(map[id]!==undefined && btns[map[id]])btns[map[id]].classList.add('active');
+}
+
+function showUnit(uid,btn){
+  document.querySelectorAll('[id^="vc-"]').forEach(g=>g.style.display='none');
+  var el=document.getElementById('vc-'+uid);
+  if(el)el.style.display='grid';
+  document.querySelectorAll('.unit-btn').forEach(b=>b.classList.remove('sel'));
+  if(btn)btn.classList.add('sel');
+}
+
+function flipCard(card){
+  var ex=card.querySelector('.fc-ex');
+  var cn=card.querySelector('.fc-cn');
+  if(ex.style.display==='none'){
+    ex.style.display='block';
+    if(cn)cn.style.display='none';
+  } else {
+    ex.style.display='none';
+    if(cn)cn.style.display='block';
+  }
+}
+</script>
+</body>
+</html>
