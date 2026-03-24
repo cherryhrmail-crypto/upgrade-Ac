@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>U2 Classroom Commands - 课堂指令</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4ECDC4;
+      --secondary: #44A08D;
+      --bg: #4ECDC420;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, var(--bg) 0%, #fff 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    
+    .header {
+      text-align: center;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 24px;
+      margin-bottom: 30px;
+      color: white;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    }
+    .header h1 { font-family: 'Fredoka', sans-serif; font-size: 2.5rem; margin-bottom: 10px; }
+    .header p { font-size: 1.2rem; opacity: 0.95; }
+    .back-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 24px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+
+    .section {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .section-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 15px;
+    }
+    .vocab-card {
+      background: linear-gradient(135deg, var(--bg), #fff);
+      border-radius: 16px;
+      padding: 20px 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+    .vocab-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      border-color: var(--primary);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .vocab-emoji { font-size: 3rem; margin-bottom: 10px; }
+    .vocab-en { font-size: 1.1rem; font-weight: 700; color: #333; margin-bottom: 5px; }
+    .vocab-cn { font-size: 0.9rem; color: #666; }
+
+    .sentence-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sentence-item {
+      background: linear-gradient(90deg, var(--bg), #fff);
+      padding: 18px 22px;
+      border-radius: 14px;
+      border-left: 4px solid var(--primary);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .sentence-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    .sent-en { font-size: 1.2rem; font-weight: 700; color: #333; margin-bottom: 5px; }
+    .sent-cn { font-size: 1rem; color: #666; }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .game-card {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 20px;
+      padding: 25px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+      transition: all 0.3s;
+    }
+    .game-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+    .game-card:hover::before {
+      top: -30%;
+      right: -30%;
+    }
+    .game-icon { font-size: 3rem; margin-bottom: 15px; }
+    .game-title { font-family: 'Fredoka', sans-serif; font-size: 1.4rem; margin-bottom: 8px; }
+    .game-desc { font-size: 0.95rem; opacity: 0.95; line-height: 1.5; }
+    .game-play {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 24px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 25px;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+    .game-card:hover .game-play {
+      background: rgba(255,255,255,0.4);
+    }
+
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.8rem; }
+      .vocab-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🎯 U2 Classroom Commands</h1>
+      <p>课堂指令 · Sit down · Stand up</p>
+      <a href="index.html" class="back-btn">← 返回首页</a>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">📚 核心词汇 Core Vocabulary</h2>
+      <div class="vocab-grid">
+                <div class="vocab-card" onclick="speak('sit down')">
+          <div class="vocab-emoji">🪑</div>
+          <div class="vocab-en">sit down</div>
+          <div class="vocab-cn">坐下</div>
+        </div>
+        <div class="vocab-card" onclick="speak('stand up')">
+          <div class="vocab-emoji">🧍</div>
+          <div class="vocab-en">stand up</div>
+          <div class="vocab-cn">站起来</div>
+        </div>
+        <div class="vocab-card" onclick="speak('listen')">
+          <div class="vocab-emoji">👂</div>
+          <div class="vocab-en">listen</div>
+          <div class="vocab-cn">听</div>
+        </div>
+        <div class="vocab-card" onclick="speak('speak')">
+          <div class="vocab-emoji">🗣️</div>
+          <div class="vocab-en">speak</div>
+          <div class="vocab-cn">说</div>
+        </div>
+        <div class="vocab-card" onclick="speak('look')">
+          <div class="vocab-emoji">👀</div>
+          <div class="vocab-en">look</div>
+          <div class="vocab-cn">看</div>
+        </div>
+        <div class="vocab-card" onclick="speak('raise your hand')">
+          <div class="vocab-emoji">✋</div>
+          <div class="vocab-en">raise your hand</div>
+          <div class="vocab-cn">举手</div>
+        </div>
+        <div class="vocab-card" onclick="speak('open your book')">
+          <div class="vocab-emoji">📖</div>
+          <div class="vocab-en">open your book</div>
+          <div class="vocab-cn">打开书</div>
+        </div>
+        <div class="vocab-card" onclick="speak('close your book')">
+          <div class="vocab-emoji">📕</div>
+          <div class="vocab-en">close your book</div>
+          <div class="vocab-cn">合上书</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">💬 核心句型 Sentence Patterns</h2>
+      <div class="sentence-list">
+                <div class="sentence-item" onclick="speak('Sit down, please.')">
+          <div class="sent-en">Sit down, please.</div>
+          <div class="sent-cn">请坐下。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Stand up, please.')">
+          <div class="sent-en">Stand up, please.</div>
+          <div class="sent-cn">请站起来。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Listen to me.')">
+          <div class="sent-en">Listen to me.</div>
+          <div class="sent-cn">听我说。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Raise your hand.')">
+          <div class="sent-en">Raise your hand.</div>
+          <div class="sent-cn">举起你的手。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Open your book.')">
+          <div class="sent-en">Open your book.</div>
+          <div class="sent-cn">打开你的书。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Be quiet, please.')">
+          <div class="sent-en">Be quiet, please.</div>
+          <div class="sent-cn">请安静。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">🎮 互动游戏 Interactive Games</h2>
+      <div class="games-grid">
+                <div class="game-card" onclick="startGame('game1')">
+          <div class="game-icon">🎮</div>
+          <div class="game-title">Simon Says 西蒙说</div>
+          <div class="game-desc">老师说"Simon says sit down"，学生做动作。没有Simon says不能做！</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game2')">
+          <div class="game-icon">🎭</div>
+          <div class="game-title">动作模仿 Action Mime</div>
+          <div class="game-desc">抽卡片做动作，其他同学猜指令</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game3')">
+          <div class="game-icon">🏃</div>
+          <div class="game-title">指令接力 Command Relay</div>
+          <div class="game-desc">分组接力，快速准确地完成指令</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game4')">
+          <div class="game-icon">🎵</div>
+          <div class="game-title">指令歌曲 Command Song</div>
+          <div class="game-desc">把指令编成歌曲，边唱边做动作</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.8;
+        speechSynthesis.speak(utterance);
+      }
+    }
+    
+    function startGame(gameType) {
+      const messages = {
+        game1: '🎮 Simon Says 西蒙说游戏即将开始！\n\n老师说"Simon says sit down"，学生做动作。没有Simon says不能做！',
+        game2: '🎭 动作模仿 Action Mime游戏即将开始！\n\n抽卡片做动作，其他同学猜指令',
+        game3: '🏃 指令接力 Command Relay游戏即将开始！\n\n分组接力，快速准确地完成指令',
+        game4: '🎵 指令歌曲 Command Song游戏即将开始！\n\n把指令编成歌曲，边唱边做动作'
+      };
+      alert(messages[gameType] || '游戏加载中...');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>U4 Feelings & Emotions - 情绪感受</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #f093fb;
+      --secondary: #f5576c;
+      --bg: #f093fb20;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, var(--bg) 0%, #fff 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    
+    .header {
+      text-align: center;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 24px;
+      margin-bottom: 30px;
+      color: white;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    }
+    .header h1 { font-family: 'Fredoka', sans-serif; font-size: 2.5rem; margin-bottom: 10px; }
+    .header p { font-size: 1.2rem; opacity: 0.95; }
+    .back-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 24px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+
+    .section {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .section-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 15px;
+    }
+    .vocab-card {
+      background: linear-gradient(135deg, var(--bg), #fff);
+      border-radius: 16px;
+      padding: 20px 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+    .vocab-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      border-color: var(--primary);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .vocab-emoji { font-size: 3rem; margin-bottom: 10px; }
+    .vocab-en { font-size: 1.1rem; font-weight: 700; color: #333; margin-bottom: 5px; }
+    .vocab-cn { font-size: 0.9rem; color: #666; }
+
+    .sentence-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sentence-item {
+      background: linear-gradient(90deg, var(--bg), #fff);
+      padding: 18px 22px;
+      border-radius: 14px;
+      border-left: 4px solid var(--primary);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .sentence-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    .sent-en { font-size: 1.2rem; font-weight: 700; color: #333; margin-bottom: 5px; }
+    .sent-cn { font-size: 1rem; color: #666; }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .game-card {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 20px;
+      padding: 25px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+      transition: all 0.3s;
+    }
+    .game-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+    .game-card:hover::before {
+      top: -30%;
+      right: -30%;
+    }
+    .game-icon { font-size: 3rem; margin-bottom: 15px; }
+    .game-title { font-family: 'Fredoka', sans-serif; font-size: 1.4rem; margin-bottom: 8px; }
+    .game-desc { font-size: 0.95rem; opacity: 0.95; line-height: 1.5; }
+    .game-play {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 24px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 25px;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+    .game-card:hover .game-play {
+      background: rgba(255,255,255,0.4);
+    }
+
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.8rem; }
+      .vocab-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>😊 U4 Feelings & Emotions</h1>
+      <p>情绪感受 · Happy · Sad · Angry</p>
+      <a href="index.html" class="back-btn">← 返回首页</a>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">📚 核心词汇 Core Vocabulary</h2>
+      <div class="vocab-grid">
+                <div class="vocab-card" onclick="speak('happy')">
+          <div class="vocab-emoji">😊</div>
+          <div class="vocab-en">happy</div>
+          <div class="vocab-cn">开心的</div>
+        </div>
+        <div class="vocab-card" onclick="speak('sad')">
+          <div class="vocab-emoji">😢</div>
+          <div class="vocab-en">sad</div>
+          <div class="vocab-cn">难过的</div>
+        </div>
+        <div class="vocab-card" onclick="speak('angry')">
+          <div class="vocab-emoji">😠</div>
+          <div class="vocab-en">angry</div>
+          <div class="vocab-cn">生气的</div>
+        </div>
+        <div class="vocab-card" onclick="speak('scared')">
+          <div class="vocab-emoji">😨</div>
+          <div class="vocab-en">scared</div>
+          <div class="vocab-cn">害怕的</div>
+        </div>
+        <div class="vocab-card" onclick="speak('tired')">
+          <div class="vocab-emoji">😴</div>
+          <div class="vocab-en">tired</div>
+          <div class="vocab-cn">累的</div>
+        </div>
+        <div class="vocab-card" onclick="speak('surprised')">
+          <div class="vocab-emoji">😲</div>
+          <div class="vocab-en">surprised</div>
+          <div class="vocab-cn">惊讶的</div>
+        </div>
+        <div class="vocab-card" onclick="speak('sick')">
+          <div class="vocab-emoji">🤒</div>
+          <div class="vocab-en">sick</div>
+          <div class="vocab-cn">生病的</div>
+        </div>
+        <div class="vocab-card" onclick="speak('love')">
+          <div class="vocab-emoji">😍</div>
+          <div class="vocab-en">love</div>
+          <div class="vocab-cn">喜爱</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">💬 核心句型 Sentence Patterns</h2>
+      <div class="sentence-list">
+                <div class="sentence-item" onclick="speak('How are you?')">
+          <div class="sent-en">How are you?</div>
+          <div class="sent-cn">你好吗？</div>
+        </div>
+        <div class="sentence-item" onclick="speak('I'm happy.')">
+          <div class="sent-en">I'm happy.</div>
+          <div class="sent-cn">我很开心。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('I'm sad.')">
+          <div class="sent-en">I'm sad.</div>
+          <div class="sent-cn">我很难过。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Are you okay?')">
+          <div class="sent-en">Are you okay?</div>
+          <div class="sent-cn">你还好吗？</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Yes, I'm fine.')">
+          <div class="sent-en">Yes, I'm fine.</div>
+          <div class="sent-cn">是的，我很好。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('I love you.')">
+          <div class="sent-en">I love you.</div>
+          <div class="sent-cn">我爱你。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">🎮 互动游戏 Interactive Games</h2>
+      <div class="games-grid">
+                <div class="game-card" onclick="startGame('game1')">
+          <div class="game-icon">🎭</div>
+          <div class="game-title">表情猜猜猜 Emotion Guess</div>
+          <div class="game-desc">做表情，其他同学猜情绪单词</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game2')">
+          <div class="game-icon">🎨</div>
+          <div class="game-title">情绪脸谱 Emotion Face</div>
+          <div class="game-desc">画出不同情绪的脸</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game3')">
+          <div class="game-icon">🎵</div>
+          <div class="game-title">情绪歌 Emotion Song</div>
+          <div class="game-desc">唱If you're happy and you know it</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game4')">
+          <div class="game-icon">🎲</div>
+          <div class="game-title">情绪骰子 Emotion Dice</div>
+          <div class="game-desc">掷骰子，做出对应情绪的表情</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.8;
+        speechSynthesis.speak(utterance);
+      }
+    }
+    
+    function startGame(gameType) {
+      const messages = {
+        game1: '🎭 表情猜猜猜 Emotion Guess游戏即将开始！\n\n做表情，其他同学猜情绪单词',
+        game2: '🎨 情绪脸谱 Emotion Face游戏即将开始！\n\n画出不同情绪的脸',
+        game3: '🎵 情绪歌 Emotion Song游戏即将开始！\n\n唱If you're happy and you know it',
+        game4: '🎲 情绪骰子 Emotion Dice游戏即将开始！\n\n掷骰子，做出对应情绪的表情'
+      };
+      alert(messages[gameType] || '游戏加载中...');
+    }
+  </script>
+</body>
+</html>

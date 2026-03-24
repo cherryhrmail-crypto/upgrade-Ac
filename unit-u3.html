@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>U3 Making Friends - 交朋友</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #667eea;
+      --secondary: #764ba2;
+      --bg: #667eea20;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, var(--bg) 0%, #fff 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    
+    .header {
+      text-align: center;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 24px;
+      margin-bottom: 30px;
+      color: white;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    }
+    .header h1 { font-family: 'Fredoka', sans-serif; font-size: 2.5rem; margin-bottom: 10px; }
+    .header p { font-size: 1.2rem; opacity: 0.95; }
+    .back-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 24px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+
+    .section {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .section-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 15px;
+    }
+    .vocab-card {
+      background: linear-gradient(135deg, var(--bg), #fff);
+      border-radius: 16px;
+      padding: 20px 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+    .vocab-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      border-color: var(--primary);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .vocab-emoji { font-size: 3rem; margin-bottom: 10px; }
+    .vocab-en { font-size: 1.1rem; font-weight: 700; color: #333; margin-bottom: 5px; }
+    .vocab-cn { font-size: 0.9rem; color: #666; }
+
+    .sentence-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sentence-item {
+      background: linear-gradient(90deg, var(--bg), #fff);
+      padding: 18px 22px;
+      border-radius: 14px;
+      border-left: 4px solid var(--primary);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .sentence-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    .sent-en { font-size: 1.2rem; font-weight: 700; color: #333; margin-bottom: 5px; }
+    .sent-cn { font-size: 1rem; color: #666; }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .game-card {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 20px;
+      padding: 25px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+      transition: all 0.3s;
+    }
+    .game-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+    .game-card:hover::before {
+      top: -30%;
+      right: -30%;
+    }
+    .game-icon { font-size: 3rem; margin-bottom: 15px; }
+    .game-title { font-family: 'Fredoka', sans-serif; font-size: 1.4rem; margin-bottom: 8px; }
+    .game-desc { font-size: 0.95rem; opacity: 0.95; line-height: 1.5; }
+    .game-play {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 24px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 25px;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+    .game-card:hover .game-play {
+      background: rgba(255,255,255,0.4);
+    }
+
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.8rem; }
+      .vocab-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🤝 U3 Making Friends</h1>
+      <p>交朋友 · What's your name?</p>
+      <a href="index.html" class="back-btn">← 返回首页</a>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">📚 核心词汇 Core Vocabulary</h2>
+      <div class="vocab-grid">
+                <div class="vocab-card" onclick="speak('hello')">
+          <div class="vocab-emoji">👋</div>
+          <div class="vocab-en">hello</div>
+          <div class="vocab-cn">你好</div>
+        </div>
+        <div class="vocab-card" onclick="speak('friend')">
+          <div class="vocab-emoji">🤝</div>
+          <div class="vocab-en">friend</div>
+          <div class="vocab-cn">朋友</div>
+        </div>
+        <div class="vocab-card" onclick="speak('boy')">
+          <div class="vocab-emoji">👶</div>
+          <div class="vocab-en">boy</div>
+          <div class="vocab-cn">男孩</div>
+        </div>
+        <div class="vocab-card" onclick="speak('girl')">
+          <div class="vocab-emoji">👧</div>
+          <div class="vocab-en">girl</div>
+          <div class="vocab-cn">女孩</div>
+        </div>
+        <div class="vocab-card" onclick="speak('he')">
+          <div class="vocab-emoji">👦</div>
+          <div class="vocab-en">he</div>
+          <div class="vocab-cn">他</div>
+        </div>
+        <div class="vocab-card" onclick="speak('she')">
+          <div class="vocab-emoji">👧</div>
+          <div class="vocab-en">she</div>
+          <div class="vocab-cn">她</div>
+        </div>
+        <div class="vocab-card" onclick="speak('nice')">
+          <div class="vocab-emoji">👍</div>
+          <div class="vocab-en">nice</div>
+          <div class="vocab-cn">好的/友善的</div>
+        </div>
+        <div class="vocab-card" onclick="speak('happy')">
+          <div class="vocab-emoji">😊</div>
+          <div class="vocab-en">happy</div>
+          <div class="vocab-cn">开心的</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">💬 核心句型 Sentence Patterns</h2>
+      <div class="sentence-list">
+                <div class="sentence-item" onclick="speak('What's your name?')">
+          <div class="sent-en">What's your name?</div>
+          <div class="sent-cn">你叫什么名字？</div>
+        </div>
+        <div class="sentence-item" onclick="speak('My name is Lucy.')">
+          <div class="sent-en">My name is Lucy.</div>
+          <div class="sent-cn">我的名字是露西。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Nice to meet you!')">
+          <div class="sent-en">Nice to meet you!</div>
+          <div class="sent-cn">很高兴认识你！</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Nice to meet you too!')">
+          <div class="sent-en">Nice to meet you too!</div>
+          <div class="sent-cn">我也很高兴认识你！</div>
+        </div>
+        <div class="sentence-item" onclick="speak('He is my friend.')">
+          <div class="sent-en">He is my friend.</div>
+          <div class="sent-cn">他是我的朋友。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('She is my friend.')">
+          <div class="sent-en">She is my friend.</div>
+          <div class="sent-cn">她是我的朋友。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">🎮 互动游戏 Interactive Games</h2>
+      <div class="games-grid">
+                <div class="game-card" onclick="startGame('game1')">
+          <div class="game-icon">🎲</div>
+          <div class="game-title">名字接龙 Name Chain</div>
+          <div class="game-desc">第一个人说"I'm Tom"，第二个人说"He's Tom, I'm Amy"</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game2')">
+          <div class="game-icon">🎭</div>
+          <div class="game-title">自我介绍秀 Self Show</div>
+          <div class="game-desc">上台用英语介绍自己的名字</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game3')">
+          <div class="game-icon">🤝</div>
+          <div class="game-title">找朋友 Find a Friend</div>
+          <div class="game-desc">音乐停止时，找朋友握手说Nice to meet you</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game4')">
+          <div class="game-icon">🎨</div>
+          <div class="game-title">朋友画像 Friend Portrait</div>
+          <div class="game-desc">画出你的朋友，用英语介绍他/她</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.8;
+        speechSynthesis.speak(utterance);
+      }
+    }
+    
+    function startGame(gameType) {
+      const messages = {
+        game1: '🎲 名字接龙 Name Chain游戏即将开始！\n\n第一个人说"I'm Tom"，第二个人说"He's Tom, I'm Amy"',
+        game2: '🎭 自我介绍秀 Self Show游戏即将开始！\n\n上台用英语介绍自己的名字',
+        game3: '🤝 找朋友 Find a Friend游戏即将开始！\n\n音乐停止时，找朋友握手说Nice to meet you',
+        game4: '🎨 朋友画像 Friend Portrait游戏即将开始！\n\n画出你的朋友，用英语介绍他/她'
+      };
+      alert(messages[gameType] || '游戏加载中...');
+    }
+  </script>
+</body>
+</html>

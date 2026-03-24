@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>U9 Body Parts - 身体部位</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ff9a9e;
+      --secondary: #fecfef;
+      --bg: #ff9a9e20;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, var(--bg) 0%, #fff 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    
+    .header {
+      text-align: center;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 24px;
+      margin-bottom: 30px;
+      color: white;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    }
+    .header h1 { font-family: 'Fredoka', sans-serif; font-size: 2.5rem; margin-bottom: 10px; }
+    .header p { font-size: 1.2rem; opacity: 0.95; }
+    .back-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 24px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+
+    .section {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .section-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 15px;
+    }
+    .vocab-card {
+      background: linear-gradient(135deg, var(--bg), #fff);
+      border-radius: 16px;
+      padding: 20px 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+    .vocab-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      border-color: var(--primary);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .vocab-emoji { font-size: 3rem; margin-bottom: 10px; }
+    .vocab-en { font-size: 1.1rem; font-weight: 700; color: #333; margin-bottom: 5px; }
+    .vocab-cn { font-size: 0.9rem; color: #666; }
+
+    .sentence-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sentence-item {
+      background: linear-gradient(90deg, var(--bg), #fff);
+      padding: 18px 22px;
+      border-radius: 14px;
+      border-left: 4px solid var(--primary);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .sentence-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    .sent-en { font-size: 1.2rem; font-weight: 700; color: #333; margin-bottom: 5px; }
+    .sent-cn { font-size: 1rem; color: #666; }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .game-card {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 20px;
+      padding: 25px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+      transition: all 0.3s;
+    }
+    .game-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+    .game-card:hover::before {
+      top: -30%;
+      right: -30%;
+    }
+    .game-icon { font-size: 3rem; margin-bottom: 15px; }
+    .game-title { font-family: 'Fredoka', sans-serif; font-size: 1.4rem; margin-bottom: 8px; }
+    .game-desc { font-size: 0.95rem; opacity: 0.95; line-height: 1.5; }
+    .game-play {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 24px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 25px;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+    .game-card:hover .game-play {
+      background: rgba(255,255,255,0.4);
+    }
+
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.8rem; }
+      .vocab-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>👤 U9 Body Parts</h1>
+      <p>身体部位 · Head · Hands · Feet</p>
+      <a href="index.html" class="back-btn">← 返回首页</a>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">📚 核心词汇 Core Vocabulary</h2>
+      <div class="vocab-grid">
+                <div class="vocab-card" onclick="speak('head')">
+          <div class="vocab-emoji">👤</div>
+          <div class="vocab-en">head</div>
+          <div class="vocab-cn">头</div>
+        </div>
+        <div class="vocab-card" onclick="speak('eyes')">
+          <div class="vocab-emoji">👁️</div>
+          <div class="vocab-en">eyes</div>
+          <div class="vocab-cn">眼睛</div>
+        </div>
+        <div class="vocab-card" onclick="speak('nose')">
+          <div class="vocab-emoji">👃</div>
+          <div class="vocab-en">nose</div>
+          <div class="vocab-cn">鼻子</div>
+        </div>
+        <div class="vocab-card" onclick="speak('ears')">
+          <div class="vocab-emoji">👂</div>
+          <div class="vocab-en">ears</div>
+          <div class="vocab-cn">耳朵</div>
+        </div>
+        <div class="vocab-card" onclick="speak('mouth')">
+          <div class="vocab-emoji">👄</div>
+          <div class="vocab-en">mouth</div>
+          <div class="vocab-cn">嘴巴</div>
+        </div>
+        <div class="vocab-card" onclick="speak('hands')">
+          <div class="vocab-emoji">✋</div>
+          <div class="vocab-en">hands</div>
+          <div class="vocab-cn">手</div>
+        </div>
+        <div class="vocab-card" onclick="speak('feet')">
+          <div class="vocab-emoji">🦶</div>
+          <div class="vocab-en">feet</div>
+          <div class="vocab-cn">脚</div>
+        </div>
+        <div class="vocab-card" onclick="speak('arms')">
+          <div class="vocab-emoji">💪</div>
+          <div class="vocab-en">arms</div>
+          <div class="vocab-cn">胳膊</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">💬 核心句型 Sentence Patterns</h2>
+      <div class="sentence-list">
+                <div class="sentence-item" onclick="speak('Touch your head.')">
+          <div class="sent-en">Touch your head.</div>
+          <div class="sent-cn">摸摸你的头。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Show me your hands.')">
+          <div class="sent-en">Show me your hands.</div>
+          <div class="sent-cn">给我看看你的手。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('I have two eyes.')">
+          <div class="sent-en">I have two eyes.</div>
+          <div class="sent-cn">我有两只眼睛。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Clap your hands.')">
+          <div class="sent-en">Clap your hands.</div>
+          <div class="sent-cn">拍拍你的手。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Stamp your feet.')">
+          <div class="sent-en">Stamp your feet.</div>
+          <div class="sent-cn">跺跺你的脚。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Wave your arms.')">
+          <div class="sent-en">Wave your arms.</div>
+          <div class="sent-cn">挥挥你的胳膊。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">🎮 互动游戏 Interactive Games</h2>
+      <div class="games-grid">
+                <div class="game-card" onclick="startGame('game1')">
+          <div class="game-icon">🎵</div>
+          <div class="game-title">头肩膀歌 Head Shoulders</div>
+          <div class="game-desc">唱Head, Shoulders, Knees and Toes</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game2')">
+          <div class="game-icon">🎯</div>
+          <div class="game-title">西蒙说 Body Simon Says</div>
+          <div class="game-desc">Simon says touch your nose!</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game3')">
+          <div class="game-icon">🎨</div>
+          <div class="game-title">画身体 Draw Body</div>
+          <div class="game-desc">画出身体各部位并标注</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game4')">
+          <div class="game-icon">🎭</div>
+          <div class="game-title">动作指令 Body Commands</div>
+          <div class="game-desc">快速准确地做身体动作</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.8;
+        speechSynthesis.speak(utterance);
+      }
+    }
+    
+    function startGame(gameType) {
+      const messages = {
+        game1: '🎵 头肩膀歌 Head Shoulders游戏即将开始！\n\n唱Head, Shoulders, Knees and Toes',
+        game2: '🎯 西蒙说 Body Simon Says游戏即将开始！\n\nSimon says touch your nose!',
+        game3: '🎨 画身体 Draw Body游戏即将开始！\n\n画出身体各部位并标注',
+        game4: '🎭 动作指令 Body Commands游戏即将开始！\n\n快速准确地做身体动作'
+      };
+      alert(messages[gameType] || '游戏加载中...');
+    }
+  </script>
+</body>
+</html>

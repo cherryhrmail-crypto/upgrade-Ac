@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>U11 Toys & Play - 玩具游戏</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #d299c2;
+      --secondary: #fef9d7;
+      --bg: #d299c220;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, var(--bg) 0%, #fff 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    
+    .header {
+      text-align: center;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 24px;
+      margin-bottom: 30px;
+      color: white;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    }
+    .header h1 { font-family: 'Fredoka', sans-serif; font-size: 2.5rem; margin-bottom: 10px; }
+    .header p { font-size: 1.2rem; opacity: 0.95; }
+    .back-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 24px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+
+    .section {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .section-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 15px;
+    }
+    .vocab-card {
+      background: linear-gradient(135deg, var(--bg), #fff);
+      border-radius: 16px;
+      padding: 20px 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+    .vocab-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      border-color: var(--primary);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .vocab-emoji { font-size: 3rem; margin-bottom: 10px; }
+    .vocab-en { font-size: 1.1rem; font-weight: 700; color: #333; margin-bottom: 5px; }
+    .vocab-cn { font-size: 0.9rem; color: #666; }
+
+    .sentence-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sentence-item {
+      background: linear-gradient(90deg, var(--bg), #fff);
+      padding: 18px 22px;
+      border-radius: 14px;
+      border-left: 4px solid var(--primary);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .sentence-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    .sent-en { font-size: 1.2rem; font-weight: 700; color: #333; margin-bottom: 5px; }
+    .sent-cn { font-size: 1rem; color: #666; }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .game-card {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 20px;
+      padding: 25px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+      transition: all 0.3s;
+    }
+    .game-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+    .game-card:hover::before {
+      top: -30%;
+      right: -30%;
+    }
+    .game-icon { font-size: 3rem; margin-bottom: 15px; }
+    .game-title { font-family: 'Fredoka', sans-serif; font-size: 1.4rem; margin-bottom: 8px; }
+    .game-desc { font-size: 0.95rem; opacity: 0.95; line-height: 1.5; }
+    .game-play {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 24px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 25px;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+    .game-card:hover .game-play {
+      background: rgba(255,255,255,0.4);
+    }
+
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.8rem; }
+      .vocab-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🧸 U11 Toys & Play</h1>
+      <p>玩具游戏 · Ball · Doll · Car</p>
+      <a href="index.html" class="back-btn">← 返回首页</a>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">📚 核心词汇 Core Vocabulary</h2>
+      <div class="vocab-grid">
+                <div class="vocab-card" onclick="speak('doll')">
+          <div class="vocab-emoji">🧸</div>
+          <div class="vocab-en">doll</div>
+          <div class="vocab-cn">洋娃娃</div>
+        </div>
+        <div class="vocab-card" onclick="speak('car')">
+          <div class="vocab-emoji">🚗</div>
+          <div class="vocab-en">car</div>
+          <div class="vocab-cn">小汽车</div>
+        </div>
+        <div class="vocab-card" onclick="speak('ball')">
+          <div class="vocab-emoji">⚽</div>
+          <div class="vocab-en">ball</div>
+          <div class="vocab-cn">球</div>
+        </div>
+        <div class="vocab-card" onclick="speak('blocks')">
+          <div class="vocab-emoji">🧩</div>
+          <div class="vocab-en">blocks</div>
+          <div class="vocab-cn">积木</div>
+        </div>
+        <div class="vocab-card" onclick="speak('balloon')">
+          <div class="vocab-emoji">🎈</div>
+          <div class="vocab-en">balloon</div>
+          <div class="vocab-cn">气球</div>
+        </div>
+        <div class="vocab-card" onclick="speak('kite')">
+          <div class="vocab-emoji">🪁</div>
+          <div class="vocab-en">kite</div>
+          <div class="vocab-cn">风筝</div>
+        </div>
+        <div class="vocab-card" onclick="speak('crayons')">
+          <div class="vocab-emoji">🎨</div>
+          <div class="vocab-en">crayons</div>
+          <div class="vocab-cn">蜡笔</div>
+        </div>
+        <div class="vocab-card" onclick="speak('teddy bear')">
+          <div class="vocab-emoji">🧸</div>
+          <div class="vocab-en">teddy bear</div>
+          <div class="vocab-cn">泰迪熊</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">💬 核心句型 Sentence Patterns</h2>
+      <div class="sentence-list">
+                <div class="sentence-item" onclick="speak('I have a ball.')">
+          <div class="sent-en">I have a ball.</div>
+          <div class="sent-cn">我有一个球。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Let's play together.')">
+          <div class="sent-en">Let's play together.</div>
+          <div class="sent-cn">我们一起玩吧。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Can I play with it?')">
+          <div class="sent-en">Can I play with it?</div>
+          <div class="sent-cn">我可以玩它吗？</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Yes, you can.')">
+          <div class="sent-en">Yes, you can.</div>
+          <div class="sent-cn">是的，你可以。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Share your toys.')">
+          <div class="sent-en">Share your toys.</div>
+          <div class="sent-cn">分享你的玩具。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('My turn! Your turn!')">
+          <div class="sent-en">My turn! Your turn!</div>
+          <div class="sent-cn">轮到我了！轮到你了！</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">🎮 互动游戏 Interactive Games</h2>
+      <div class="games-grid">
+                <div class="game-card" onclick="startGame('game1')">
+          <div class="game-icon">🎁</div>
+          <div class="game-title">玩具商店 Toy Shop</div>
+          <div class="game-desc">用英语买卖玩具</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game2')">
+          <div class="game-icon">🤝</div>
+          <div class="game-title">分享游戏 Sharing Game</div>
+          <div class="game-desc">练习"Can I play?"和分享</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game3')">
+          <div class="game-icon">🎯</div>
+          <div class="game-title">玩具分类 Toy Sort</div>
+          <div class="game-desc">按类型、颜色、大小分类玩具</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game4')">
+          <div class="game-icon">🎭</div>
+          <div class="game-title">玩具故事 Toy Story</div>
+          <div class="game-desc">用玩具编一个小故事</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.8;
+        speechSynthesis.speak(utterance);
+      }
+    }
+    
+    function startGame(gameType) {
+      const messages = {
+        game1: '🎁 玩具商店 Toy Shop游戏即将开始！\n\n用英语买卖玩具',
+        game2: '🤝 分享游戏 Sharing Game游戏即将开始！\n\n练习"Can I play?"和分享',
+        game3: '🎯 玩具分类 Toy Sort游戏即将开始！\n\n按类型、颜色、大小分类玩具',
+        game4: '🎭 玩具故事 Toy Story游戏即将开始！\n\n用玩具编一个小故事'
+      };
+      alert(messages[gameType] || '游戏加载中...');
+    }
+  </script>
+</body>
+</html>

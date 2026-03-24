@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>U10 Food I Like - 我爱美食</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #a1c4fd;
+      --secondary: #c2e9fb;
+      --bg: #a1c4fd20;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, var(--bg) 0%, #fff 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    
+    .header {
+      text-align: center;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 24px;
+      margin-bottom: 30px;
+      color: white;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    }
+    .header h1 { font-family: 'Fredoka', sans-serif; font-size: 2.5rem; margin-bottom: 10px; }
+    .header p { font-size: 1.2rem; opacity: 0.95; }
+    .back-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 24px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+
+    .section {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .section-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 15px;
+    }
+    .vocab-card {
+      background: linear-gradient(135deg, var(--bg), #fff);
+      border-radius: 16px;
+      padding: 20px 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+    .vocab-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      border-color: var(--primary);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .vocab-emoji { font-size: 3rem; margin-bottom: 10px; }
+    .vocab-en { font-size: 1.1rem; font-weight: 700; color: #333; margin-bottom: 5px; }
+    .vocab-cn { font-size: 0.9rem; color: #666; }
+
+    .sentence-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sentence-item {
+      background: linear-gradient(90deg, var(--bg), #fff);
+      padding: 18px 22px;
+      border-radius: 14px;
+      border-left: 4px solid var(--primary);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .sentence-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    .sent-en { font-size: 1.2rem; font-weight: 700; color: #333; margin-bottom: 5px; }
+    .sent-cn { font-size: 1rem; color: #666; }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .game-card {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 20px;
+      padding: 25px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+      transition: all 0.3s;
+    }
+    .game-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+    .game-card:hover::before {
+      top: -30%;
+      right: -30%;
+    }
+    .game-icon { font-size: 3rem; margin-bottom: 15px; }
+    .game-title { font-family: 'Fredoka', sans-serif; font-size: 1.4rem; margin-bottom: 8px; }
+    .game-desc { font-size: 0.95rem; opacity: 0.95; line-height: 1.5; }
+    .game-play {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 24px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 25px;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+    .game-card:hover .game-play {
+      background: rgba(255,255,255,0.4);
+    }
+
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.8rem; }
+      .vocab-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🍕 U10 Food I Like</h1>
+      <p>我爱美食 · Yummy food I like</p>
+      <a href="index.html" class="back-btn">← 返回首页</a>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">📚 核心词汇 Core Vocabulary</h2>
+      <div class="vocab-grid">
+                <div class="vocab-card" onclick="speak('apple')">
+          <div class="vocab-emoji">🍎</div>
+          <div class="vocab-en">apple</div>
+          <div class="vocab-cn">苹果</div>
+        </div>
+        <div class="vocab-card" onclick="speak('banana')">
+          <div class="vocab-emoji">🍌</div>
+          <div class="vocab-en">banana</div>
+          <div class="vocab-cn">香蕉</div>
+        </div>
+        <div class="vocab-card" onclick="speak('pizza')">
+          <div class="vocab-emoji">🍕</div>
+          <div class="vocab-en">pizza</div>
+          <div class="vocab-cn">披萨</div>
+        </div>
+        <div class="vocab-card" onclick="speak('hamburger')">
+          <div class="vocab-emoji">🍔</div>
+          <div class="vocab-en">hamburger</div>
+          <div class="vocab-cn">汉堡</div>
+        </div>
+        <div class="vocab-card" onclick="speak('ice cream')">
+          <div class="vocab-emoji">🍦</div>
+          <div class="vocab-en">ice cream</div>
+          <div class="vocab-cn">冰淇淋</div>
+        </div>
+        <div class="vocab-card" onclick="speak('cake')">
+          <div class="vocab-emoji">🍰</div>
+          <div class="vocab-en">cake</div>
+          <div class="vocab-cn">蛋糕</div>
+        </div>
+        <div class="vocab-card" onclick="speak('milk')">
+          <div class="vocab-emoji">🥛</div>
+          <div class="vocab-en">milk</div>
+          <div class="vocab-cn">牛奶</div>
+        </div>
+        <div class="vocab-card" onclick="speak('juice')">
+          <div class="vocab-emoji">🧃</div>
+          <div class="vocab-en">juice</div>
+          <div class="vocab-cn">果汁</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">💬 核心句型 Sentence Patterns</h2>
+      <div class="sentence-list">
+                <div class="sentence-item" onclick="speak('I like apples.')">
+          <div class="sent-en">I like apples.</div>
+          <div class="sent-cn">我喜欢苹果。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('I don't like fish.')">
+          <div class="sent-en">I don't like fish.</div>
+          <div class="sent-cn">我不喜欢鱼。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Yummy! Delicious!')">
+          <div class="sent-en">Yummy! Delicious!</div>
+          <div class="sent-cn">好吃！美味！</div>
+        </div>
+        <div class="sentence-item" onclick="speak('What do you like?')">
+          <div class="sent-en">What do you like?</div>
+          <div class="sent-cn">你喜欢什么？</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Do you like pizza?')">
+          <div class="sent-en">Do you like pizza?</div>
+          <div class="sent-cn">你喜欢披萨吗？</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Yes, I do! / No, I don't.')">
+          <div class="sent-en">Yes, I do! / No, I don't.</div>
+          <div class="sent-cn">是的，我喜欢！/不，我不喜欢。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">🎮 互动游戏 Interactive Games</h2>
+      <div class="games-grid">
+                <div class="game-card" onclick="startGame('game1')">
+          <div class="game-icon">🍽️</div>
+          <div class="game-title">食物喜好 Food Preference</div>
+          <div class="game-desc">用Yes/No回答喜欢的食物</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game2')">
+          <div class="game-icon">🎭</div>
+          <div class="game-title">餐厅游戏 Restaurant</div>
+          <div class="game-desc">扮演顾客和服务员点餐</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game3')">
+          <div class="game-icon">🎨</div>
+          <div class="game-title">食物分类 Food Sort</div>
+          <div class="game-desc">将食物分类：水果、饮料、主食</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game4')">
+          <div class="game-icon">🎵</div>
+          <div class="game-title">食物歌 Food Song</div>
+          <div class="game-desc">唱Do You Like Broccoli?</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.8;
+        speechSynthesis.speak(utterance);
+      }
+    }
+    
+    function startGame(gameType) {
+      const messages = {
+        game1: '🍽️ 食物喜好 Food Preference游戏即将开始！\n\n用Yes/No回答喜欢的食物',
+        game2: '🎭 餐厅游戏 Restaurant游戏即将开始！\n\n扮演顾客和服务员点餐',
+        game3: '🎨 食物分类 Food Sort游戏即将开始！\n\n将食物分类：水果、饮料、主食',
+        game4: '🎵 食物歌 Food Song游戏即将开始！\n\n唱Do You Like Broccoli?'
+      };
+      alert(messages[gameType] || '游戏加载中...');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>U5 Colors - 颜色认知</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #fa709a;
+      --secondary: #fee140;
+      --bg: #fa709a20;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, var(--bg) 0%, #fff 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    
+    .header {
+      text-align: center;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 24px;
+      margin-bottom: 30px;
+      color: white;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    }
+    .header h1 { font-family: 'Fredoka', sans-serif; font-size: 2.5rem; margin-bottom: 10px; }
+    .header p { font-size: 1.2rem; opacity: 0.95; }
+    .back-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 24px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+
+    .section {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .section-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 15px;
+    }
+    .vocab-card {
+      background: linear-gradient(135deg, var(--bg), #fff);
+      border-radius: 16px;
+      padding: 20px 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+    .vocab-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      border-color: var(--primary);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .vocab-emoji { font-size: 3rem; margin-bottom: 10px; }
+    .vocab-en { font-size: 1.1rem; font-weight: 700; color: #333; margin-bottom: 5px; }
+    .vocab-cn { font-size: 0.9rem; color: #666; }
+
+    .sentence-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sentence-item {
+      background: linear-gradient(90deg, var(--bg), #fff);
+      padding: 18px 22px;
+      border-radius: 14px;
+      border-left: 4px solid var(--primary);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .sentence-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    .sent-en { font-size: 1.2rem; font-weight: 700; color: #333; margin-bottom: 5px; }
+    .sent-cn { font-size: 1rem; color: #666; }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .game-card {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 20px;
+      padding: 25px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+      transition: all 0.3s;
+    }
+    .game-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+    .game-card:hover::before {
+      top: -30%;
+      right: -30%;
+    }
+    .game-icon { font-size: 3rem; margin-bottom: 15px; }
+    .game-title { font-family: 'Fredoka', sans-serif; font-size: 1.4rem; margin-bottom: 8px; }
+    .game-desc { font-size: 0.95rem; opacity: 0.95; line-height: 1.5; }
+    .game-play {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 24px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 25px;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+    .game-card:hover .game-play {
+      background: rgba(255,255,255,0.4);
+    }
+
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.8rem; }
+      .vocab-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🌈 U5 Colors</h1>
+      <p>颜色认知 · Red · Blue · Green</p>
+      <a href="index.html" class="back-btn">← 返回首页</a>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">📚 核心词汇 Core Vocabulary</h2>
+      <div class="vocab-grid">
+                <div class="vocab-card" onclick="speak('red')">
+          <div class="vocab-emoji">🔴</div>
+          <div class="vocab-en">red</div>
+          <div class="vocab-cn">红色</div>
+        </div>
+        <div class="vocab-card" onclick="speak('blue')">
+          <div class="vocab-emoji">🔵</div>
+          <div class="vocab-en">blue</div>
+          <div class="vocab-cn">蓝色</div>
+        </div>
+        <div class="vocab-card" onclick="speak('green')">
+          <div class="vocab-emoji">🟢</div>
+          <div class="vocab-en">green</div>
+          <div class="vocab-cn">绿色</div>
+        </div>
+        <div class="vocab-card" onclick="speak('yellow')">
+          <div class="vocab-emoji">🟡</div>
+          <div class="vocab-en">yellow</div>
+          <div class="vocab-cn">黄色</div>
+        </div>
+        <div class="vocab-card" onclick="speak('orange')">
+          <div class="vocab-emoji">🟠</div>
+          <div class="vocab-en">orange</div>
+          <div class="vocab-cn">橙色</div>
+        </div>
+        <div class="vocab-card" onclick="speak('purple')">
+          <div class="vocab-emoji">🟣</div>
+          <div class="vocab-en">purple</div>
+          <div class="vocab-cn">紫色</div>
+        </div>
+        <div class="vocab-card" onclick="speak('black')">
+          <div class="vocab-emoji">⚫</div>
+          <div class="vocab-en">black</div>
+          <div class="vocab-cn">黑色</div>
+        </div>
+        <div class="vocab-card" onclick="speak('white')">
+          <div class="vocab-emoji">⚪</div>
+          <div class="vocab-en">white</div>
+          <div class="vocab-cn">白色</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">💬 核心句型 Sentence Patterns</h2>
+      <div class="sentence-list">
+                <div class="sentence-item" onclick="speak('What color is it?')">
+          <div class="sent-en">What color is it?</div>
+          <div class="sent-cn">这是什么颜色？</div>
+        </div>
+        <div class="sentence-item" onclick="speak('It's red.')">
+          <div class="sent-en">It's red.</div>
+          <div class="sent-cn">它是红色的。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('I like red.')">
+          <div class="sent-en">I like red.</div>
+          <div class="sent-cn">我喜欢红色。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('What color do you like?')">
+          <div class="sent-en">What color do you like?</div>
+          <div class="sent-cn">你喜欢什么颜色？</div>
+        </div>
+        <div class="sentence-item" onclick="speak('I like blue and green.')">
+          <div class="sent-en">I like blue and green.</div>
+          <div class="sent-cn">我喜欢蓝色和绿色。</div>
+        </div>
+        <div class="sentence-item" onclick="speak('Rainbow has many colors.')">
+          <div class="sent-en">Rainbow has many colors.</div>
+          <div class="sent-cn">彩虹有很多颜色。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">🎮 互动游戏 Interactive Games</h2>
+      <div class="games-grid">
+                <div class="game-card" onclick="startGame('game1')">
+          <div class="game-icon">🎨</div>
+          <div class="game-title">颜色配对 Color Match</div>
+          <div class="game-desc">找到相同颜色的物品配对</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game2')">
+          <div class="game-icon">🏃</div>
+          <div class="game-title">颜色跑 Color Run</div>
+          <div class="game-desc">老师说颜色，学生跑到对应颜色的区域</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game3')">
+          <div class="game-icon">🎵</div>
+          <div class="game-title">彩虹歌 Rainbow Song</div>
+          <div class="game-desc">唱彩虹歌，指出对应颜色</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+        <div class="game-card" onclick="startGame('game4')">
+          <div class="game-icon">🎲</div>
+          <div class="game-title">颜色转盘 Color Spinner</div>
+          <div class="game-desc">转动转盘，说出指针指向的颜色</div>
+          <div class="game-play">开始游戏 →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.8;
+        speechSynthesis.speak(utterance);
+      }
+    }
+    
+    function startGame(gameType) {
+      const messages = {
+        game1: '🎨 颜色配对 Color Match游戏即将开始！\n\n找到相同颜色的物品配对',
+        game2: '🏃 颜色跑 Color Run游戏即将开始！\n\n老师说颜色，学生跑到对应颜色的区域',
+        game3: '🎵 彩虹歌 Rainbow Song游戏即将开始！\n\n唱彩虹歌，指出对应颜色',
+        game4: '🎲 颜色转盘 Color Spinner游戏即将开始！\n\n转动转盘，说出指针指向的颜色'
+      };
+      alert(messages[gameType] || '游戏加载中...');
+    }
+  </script>
+</body>
+</html>
