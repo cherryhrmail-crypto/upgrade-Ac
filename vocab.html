@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>核心词汇 & 句型 | UpGrade 幼儿英语</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f7f8fc;color:#333;line-height:1.8}
+
+/* HEADER */
+.hero{background:linear-gradient(135deg,#f093fb,#f5576c,#fda085);color:#fff;padding:48px 24px 36px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:"📚";font-size:120px;position:absolute;top:-20px;left:-20px;opacity:.07;transform:rotate(-10deg)}
+.hero::after{content:"✏️";font-size:100px;position:absolute;bottom:-15px;right:-10px;opacity:.07;transform:rotate(10deg)}
+.hero h1{font-size:2rem;font-weight:900;letter-spacing:2px;text-shadow:0 2px 8px rgba(0,0,0,.2);margin-bottom:8px}
+.hero p{font-size:.95rem;opacity:.92;margin-bottom:16px}
+.back-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.5);color:#fff;padding:8px 18px;border-radius:20px;text-decoration:none;font-size:.88rem;font-weight:600;transition:.2s}
+.back-btn:hover{background:rgba(255,255,255,.35)}
+
+/* STATS */
+.stats{display:flex;justify-content:center;gap:32px;background:#fff;padding:14px 24px;box-shadow:0 2px 12px rgba(0,0,0,.06);flex-wrap:wrap}
+.stat-item{text-align:center}
+.stat-num{font-size:1.5rem;font-weight:800;color:#f5576c}
+.stat-label{font-size:.78rem;color:#888;margin-top:2px}
+
+/* UNIT TABS NAV */
+.unit-nav{background:#fff;padding:14px 20px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+.unit-nav-inner{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;max-width:1100px;margin:0 auto}
+.unit-nav-inner::-webkit-scrollbar{display:none}
+.unav-btn{padding:7px 14px;border-radius:20px;border:2px solid #e0e0e0;background:#fff;cursor:pointer;font-size:.82rem;font-weight:700;color:#666;white-space:nowrap;transition:.15s;flex-shrink:0}
+.unav-btn:hover{border-color:#f5576c;color:#f5576c}
+.unav-btn.active{color:#fff;border-color:transparent}
+
+/* MAIN CONTAINER */
+.wrap{max-width:1100px;margin:0 auto;padding:28px 20px 80px}
+
+/* UNIT SECTION */
+.unit-section{background:#fff;border-radius:20px;margin-bottom:28px;box-shadow:0 3px 16px rgba(0,0,0,.07);overflow:hidden;scroll-margin-top:70px}
+.unit-header{padding:20px 28px;display:flex;align-items:center;gap:16px}
+.unit-badge{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:800;color:#fff;flex-shrink:0}
+.unit-title-cn{font-size:1.25rem;font-weight:800;color:#fff;margin-bottom:3px}
+.unit-title-en{font-size:.88rem;color:rgba(255,255,255,.8)}
+.unit-body{padding:6px 28px 28px}
+
+/* SECTION LABELS */
+.slabel{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#fff;border-radius:8px;padding:4px 12px;margin:20px 0 12px}
+
+/* VOCAB GRID */
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:6px}
+.vocab-card{border-radius:12px;padding:14px 10px;text-align:center;border:2px solid transparent;transition:.2s;cursor:default}
+.vocab-card:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(0,0,0,.1)}
+.vocab-card .vc-emoji{font-size:1.9rem;margin-bottom:6px;display:block}
+.vocab-card .vc-en{font-weight:700;font-size:.92rem;color:#333;line-height:1.3}
+.vocab-card .vc-cn{font-size:.75rem;color:#888;margin-top:3px}
+
+/* SENTENCE PATTERNS */
+.sent-list{list-style:none}
+.sent-item{display:flex;gap:14px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed #f0f0f0;transition:.15s}
+.sent-item:last-child{border-bottom:none}
+.sent-item:hover{background:#fafafa;padding-left:6px;border-radius:8px}
+.sent-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;color:#fff;flex-shrink:0;margin-top:2px}
+.sent-en{font-weight:700;font-size:.95rem;color:#333;flex:1;min-width:0}
+.sent-cn{font-size:.85rem;color:#888;flex-shrink:0;text-align:right;min-width:80px}
+
+/* DIVIDER */
+.unit-divider{height:1px;background:#f5f5f5;margin:4px 0 0}
+
+/* SEARCH */
+.search-box{max-width:480px;margin:0 auto 24px;position:relative}
+.search-input{width:100%;padding:12px 44px 12px 18px;border-radius:30px;border:2px solid #e0e0e0;font-size:.92rem;outline:none;transition:.2s;background:#fff}
+.search-input:focus{border-color:#f5576c;box-shadow:0 0 0 3px rgba(245,87,108,.12)}
+.search-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:18px;color:#ccc}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .vocab-grid{grid-template-columns:repeat(3,1fr)}
+  .unit-header{padding:16px 18px}
+  .unit-body{padding:6px 18px 22px}
+  .sent-cn{display:none}
+  .hero h1{font-size:1.5rem}
+}
+
+/* UNIT COLOR THEMES */
+.u1-theme .unit-header{background:linear-gradient(135deg,#ffecd2,#fcb69f)}
+.u1-theme .unit-badge{background:#f5a623}
+.u1-theme .slabel{background:#f5a623}
+.u1-theme .vocab-card{background:#fff8f0;border-color:#ffd8a8}
+.u1-theme .sent-num{background:#f5a623}
+
+.u2-theme .unit-header{background:linear-gradient(135deg,#d4fc79,#96e6a1)}
+.u2-theme .unit-badge{background:#4caf50}
+.u2-theme .slabel{background:#4caf50}
+.u2-theme .vocab-card{background:#f3fdf4;border-color:#b9f0c0}
+.u2-theme .sent-num{background:#4caf50}
+
+.u3-theme .unit-header{background:linear-gradient(135deg,#a1c4fd,#c2e9fb)}
+.u3-theme .unit-badge{background:#2196f3}
+.u3-theme .slabel{background:#2196f3}
+.u3-theme .vocab-card{background:#f0f8ff;border-color:#b3d7ff}
+.u3-theme .sent-num{background:#2196f3}
+
+.u4-theme .unit-header{background:linear-gradient(135deg,#f6d365,#fda085)}
+.u4-theme .unit-badge{background:#ff7043}
+.u4-theme .slabel{background:#ff7043}
+.u4-theme .vocab-card{background:#fff5f0;border-color:#ffd0b5}
+.u4-theme .sent-num{background:#ff7043}
+
+.u5-theme .unit-header{background:linear-gradient(135deg,#e0c3fc,#8ec5fc)}
+.u5-theme .unit-badge{background:#9c27b0}
+.u5-theme .slabel{background:#9c27b0}
+.u5-theme .vocab-card{background:#faf0ff;border-color:#ddb0f5}
+.u5-theme .sent-num{background:#9c27b0}
+
+.u6-theme .unit-header{background:linear-gradient(135deg,#fccb90,#d57eeb)}
+.u6-theme .unit-badge{background:#e91e63}
+.u6-theme .slabel{background:#e91e63}
+.u6-theme .vocab-card{background:#fff0f5;border-color:#f7b8d3}
+.u6-theme .sent-num{background:#e91e63}
+
+.u7-theme .unit-header{background:linear-gradient(135deg,#96fbc4,#f9f586)}
+.u7-theme .unit-badge{background:#009688}
+.u7-theme .slabel{background:#009688}
+.u7-theme .vocab-card{background:#f0fff8;border-color:#a0f0d5}
+.u7-theme .sent-num{background:#009688}
+
+.u8-theme .unit-header{background:linear-gradient(135deg,#89f7fe,#66a6ff)}
+.u8-theme .unit-badge{background:#2979ff}
+.u8-theme .slabel{background:#2979ff}
+.u8-theme .vocab-card{background:#f0feff;border-color:#a0e8f0}
+.u8-theme .sent-num{background:#2979ff}
+
+.u9-theme .unit-header{background:linear-gradient(135deg,#e0e0e0,#b3c6e0)}
+.u9-theme .unit-badge{background:#607d8b}
+.u9-theme .slabel{background:#607d8b}
+.u9-theme .vocab-card{background:#f5f7fa;border-color:#c3cfe2}
+.u9-theme .sent-num{background:#607d8b}
+
+.u10-theme .unit-header{background:linear-gradient(135deg,#fbc2eb,#a18cd1)}
+.u10-theme .unit-badge{background:#e91e63}
+.u10-theme .slabel{background:#e91e63}
+.u10-theme .vocab-card{background:#fff0f5;border-color:#ffc0d0}
+.u10-theme .sent-num{background:#e91e63}
+
+.u11-theme .unit-header{background:linear-gradient(135deg,#c3cfe2,#cfd9df)}
+.u11-theme .unit-badge{background:#673ab7}
+.u11-theme .slabel{background:#673ab7}
+.u11-theme .vocab-card{background:#f8f0ff;border-color:#d4b0f0}
+.u11-theme .sent-num{background:#673ab7}
+
+.u12-theme .unit-header{background:linear-gradient(135deg,#f7971e,#ffd200)}
+.u12-theme .unit-badge{background:#ff6f00}
+.u12-theme .slabel{background:#ff6f00}
+.u12-theme .vocab-card{background:#fff5e6;border-color:#ffc8a0}
+.u12-theme .sent-num{background:#ff6f00}
+
+/* HIGHLIGHT */
+.highlight{background:#fff176;border-radius:3px;padding:0 2px}
+
+/* NO RESULTS */
+.no-results{text-align:center;padding:48px;color:#bbb}
+.no-results .icon{font-size:48px;margin-bottom:12px}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>📖 核心词汇 &amp; 句型</h1>
+  <p>4-5岁启蒙英语教材 · 12个单元 · 88个核心词汇 · 50个核心句型</p>
+  <a href="index.html" class="back-btn">← 返回首页</a>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item"><div class="stat-num">12</div><div class="stat-label">学习单元</div></div>
+  <div class="stat-item"><div class="stat-num">88</div><div class="stat-label">核心词汇</div></div>
+  <div class="stat-item"><div class="stat-num">50+</div><div class="stat-label">核心句型</div></div>
+  <div class="stat-item"><div class="stat-num">4-5岁</div><div class="stat-label">适用年龄</div></div>
+</div>
+
+<!-- UNIT NAV -->
+<div class="unit-nav">
+  <div class="unit-nav-inner">
+    <button class="unav-btn active" onclick="scrollToUnit('all',this)" style="background:linear-gradient(135deg,#f5576c,#fda085);border-color:transparent;color:#fff">全部</button>
+    <button class="unav-btn" onclick="scrollToUnit('u1',this)">U1 打招呼</button>
+    <button class="unav-btn" onclick="scrollToUnit('u2',this)">U2 课堂指令</button>
+    <button class="unav-btn" onclick="scrollToUnit('u3',this)">U3 认识朋友</button>
+    <button class="unav-btn" onclick="scrollToUnit('u4',this)">U4 我的感受</button>
+    <button class="unav-btn" onclick="scrollToUnit('u5',this)">U5 颜色世界</button>
+    <button class="unav-btn" onclick="scrollToUnit('u6',this)">U6 数字1-10</button>
+    <button class="unav-btn" onclick="scrollToUnit('u7',this)">U7 可爱动物</button>
+    <button class="unav-btn" onclick="scrollToUnit('u8',this)">U8 我的家人</button>
+    <button class="unav-btn" onclick="scrollToUnit('u9',this)">U9 身体部位</button>
+    <button class="unav-btn" onclick="scrollToUnit('u10',this)">U10 我喜欢吃</button>
+    <button class="unav-btn" onclick="scrollToUnit('u11',this)">U11 玩具游戏</button>
+    <button class="unav-btn" onclick="scrollToUnit('u12',this)">U12 综合复习</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- SEARCH -->
+<div class="search-box">
+  <input type="text" class="search-input" id="searchInput" placeholder="搜索词汇或句型…" oninput="doSearch(this.value)"/>
+  <span class="search-icon">🔍</span>
+</div>
+
+<div id="unitsContainer">
+
+<!-- ═══ UNIT 1 ═══ -->
+<div class="unit-section u1-theme" id="u1">
+  <div class="unit-header">
+    <div class="unit-badge">1</div>
+    <div>
+      <div class="unit-title-cn">打招呼 &amp; 道别</div>
+      <div class="unit-title-en">Greetings &amp; Farewells · 2课时</div>
+    </div>
+  </div>
+  <div class="unit-body">
+    <span class="slabel">🔤 核心词汇</span>
+    <div class="vocab-grid">
+      <div class="vocab-card"><span class="vc-emoji">👋</span><div class="vc-en">Hello / Hi</div><div class="vc-cn">你好</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🌅</span><div class="vc-en">Good morning</div><div class="vc-cn">早上好</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🌆</span><div class="vc-en">Good afternoon</div><div class="vc-cn">下午好</div></div>
+      <div class="vocab-card"><span class="vc-emoji">👋</span><div class="vc-en">Goodbye / Bye</div><div class="vc-cn">再见</div></div>
+      <div class="vocab-card"><span class="vc-emoji">👩‍🏫</span><div class="vc-en">Teacher</div><div class="vc-cn">老师</div></div>
+      <div class="vocab-card"><span class="vc-emoji">👧</span><div class="vc-en">Friend</div><div class="vc-cn">朋友</div></div>
+    </div>
+    <div class="unit-divider"></div>
+    <span class="slabel">💬 核心句型</span>
+    <ul class="sent-list">
+      <li class="sent-item"><span class="sent-num">1</span><span class="sent-en">Hello! / Hi!</span><span class="sent-cn">打招呼</span></li>
+      <li class="sent-item"><span class="sent-num">2</span><span class="sent-en">Good morning, Teacher!</span><span class="sent-cn">早上好，老师！</span></li>
+      <li class="sent-item"><span class="sent-num">3</span><span class="sent-en">Good morning, [Name]!</span><span class="sent-cn">早上好，[名字]！</span></li>
+      <li class="sent-item"><span class="sent-num">4</span><span class="sent-en">Goodbye! / Bye-bye!</span><span class="sent-cn">再见！</span></li>
+      <li class="sent-item"><span class="sent-num">5</span><span class="sent-en">See you next time!</span><span class="sent-cn">下次见！</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ UNIT 2 ═══ -->
+<div class="unit-section u2-theme" id="u2">
+  <div class="unit-header">
+    <div class="unit-badge">2</div>
+    <div>
+      <div class="unit-title-cn">课堂指令</div>
+      <div class="unit-title-en">Classroom Commands · 2课时</div>
+    </div>
+  </div>
+  <div class="unit-body">
+    <span class="slabel">🔤 核心词汇</span>
+    <div class="vocab-grid">
+      <div class="vocab-card"><span class="vc-emoji">🪑</span><div class="vc-en">Sit down</div><div class="vc-cn">坐下</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🧍</span><div class="vc-en">Stand up</div><div class="vc-cn">站起来</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🤫</span><div class="vc-en">Quiet / Shh</div><div class="vc-cn">安静</div></div>
+      <div class="vocab-card"><span class="vc-emoji">👁️</span><div class="vc-en">Look at me</div><div class="vc-cn">看我</div></div>
+      <div class="vocab-card"><span class="vc-emoji">👂</span><div class="vc-en">Listen</div><div class="vc-cn">听</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🙌</span><div class="vc-en">Hands up</div><div class="vc-cn">举手</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🚶</span><div class="vc-en">Line up</div><div class="vc-cn">排队</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🧹</span><div class="vc-en">Clean up</div><div class="vc-cn">收拾好</div></div>
+    </div>
+    <div class="unit-divider"></div>
+    <span class="slabel">💬 核心句型</span>
+    <ul class="sent-list">
+      <li class="sent-item"><span class="sent-num">1</span><span class="sent-en">Sit down, please.</span><span class="sent-cn">请坐下</span></li>
+      <li class="sent-item"><span class="sent-num">2</span><span class="sent-en">Stand up, please.</span><span class="sent-cn">请站起来</span></li>
+      <li class="sent-item"><span class="sent-num">3</span><span class="sent-en">Eyes on me! / Look at me!</span><span class="sent-cn">看着我！</span></li>
+      <li class="sent-item"><span class="sent-num">4</span><span class="sent-en">Quiet, please. Shh...</span><span class="sent-cn">请安静</span></li>
+      <li class="sent-item"><span class="sent-num">5</span><span class="sent-en">Raise your hand!</span><span class="sent-cn">举手！</span></li>
+      <li class="sent-item"><span class="sent-num">6</span><span class="sent-en">Let's clean up!</span><span class="sent-cn">一起收拾！</span></li>
+      <li class="sent-item"><span class="sent-num">7</span><span class="sent-en">Good job! / Well done!</span><span class="sent-cn">做得好！</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ UNIT 3 ═══ -->
+<div class="unit-section u3-theme" id="u3">
+  <div class="unit-header">
+    <div class="unit-badge">3</div>
+    <div>
+      <div class="unit-title-cn">认识朋友</div>
+      <div class="unit-title-en">Making Friends · 2课时</div>
+    </div>
+  </div>
+  <div class="unit-body">
+    <span class="slabel">🔤 核心词汇</span>
+    <div class="vocab-grid">
+      <div class="vocab-card"><span class="vc-emoji">🙋</span><div class="vc-en">My name is...</div><div class="vc-cn">我叫……</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🤝</span><div class="vc-en">Nice to meet you</div><div class="vc-cn">很高兴认识你</div></div>
+      <div class="vocab-card"><span class="vc-emoji">❓</span><div class="vc-en">What's your name?</div><div class="vc-cn">你叫什么？</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🙏</span><div class="vc-en">Please</div><div class="vc-cn">请</div></div>
+      <div class="vocab-card"><span class="vc-emoji">💛</span><div class="vc-en">Thank you</div><div class="vc-cn">谢谢</div></div>
+      <div class="vocab-card"><span class="vc-emoji">😊</span><div class="vc-en">You're welcome</div><div class="vc-cn">不客气</div></div>
+      <div class="vocab-card"><span class="vc-emoji">😔</span><div class="vc-en">Sorry</div><div class="vc-cn">对不起</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🤗</span><div class="vc-en">It's OK</div><div class="vc-cn">没关系</div></div>
+    </div>
+    <div class="unit-divider"></div>
+    <span class="slabel">💬 核心句型</span>
+    <ul class="sent-list">
+      <li class="sent-item"><span class="sent-num">1</span><span class="sent-en">Hi! My name is [Name].</span><span class="sent-cn">嗨！我叫……</span></li>
+      <li class="sent-item"><span class="sent-num">2</span><span class="sent-en">What's your name?</span><span class="sent-cn">你叫什么名字？</span></li>
+      <li class="sent-item"><span class="sent-num">3</span><span class="sent-en">Nice to meet you!</span><span class="sent-cn">很高兴认识你！</span></li>
+      <li class="sent-item"><span class="sent-num">4</span><span class="sent-en">Nice to meet you, too!</span><span class="sent-cn">我也很高兴认识你！</span></li>
+      <li class="sent-item"><span class="sent-num">5</span><span class="sent-en">Thank you! / Thanks!</span><span class="sent-cn">谢谢！</span></li>
+      <li class="sent-item"><span class="sent-num">6</span><span class="sent-en">Sorry! → It's OK!</span><span class="sent-cn">对不起→没关系</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ UNIT 4 ═══ -->
+<div class="unit-section u4-theme" id="u4">
+  <div class="unit-header">
+    <div class="unit-badge">4</div>
+    <div>
+      <div class="unit-title-cn">我的感受</div>
+      <div class="unit-title-en">Feelings &amp; Emotions · 2课时</div>
+    </div>
+  </div>
+  <div class="unit-body">
+    <span class="slabel">🔤 核心词汇</span>
+    <div class="vocab-grid">
+      <div class="vocab-card"><span class="vc-emoji">😊</span><div class="vc-en">Happy</div><div class="vc-cn">开心</div></div>
+      <div class="vocab-card"><span class="vc-emoji">😢</span><div class="vc-en">Sad</div><div class="vc-cn">难过</div></div>
+      <div class="vocab-card"><span class="vc-emoji">😡</span><div class="vc-en">Angry</div><div class="vc-cn">生气</div></div>
+      <div class="vocab-card"><span class="vc-emoji">😨</span><div class="vc-en">Scared</div><div class="vc-cn">害怕</div></div>
+      <div class="vocab-card"><span class="vc-emoji">😴</span><div class="vc-en">Tired</div><div class="vc-cn">累了</div></div>
+      <div class="vocab-card"><span class="vc-emoji">😋</span><div class="vc-en">Hungry</div><div class="vc-cn">饿了</div></div>
+    </div>
+    <div class="unit-divider"></div>
+    <span class="slabel">💬 核心句型</span>
+    <ul class="sent-list">
+      <li class="sent-item"><span class="sent-num">1</span><span class="sent-en">I'm happy / sad / angry.</span><span class="sent-cn">我很开心/难过/生气</span></li>
+      <li class="sent-item"><span class="sent-num">2</span><span class="sent-en">How do you feel?</span><span class="sent-cn">你感觉怎么样？</span></li>
+      <li class="sent-item"><span class="sent-num">3</span><span class="sent-en">Are you happy?  Yes! / No...</span><span class="sent-cn">你开心吗？是/不是</span></li>
+      <li class="sent-item"><span class="sent-num">4</span><span class="sent-en">I feel tired. / I'm hungry!</span><span class="sent-cn">我累了/我饿了！</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ UNIT 5 ═══ -->
+<div class="unit-section u5-theme" id="u5">
+  <div class="unit-header">
+    <div class="unit-badge">5</div>
+    <div>
+      <div class="unit-title-cn">颜色世界</div>
+      <div class="unit-title-en">Colors · 2课时</div>
+    </div>
+  </div>
+  <div class="unit-body">
+    <span class="slabel">🔤 核心词汇</span>
+    <div class="vocab-grid">
+      <div class="vocab-card"><span class="vc-emoji">❤️</span><div class="vc-en">Red</div><div class="vc-cn">红色</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🟠</span><div class="vc-en">Orange</div><div class="vc-cn">橙色</div></div>
+      <div class="vocab-card"><span class="vc-emoji">💛</span><div class="vc-en">Yellow</div><div class="vc-cn">黄色</div></div>
+      <div class="vocab-card"><span class="vc-emoji">💚</span><div class="vc-en">Green</div><div class="vc-cn">绿色</div></div>
+      <div class="vocab-card"><span class="vc-emoji">💙</span><div class="vc-en">Blue</div><div class="vc-cn">蓝色</div></div>
+      <div class="vocab-card"><span class="vc-emoji">💜</span><div class="vc-en">Purple</div><div class="vc-cn">紫色</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🩷</span><div class="vc-en">Pink</div><div class="vc-cn">粉色</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🖤</span><div class="vc-en">Black</div><div class="vc-cn">黑色</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🤍</span><div class="vc-en">White</div><div class="vc-cn">白色</div></div>
+    </div>
+    <div class="unit-divider"></div>
+    <span class="slabel">💬 核心句型</span>
+    <ul class="sent-list">
+      <li class="sent-item"><span class="sent-num">1</span><span class="sent-en">What colour is it?</span><span class="sent-cn">它是什么颜色？</span></li>
+      <li class="sent-item"><span class="sent-num">2</span><span class="sent-en">It's red / blue / green.</span><span class="sent-cn">它是红/蓝/绿色</span></li>
+      <li class="sent-item"><span class="sent-num">3</span><span class="sent-en">I like [colour]!</span><span class="sent-cn">我喜欢[颜色]！</span></li>
+      <li class="sent-item"><span class="sent-num">4</span><span class="sent-en">My favourite colour is [colour].</span><span class="sent-cn">我最喜欢的颜色是……</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ UNIT 6 ═══ -->
+<div class="unit-section u6-theme" id="u6">
+  <div class="unit-header">
+    <div class="unit-badge">6</div>
+    <div>
+      <div class="unit-title-cn">数字 1-10</div>
+      <div class="unit-title-en">Numbers 1-10 · 2课时</div>
+    </div>
+  </div>
+  <div class="unit-body">
+    <span class="slabel">🔤 核心词汇</span>
+    <div class="vocab-grid">
+      <div class="vocab-card"><span class="vc-emoji">1️⃣</span><div class="vc-en">One</div><div class="vc-cn">一</div></div>
+      <div class="vocab-card"><span class="vc-emoji">2️⃣</span><div class="vc-en">Two</div><div class="vc-cn">二</div></div>
+      <div class="vocab-card"><span class="vc-emoji">3️⃣</span><div class="vc-en">Three</div><div class="vc-cn">三</div></div>
+      <div class="vocab-card"><span class="vc-emoji">4️⃣</span><div class="vc-en">Four</div><div class="vc-cn">四</div></div>
+      <div class="vocab-card"><span class="vc-emoji">5️⃣</span><div class="vc-en">Five</div><div class="vc-cn">五</div></div>
+      <div class="vocab-card"><span class="vc-emoji">6️⃣</span><div class="vc-en">Six</div><div class="vc-cn">六</div></div>
+      <div class="vocab-card"><span class="vc-emoji">7️⃣</span><div class="vc-en">Seven</div><div class="vc-cn">七</div></div>
+      <div class="vocab-card"><span class="vc-emoji">8️⃣</span><div class="vc-en">Eight</div><div class="vc-cn">八</div></div>
+      <div class="vocab-card"><span class="vc-emoji">9️⃣</span><div class="vc-en">Nine</div><div class="vc-cn">九</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🔟</span><div class="vc-en">Ten</div><div class="vc-cn">十</div></div>
+    </div>
+    <div class="unit-divider"></div>
+    <span class="slabel">💬 核心句型</span>
+    <ul class="sent-list">
+      <li class="sent-item"><span class="sent-num">1</span><span class="sent-en">One, two, three... ten!</span><span class="sent-cn">数数 1 到 10</span></li>
+      <li class="sent-item"><span class="sent-num">2</span><span class="sent-en">How many? — [number]!</span><span class="sent-cn">有几个？——[数字]！</span></li>
+      <li class="sent-item"><span class="sent-num">3</span><span class="sent-en">I have [number] [things].</span><span class="sent-cn">我有[数字]个[物品]</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ UNIT 7 ═══ -->
+<div class="unit-section u7-theme" id="u7">
+  <div class="unit-header">
+    <div class="unit-badge">7</div>
+    <div>
+      <div class="unit-title-cn">可爱动物</div>
+      <div class="unit-title-en">Animals · 2课时</div>
+    </div>
+  </div>
+  <div class="unit-body">
+    <span class="slabel">🔤 核心词汇</span>
+    <div class="vocab-grid">
+      <div class="vocab-card"><span class="vc-emoji">🐶</span><div class="vc-en">Dog</div><div class="vc-cn">狗</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🐱</span><div class="vc-en">Cat</div><div class="vc-cn">猫</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🐰</span><div class="vc-en">Rabbit</div><div class="vc-cn">兔子</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🐼</span><div class="vc-en">Panda</div><div class="vc-cn">熊猫</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🐘</span><div class="vc-en">Elephant</div><div class="vc-cn">大象</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🦁</span><div class="vc-en">Lion</div><div class="vc-cn">狮子</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🐯</span><div class="vc-en">Tiger</div><div class="vc-cn">老虎</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🦒</span><div class="vc-en">Giraffe</div><div class="vc-cn">长颈鹿</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🐸</span><div class="vc-en">Frog</div><div class="vc-cn">青蛙</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🐦</span><div class="vc-en">Bird</div><div class="vc-cn">鸟</div></div>
+    </div>
+    <div class="unit-divider"></div>
+    <span class="slabel">💬 核心句型</span>
+    <ul class="sent-list">
+      <li class="sent-item"><span class="sent-num">1</span><span class="sent-en">What is it? — It's a [animal].</span><span class="sent-cn">这是什么？——是一只[动物]</span></li>
+      <li class="sent-item"><span class="sent-num">2</span><span class="sent-en">I like [animals]!</span><span class="sent-cn">我喜欢[动物]！</span></li>
+      <li class="sent-item"><span class="sent-num">3</span><span class="sent-en">The [animal] says [sound].</span><span class="sent-cn">[动物]说[叫声]</span></li>
+      <li class="sent-item"><span class="sent-num">4</span><span class="sent-en">Can [animal] jump / fly / swim?</span><span class="sent-cn">[动物]能跳/飞/游泳吗？</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ UNIT 8 ═══ -->
+<div class="unit-section u8-theme" id="u8">
+  <div class="unit-header">
+    <div class="unit-badge">8</div>
+    <div>
+      <div class="unit-title-cn">我的家人</div>
+      <div class="unit-title-en">My Family · 2课时</div>
+    </div>
+  </div>
+  <div class="unit-body">
+    <span class="slabel">🔤 核心词汇</span>
+    <div class="vocab-grid">
+      <div class="vocab-card"><span class="vc-emoji">👨</span><div class="vc-en">Dad / Father</div><div class="vc-cn">爸爸</div></div>
+      <div class="vocab-card"><span class="vc-emoji">👩</span><div class="vc-en">Mum / Mother</div><div class="vc-cn">妈妈</div></div>
+      <div class="vocab-card"><span class="vc-emoji">👦</span><div class="vc-en">Brother</div><div class="vc-cn">哥哥/弟弟</div></div>
+      <div class="vocab-card"><span class="vc-emoji">👧</span><div class="vc-en">Sister</div><div class="vc-cn">姐姐/妹妹</div></div>
+      <div class="vocab-card"><span class="vc-emoji">👴</span><div class="vc-en">Grandpa</div><div class="vc-cn">爷爷/外公</div></div>
+      <div class="vocab-card"><span class="vc-emoji">👵</span><div class="vc-en">Grandma</div><div class="vc-cn">奶奶/外婆</div></div>
+      <div class="vocab-card"><span class="vc-emoji">👶</span><div class="vc-en">Baby</div><div class="vc-cn">宝宝</div></div>
+      <div class="vocab-card"><span class="vc-emoji">👨‍👩‍👧‍👦</span><div class="vc-en">Family</div><div class="vc-cn">家庭</div></div>
+    </div>
+    <div class="unit-divider"></div>
+    <span class="slabel">💬 核心句型</span>
+    <ul class="sent-list">
+      <li class="sent-item"><span class="sent-num">1</span><span class="sent-en">This is my [family member].</span><span class="sent-cn">这是我的[家人]</span></li>
+      <li class="sent-item"><span class="sent-num">2</span><span class="sent-en">I love my family!</span><span class="sent-cn">我爱我的家人！</span></li>
+      <li class="sent-item"><span class="sent-num">3</span><span class="sent-en">Who is this? — This is my mum.</span><span class="sent-cn">这是谁？——这是我妈妈</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ UNIT 9 ═══ -->
+<div class="unit-section u9-theme" id="u9">
+  <div class="unit-header">
+    <div class="unit-badge">9</div>
+    <div>
+      <div class="unit-title-cn">身体部位</div>
+      <div class="unit-title-en">Body Parts · 2课时</div>
+    </div>
+  </div>
+  <div class="unit-body">
+    <span class="slabel">🔤 核心词汇</span>
+    <div class="vocab-grid">
+      <div class="vocab-card"><span class="vc-emoji">👁️</span><div class="vc-en">Eyes</div><div class="vc-cn">眼睛</div></div>
+      <div class="vocab-card"><span class="vc-emoji">👃</span><div class="vc-en">Nose</div><div class="vc-cn">鼻子</div></div>
+      <div class="vocab-card"><span class="vc-emoji">👄</span><div class="vc-en">Mouth</div><div class="vc-cn">嘴巴</div></div>
+      <div class="vocab-card"><span class="vc-emoji">👂</span><div class="vc-en">Ears</div><div class="vc-cn">耳朵</div></div>
+      <div class="vocab-card"><span class="vc-emoji">✋</span><div class="vc-en">Hands</div><div class="vc-cn">手</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🦶</span><div class="vc-en">Feet</div><div class="vc-cn">脚</div></div>
+      <div class="vocab-card"><span class="vc-emoji">💪</span><div class="vc-en">Arms</div><div class="vc-cn">手臂</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🦵</span><div class="vc-en">Legs</div><div class="vc-cn">腿</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🧠</span><div class="vc-en">Head</div><div class="vc-cn">头</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🫀</span><div class="vc-en">Tummy</div><div class="vc-cn">肚子</div></div>
+    </div>
+    <div class="unit-divider"></div>
+    <span class="slabel">💬 核心句型</span>
+    <ul class="sent-list">
+      <li class="sent-item"><span class="sent-num">1</span><span class="sent-en">Touch your [body part]!</span><span class="sent-cn">摸你的[身体部位]！</span></li>
+      <li class="sent-item"><span class="sent-num">2</span><span class="sent-en">Head, shoulders, knees and toes!</span><span class="sent-cn">头、肩、膝、脚趾！</span></li>
+      <li class="sent-item"><span class="sent-num">3</span><span class="sent-en">I have two eyes / two ears.</span><span class="sent-cn">我有两只眼睛/耳朵</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ UNIT 10 ═══ -->
+<div class="unit-section u10-theme" id="u10">
+  <div class="unit-header">
+    <div class="unit-badge">10</div>
+    <div>
+      <div class="unit-title-cn">我喜欢吃</div>
+      <div class="unit-title-en">Food I Like · 2课时</div>
+    </div>
+  </div>
+  <div class="unit-body">
+    <span class="slabel">🔤 核心词汇</span>
+    <div class="vocab-grid">
+      <div class="vocab-card"><span class="vc-emoji">🍎</span><div class="vc-en">Apple</div><div class="vc-cn">苹果</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🍌</span><div class="vc-en">Banana</div><div class="vc-cn">香蕉</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🍊</span><div class="vc-en">Orange</div><div class="vc-cn">橙子</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🍕</span><div class="vc-en">Pizza</div><div class="vc-cn">披萨</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🍚</span><div class="vc-en">Rice</div><div class="vc-cn">米饭</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🥦</span><div class="vc-en">Broccoli</div><div class="vc-cn">西兰花</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🥕</span><div class="vc-en">Carrot</div><div class="vc-cn">胡萝卜</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🍦</span><div class="vc-en">Ice cream</div><div class="vc-cn">冰淇淋</div></div>
+    </div>
+    <div class="unit-divider"></div>
+    <span class="slabel">💬 核心句型</span>
+    <ul class="sent-list">
+      <li class="sent-item"><span class="sent-num">1</span><span class="sent-en">Do you like [food]?</span><span class="sent-cn">你喜欢吃[食物]吗？</span></li>
+      <li class="sent-item"><span class="sent-num">2</span><span class="sent-en">Yes, I like [food]! / No, I don't.</span><span class="sent-cn">是的，我喜欢！/不，我不喜欢</span></li>
+      <li class="sent-item"><span class="sent-num">3</span><span class="sent-en">Yummy! / Yuck!</span><span class="sent-cn">好吃！/难吃！</span></li>
+      <li class="sent-item"><span class="sent-num">4</span><span class="sent-en">I'm hungry! Can I have a [food]?</span><span class="sent-cn">我饿了！我能吃[食物]吗？</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ UNIT 11 ═══ -->
+<div class="unit-section u11-theme" id="u11">
+  <div class="unit-header">
+    <div class="unit-badge">11</div>
+    <div>
+      <div class="unit-title-cn">玩具与游戏</div>
+      <div class="unit-title-en">Toys &amp; Play · 2课时</div>
+    </div>
+  </div>
+  <div class="unit-body">
+    <span class="slabel">🔤 核心词汇</span>
+    <div class="vocab-grid">
+      <div class="vocab-card"><span class="vc-emoji">🏀</span><div class="vc-en">Ball</div><div class="vc-cn">球</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🪆</span><div class="vc-en">Doll</div><div class="vc-cn">玩偶</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🚗</span><div class="vc-en">Car</div><div class="vc-cn">小汽车</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🧩</span><div class="vc-en">Puzzle</div><div class="vc-cn">拼图</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🎨</span><div class="vc-en">Paint</div><div class="vc-cn">画画</div></div>
+      <div class="vocab-card"><span class="vc-emoji">📚</span><div class="vc-en">Books</div><div class="vc-cn">书</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🎮</span><div class="vc-en">Play / Game</div><div class="vc-cn">玩/游戏</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🏃</span><div class="vc-en">Run / Jump</div><div class="vc-cn">跑/跳</div></div>
+    </div>
+    <div class="unit-divider"></div>
+    <span class="slabel">💬 核心句型</span>
+    <ul class="sent-list">
+      <li class="sent-item"><span class="sent-num">1</span><span class="sent-en">Let's play [game]!</span><span class="sent-cn">我们来玩[游戏]吧！</span></li>
+      <li class="sent-item"><span class="sent-num">2</span><span class="sent-en">Can I play with you?</span><span class="sent-cn">我可以和你一起玩吗？</span></li>
+      <li class="sent-item"><span class="sent-num">3</span><span class="sent-en">My favourite toy is a [toy].</span><span class="sent-cn">我最喜欢的玩具是[玩具]</span></li>
+      <li class="sent-item"><span class="sent-num">4</span><span class="sent-en">Share, please! / Take turns!</span><span class="sent-cn">请分享！/轮流来！</span></li>
+      <li class="sent-item"><span class="sent-num">5</span><span class="sent-en">That's fun! / I love this game!</span><span class="sent-cn">好有趣！/我喜欢这个游戏！</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ UNIT 12 ═══ -->
+<div class="unit-section u12-theme" id="u12">
+  <div class="unit-header">
+    <div class="unit-badge">12</div>
+    <div>
+      <div class="unit-title-cn">综合复习 &amp; 期末展示</div>
+      <div class="unit-title-en">Review &amp; Mini Show · 2课时</div>
+    </div>
+  </div>
+  <div class="unit-body">
+    <span class="slabel">🔤 复习全部词汇</span>
+    <div class="vocab-grid">
+      <div class="vocab-card"><span class="vc-emoji">👋</span><div class="vc-en">Greetings</div><div class="vc-cn">U1 打招呼</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🏫</span><div class="vc-en">Commands</div><div class="vc-cn">U2 课堂指令</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🤝</span><div class="vc-en">Friends</div><div class="vc-cn">U3 认识朋友</div></div>
+      <div class="vocab-card"><span class="vc-emoji">😊</span><div class="vc-en">Feelings</div><div class="vc-cn">U4 我的感受</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🌈</span><div class="vc-en">Colours</div><div class="vc-cn">U5 颜色世界</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🔢</span><div class="vc-en">Numbers</div><div class="vc-cn">U6 数字1-10</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🦁</span><div class="vc-en">Animals</div><div class="vc-cn">U7 可爱动物</div></div>
+      <div class="vocab-card"><span class="vc-emoji">👨‍👩‍👧‍👦</span><div class="vc-en">Family</div><div class="vc-cn">U8 我的家人</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🤸</span><div class="vc-en">Body</div><div class="vc-cn">U9 身体部位</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🍎</span><div class="vc-en">Food</div><div class="vc-cn">U10 我喜欢吃</div></div>
+      <div class="vocab-card"><span class="vc-emoji">🎮</span><div class="vc-en">Toys</div><div class="vc-cn">U11 玩具游戏</div></div>
+    </div>
+    <div class="unit-divider"></div>
+    <span class="slabel">💬 期末展示句型</span>
+    <ul class="sent-list">
+      <li class="sent-item"><span class="sent-num">1</span><span class="sent-en">Hello, everyone! My name is [Name].</span><span class="sent-cn">大家好！我叫……</span></li>
+      <li class="sent-item"><span class="sent-num">2</span><span class="sent-en">I'm [age] years old.</span><span class="sent-cn">我[X]岁了</span></li>
+      <li class="sent-item"><span class="sent-num">3</span><span class="sent-en">My favourite colour is [colour].</span><span class="sent-cn">我最喜欢的颜色是……</span></li>
+      <li class="sent-item"><span class="sent-num">4</span><span class="sent-en">I like [food / animal / toy].</span><span class="sent-cn">我喜欢[食物/动物/玩具]</span></li>
+      <li class="sent-item"><span class="sent-num">5</span><span class="sent-en">Thank you! Goodbye, everyone!</span><span class="sent-cn">谢谢大家！再见！</span></li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- end unitsContainer -->
+</div><!-- end wrap -->
+
+<script>
+const unitColors = {
+  u1:'#f5a623',u2:'#4caf50',u3:'#2196f3',u4:'#ff7043',
+  u5:'#9c27b0',u6:'#e91e63',u7:'#009688',u8:'#2979ff',
+  u9:'#607d8b',u10:'#e91e63',u11:'#673ab7',u12:'#ff6f00'
+};
+
+// Set nav button colors
+document.querySelectorAll('.unav-btn').forEach(btn=>{
+  const onclick = btn.getAttribute('onclick');
+  const m = onclick.match(/scrollToUnit\('(u\d+)'/);
+  if(m && unitColors[m[1]]){
+    btn.addEventListener('mouseover',()=>btn.style.borderColor=unitColors[m[1]]);
+    btn.addEventListener('mouseout',()=>{if(!btn.classList.contains('active'))btn.style.borderColor='#e0e0e0'});
+  }
+});
+
+function scrollToUnit(id, btn){
+  document.querySelectorAll('.unav-btn').forEach(b=>{
+    b.classList.remove('active');
+    b.style.background='';
+    b.style.color='';
+    b.style.borderColor='#e0e0e0';
+  });
+  btn.classList.add('active');
+  if(id==='all'){
+    btn.style.background='linear-gradient(135deg,#f5576c,#fda085)';
+    btn.style.color='#fff';
+    btn.style.borderColor='transparent';
+    window.scrollTo({top:0,behavior:'smooth'});
+  } else {
+    const color = unitColors[id]||'#f5576c';
+    btn.style.background=color;
+    btn.style.color='#fff';
+    btn.style.borderColor='transparent';
+    const el = document.getElementById(id);
+    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+
+// Search
+function doSearch(query){
+  const q = query.trim().toLowerCase();
+  const container = document.getElementById('unitsContainer');
+  if(!q){
+    document.querySelectorAll('.unit-section').forEach(s=>s.style.display='');
+    document.querySelectorAll('.highlight').forEach(h=>{
+      h.outerHTML = h.textContent;
+    });
+    return;
+  }
+  document.querySelectorAll('.unit-section').forEach(section=>{
+    const text = section.textContent.toLowerCase();
+    section.style.display = text.includes(q) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>
