@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Songs 歌曲资源 | UpGrade 幼儿英语</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#fff9f0;color:#333;min-height:100vh}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#ff9a3c,#ff6b35,#f7931e);color:#fff;padding:40px 24px 32px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:"🎵";font-size:120px;position:absolute;top:-20px;left:-20px;opacity:.08;transform:rotate(-15deg)}
+.header::after{content:"🎶";font-size:100px;position:absolute;bottom:-15px;right:-10px;opacity:.08;transform:rotate(10deg)}
+.header h1{font-size:2.2rem;font-weight:900;letter-spacing:2px;text-shadow:0 2px 8px rgba(0,0,0,.2);margin-bottom:8px}
+.header p{font-size:1rem;opacity:.92;margin-bottom:16px}
+.back-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.5);color:#fff;padding:8px 18px;border-radius:20px;text-decoration:none;font-size:.88rem;font-weight:600;transition:.2s}
+.back-btn:hover{background:rgba(255,255,255,.35)}
+
+/* STATS BAR */
+.stats{display:flex;justify-content:center;gap:32px;background:#fff;padding:16px 24px;box-shadow:0 2px 12px rgba(0,0,0,.06);flex-wrap:wrap}
+.stat-item{text-align:center}
+.stat-num{font-size:1.5rem;font-weight:800;color:#ff6b35}
+.stat-label{font-size:.78rem;color:#888;margin-top:2px}
+
+/* UNIT FILTER */
+.filter-bar{padding:20px 24px 8px;max-width:1100px;margin:0 auto}
+.filter-bar h3{font-size:.88rem;color:#888;font-weight:600;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px}
+.unit-tabs{display:flex;flex-wrap:wrap;gap:8px}
+.unit-tab{padding:7px 16px;border-radius:20px;border:2px solid #e0e0e0;background:#fff;cursor:pointer;font-size:.85rem;font-weight:600;color:#666;transition:.15s}
+.unit-tab:hover{border-color:#ff9a3c;color:#ff6b35}
+.unit-tab.active{background:linear-gradient(135deg,#ff9a3c,#ff6b35);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(255,107,53,.3)}
+
+/* SONGS GRID */
+.songs-container{max-width:1100px;margin:0 auto;padding:20px 24px 60px}
+.unit-section{margin-bottom:36px}
+.unit-title{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.unit-badge{background:linear-gradient(135deg,#ff9a3c,#ff6b35);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;flex-shrink:0}
+.unit-name{font-size:1.1rem;font-weight:800;color:#333}
+.unit-count{font-size:.8rem;color:#999;margin-left:4px}
+
+.songs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+
+/* SONG CARD */
+.song-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.08);transition:.25s;cursor:pointer;border:2px solid transparent}
+.song-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(255,107,53,.18);border-color:#ff9a3c}
+.song-card.playing{border-color:#ff6b35;box-shadow:0 8px 24px rgba(255,107,53,.3)}
+
+.song-thumb{position:relative;background:linear-gradient(135deg,#ffecd2,#fcb69f);height:160px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.song-thumb .emoji-bg{font-size:64px;opacity:.35;position:absolute}
+.song-thumb .play-icon{width:52px;height:52px;background:rgba(255,255,255,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 16px rgba(0,0,0,.15);transition:.2s;position:relative;z-index:1}
+.song-card:hover .play-icon,.song-card.playing .play-icon{background:#ff6b35;box-shadow:0 6px 20px rgba(255,107,53,.4)}
+.song-card.playing .play-icon{animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+
+.song-unit-tag{position:absolute;top:10px;left:10px;background:rgba(255,107,53,.85);color:#fff;font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:12px;backdrop-filter:blur(4px)}
+
+.song-info{padding:14px 16px}
+.song-title{font-size:.95rem;font-weight:700;color:#333;margin-bottom:6px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.song-meta{display:flex;align-items:center;justify-content:space-between}
+.song-unit-label{font-size:.78rem;color:#ff6b35;font-weight:600;background:#fff3ec;padding:2px 8px;border-radius:8px}
+.song-size{font-size:.75rem;color:#bbb}
+
+/* VIDEO PLAYER MODAL */
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:1000;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.show{display:flex}
+.modal-box{background:#1a1a2e;border-radius:20px;overflow:hidden;max-width:860px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.modal-header{background:linear-gradient(135deg,#ff9a3c,#ff6b35);padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.modal-title{color:#fff;font-size:1rem;font-weight:700;flex:1;margin-right:12px}
+.modal-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0}
+.modal-close:hover{background:rgba(255,255,255,.4)}
+.modal-video{width:100%;display:block;background:#000;max-height:70vh}
+.modal-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#16213e}
+.nav-btn{background:#ff6b35;color:#fff;border:none;padding:8px 18px;border-radius:20px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.2s;display:flex;align-items:center;gap:6px}
+.nav-btn:hover{background:#ff9a3c}
+.nav-btn:disabled{background:#444;cursor:not-allowed;opacity:.5}
+.now-playing{color:#aaa;font-size:.82rem;text-align:center}
+
+/* PLAYING INDICATOR */
+.now-playing-bar{display:none;background:linear-gradient(135deg,#ff9a3c22,#ff6b3522);border:2px solid #ff9a3c;border-radius:12px;padding:10px 16px;margin-bottom:16px;align-items:center;gap:10px}
+.now-playing-bar.show{display:flex}
+.playing-dot{width:10px;height:10px;background:#ff6b35;border-radius:50%;animation:pulse 1s infinite}
+.playing-text{font-size:.88rem;font-weight:600;color:#ff6b35}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:60px 20px;color:#bbb}
+.empty-state .icon{font-size:56px;margin-bottom:16px}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .header h1{font-size:1.6rem}
+  .songs-grid{grid-template-columns:1fr}
+  .stats{gap:20px}
+  .stat-num{font-size:1.2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>🎵 Songs 歌曲资源</h1>
+  <p>21首经典幼儿英语歌曲 · 11个主题单元 · 点击即可播放</p>
+  <a href="index.html" class="back-btn">← 返回首页</a>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item"><div class="stat-num">21</div><div class="stat-label">首歌曲</div></div>
+  <div class="stat-item"><div class="stat-num">11</div><div class="stat-label">主题单元</div></div>
+  <div class="stat-item"><div class="stat-num">4-5岁</div><div class="stat-label">适用年龄</div></div>
+  <div class="stat-item"><div class="stat-num">MP4</div><div class="stat-label">高清视频</div></div>
+</div>
+
+<!-- FILTER -->
+<div class="filter-bar">
+  <h3>按单元筛选</h3>
+  <div class="unit-tabs">
+    <button class="unit-tab active" onclick="filterUnit('all')">全部</button>
+    <button class="unit-tab" onclick="filterUnit('U1')">Unit 1 · 问候</button>
+    <button class="unit-tab" onclick="filterUnit('U2')">Unit 2 · 日常</button>
+    <button class="unit-tab" onclick="filterUnit('U3')">Unit 3 · 姓名</button>
+    <button class="unit-tab" onclick="filterUnit('U4')">Unit 4 · 情绪</button>
+    <button class="unit-tab" onclick="filterUnit('U5')">Unit 5 · 颜色</button>
+    <button class="unit-tab" onclick="filterUnit('U6')">Unit 6 · 数字</button>
+    <button class="unit-tab" onclick="filterUnit('U7')">Unit 7 · 动物</button>
+    <button class="unit-tab" onclick="filterUnit('U8')">Unit 8 · 家庭</button>
+    <button class="unit-tab" onclick="filterUnit('U9')">Unit 9 · 身体</button>
+    <button class="unit-tab" onclick="filterUnit('U10')">Unit 10 · 食物</button>
+    <button class="unit-tab" onclick="filterUnit('U11')">Unit 11 · 交通</button>
+  </div>
+</div>
+
+<!-- NOW PLAYING BAR -->
+<div class="songs-container">
+  <div class="now-playing-bar" id="nowPlayingBar">
+    <div class="playing-dot"></div>
+    <span class="playing-text">正在播放：<span id="nowPlayingName"></span></span>
+  </div>
+</div>
+
+<!-- SONGS GRID -->
+<div class="songs-container" style="padding-top:0" id="songsContainer"></div>
+
+<!-- VIDEO MODAL -->
+<div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">歌曲标题</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <video class="modal-video" id="modalVideo" controls autoplay></video>
+    <div class="modal-nav">
+      <button class="nav-btn" id="prevBtn" onclick="playPrev()">◀ 上一首</button>
+      <div class="now-playing" id="modalCounter"></div>
+      <button class="nav-btn" id="nextBtn" onclick="playNext()">下一首 ▶</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const songs = [
+  // Unit 1 - 问候
+  {unit:"U1", title:"Hello!", emoji:"👋", file:"songs/U1 Hello!.mp4", theme:"#ff6b9d"},
+  {unit:"U1", title:"Bye Bye Goodbye", emoji:"👋", file:"songs/U1 Bye Bye Goodbye.mp4", theme:"#ff6b9d"},
+  {unit:"U1", title:"Good Morning, Mr. Rooster", emoji:"🐓", file:"songs/U1 Good Morning, Mr. Rooster.mp4", theme:"#ff6b9d"},
+  // Unit 2 - 日常
+  {unit:"U2", title:"Clean Up!", emoji:"🧹", file:"songs/U2 Clean Up!.mp4", theme:"#4ecdc4"},
+  {unit:"U2", title:"If You're Happy And You Know It", emoji:"😊", file:"songs/U2 If You're Happy And You Know It.mp4", theme:"#4ecdc4"},
+  // Unit 3 - 姓名
+  {unit:"U3", title:"What's Your Name? (Puppets Version)", emoji:"🤔", file:"songs/U3 What,s Your Name？ (Super Simple Puppets Version).mp4", theme:"#a29bfe"},
+  // Unit 4 - 情绪
+  {unit:"U4", title:"If You're Happy And You Know It Shout Hoo-ray", emoji:"🎉", file:"songs/U4  If You're Happy And You Know It Shout Hoo-ray.mp4", theme:"#fd79a8"},
+  {unit:"U4", title:"Feelings", emoji:"😄", file:"songs/U4-Feelings.mp4", theme:"#fd79a8"},
+  // Unit 5 - 颜色
+  {unit:"U5", title:"The Rainbow Song", emoji:"🌈", file:"songs/U5 The Rainbow Song.mp4", theme:"#6c5ce7"},
+  {unit:"U5", title:"Colors", emoji:"🎨", file:"songs/U5-Colors.mp4", theme:"#6c5ce7"},
+  // Unit 6 - 数字
+  {unit:"U6", title:"Counting 1-10 Song", emoji:"🔢", file:"songs/U6-Counting1-10Song.mp4", theme:"#00b894"},
+  {unit:"U6", title:"Ten Little Fingers", emoji:"✋", file:"songs/U6-Ten Little Fingers.mp4", theme:"#00b894"},
+  // Unit 7 - 动物
+  {unit:"U7", title:"Old MacDonald Had A Farm", emoji:"🐄", file:"songs/U7 Old_MacDonald_Had_A_Farm.mp4", theme:"#e17055"},
+  {unit:"U7", title:"Walking In The Jungle", emoji:"🦁", file:"songs/U7 Walking In The Jungle.mp4", theme:"#e17055"},
+  // Unit 8 - 家庭
+  {unit:"U8", title:"The People In My Family", emoji:"👨‍👩‍👧‍👦", file:"songs/U8 The People In My Family.mp4", theme:"#fdcb6e"},
+  {unit:"U8", title:"Finger Family Song", emoji:"👆", file:"songs/U8- Finger_Family_Song.mp4", theme:"#fdcb6e"},
+  // Unit 9 - 身体
+  {unit:"U9", title:"Head Shoulders Knees And Toes", emoji:"🤸", file:"songs/U9 Head Shoulders Knees And Toes.mp4", theme:"#74b9ff"},
+  {unit:"U9", title:"Little Animal Dance", emoji:"💃", file:"songs/U9 Little Animal Dance.mp4", theme:"#74b9ff"},
+  // Unit 10 - 食物
+  {unit:"U10", title:"Do You Like Broccoli Ice Cream? (Puppets)", emoji:"🥦", file:"songs/U10 Do You Like Broccoli Ice Cream？ (Puppets).mp4", theme:"#55efc4"},
+  {unit:"U10", title:"Peanut Butter Jelly - featuring The Super Simple Puppets", emoji:"🥜", file:"songs/U10 Peanut Butter - Jelly - featuring The Super Simple Puppets.mp4", theme:"#55efc4"},
+  // Unit 11 - 交通
+  {unit:"U11", title:"The Wheels On The Bus", emoji:"🚌", file:"songs/U11 The Wheels On The Bus.mp4", theme:"#fab1a0"},
+];
+
+const unitColors = {
+  U1:"#ff6b9d",U2:"#4ecdc4",U3:"#a29bfe",U4:"#fd79a8",U5:"#6c5ce7",
+  U6:"#00b894",U7:"#e17055",U8:"#fdcb6e",U9:"#74b9ff",U10:"#55efc4",U11:"#fab1a0"
+};
+
+const unitNames = {
+  U1:"问候 Greetings",U2:"日常 Daily Routine",U3:"姓名 Names",
+  U4:"情绪 Feelings",U5:"颜色 Colors",U6:"数字 Numbers",
+  U7:"动物 Animals",U8:"家庭 Family",U9:"身体 Body",
+  U10:"食物 Food",U11:"交通 Transport"
+};
+
+let currentFilter = 'all';
+let currentIndex = 0;
+let filteredSongs = [...songs];
+
+function getThumbGradient(unit){
+  const c = unitColors[unit] || '#ff9a3c';
+  return `linear-gradient(135deg,${c}33,${c}66)`;
+}
+
+function renderSongs(list){
+  const container = document.getElementById('songsContainer');
+  if(list.length===0){
+    container.innerHTML=`<div class="empty-state"><div class="icon">🔍</div><p>该单元暂无歌曲</p></div>`;
+    return;
+  }
+  // Group by unit
+  const groups={};
+  list.forEach((s,i)=>{
+    if(!groups[s.unit]) groups[s.unit]=[];
+    groups[s.unit].push({...s, globalIdx:songs.indexOf(s)});
+  });
+  
+  let html='';
+  Object.keys(groups).sort().forEach(unit=>{
+    const unitSongs=groups[unit];
+    html+=`<div class="unit-section" data-unit="${unit}">
+      <div class="unit-title">
+        <div class="unit-badge" style="background:${unitColors[unit]||'#ff9a3c'}">${unit.replace('U','')}</div>
+        <div class="unit-name">Unit ${unit.replace('U','')} · ${unitNames[unit]||''}</div>
+        <span class="unit-count">(${unitSongs.length}首)</span>
+      </div>
+      <div class="songs-grid">`;
+    unitSongs.forEach((s,idx)=>{
+      const listIdx = filteredSongs.indexOf(songs[s.globalIdx]);
+      html+=`<div class="song-card" id="card-${s.globalIdx}" onclick="openModal(${s.globalIdx})">
+        <div class="song-thumb" style="background:${getThumbGradient(s.unit)}">
+          <div class="emoji-bg">${s.emoji}</div>
+          <div class="song-unit-tag">${s.unit}</div>
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="song-info">
+          <div class="song-title">${s.title}</div>
+          <div class="song-meta">
+            <span class="song-unit-label" style="background:${unitColors[s.unit]}22;color:${unitColors[s.unit]}">${s.unit}</span>
+          </div>
+        </div>
+      </div>`;
+    });
+    html+='</div></div>';
+  });
+  container.innerHTML=html;
+}
+
+function filterUnit(unit){
+  currentFilter=unit;
+  document.querySelectorAll('.unit-tab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  filteredSongs = unit==='all' ? [...songs] : songs.filter(s=>s.unit===unit);
+  renderSongs(filteredSongs);
+}
+
+function openModal(globalIdx){
+  currentIndex = globalIdx;
+  const s = songs[globalIdx];
+  document.getElementById('modalTitle').textContent = `${s.unit} · ${s.title}`;
+  document.getElementById('modalVideo').src = s.file;
+  document.getElementById('modal').classList.add('show');
+  document.getElementById('modalCounter').textContent = `第 ${globalIdx+1} / ${songs.length} 首`;
+  
+  // Update prev/next buttons
+  document.getElementById('prevBtn').disabled = globalIdx===0;
+  document.getElementById('nextBtn').disabled = globalIdx===songs.length-1;
+  
+  // Show now playing bar
+  document.getElementById('nowPlayingBar').classList.add('show');
+  document.getElementById('nowPlayingName').textContent = s.title;
+  
+  // Mark card as playing
+  document.querySelectorAll('.song-card').forEach(c=>c.classList.remove('playing'));
+  const card = document.getElementById(`card-${globalIdx}`);
+  if(card) card.classList.add('playing');
+}
+
+function closeModal(){
+  document.getElementById('modal').classList.remove('show');
+  document.getElementById('modalVideo').pause();
+  document.getElementById('modalVideo').src='';
+  document.querySelectorAll('.song-card').forEach(c=>c.classList.remove('playing'));
+  document.getElementById('nowPlayingBar').classList.remove('show');
+}
+
+function playPrev(){
+  if(currentIndex>0) openModal(currentIndex-1);
+}
+function playNext(){
+  if(currentIndex<songs.length-1) openModal(currentIndex+1);
+}
+
+function handleOverlayClick(e){
+  if(e.target===document.getElementById('modal')) closeModal();
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape') closeModal();
+  if(e.key==='ArrowLeft') playPrev();
+  if(e.key==='ArrowRight') playNext();
+});
+
+// Auto play next
+document.getElementById('modalVideo').addEventListener('ended',()=>{
+  if(currentIndex<songs.length-1) setTimeout(()=>playNext(),1000);
+});
+
+// Initial render
+renderSongs(songs);
+</script>
+</body>
+</html>
