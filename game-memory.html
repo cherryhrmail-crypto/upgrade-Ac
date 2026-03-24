@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Match - 记忆配对游戏</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 30px;
+    }
+    .header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+    .header p { font-size: 1.1rem; opacity: 0.9; }
+    
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 20px;
+      color: white;
+      font-size: 1.2rem;
+    }
+    .stat { background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 20px; }
+    
+    .game-board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .card {
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      position: relative;
+      transform-style: preserve-3d;
+    }
+    .card:hover { transform: translateY(-5px); }
+    .card.flipped { background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%); }
+    .card.matched { 
+      background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); 
+      animation: matchPulse 0.5s ease;
+    }
+    .card.hidden { font-size: 2rem; color: #74b9ff; }
+    .card.hidden::after { content: '?'; }
+    .card span { display: none; }
+    .card.flipped span, .card.matched span { display: block; }
+    
+    @keyframes matchPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    
+    .controls {
+      text-align: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px 40px;
+      background: white;
+      color: #764ba2;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin: 5px;
+      text-decoration: none;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+    
+    .win-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 40px 60px;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      display: none;
+      z-index: 100;
+    }
+    .win-message.show { display: block; animation: popIn 0.5s ease; }
+    .win-message h2 { color: #00b894; font-size: 2.5rem; margin-bottom: 15px; }
+    .win-message p { color: #636e72; font-size: 1.2rem; margin-bottom: 20px; }
+    
+    @keyframes popIn {
+      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+    
+    .overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      z-index: 99;
+    }
+    .overlay.show { display: block; }
+    
+    @media (max-width: 600px) {
+      .game-board { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .card { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🧠 Memory Match</h1>
+      <p>记忆配对游戏 - 找到相同的卡片！</p>
+    </div>
+    
+    <div class="stats">
+      <div class="stat">步数: <span id="moves">0</span></div>
+      <div class="stat">配对: <span id="matches">0</span>/8</div>
+      <div class="stat">时间: <span id="time">0</span>s</div>
+    </div>
+    
+    <div class="game-board" id="gameBoard"></div>
+    
+    <div class="controls">
+      <button class="btn" onclick="initGame()">🔄 重新开始</button>
+      <a href="index.html" class="btn">🏠 返回首页</a>
+    </div>
+  </div>
+  
+  <div class="overlay" id="overlay"></div>
+  <div class="win-message" id="winMessage">
+    <h2>🎉 恭喜你！</h2>
+    <p>你完成了所有配对！<br>用时 <span id="finalTime">0</span> 秒，共 <span id="finalMoves">0</span> 步</p>
+    <button class="btn" onclick="initGame()">再玩一次</button>
+  </div>
+
+  <script>
+    const emojis = ['🐱', '🐶', '🐰', '🐻', '🐼', '🐨', '🦁', '🐯'];
+    let cards = [];
+    let flippedCards = [];
+    let matchedPairs = 0;
+    let moves = 0;
+    let timer = null;
+    let seconds = 0;
+    let isLocked = false;
+
+    function initGame() {
+      const board = document.getElementById('gameBoard');
+      board.innerHTML = '';
+      
+      // Create pairs
+      cards = [...emojis, ...emojis];
+      // Shuffle
+      cards.sort(() => Math.random() - 0.5);
+      
+      flippedCards = [];
+      matchedPairs = 0;
+      moves = 0;
+      seconds = 0;
+      isLocked = false;
+      
+      updateStats();
+      clearInterval(timer);
+      timer = setInterval(() => {
+        seconds++;
+        document.getElementById('time').textContent = seconds;
+      }, 1000);
+      
+      document.getElementById('winMessage').classList.remove('show');
+      document.getElementById('overlay').classList.remove('show');
+      
+      // Create cards
+      cards.forEach((emoji, index) => {
+        const card = document.createElement('div');
+        card.className = 'card hidden';
+        card.dataset.index = index;
+        card.dataset.emoji = emoji;
+        card.innerHTML = `<span>${emoji}</span>`;
+        card.addEventListener('click', () => flipCard(card));
+        board.appendChild(card);
+      });
+    }
+
+    function flipCard(card) {
+      if (isLocked || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+      
+      card.classList.remove('hidden');
+      card.classList.add('flipped');
+      flippedCards.push(card);
+      
+      if (flippedCards.length === 2) {
+        moves++;
+        updateStats();
+        checkMatch();
+      }
+    }
+
+    function checkMatch() {
+      isLocked = true;
+      const [card1, card2] = flippedCards;
+      
+      if (card1.dataset.emoji === card2.dataset.emoji) {
+        setTimeout(() => {
+          card1.classList.remove('flipped');
+          card1.classList.add('matched');
+          card2.classList.remove('flipped');
+          card2.classList.add('matched');
+          matchedPairs++;
+          updateStats();
+          flippedCards = [];
+          isLocked = false;
+          
+          if (matchedPairs === 8) {
+            gameWin();
+          }
+        }, 500);
+      } else {
+        setTimeout(() => {
+          card1.classList.remove('flipped');
+          card1.classList.add('hidden');
+          card2.classList.remove('flipped');
+          card2.classList.add('hidden');
+          flippedCards = [];
+          isLocked = false;
+        }, 1000);
+      }
+    }
+
+    function updateStats() {
+      document.getElementById('moves').textContent = moves;
+      document.getElementById('matches').textContent = matchedPairs;
+    }
+
+    function gameWin() {
+      clearInterval(timer);
+      document.getElementById('finalTime').textContent = seconds;
+      document.getElementById('finalMoves').textContent = moves;
+      document.getElementById('winMessage').classList.add('show');
+      document.getElementById('overlay').classList.add('show');
+    }
+
+    // Start game on load
+    initGame();
+  </script>
+</body>
+</html>

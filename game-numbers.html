@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number Pop - 数字泡泡游戏</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+      min-height: 100vh;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 20px;
+    }
+    .header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+    .header p { font-size: 1.1rem; opacity: 0.9; }
+    
+    .target {
+      background: white;
+      border-radius: 20px;
+      padding: 20px 40px;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    .target-label { font-size: 1.2rem; color: #636e72; margin-bottom: 10px; }
+    .target-number { 
+      font-size: 4rem; 
+      font-weight: 600; 
+      color: #30cfd0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    .target-word { font-size: 1.5rem; color: #a29bfe; margin-top: 5px; }
+    
+    .game-area {
+      position: relative;
+      height: 400px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    
+    .bubble {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #330867;
+      cursor: pointer;
+      transition: transform 0.1s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2), inset 0 -5px 10px rgba(0,0,0,0.1);
+      animation: float 3s ease-in-out infinite;
+    }
+    .bubble:hover { transform: scale(1.1); }
+    .bubble:active { transform: scale(0.9); }
+    .bubble.pop {
+      animation: pop 0.3s ease forwards;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes pop {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.8; }
+      100% { transform: scale(0); opacity: 0; }
+    }
+    
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .stat-box {
+      background: white;
+      padding: 15px 30px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .stat-label { font-size: 0.9rem; color: #636e72; }
+    .stat-value { font-size: 1.8rem; font-weight: 600; color: #2d3436; }
+    
+    .controls {
+      text-align: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px 40px;
+      background: white;
+      color: #330867;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin: 5px;
+      text-decoration: none;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+    
+    .feedback {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 5rem;
+      animation: feedbackPop 0.5s ease;
+      pointer-events: none;
+      z-index: 100;
+    }
+    @keyframes feedbackPop {
+      0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+      50% { transform: translate(-50%, -50%) scale(1.2); }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+    
+    @media (max-width: 600px) {
+      .game-area { height: 300px; }
+      .bubble { width: 60px; height: 60px; font-size: 1.5rem; }
+      .target-number { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🔢 Number Pop</h1>
+      <p>数字泡泡 - 戳破正确的数字！</p>
+    </div>
+    
+    <div class="target">
+      <div class="target-label">找到这个数字 Find this number</div>
+      <div class="target-number" id="targetNum">5</div>
+      <div class="target-word" id="targetWord">five</div>
+    </div>
+    
+    <div class="game-area" id="gameArea"></div>
+    
+    <div class="stats">
+      <div class="stat-box">
+        <div class="stat-label">得分 Score</div>
+        <div class="stat-value" id="score">0</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">时间 Time</div>
+        <div class="stat-value" id="time">60</div>
+      </div>
+    </div>
+    
+    <div class="controls">
+      <button class="btn" onclick="startGame()">▶️ 开始游戏</button>
+      <a href="index.html" class="btn">🏠 返回首页</a>
+    </div>
+  </div>
+
+  <script>
+    const numberWords = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+    let score = 0;
+    let timeLeft = 60;
+    let timer = null;
+    let targetNumber = 0;
+    let isPlaying = false;
+
+    function startGame() {
+      score = 0;
+      timeLeft = 60;
+      isPlaying = true;
+      document.getElementById('score').textContent = score;
+      document.getElementById('time').textContent = timeLeft;
+      
+      clearInterval(timer);
+      timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById('time').textContent = timeLeft;
+        if (timeLeft <= 0) {
+          endGame();
+        }
+      }, 1000);
+      
+      nextRound();
+    }
+
+    function nextRound() {
+      if (!isPlaying) return;
+      
+      targetNumber = Math.floor(Math.random() * 10) + 1;
+      document.getElementById('targetNum').textContent = targetNumber;
+      document.getElementById('targetWord').textContent = numberWords[targetNumber];
+      
+      createBubbles();
+      speak(`Find number ${targetNumber}`);
+    }
+
+    function createBubbles() {
+      const area = document.getElementById('gameArea');
+      area.innerHTML = '';
+      
+      const areaWidth = area.offsetWidth - 80;
+      const areaHeight = area.offsetHeight - 80;
+      
+      // Create 8 bubbles
+      for (let i = 0; i < 8; i++) {
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        
+        let num;
+        if (i < 3) {
+          // Make sure at least 3 are correct
+          num = targetNumber;
+        } else {
+          num = Math.floor(Math.random() * 10) + 1;
+        }
+        
+        bubble.textContent = num;
+        bubble.dataset.number = num;
+        
+        // Random position
+        bubble.style.left = Math.random() * areaWidth + 'px';
+        bubble.style.top = Math.random() * areaHeight + 'px';
+        bubble.style.animationDelay = Math.random() * 2 + 's';
+        
+        bubble.onclick = () => popBubble(bubble, num);
+        area.appendChild(bubble);
+      }
+    }
+
+    function popBubble(bubble, num) {
+      if (!isPlaying || bubble.classList.contains('pop')) return;
+      
+      bubble.classList.add('pop');
+      
+      const isCorrect = num === targetNumber;
+      
+      // Show feedback
+      const feedback = document.createElement('div');
+      feedback.className = 'feedback';
+      feedback.textContent = isCorrect ? '✅' : '❌';
+      document.body.appendChild(feedback);
+      setTimeout(() => feedback.remove(), 500);
+      
+      if (isCorrect) {
+        score += 10;
+        document.getElementById('score').textContent = score;
+        speak('Great!');
+        
+        setTimeout(() => {
+          if (document.querySelectorAll('.bubble:not(.pop)').length === 0) {
+            nextRound();
+          }
+        }, 300);
+      } else {
+        score = Math.max(0, score - 5);
+        document.getElementById('score').textContent = score;
+        speak('Try again!');
+      }
+    }
+
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+      }
+    }
+
+    function endGame() {
+      isPlaying = false;
+      clearInterval(timer);
+      speak(`Game over! Your score is ${score}`);
+      alert(`🎉 游戏结束！\n你的得分: ${score}`);
+    }
+
+    // Start on load
+    startGame();
+  </script>
+</body>
+</html>

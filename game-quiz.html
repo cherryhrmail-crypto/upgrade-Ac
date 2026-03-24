@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knowledge Quiz - 知识大闯关</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 700px; margin: 0 auto; }
+    .header { text-align: center; color: #2d3436; margin-bottom: 20px; }
+    .header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+    .quiz-card {
+      background: white;
+      border-radius: 24px;
+      padding: 30px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+    .question-emoji { font-size: 4rem; text-align: center; margin-bottom: 20px; }
+    .question-text { font-size: 1.5rem; color: #2d3436; margin-bottom: 25px; text-align: center; }
+    .options { display: flex; flex-direction: column; gap: 12px; }
+    .option {
+      background: #f8f9fa;
+      border: 2px solid #dfe6e9;
+      border-radius: 16px;
+      padding: 18px 24px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1.2rem;
+    }
+    .option:hover { border-color: #74b9ff; background: #e8f4f8; }
+    .option.correct { border-color: #00b894; background: #e8f8f5; }
+    .option.wrong { border-color: #ff6b6b; background: #ffe8e8; }
+    .btn {
+      display: inline-block;
+      padding: 15px 40px;
+      background: white;
+      color: #66a6ff;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 5px;
+      text-decoration: none;
+    }
+    .controls { text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🎓 Knowledge Quiz</h1>
+      <p>知识大闯关 - 测试你的英语知识！</p>
+    </div>
+    <div class="quiz-card">
+      <div class="question-emoji" id="questionEmoji">🐱</div>
+      <div class="question-text" id="questionText">What animal is this?</div>
+      <div class="options" id="options"></div>
+    </div>
+    <div class="controls">
+      <button class="btn" onclick="nextQuestion()">🔄 下一题</button>
+      <a href="index.html" class="btn">🏠 返回首页</a>
+    </div>
+  </div>
+  <script>
+    const questions = [
+      { emoji: '🐱', q: 'What animal is this?', options: ['Cat', 'Dog', 'Bird', 'Fish'], answer: 0 },
+      { emoji: '🔴', q: 'What color is this?', options: ['Blue', 'Red', 'Green', 'Yellow'], answer: 1 },
+      { emoji: '👋', q: 'How do you greet someone?', options: ['Goodbye', 'Hello', 'Thank you', 'Sorry'], answer: 1 },
+      { emoji: '🔢', q: 'What comes after 3?', options: ['2', '4', '5', '6'], answer: 1 },
+      { emoji: '🍎', q: 'What fruit is this?', options: ['Banana', 'Orange', 'Apple', 'Grape'], answer: 2 }
+    ];
+    let current = 0;
+    function loadQuestion() {
+      const q = questions[current];
+      document.getElementById('questionEmoji').textContent = q.emoji;
+      document.getElementById('questionText').textContent = q.q;
+      const opts = document.getElementById('options');
+      opts.innerHTML = '';
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement('div');
+        btn.className = 'option';
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(i, btn);
+        opts.appendChild(btn);
+      });
+    }
+    function checkAnswer(idx, btn) {
+      const correct = questions[current].answer;
+      btn.classList.add(idx === correct ? 'correct' : 'wrong');
+      if ('speechSynthesis' in window) {
+        speechSynthesis.speak(new SpeechSynthesisUtterance(idx === correct ? 'Correct!' : 'Try again!'));
+      }
+    }
+    function nextQuestion() {
+      current = (current + 1) % questions.length;
+      loadQuestion();
+    }
+    loadQuestion();
+  </script>
+</body>
+</html>
