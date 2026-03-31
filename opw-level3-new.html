@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔊 牛津自然拼读 Level 3 · 长元音</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#FF6B6B;--red-d:#e04444;
+  --orange:#FF9A3C;--yellow:#FFD93D;
+  --green:#4CAF50;--blue:#4D96FF;
+  --purple:#9B59B6;--pink:#FF6B9D;
+  --teal:#26C6DA;--lime:#8BC34A;
+  --bg:#FFF8F0;--white:#fff;--dark:#1a1a2e;
+  --shadow:0 4px 20px rgba(0,0,0,.10);
+}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:#333;min-height:100vh;}
+.topbar{background:linear-gradient(135deg,#FF6B9D,#FF9A3C);color:white;}
+.rainbow-bar{height:6px;background:linear-gradient(90deg,#FF6B6B,#FF9A3C,#FFD93D,#6BCB77,#4D96FF,#9B59B6,#FF6B9D);}
+.topbar-inner{display:flex;align-items:center;gap:14px;padding:12px 20px;}
+.back-btn{background:rgba(255,255,255,.22);border:none;color:white;padding:6px 18px;border-radius:20px;font-weight:900;cursor:pointer;font-size:.9rem;text-decoration:none;transition:.2s;}
+.back-btn:hover{background:rgba(255,255,255,.38);}
+.topbar-title{font-family:'Fredoka One',cursive;font-size:1.4rem;}
+.topbar-sub{font-size:.8rem;opacity:.8;margin-left:auto;}
+.hero{background:linear-gradient(135deg,#FF6B9D,#FF9A3C);color:white;text-align:center;padding:36px 20px 54px;position:relative;overflow:hidden;}
+.hero::before{content:'🌟';position:absolute;left:-18px;bottom:-18px;font-size:9rem;opacity:.1;pointer-events:none;}
+.hero::after{content:'🎵';position:absolute;right:-14px;top:-10px;font-size:9rem;opacity:.1;pointer-events:none;}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.22);border:1.5px solid rgba(255,255,255,.5);padding:5px 20px;border-radius:30px;font-size:.85rem;font-weight:900;letter-spacing:1px;margin-bottom:10px;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.8rem;margin-bottom:4px;text-shadow:2px 2px 8px rgba(0,0,0,.15);}
+.hero-sub{font-size:1rem;opacity:.9;margin-bottom:20px;}
+.hero-stats{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;}
+.hs{background:rgba(255,255,255,.18);border-radius:16px;padding:10px 20px;min-width:86px;}
+.hs-num{font-family:'Fredoka One',cursive;font-size:1.6rem;}
+.hs-label{font-size:.72rem;opacity:.85;}
+.tab-nav{display:flex;overflow-x:auto;background:white;border-bottom:2px solid #f0f0f0;position:sticky;top:0;z-index:99;padding:0 12px;box-shadow:0 2px 16px rgba(0,0,0,.08);}
+.tab-nav::-webkit-scrollbar{height:3px;}
+.tab-nav::-webkit-scrollbar-thumb{background:var(--pink);border-radius:3px;}
+.tab-btn{padding:13px 16px;font-weight:900;font-size:.88rem;color:#bbb;border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-2px;transition:.2s;font-family:'Nunito',sans-serif;}
+.tab-btn.active{color:var(--pink);border-bottom-color:var(--pink);}
+.tab-btn:hover:not(.active){color:var(--pink);opacity:.7;}
+.pane{display:none;padding:24px 16px;max-width:1000px;margin:0 auto;}
+.pane.active{display:block;}
+.sec-hdr{text-align:center;margin-bottom:28px;}
+.sec-hdr h2{font-family:'Fredoka One',cursive;font-size:1.8rem;color:var(--dark);margin-bottom:5px;}
+.sec-hdr p{color:#888;font-size:.92rem;}
+/* Units */
+.units-timeline{display:flex;flex-direction:column;gap:0;}
+.unit-group{margin-bottom:32px;}
+.group-label{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.group-line{flex:1;height:2px;background:linear-gradient(90deg,var(--pink),transparent);}
+.group-title{font-family:'Fredoka One',cursive;font-size:1rem;color:var(--pink);white-space:nowrap;}
+.unit-card{background:white;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:14px;transition:transform .2s;}
+.unit-card:hover{transform:translateY(-3px);}
+.unit-card.review-card .uc-head{background:linear-gradient(135deg,#FFD93D,#FF9A3C)!important;}
+.unit-card.review-card{border:2.5px solid #FFD93D;}
+.uc-head{padding:16px 20px;color:white;position:relative;display:flex;align-items:center;gap:14px;}
+.uc-head-emoji{font-size:2.2rem;flex-shrink:0;}
+.uc-head-info{flex:1;}
+.uc-unit-num{font-size:.75rem;font-weight:900;opacity:.85;letter-spacing:1px;}
+.uc-title{font-family:'Fredoka One',cursive;font-size:1.3rem;}
+.uc-subtitle{font-size:.82rem;opacity:.85;margin-top:2px;}
+.uc-toggle{background:rgba(255,255,255,.25);border:none;color:white;width:36px;height:36px;border-radius:50%;font-size:1.1rem;cursor:pointer;transition:.2s;flex-shrink:0;}
+.uc-toggle:hover{background:rgba(255,255,255,.4);}
+.uc-body{display:none;padding:20px;}
+.uc-body.open{display:block;}
+/* Phonics rule box */
+.phonics-box{background:linear-gradient(135deg,#fff8f0,#fff0f8);border-radius:16px;padding:16px 20px;margin-bottom:18px;border-left:4px solid var(--pink);}
+.phonics-box h4{font-family:'Fredoka One',cursive;color:var(--pink);font-size:1rem;margin-bottom:8px;}
+.phonics-box p{font-size:.88rem;line-height:1.7;color:#444;}
+.phonics-ipa{font-size:1.1rem;color:var(--purple);font-weight:900;cursor:pointer;}
+.phonics-ipa:hover{text-decoration:underline;}
+/* Magic E display */
+.magic-e-box{background:linear-gradient(135deg,#f0f8ff,#fff8ff);border-radius:16px;padding:18px;margin-bottom:18px;text-align:center;}
+.magic-e-box h4{font-family:'Fredoka One',cursive;color:var(--purple);margin-bottom:12px;}
+.magic-e-demo{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:12px;flex-wrap:wrap;}
+.me-before{font-family:'Fredoka One',cursive;font-size:1.6rem;color:#999;}
+.me-arrow{font-size:1.4rem;color:var(--orange);}
+.me-after{font-family:'Fredoka One',cursive;font-size:1.8rem;color:var(--blue);}
+.me-after .magic-e{color:var(--pink);font-size:2.2rem;}
+.me-rule{font-size:.85rem;color:#666;background:#f8f8f8;border-radius:10px;padding:8px 14px;display:inline-block;}
+/* Vowel Team display */
+.vowel-team-box{background:linear-gradient(135deg,#f0fff8,#f8fff0);border-radius:16px;padding:18px;margin-bottom:18px;text-align:center;}
+.vowel-team-box h4{font-family:'Fredoka One',cursive;color:var(--green);margin-bottom:10px;}
+.vt-pattern{font-family:'Fredoka One',cursive;font-size:2.8rem;color:var(--blue);letter-spacing:2px;margin-bottom:8px;}
+.vt-rule{font-size:.85rem;color:#666;background:#f8f8f8;border-radius:10px;padding:8px 14px;display:inline-block;margin-bottom:10px;}
+.vt-words-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.vt-word-chip{background:white;border:2px solid var(--green);border-radius:12px;padding:6px 14px;font-family:'Fredoka One',cursive;font-size:1.1rem;color:var(--dark);cursor:pointer;transition:.2s;}
+.vt-word-chip:hover{background:var(--green);color:white;transform:scale(1.08);}
+.vt-word-chip .vowel{color:var(--orange);font-size:1.2rem;}
+/* Word cards */
+.word-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:18px;}
+.wcard{background:white;border-radius:16px;padding:14px 10px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.08);transition:.2s;cursor:pointer;border:2px solid transparent;}
+.wcard:hover{transform:translateY(-4px);box-shadow:0 6px 20px rgba(0,0,0,.13);}
+.wcard.learned{border-color:var(--green);background:#f0fff4;}
+.wcard-emoji{font-size:2.2rem;margin-bottom:6px;}
+.wcard-word{font-family:'Fredoka One',cursive;font-size:1.2rem;color:var(--dark);margin-bottom:2px;}
+.wcard-word .vowel{color:var(--orange);font-size:1.3rem;}
+.wcard-word .magic-e{color:var(--pink);}
+.wcard-ipa{font-size:.75rem;color:#888;}
+.wcard-cn{font-size:.8rem;color:#666;margin-top:3px;}
+.wcard-speak{background:var(--pink);color:white;border:none;border-radius:10px;padding:4px 10px;font-size:.75rem;cursor:pointer;margin-top:6px;font-family:'Nunito',sans-serif;}
+/* Sentences */
+.sentences-list{display:flex;flex-direction:column;gap:10px;margin-bottom:18px;}
+.sitem{background:#fff8f0;border-radius:14px;padding:12px 16px;display:flex;align-items:flex-start;gap:10px;}
+.sitem-en{font-size:.95rem;font-weight:700;color:var(--dark);}
+.sitem-cn{font-size:.82rem;color:#888;margin-top:3px;}
+.sitem-speak{background:var(--orange);color:white;border:none;border-radius:10px;padding:5px 12px;font-size:.8rem;cursor:pointer;white-space:nowrap;font-family:'Nunito',sans-serif;}
+/* Chant */
+.chant-box{background:linear-gradient(135deg,#fff0f8,#fff8f0);border-radius:16px;padding:16px 20px;border:2px dashed var(--orange);}
+.chant-box h4{font-family:'Fredoka One',cursive;color:var(--orange);font-size:1rem;margin-bottom:10px;}
+.chant-line{padding:4px 0;font-size:.9rem;line-height:1.8;color:#444;}
+.chant-line .highlight{color:var(--pink);font-weight:900;}
+.chant-play{background:linear-gradient(135deg,var(--orange),var(--pink));color:white;border:none;border-radius:20px;padding:8px 22px;font-size:.88rem;font-weight:900;cursor:pointer;margin-top:10px;font-family:'Nunito',sans-serif;}
+/* Vocab Pane */
+.vowel-filter{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;justify-content:center;}
+.vf-btn{padding:8px 18px;border-radius:20px;border:2px solid #e0e0e0;background:white;font-weight:900;cursor:pointer;font-size:.85rem;transition:.2s;font-family:'Nunito',sans-serif;}
+.vf-btn.active{background:var(--pink);color:white;border-color:var(--pink);}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px;}
+.vc{background:white;border-radius:16px;padding:14px 10px;text-align:center;box-shadow:var(--shadow);cursor:pointer;transition:.2s;border:2.5px solid transparent;position:relative;}
+.vc:hover{transform:translateY(-4px);}
+.vc.learned{border-color:var(--green);background:#f0fff4;}
+.vc-emoji{font-size:2.4rem;margin-bottom:6px;}
+.vc-word{font-family:'Fredoka One',cursive;font-size:1.25rem;color:var(--dark);}
+.vc-word .vowel{color:var(--orange);}
+.vc-word .magic-e{color:var(--pink);}
+.vc-ipa{font-size:.72rem;color:#999;margin-top:2px;}
+.vc-cn{font-size:.82rem;color:#666;margin-top:4px;}
+.vc-unit{position:absolute;top:6px;right:8px;font-size:.65rem;color:#ccc;font-weight:900;}
+.vc-speak{background:var(--pink);color:white;border:none;border-radius:10px;padding:4px 12px;font-size:.75rem;cursor:pointer;margin-top:6px;font-family:'Nunito',sans-serif;}
+/* Songs Pane */
+.song-list{display:flex;flex-direction:column;gap:16px;}
+.song-card{background:white;border-radius:20px;padding:20px;box-shadow:var(--shadow);}
+.sc-hdr{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.sc-emoji{font-size:2rem;}
+.sc-title{font-family:'Fredoka One',cursive;font-size:1.2rem;color:var(--dark);}
+.sc-unit{font-size:.78rem;color:#aaa;font-weight:700;}
+.sc-lyrics{background:#f8f8f8;border-radius:12px;padding:14px;font-size:.88rem;line-height:2;color:#444;}
+.sc-lyrics .highlight{color:var(--pink);font-weight:900;}
+.sc-ctrl{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.sc-btn{padding:8px 18px;border-radius:20px;border:none;font-weight:900;cursor:pointer;font-size:.85rem;font-family:'Nunito',sans-serif;transition:.2s;}
+.sc-btn-play{background:linear-gradient(135deg,var(--orange),var(--pink));color:white;}
+.sc-btn-stop{background:#eee;color:#666;}
+/* Games */
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:24px;}
+.gcard{background:white;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;}
+.gthumb{height:100px;display:flex;align-items:center;justify-content:center;font-size:3rem;}
+.gbody{padding:14px;}
+.gname{font-family:'Fredoka One',cursive;font-size:1.1rem;color:var(--dark);margin-bottom:5px;}
+.gdesc{font-size:.8rem;color:#888;margin-bottom:12px;}
+.gstart{width:100%;padding:9px;border:none;border-radius:12px;color:white;font-weight:900;cursor:pointer;font-size:.9rem;font-family:'Nunito',sans-serif;}
+.game-area{display:none;background:white;border-radius:22px;padding:24px;box-shadow:var(--shadow);text-align:center;margin-top:16px;}
+.game-area.active{display:block;}
+.ga-title{font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--dark);margin-bottom:16px;}
+.quiz-img{font-size:5rem;margin-bottom:10px;}
+.quiz-word{font-size:1rem;color:#555;margin-bottom:16px;}
+.quiz-opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+.qopt{padding:12px 28px;border-radius:16px;border:2.5px solid #e0e0e0;background:white;font-family:'Fredoka One',cursive;font-size:1.3rem;cursor:pointer;transition:.2s;}
+.qopt:hover{border-color:var(--pink);color:var(--pink);}
+.qopt.correct{background:var(--green);color:white;border-color:var(--green);}
+.qopt.wrong{background:var(--red);color:white;border-color:var(--red);}
+.ga-score{font-size:.9rem;color:#888;margin:14px 0;font-weight:700;}
+.ga-ctrl{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px;}
+.gabtn{padding:10px 24px;border-radius:20px;border:none;font-weight:900;cursor:pointer;font-size:.88rem;font-family:'Nunito',sans-serif;}
+.gabtn-p{background:linear-gradient(135deg,var(--orange),var(--pink));color:white;}
+.gabtn-s{background:#eee;color:#666;}
+/* Match game */
+.lmatch-board{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:16px;}
+.lmatch-col{display:flex;flex-direction:column;gap:10px;}
+.lm-card{padding:12px 22px;border-radius:14px;border:2.5px solid #e0e0e0;background:white;font-family:'Fredoka One',cursive;font-size:1.4rem;cursor:pointer;transition:.2s;text-align:center;}
+.lm-card.selected{border-color:var(--pink);background:#fff0f8;color:var(--pink);}
+.lm-card.matched{border-color:var(--green);background:#f0fff4;color:var(--green);cursor:default;}
+/* Memory */
+.mem-board{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:380px;margin:0 auto 16px;}
+.mc{height:80px;border-radius:14px;border:2.5px solid #e0e0e0;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;transition:.3s;font-family:'Fredoka One',cursive;}
+.mc.flipped,.mc.matched{background:white;border-color:var(--pink);}
+.mc.matched{border-color:var(--green);background:#f0fff4;cursor:default;}
+.mc-back{display:none;font-size:1.2rem;}
+.mc.flipped .mc-back,.mc.matched .mc-back{display:block;}
+.mc-front{font-size:1.5rem;}
+.mc.flipped .mc-front,.mc.matched .mc-front{display:none;}
+/* Spell game */
+.spell-word{font-family:'Fredoka One',cursive;font-size:2.5rem;letter-spacing:8px;color:var(--dark);margin-bottom:12px;}
+.spell-hint{font-size:.88rem;color:#888;margin-bottom:16px;}
+.letter-keys{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:12px;}
+.lkey{padding:10px 18px;border-radius:12px;border:2.5px solid var(--pink);background:white;font-family:'Fredoka One',cursive;font-size:1.2rem;color:var(--pink);cursor:pointer;transition:.2s;}
+.lkey:hover{background:var(--pink);color:white;}
+.lkey:disabled{opacity:.3;cursor:default;}
+/* TTS Modal */
+.tts-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;display:none;align-items:center;justify-content:center;}
+.tts-overlay.open{display:flex;}
+.tts-modal{background:white;border-radius:28px;padding:32px 28px;max-width:400px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.2);}
+.tts-emoji{font-size:4rem;margin-bottom:10px;}
+.tts-word{font-family:'Fredoka One',cursive;font-size:2.5rem;color:var(--dark);margin-bottom:4px;}
+.tts-word .vowel{color:var(--orange);}
+.tts-word .magic-e{color:var(--pink);}
+.tts-ipa{font-size:1rem;color:#888;margin-bottom:14px;}
+.tts-cn{font-size:1.1rem;color:#555;margin-bottom:20px;}
+.tts-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.tts-play{background:linear-gradient(135deg,var(--orange),var(--pink));color:white;border:none;border-radius:20px;padding:10px 28px;font-weight:900;font-size:1rem;cursor:pointer;font-family:'Nunito',sans-serif;}
+.tts-close{background:#eee;color:#666;border:none;border-radius:20px;padding:10px 22px;font-weight:900;font-size:.9rem;cursor:pointer;font-family:'Nunito',sans-serif;}
+/* Checkin */
+.checkin-hero{background:linear-gradient(135deg,#FF6B9D,#FF9A3C);color:white;border-radius:24px;padding:32px 20px;text-align:center;margin-bottom:24px;}
+.ch-fire{font-size:3rem;margin-bottom:6px;}
+.ch-streak{font-family:'Fredoka One',cursive;font-size:3.5rem;}
+.ch-label{font-size:.88rem;opacity:.85;margin-bottom:16px;}
+.ch-btn{background:white;color:var(--pink);border:none;border-radius:20px;padding:12px 36px;font-weight:900;font-size:1rem;cursor:pointer;font-family:'Nunito',sans-serif;}
+.ch-done{font-size:.95rem;opacity:.9;margin-top:10px;}
+.cal-box{background:white;border-radius:22px;padding:20px;box-shadow:var(--shadow);margin-bottom:20px;}
+.cal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.cal-month{font-family:'Fredoka One',cursive;font-size:1.2rem;color:var(--dark);}
+.cal-nav{background:none;border:none;font-size:1.2rem;cursor:pointer;padding:4px 10px;border-radius:8px;}
+.cal-nav:hover{background:#f0f0f0;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.cdh{text-align:center;font-size:.72rem;font-weight:900;color:#aaa;padding:6px 0;}
+.cd{text-align:center;padding:7px 4px;border-radius:8px;font-size:.85rem;font-weight:700;cursor:default;}
+.cd.today{background:var(--pink);color:white;}
+.cd.checked{background:#4CAF50;color:white;}
+.cd.empty{opacity:0;}
+.prog-box{background:white;border-radius:22px;padding:20px;box-shadow:var(--shadow);}
+.prog-title{font-family:'Fredoka One',cursive;font-size:1.1rem;color:var(--dark);margin-bottom:14px;}
+.prog-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.prog-icon{font-size:1.3rem;}
+.prog-label{font-size:.85rem;font-weight:700;color:#555;min-width:80px;}
+.prog-bar{flex:1;height:10px;background:#f0f0f0;border-radius:5px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--orange),var(--pink));border-radius:5px;transition:width .6s;}
+.prog-val{font-size:.82rem;font-weight:900;color:var(--pink);min-width:36px;text-align:right;}
+/* Toast */
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:#333;color:white;padding:12px 28px;border-radius:30px;font-weight:700;font-size:.9rem;opacity:0;transition:.4s;z-index:9999;pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+@keyframes bounceIn{0%{transform:scale(.3);opacity:0;}50%{transform:scale(1.15);}100%{transform:scale(1);opacity:1;}}
+@keyframes pop{0%{transform:scale(1);}50%{transform:scale(1.18);}100%{transform:scale(1);}}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-8px);}75%{transform:translateX(8px);}}
+.unit-card{animation:bounceIn .3s ease;}
+@media(max-width:600px){
+  .hero-title{font-size:2rem;}
+  .word-cards{grid-template-columns:repeat(2,1fr);}
+  .vocab-grid{grid-template-columns:repeat(2,1fr);}
+  .mem-board{grid-template-columns:repeat(4,1fr);}
+  .games-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="rainbow-bar"></div>
+<div class="topbar">
+  <div class="topbar-inner">
+    <a href="opw-platform.html" class="back-btn">← 返回主页</a>
+    <span class="topbar-title">🌟 牛津自然拼读 Level 3</span>
+    <span class="topbar-sub">Long Vowels · 长元音</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-badge">OXFORD PHONICS WORLD · LEVEL 3</div>
+  <div class="hero-title">长元音大冒险 🌟</div>
+  <div class="hero-sub">Magic-e 魔法 · 元音组合 · 24 个精彩单元</div>
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-num">24</div><div class="hs-label">教学单元</div></div>
+    <div class="hs"><div class="hs-num">8</div><div class="hs-label">复习单元</div></div>
+    <div class="hs"><div class="hs-num">144+</div><div class="hs-label">核心词汇</div></div>
+    <div class="hs"><div class="hs-num">5</div><div class="hs-label">长元音</div></div>
+  </div>
+</div>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('units')">📚 教材</button>
+  <button class="tab-btn" onclick="switchTab('vocab')">📝 词汇</button>
+  <button class="tab-btn" onclick="switchTab('songs')">🎵 歌曲</button>
+  <button class="tab-btn" onclick="switchTab('games')">🎮 游戏</button>
+  <button class="tab-btn" onclick="switchTab('checkin')">📅 打卡</button>
+</nav>
+
+<!-- UNITS PANE -->
+<div id="pane-units" class="pane active">
+  <div class="sec-hdr">
+    <h2>📖 课程单元</h2>
+    <p>共 32 单元 · 24 教学 + 8 复习 · 点击单元开始学习</p>
+  </div>
+  <div class="units-timeline" id="units-container"></div>
+</div>
+
+<!-- VOCAB PANE -->
+<div id="pane-vocab" class="pane">
+  <div class="sec-hdr">
+    <h2>📝 核心词汇</h2>
+    <p>共 144+ 个单词 · 按长元音分类 · 点击发音</p>
+  </div>
+  <div class="vowel-filter">
+    <button class="vf-btn active" onclick="filterVocab('all')">全部</button>
+    <button class="vf-btn" onclick="filterVocab('long-a')" style="color:#FF6B9D;">Long A /eɪ/</button>
+    <button class="vf-btn" onclick="filterVocab('long-i')" style="color:#4D96FF;">Long I /aɪ/</button>
+    <button class="vf-btn" onclick="filterVocab('long-o')" style="color:#FF9A3C;">Long O /oʊ/</button>
+    <button class="vf-btn" onclick="filterVocab('long-u')" style="color:#9B59B6;">Long U /juː/</button>
+    <button class="vf-btn" onclick="filterVocab('long-e')" style="color:#4CAF50;">Long E /iː/</button>
+  </div>
+  <div class="vocab-grid" id="vocab-grid"></div>
+</div>
+
+<!-- SONGS PANE -->
+<div id="pane-songs" class="pane">
+  <div class="sec-hdr">
+    <h2>🎵 拼读童谣</h2>
+    <p>每个单元配套童谣 · 朗朗上口助记忆</p>
+  </div>
+  <div class="song-list" id="song-list"></div>
+</div>
+
+<!-- GAMES PANE -->
+<div id="pane-games" class="pane">
+  <div class="sec-hdr">
+    <h2>🎮 拼读游戏</h2>
+    <p>4 款互动游戏 · 趣味巩固长元音</p>
+  </div>
+  <div class="games-grid">
+    <div class="gcard">
+      <div class="gthumb" style="background:linear-gradient(135deg,#fff0f8,#ffe0f0)">🎧</div>
+      <div class="gbody">
+        <div class="gname">听音选词</div>
+        <div class="gdesc">听到读音，选出正确的单词</div>
+        <button class="gstart" style="background:linear-gradient(135deg,#FF6B9D,#FF9A3C)" onclick="startGame('listen')">开始游戏</button>
+      </div>
+    </div>
+    <div class="gcard">
+      <div class="gthumb" style="background:linear-gradient(135deg,#f0f8ff,#e0f0ff)">🔤</div>
+      <div class="gbody">
+        <div class="gname">Magic-e 配对</div>
+        <div class="gdesc">把短元音词变成长元音词</div>
+        <button class="gstart" style="background:linear-gradient(135deg,#4D96FF,#9B59B6)" onclick="startGame('magic')">开始游戏</button>
+      </div>
+    </div>
+    <div class="gcard">
+      <div class="gthumb" style="background:linear-gradient(135deg,#f0fff8,#e0ffe8)">🃏</div>
+      <div class="gbody">
+        <div class="gname">翻牌记忆</div>
+        <div class="gdesc">翻转配对图片和单词</div>
+        <button class="gstart" style="background:linear-gradient(135deg,#4CAF50,#26C6DA)" onclick="startGame('memory')">开始游戏</button>
+      </div>
+    </div>
+    <div class="gcard">
+      <div class="gthumb" style="background:linear-gradient(135deg,#fff8f0,#ffe8d0)">✏️</div>
+      <div class="gbody">
+        <div class="gname">看图拼单词</div>
+        <div class="gdesc">看图片，拼出正确单词</div>
+        <button class="gstart" style="background:linear-gradient(135deg,#FF9A3C,#FFD93D)" onclick="startGame('spell')">开始游戏</button>
+      </div>
+    </div>
+  </div>
+  <div class="game-area" id="game-area"></div>
+</div>
+
+<!-- CHECKIN PANE -->
+<div id="pane-checkin" class="pane">
+  <div class="checkin-hero">
+    <div class="ch-fire">🔥</div>
+    <div class="ch-streak" id="streak-num">0</div>
+    <div class="ch-label">天连续打卡</div>
+    <button class="ch-btn" onclick="doCheckin()">✅ 今日打卡</button>
+    <div class="ch-done" id="ch-done-msg"></div>
+  </div>
+  <div class="cal-box">
+    <div class="cal-hdr">
+      <button class="cal-nav" onclick="changeMonth(-1)">◀</button>
+      <span class="cal-month" id="cal-month-label"></span>
+      <button class="cal-nav" onclick="changeMonth(1)">▶</button>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+  </div>
+  <div class="prog-box">
+    <div class="prog-title">📊 学习进度</div>
+    <div class="prog-row">
+      <span class="prog-icon">🔴</span>
+      <span class="prog-label">Long A /eɪ/</span>
+      <div class="prog-bar"><div class="prog-fill" id="prog-a" style="width:0%"></div></div>
+      <span class="prog-val" id="pv-a">0%</span>
+    </div>
+    <div class="prog-row">
+      <span class="prog-icon">🔵</span>
+      <span class="prog-label">Long I /aɪ/</span>
+      <div class="prog-bar"><div class="prog-fill" id="prog-i" style="width:0%"></div></div>
+      <span class="prog-val" id="pv-i">0%</span>
+    </div>
+    <div class="prog-row">
+      <span class="prog-icon">🟠</span>
+      <span class="prog-label">Long O /oʊ/</span>
+      <div class="prog-bar"><div class="prog-fill" id="prog-o" style="width:0%"></div></div>
+      <span class="prog-val" id="pv-o">0%</span>
+    </div>
+    <div class="prog-row">
+      <span class="prog-icon">🟣</span>
+      <span class="prog-label">Long U /juː/</span>
+      <div class="prog-bar"><div class="prog-fill" id="prog-u" style="width:0%"></div></div>
+      <span class="prog-val" id="pv-u">0%</span>
+    </div>
+    <div class="prog-row">
+      <span class="prog-icon">🟢</span>
+      <span class="prog-label">Long E /iː/</span>
+      <div class="prog-bar"><div class="prog-fill" id="prog-e" style="width:0%"></div></div>
+      <span class="prog-val" id="pv-e">0%</span>
+    </div>
+  </div>
+</div>
+
+<!-- TTS Modal -->
+<div class="tts-overlay" id="tts-overlay" onclick="closeTTS(event)">
+  <div class="tts-modal">
+    <div class="tts-emoji" id="tts-emoji">🌟</div>
+    <div class="tts-word" id="tts-word">cake</div>
+    <div class="tts-ipa" id="tts-ipa">/keɪk/</div>
+    <div class="tts-cn" id="tts-cn">蛋糕</div>
+    <div class="tts-btns">
+      <button class="tts-play" onclick="speakTTS(1)">🔊 正常</button>
+      <button class="tts-play" onclick="speakTTS(0.6)">🐢 慢速</button>
+      <button class="tts-close" onclick="closeTTSModal()">关闭</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// OPW LEVEL 3 DATA — 24 Units + 8 Reviews = 32 Total
+// Long Vowels: Long A, Long I, Long O, Long U, Long E
+// ============================================================
+
+const UNITS = [
+  // ── GROUP 1: Long A ──────────────────────────────
+  {
+    id:'U1', type:'unit', group:'long-a',
+    groupLabel:'🔴 Long A /eɪ/ — a_e Magic-e',
+    color:'#FF6B9D', emoji:'🎂',
+    title:'Magic-e: a_e', subtitle:'cake · make · lake · name · game',
+    rule:'当 a 和 e 中间有一个辅音时，a 发长音 /eɪ/，末尾的 e 不发音。',
+    ipa:'/eɪ/', pattern:'a_e',
+    magicE:true, vowelTeam:false,
+    demoFrom:'cap', demoTo:'cape',
+    words:[
+      {w:'cake',emoji:'🎂',ipa:'/keɪk/',cn:'蛋糕',vowelIdx:1,eIdx:3},
+      {w:'make',emoji:'🔨',ipa:'/meɪk/',cn:'制作',vowelIdx:1,eIdx:3},
+      {w:'lake',emoji:'🏞️',ipa:'/leɪk/',cn:'湖泊',vowelIdx:1,eIdx:3},
+      {w:'name',emoji:'🏷️',ipa:'/neɪm/',cn:'名字',vowelIdx:1,eIdx:3},
+      {w:'game',emoji:'🎮',ipa:'/ɡeɪm/',cn:'游戏',vowelIdx:1,eIdx:3},
+      {w:'came',emoji:'🚶',ipa:'/keɪm/',cn:'来了',vowelIdx:1,eIdx:3},
+    ],
+    sentences:[
+      {en:"I like to make a cake.",cn:"我喜欢做蛋糕。"},
+      {en:"What is your name?",cn:"你叫什么名字？"},
+    ],
+    chant:`🎂 <span class="highlight">Cake</span>, <span class="highlight">cake</span>, I can make a cake!
+🏞️ <span class="highlight">Lake</span>, <span class="highlight">lake</span>, swim in the lake!
+🎮 <span class="highlight">Game</span>, <span class="highlight">game</span>, play the game!
+📌 a + consonant + <span class="highlight">e</span> = long A /eɪ/`
+  },
+  {
+    id:'U2', type:'unit', group:'long-a',
+    groupLabel:'',
+    color:'#FF6B9D', emoji:'🐍',
+    title:'Magic-e: a_e more', subtitle:'face · race · place · space · trace',
+    rule:'a_e 规则继续：face, race, place, space 等词中 a 发 /eɪ/。',
+    ipa:'/eɪ/', pattern:'a_e',
+    magicE:true, vowelTeam:false,
+    demoFrom:'cap', demoTo:'cape',
+    words:[
+      {w:'face',emoji:'😊',ipa:'/feɪs/',cn:'脸',vowelIdx:1,eIdx:3},
+      {w:'race',emoji:'🏁',ipa:'/reɪs/',cn:'比赛',vowelIdx:1,eIdx:3},
+      {w:'place',emoji:'📍',ipa:'/pleɪs/',cn:'地方',vowelIdx:2,eIdx:4},
+      {w:'space',emoji:'🚀',ipa:'/speɪs/',cn:'太空',vowelIdx:2,eIdx:4},
+      {w:'grape',emoji:'🍇',ipa:'/ɡreɪp/',cn:'葡萄',vowelIdx:2,eIdx:4},
+      {w:'plate',emoji:'🍽️',ipa:'/pleɪt/',cn:'盘子',vowelIdx:2,eIdx:4},
+    ],
+    sentences:[
+      {en:"The grapes are on the plate.",cn:"葡萄在盘子上。"},
+      {en:"I won the race!",cn:"我赢了比赛！"},
+    ],
+    chant:`🏁 <span class="highlight">Race</span>, <span class="highlight">race</span>, run the race!
+😊 <span class="highlight">Face</span>, <span class="highlight">face</span>, happy face!
+🚀 <span class="highlight">Space</span>, <span class="highlight">space</span>, fly to space!
+📌 a + consonant + <span class="highlight">e</span> = long A /eɪ/`
+  },
+  {
+    id:'U3', type:'unit', group:'long-a',
+    groupLabel:'',
+    color:'#FF6B9D', emoji:'🌧️',
+    title:'Vowel Team: ai', subtitle:'rain · train · tail · mail · sail',
+    rule:'ai 组合在单词中间时，a 发长音 /eɪ/，i 不发音。规律："When two vowels go walking, the first one does the talking!"',
+    ipa:'/eɪ/', pattern:'ai',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'rain',emoji:'🌧️',ipa:'/reɪn/',cn:'雨',vowelIdx:1,eIdx:-1},
+      {w:'train',emoji:'🚂',ipa:'/treɪn/',cn:'火车',vowelIdx:2,eIdx:-1},
+      {w:'tail',emoji:'🦊',ipa:'/teɪl/',cn:'尾巴',vowelIdx:1,eIdx:-1},
+      {w:'mail',emoji:'📬',ipa:'/meɪl/',cn:'邮件',vowelIdx:1,eIdx:-1},
+      {w:'sail',emoji:'⛵',ipa:'/seɪl/',cn:'帆',vowelIdx:1,eIdx:-1},
+      {w:'snail',emoji:'🐌',ipa:'/sneɪl/',cn:'蜗牛',vowelIdx:2,eIdx:-1},
+    ],
+    sentences:[
+      {en:"The snail sits in the rain.",cn:"蜗牛坐在雨中。"},
+      {en:"The train has a long tail.",cn:"火车有很长的尾巴。"},
+    ],
+    chant:`🌧️ <span class="highlight">Rain</span>, <span class="highlight">rain</span>, falling down!
+🚂 <span class="highlight">Train</span>, <span class="highlight">train</span>, choo choo train!
+🐌 <span class="highlight">Snail</span>, <span class="highlight">snail</span>, in the rain!
+📌 a + <span class="highlight">i</span> = long A /eɪ/`
+  },
+  {
+    id:'R1', type:'review',
+    color:'#FFD93D', emoji:'⭐',
+    title:'复习 Review 1', subtitle:'Long A: a_e · ai',
+    rule:'复习长元音 A 的两种拼写规则：① a_e 魔法 e；② ai 元音组合。',
+    words:[
+      {w:'cake',emoji:'🎂',ipa:'/keɪk/',cn:'蛋糕',vowelIdx:1,eIdx:3,group:'long-a'},
+      {w:'rain',emoji:'🌧️',ipa:'/reɪn/',cn:'雨',vowelIdx:1,eIdx:-1,group:'long-a'},
+      {w:'face',emoji:'😊',ipa:'/feɪs/',cn:'脸',vowelIdx:1,eIdx:3,group:'long-a'},
+      {w:'train',emoji:'🚂',ipa:'/treɪn/',cn:'火车',vowelIdx:2,eIdx:-1,group:'long-a'},
+      {w:'grape',emoji:'🍇',ipa:'/ɡreɪp/',cn:'葡萄',vowelIdx:2,eIdx:4,group:'long-a'},
+      {w:'snail',emoji:'🐌',ipa:'/sneɪl/',cn:'蜗牛',vowelIdx:2,eIdx:-1,group:'long-a'},
+    ],
+    sentences:[
+      {en:"Review: a_e and ai both make the /eɪ/ sound.",cn:"复习：a_e 和 ai 都发 /eɪ/ 的音。"},
+    ],
+    chant:`⭐ Review Long A!
+🎂 c<span class="highlight">a</span>k<span class="highlight">e</span> · 🌧️ r<span class="highlight">ai</span>n
+😊 f<span class="highlight">a</span>c<span class="highlight">e</span> · 🚂 tr<span class="highlight">ai</span>n
+📌 a_e and ai = /eɪ/`
+  },
+  // ── GROUP 2: Long A (ay) + Long I begins ─────────
+  {
+    id:'U4', type:'unit', group:'long-a',
+    groupLabel:'',
+    color:'#FF9A3C', emoji:'☀️',
+    title:'Vowel Team: ay', subtitle:'day · play · stay · way · say',
+    rule:'ay 在词末时，a 发长音 /eɪ/，通常出现在单词末尾。',
+    ipa:'/eɪ/', pattern:'ay',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'day',emoji:'☀️',ipa:'/deɪ/',cn:'白天',vowelIdx:1,eIdx:-1},
+      {w:'play',emoji:'🎉',ipa:'/pleɪ/',cn:'玩',vowelIdx:2,eIdx:-1},
+      {w:'stay',emoji:'🏠',ipa:'/steɪ/',cn:'待着',vowelIdx:2,eIdx:-1},
+      {w:'way',emoji:'🛤️',ipa:'/weɪ/',cn:'方式/路',vowelIdx:1,eIdx:-1},
+      {w:'say',emoji:'💬',ipa:'/seɪ/',cn:'说',vowelIdx:1,eIdx:-1},
+      {w:'clay',emoji:'🏺',ipa:'/kleɪ/',cn:'黏土',vowelIdx:2,eIdx:-1},
+    ],
+    sentences:[
+      {en:"Let's play all day!",cn:"我们玩一整天吧！"},
+      {en:"What do you say?",cn:"你说什么？"},
+    ],
+    chant:`☀️ <span class="highlight">Day</span>, <span class="highlight">day</span>, it's a sunny day!
+🎉 <span class="highlight">Play</span>, <span class="highlight">play</span>, let's play!
+🏠 <span class="highlight">Stay</span>, <span class="highlight">stay</span>, please stay!
+📌 a + <span class="highlight">y</span> = long A /eɪ/`
+  },
+  {
+    id:'U5', type:'unit', group:'long-i',
+    groupLabel:'🔵 Long I /aɪ/ — i_e Magic-e',
+    color:'#4D96FF', emoji:'🚲',
+    title:'Magic-e: i_e', subtitle:'bike · kite · like · ride · hide',
+    rule:'当 i 和 e 中间有一个辅音时，i 发长音 /aɪ/，末尾的 e 不发音。',
+    ipa:'/aɪ/', pattern:'i_e',
+    magicE:true, vowelTeam:false,
+    demoFrom:'bit', demoTo:'bite',
+    words:[
+      {w:'bike',emoji:'🚲',ipa:'/baɪk/',cn:'自行车',vowelIdx:1,eIdx:3},
+      {w:'kite',emoji:'🪁',ipa:'/kaɪt/',cn:'风筝',vowelIdx:1,eIdx:3},
+      {w:'like',emoji:'❤️',ipa:'/laɪk/',cn:'喜欢',vowelIdx:1,eIdx:3},
+      {w:'ride',emoji:'🏇',ipa:'/raɪd/',cn:'骑',vowelIdx:1,eIdx:3},
+      {w:'hide',emoji:'🙈',ipa:'/haɪd/',cn:'躲藏',vowelIdx:1,eIdx:3},
+      {w:'pine',emoji:'🌲',ipa:'/paɪn/',cn:'松树',vowelIdx:1,eIdx:3},
+    ],
+    sentences:[
+      {en:"I like to ride my bike.",cn:"我喜欢骑自行车。"},
+      {en:"Let's fly the kite!",cn:"让我们放风筝吧！"},
+    ],
+    chant:`🚲 <span class="highlight">Bike</span>, <span class="highlight">bike</span>, ride my bike!
+🪁 <span class="highlight">Kite</span>, <span class="highlight">kite</span>, fly the kite!
+❤️ <span class="highlight">Like</span>, <span class="highlight">like</span>, I like it!
+📌 i + consonant + <span class="highlight">e</span> = long I /aɪ/`
+  },
+  {
+    id:'U6', type:'unit', group:'long-i',
+    groupLabel:'',
+    color:'#4D96FF', emoji:'🌙',
+    title:'Vowel Team: igh', subtitle:'night · light · right · fight · bright',
+    rule:'igh 组合发长音 /aɪ/，gh 不发音。',
+    ipa:'/aɪ/', pattern:'igh',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'night',emoji:'🌙',ipa:'/naɪt/',cn:'夜晚',vowelIdx:1,eIdx:-1},
+      {w:'light',emoji:'💡',ipa:'/laɪt/',cn:'光',vowelIdx:1,eIdx:-1},
+      {w:'right',emoji:'✅',ipa:'/raɪt/',cn:'正确',vowelIdx:1,eIdx:-1},
+      {w:'fight',emoji:'🥊',ipa:'/faɪt/',cn:'打架',vowelIdx:1,eIdx:-1},
+      {w:'bright',emoji:'✨',ipa:'/braɪt/',cn:'明亮',vowelIdx:2,eIdx:-1},
+      {w:'flight',emoji:'✈️',ipa:'/flaɪt/',cn:'飞行',vowelIdx:2,eIdx:-1},
+    ],
+    sentences:[
+      {en:"The moon is bright at night.",cn:"夜晚月亮很明亮。"},
+      {en:"Turn on the light!",cn:"打开灯！"},
+    ],
+    chant:`🌙 <span class="highlight">Night</span>, <span class="highlight">night</span>, good night!
+💡 <span class="highlight">Light</span>, <span class="highlight">light</span>, bright light!
+✅ <span class="highlight">Right</span>, <span class="highlight">right</span>, that's right!
+📌 i + g + <span class="highlight">h</span> = long I /aɪ/`
+  },
+  {
+    id:'R2', type:'review',
+    color:'#FFD93D', emoji:'⭐',
+    title:'复习 Review 2', subtitle:'Long A: ay · Long I: i_e · igh',
+    rule:'复习：ay 发 /eɪ/；i_e 魔法 e 和 igh 都发 /aɪ/。',
+    words:[
+      {w:'day',emoji:'☀️',ipa:'/deɪ/',cn:'白天',vowelIdx:1,eIdx:-1,group:'long-a'},
+      {w:'play',emoji:'🎉',ipa:'/pleɪ/',cn:'玩',vowelIdx:2,eIdx:-1,group:'long-a'},
+      {w:'bike',emoji:'🚲',ipa:'/baɪk/',cn:'自行车',vowelIdx:1,eIdx:3,group:'long-i'},
+      {w:'night',emoji:'🌙',ipa:'/naɪt/',cn:'夜晚',vowelIdx:1,eIdx:-1,group:'long-i'},
+      {w:'light',emoji:'💡',ipa:'/laɪt/',cn:'光',vowelIdx:1,eIdx:-1,group:'long-i'},
+      {w:'kite',emoji:'🪁',ipa:'/kaɪt/',cn:'风筝',vowelIdx:1,eIdx:3,group:'long-i'},
+    ],
+    sentences:[
+      {en:"Review: ay = /eɪ/; i_e and igh = /aɪ/",cn:"复习：ay = /eɪ/；i_e 和 igh = /aɪ/"},
+    ],
+    chant:`⭐ Review Time!
+☀️ pl<span class="highlight">ay</span> · 🚲 b<span class="highlight">i</span>k<span class="highlight">e</span> · 🌙 n<span class="highlight">igh</span>t
+📌 Long A and Long I!`
+  },
+  // ── GROUP 3: Long I (y) + Long O ─────────────────
+  {
+    id:'U7', type:'unit', group:'long-i',
+    groupLabel:'',
+    color:'#4D96FF', emoji:'🦋',
+    title:'Final y = Long I', subtitle:'fly · sky · dry · cry · try',
+    rule:'单音节单词末尾的 y 发长音 /aɪ/。',
+    ipa:'/aɪ/', pattern:'y',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'fly',emoji:'🦋',ipa:'/flaɪ/',cn:'飞',vowelIdx:2,eIdx:-1},
+      {w:'sky',emoji:'🌤️',ipa:'/skaɪ/',cn:'天空',vowelIdx:2,eIdx:-1},
+      {w:'dry',emoji:'☀️',ipa:'/draɪ/',cn:'干燥',vowelIdx:2,eIdx:-1},
+      {w:'cry',emoji:'😢',ipa:'/kraɪ/',cn:'哭',vowelIdx:2,eIdx:-1},
+      {w:'try',emoji:'💪',ipa:'/traɪ/',cn:'尝试',vowelIdx:2,eIdx:-1},
+      {w:'my',emoji:'👆',ipa:'/maɪ/',cn:'我的',vowelIdx:1,eIdx:-1},
+    ],
+    sentences:[
+      {en:"Birds fly in the blue sky.",cn:"鸟儿在蓝天中飞翔。"},
+      {en:"Don't cry, try again!",cn:"别哭，再试一次！"},
+    ],
+    chant:`🦋 <span class="highlight">Fly</span>, <span class="highlight">fly</span>, butterflies fly!
+🌤️ <span class="highlight">Sky</span>, <span class="highlight">sky</span>, blue blue sky!
+💪 <span class="highlight">Try</span>, <span class="highlight">try</span>, always try!
+📌 single y at end = long I /aɪ/`
+  },
+  {
+    id:'U8', type:'unit', group:'long-o',
+    groupLabel:'🟠 Long O /oʊ/ — o_e Magic-e',
+    color:'#FF9A3C', emoji:'🏠',
+    title:'Magic-e: o_e', subtitle:'home · hope · note · bone · nose',
+    rule:'当 o 和 e 中间有一个辅音时，o 发长音 /oʊ/，末尾的 e 不发音。',
+    ipa:'/oʊ/', pattern:'o_e',
+    magicE:true, vowelTeam:false,
+    demoFrom:'hop', demoTo:'hope',
+    words:[
+      {w:'home',emoji:'🏠',ipa:'/hoʊm/',cn:'家',vowelIdx:1,eIdx:3},
+      {w:'hope',emoji:'🌈',ipa:'/hoʊp/',cn:'希望',vowelIdx:1,eIdx:3},
+      {w:'note',emoji:'📝',ipa:'/noʊt/',cn:'便条',vowelIdx:1,eIdx:3},
+      {w:'bone',emoji:'🦴',ipa:'/boʊn/',cn:'骨头',vowelIdx:1,eIdx:3},
+      {w:'nose',emoji:'👃',ipa:'/noʊz/',cn:'鼻子',vowelIdx:1,eIdx:3},
+      {w:'rose',emoji:'🌹',ipa:'/roʊz/',cn:'玫瑰',vowelIdx:1,eIdx:3},
+    ],
+    sentences:[
+      {en:"I hope to go home.",cn:"我希望回家。"},
+      {en:"The dog loves its bone.",cn:"狗狗爱它的骨头。"},
+    ],
+    chant:`🏠 <span class="highlight">Home</span>, <span class="highlight">home</span>, sweet home!
+🌈 <span class="highlight">Hope</span>, <span class="highlight">hope</span>, I have hope!
+🌹 <span class="highlight">Rose</span>, <span class="highlight">rose</span>, red rose!
+📌 o + consonant + <span class="highlight">e</span> = long O /oʊ/`
+  },
+  {
+    id:'U9', type:'unit', group:'long-o',
+    groupLabel:'',
+    color:'#FF9A3C', emoji:'⛵',
+    title:'Vowel Team: oa', subtitle:'boat · coat · road · toad · soap',
+    rule:'oa 在单词中发长音 /oʊ/，a 不发音。',
+    ipa:'/oʊ/', pattern:'oa',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'boat',emoji:'⛵',ipa:'/boʊt/',cn:'小船',vowelIdx:1,eIdx:-1},
+      {w:'coat',emoji:'🧥',ipa:'/koʊt/',cn:'外套',vowelIdx:1,eIdx:-1},
+      {w:'road',emoji:'🛣️',ipa:'/roʊd/',cn:'道路',vowelIdx:1,eIdx:-1},
+      {w:'toad',emoji:'🐸',ipa:'/toʊd/',cn:'蟾蜍',vowelIdx:1,eIdx:-1},
+      {w:'soap',emoji:'🧼',ipa:'/soʊp/',cn:'肥皂',vowelIdx:1,eIdx:-1},
+      {w:'toast',emoji:'🍞',ipa:'/toʊst/',cn:'吐司',vowelIdx:1,eIdx:-1},
+    ],
+    sentences:[
+      {en:"A toad sat on the road.",cn:"蟾蜍坐在路上。"},
+      {en:"Wash with soap on the boat.",cn:"在船上用肥皂洗澡。"},
+    ],
+    chant:`⛵ <span class="highlight">Boat</span>, <span class="highlight">boat</span>, row the boat!
+🧥 <span class="highlight">Coat</span>, <span class="highlight">coat</span>, warm coat!
+🐸 <span class="highlight">Toad</span>, <span class="highlight">toad</span>, on the road!
+📌 o + <span class="highlight">a</span> = long O /oʊ/`
+  },
+  {
+    id:'R3', type:'review',
+    color:'#FFD93D', emoji:'⭐',
+    title:'复习 Review 3', subtitle:'Long I: y · Long O: o_e · oa',
+    rule:'复习：y 发 /aɪ/；o_e 魔法 e 和 oa 都发 /oʊ/。',
+    words:[
+      {w:'fly',emoji:'🦋',ipa:'/flaɪ/',cn:'飞',vowelIdx:2,eIdx:-1,group:'long-i'},
+      {w:'sky',emoji:'🌤️',ipa:'/skaɪ/',cn:'天空',vowelIdx:2,eIdx:-1,group:'long-i'},
+      {w:'home',emoji:'🏠',ipa:'/hoʊm/',cn:'家',vowelIdx:1,eIdx:3,group:'long-o'},
+      {w:'boat',emoji:'⛵',ipa:'/boʊt/',cn:'小船',vowelIdx:1,eIdx:-1,group:'long-o'},
+      {w:'toad',emoji:'🐸',ipa:'/toʊd/',cn:'蟾蜍',vowelIdx:1,eIdx:-1,group:'long-o'},
+      {w:'rose',emoji:'🌹',ipa:'/roʊz/',cn:'玫瑰',vowelIdx:1,eIdx:3,group:'long-o'},
+    ],
+    sentences:[
+      {en:"Review: y = /aɪ/; o_e and oa = /oʊ/",cn:"复习：y = /aɪ/；o_e 和 oa = /oʊ/"},
+    ],
+    chant:`⭐ Review Time!
+🦋 fl<span class="highlight">y</span> · 🏠 h<span class="highlight">o</span>m<span class="highlight">e</span> · ⛵ b<span class="highlight">oa</span>t
+📌 Long I and Long O!`
+  },
+  // ── GROUP 4: Long O (ow) + Long U ────────────────
+  {
+    id:'U10', type:'unit', group:'long-o',
+    groupLabel:'',
+    color:'#FF9A3C', emoji:'❄️',
+    title:'Vowel Team: ow (long o)', subtitle:'snow · blow · flow · grow · know',
+    rule:'ow 在词末时（或在某些词中）发长音 /oʊ/，区别于 ow = /aʊ/（如 cow）。',
+    ipa:'/oʊ/', pattern:'ow',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'snow',emoji:'❄️',ipa:'/snoʊ/',cn:'雪',vowelIdx:2,eIdx:-1},
+      {w:'blow',emoji:'💨',ipa:'/bloʊ/',cn:'吹',vowelIdx:2,eIdx:-1},
+      {w:'flow',emoji:'🌊',ipa:'/floʊ/',cn:'流动',vowelIdx:2,eIdx:-1},
+      {w:'grow',emoji:'🌱',ipa:'/ɡroʊ/',cn:'生长',vowelIdx:2,eIdx:-1},
+      {w:'know',emoji:'💡',ipa:'/noʊ/',cn:'知道',vowelIdx:2,eIdx:-1},
+      {w:'show',emoji:'🎪',ipa:'/ʃoʊ/',cn:'展示',vowelIdx:2,eIdx:-1},
+    ],
+    sentences:[
+      {en:"The snow blows in the wind.",cn:"雪随风飘。"},
+      {en:"Watch the flower grow!",cn:"看花儿生长！"},
+    ],
+    chant:`❄️ <span class="highlight">Snow</span>, <span class="highlight">snow</span>, white snow!
+💨 <span class="highlight">Blow</span>, <span class="highlight">blow</span>, winds blow!
+🌱 <span class="highlight">Grow</span>, <span class="highlight">grow</span>, flowers grow!
+📌 o + <span class="highlight">w</span> (at end) = long O /oʊ/`
+  },
+  {
+    id:'U11', type:'unit', group:'long-u',
+    groupLabel:'🟣 Long U /juː/ — u_e Magic-e',
+    color:'#9B59B6', emoji:'🎵',
+    title:'Magic-e: u_e', subtitle:'cube · tune · cute · mule · flute',
+    rule:'当 u 和 e 中间有一个辅音时，u 发长音 /juː/ 或 /uː/，末尾的 e 不发音。',
+    ipa:'/juː/', pattern:'u_e',
+    magicE:true, vowelTeam:false,
+    demoFrom:'cub', demoTo:'cube',
+    words:[
+      {w:'cube',emoji:'🟦',ipa:'/kjuːb/',cn:'正方体',vowelIdx:1,eIdx:3},
+      {w:'tune',emoji:'🎵',ipa:'/tjuːn/',cn:'曲调',vowelIdx:1,eIdx:3},
+      {w:'cute',emoji:'🐱',ipa:'/kjuːt/',cn:'可爱的',vowelIdx:1,eIdx:3},
+      {w:'mule',emoji:'🫏',ipa:'/mjuːl/',cn:'骡子',vowelIdx:1,eIdx:3},
+      {w:'flute',emoji:'🎶',ipa:'/fluːt/',cn:'长笛',vowelIdx:2,eIdx:4},
+      {w:'dune',emoji:'🏜️',ipa:'/djuːn/',cn:'沙丘',vowelIdx:1,eIdx:3},
+    ],
+    sentences:[
+      {en:"The cute cat plays a tune.",cn:"可爱的猫弹奏曲调。"},
+      {en:"She plays the flute.",cn:"她吹长笛。"},
+    ],
+    chant:`🟦 <span class="highlight">Cube</span>, <span class="highlight">cube</span>, ice cube!
+🐱 <span class="highlight">Cute</span>, <span class="highlight">cute</span>, so cute!
+🎶 <span class="highlight">Flute</span>, <span class="highlight">flute</span>, play the flute!
+📌 u + consonant + <span class="highlight">e</span> = long U /juː/`
+  },
+  {
+    id:'U12', type:'unit', group:'long-u',
+    groupLabel:'',
+    color:'#9B59B6', emoji:'🔵',
+    title:'Vowel Team: ue', subtitle:'blue · glue · true · clue · sue',
+    rule:'ue 在词末时发长音 /uː/。',
+    ipa:'/uː/', pattern:'ue',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'blue',emoji:'🔵',ipa:'/bluː/',cn:'蓝色',vowelIdx:2,eIdx:-1},
+      {w:'glue',emoji:'🔧',ipa:'/ɡluː/',cn:'胶水',vowelIdx:2,eIdx:-1},
+      {w:'true',emoji:'✅',ipa:'/truː/',cn:'真的',vowelIdx:2,eIdx:-1},
+      {w:'clue',emoji:'🔍',ipa:'/kluː/',cn:'线索',vowelIdx:2,eIdx:-1},
+      {w:'due',emoji:'📅',ipa:'/djuː/',cn:'到期',vowelIdx:1,eIdx:-1},
+      {w:'fuel',emoji:'⛽',ipa:'/fjuːəl/',cn:'燃料',vowelIdx:1,eIdx:-1},
+    ],
+    sentences:[
+      {en:"The blue sky is true!",cn:"蓝色的天空是真的！"},
+      {en:"Find the clue with glue.",cn:"用胶水找线索。"},
+    ],
+    chant:`🔵 <span class="highlight">Blue</span>, <span class="highlight">blue</span>, sky is blue!
+🔧 <span class="highlight">Glue</span>, <span class="highlight">glue</span>, sticky glue!
+🔍 <span class="highlight">Clue</span>, <span class="highlight">clue</span>, find the clue!
+📌 u + <span class="highlight">e</span> = long U /uː/`
+  },
+  {
+    id:'R4', type:'review',
+    color:'#FFD93D', emoji:'⭐',
+    title:'复习 Review 4', subtitle:'Long O: ow · Long U: u_e · ue',
+    rule:'复习：ow 发 /oʊ/；u_e 魔法 e 和 ue 发 /juː/ 或 /uː/。',
+    words:[
+      {w:'snow',emoji:'❄️',ipa:'/snoʊ/',cn:'雪',vowelIdx:2,eIdx:-1,group:'long-o'},
+      {w:'grow',emoji:'🌱',ipa:'/ɡroʊ/',cn:'生长',vowelIdx:2,eIdx:-1,group:'long-o'},
+      {w:'cube',emoji:'🟦',ipa:'/kjuːb/',cn:'正方体',vowelIdx:1,eIdx:3,group:'long-u'},
+      {w:'blue',emoji:'🔵',ipa:'/bluː/',cn:'蓝色',vowelIdx:2,eIdx:-1,group:'long-u'},
+      {w:'cute',emoji:'🐱',ipa:'/kjuːt/',cn:'可爱的',vowelIdx:1,eIdx:3,group:'long-u'},
+      {w:'glue',emoji:'🔧',ipa:'/ɡluː/',cn:'胶水',vowelIdx:2,eIdx:-1,group:'long-u'},
+    ],
+    sentences:[
+      {en:"Review: ow = /oʊ/; u_e and ue = long U",cn:"复习：ow = /oʊ/；u_e 和 ue = 长元音 U"},
+    ],
+    chant:`⭐ Review Time!
+❄️ sn<span class="highlight">ow</span> · 🟦 c<span class="highlight">u</span>b<span class="highlight">e</span> · 🔵 bl<span class="highlight">ue</span>
+📌 Long O and Long U!`
+  },
+  // ── GROUP 5: Long U (ew, oo) + Long E ────────────
+  {
+    id:'U13', type:'unit', group:'long-u',
+    groupLabel:'',
+    color:'#9B59B6', emoji:'🍦',
+    title:'Vowel Team: ew', subtitle:'new · dew · few · drew · flew',
+    rule:'ew 发长音 /juː/ 或 /uː/，常见于单词末尾。',
+    ipa:'/uː/', pattern:'ew',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'new',emoji:'✨',ipa:'/njuː/',cn:'新的',vowelIdx:1,eIdx:-1},
+      {w:'dew',emoji:'💧',ipa:'/djuː/',cn:'露水',vowelIdx:1,eIdx:-1},
+      {w:'few',emoji:'🤏',ipa:'/fjuː/',cn:'少数',vowelIdx:1,eIdx:-1},
+      {w:'drew',emoji:'✏️',ipa:'/druː/',cn:'画（过去式）',vowelIdx:2,eIdx:-1},
+      {w:'flew',emoji:'✈️',ipa:'/fluː/',cn:'飞（过去式）',vowelIdx:2,eIdx:-1},
+      {w:'stew',emoji:'🍲',ipa:'/stjuː/',cn:'炖菜',vowelIdx:2,eIdx:-1},
+    ],
+    sentences:[
+      {en:"A few new birds flew by.",cn:"几只新的鸟飞过。"},
+      {en:"She drew a picture of dew.",cn:"她画了一张露水的图。"},
+    ],
+    chant:`✨ <span class="highlight">New</span>, <span class="highlight">new</span>, brand new!
+✈️ <span class="highlight">Flew</span>, <span class="highlight">flew</span>, the bird flew!
+✏️ <span class="highlight">Drew</span>, <span class="highlight">drew</span>, she drew!
+📌 e + <span class="highlight">w</span> = long U /uː/`
+  },
+  {
+    id:'U14', type:'unit', group:'long-e',
+    groupLabel:'🟢 Long E /iː/ — ee',
+    color:'#4CAF50', emoji:'🌳',
+    title:'Vowel Team: ee', subtitle:'tree · bee · feet · see · free',
+    rule:'ee 发长音 /iː/。',
+    ipa:'/iː/', pattern:'ee',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'tree',emoji:'🌳',ipa:'/triː/',cn:'树',vowelIdx:2,eIdx:-1},
+      {w:'bee',emoji:'🐝',ipa:'/biː/',cn:'蜜蜂',vowelIdx:1,eIdx:-1},
+      {w:'feet',emoji:'🦶',ipa:'/fiːt/',cn:'双脚',vowelIdx:1,eIdx:-1},
+      {w:'see',emoji:'👀',ipa:'/siː/',cn:'看见',vowelIdx:1,eIdx:-1},
+      {w:'free',emoji:'🕊️',ipa:'/friː/',cn:'自由',vowelIdx:2,eIdx:-1},
+      {w:'green',emoji:'💚',ipa:'/ɡriːn/',cn:'绿色',vowelIdx:2,eIdx:-1},
+    ],
+    sentences:[
+      {en:"I see a bee in the green tree.",cn:"我看见绿树上有一只蜜蜂。"},
+      {en:"Set the bird free!",cn:"把鸟儿放飞！"},
+    ],
+    chant:`🌳 <span class="highlight">Tree</span>, <span class="highlight">tree</span>, green tree!
+🐝 <span class="highlight">Bee</span>, <span class="highlight">bee</span>, busy bee!
+🦶 <span class="highlight">Feet</span>, <span class="highlight">feet</span>, two feet!
+📌 e + <span class="highlight">e</span> = long E /iː/`
+  },
+  {
+    id:'U15', type:'unit', group:'long-e',
+    groupLabel:'',
+    color:'#4CAF50', emoji:'🍃',
+    title:'Vowel Team: ea', subtitle:'eat · sea · read · leaf · meat',
+    rule:'ea 发长音 /iː/（注意少数词如 bread 例外）。',
+    ipa:'/iː/', pattern:'ea',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'eat',emoji:'🍽️',ipa:'/iːt/',cn:'吃',vowelIdx:0,eIdx:-1},
+      {w:'sea',emoji:'🌊',ipa:'/siː/',cn:'大海',vowelIdx:1,eIdx:-1},
+      {w:'read',emoji:'📚',ipa:'/riːd/',cn:'阅读',vowelIdx:1,eIdx:-1},
+      {w:'leaf',emoji:'🍃',ipa:'/liːf/',cn:'叶子',vowelIdx:1,eIdx:-1},
+      {w:'meat',emoji:'🥩',ipa:'/miːt/',cn:'肉',vowelIdx:1,eIdx:-1},
+      {w:'beach',emoji:'🏖️',ipa:'/biːtʃ/',cn:'海滩',vowelIdx:1,eIdx:-1},
+    ],
+    sentences:[
+      {en:"Let's eat meat at the beach.",cn:"让我们在海滩吃肉。"},
+      {en:"I read under the leaf.",cn:"我在叶子下读书。"},
+    ],
+    chant:`🍽️ <span class="highlight">Eat</span>, <span class="highlight">eat</span>, let's eat!
+🌊 <span class="highlight">Sea</span>, <span class="highlight">sea</span>, the big sea!
+🍃 <span class="highlight">Leaf</span>, <span class="highlight">leaf</span>, green leaf!
+📌 e + <span class="highlight">a</span> = long E /iː/`
+  },
+  {
+    id:'R5', type:'review',
+    color:'#FFD93D', emoji:'⭐',
+    title:'复习 Review 5', subtitle:'Long U: ew · Long E: ee · ea',
+    rule:'复习：ew 发 /uː/；ee 和 ea 都发 /iː/。',
+    words:[
+      {w:'new',emoji:'✨',ipa:'/njuː/',cn:'新的',vowelIdx:1,eIdx:-1,group:'long-u'},
+      {w:'flew',emoji:'✈️',ipa:'/fluː/',cn:'飞',vowelIdx:2,eIdx:-1,group:'long-u'},
+      {w:'tree',emoji:'🌳',ipa:'/triː/',cn:'树',vowelIdx:2,eIdx:-1,group:'long-e'},
+      {w:'bee',emoji:'🐝',ipa:'/biː/',cn:'蜜蜂',vowelIdx:1,eIdx:-1,group:'long-e'},
+      {w:'sea',emoji:'🌊',ipa:'/siː/',cn:'大海',vowelIdx:1,eIdx:-1,group:'long-e'},
+      {w:'leaf',emoji:'🍃',ipa:'/liːf/',cn:'叶子',vowelIdx:1,eIdx:-1,group:'long-e'},
+    ],
+    sentences:[
+      {en:"Review: ew = /uː/; ee and ea = /iː/",cn:"复习：ew = /uː/；ee 和 ea = /iː/"},
+    ],
+    chant:`⭐ Review Time!
+✨ n<span class="highlight">ew</span> · 🌳 tr<span class="highlight">ee</span> · 🌊 s<span class="highlight">ea</span>
+📌 Long U and Long E!`
+  },
+  // ── GROUP 6: Long E (more) ────────────────────────
+  {
+    id:'U16', type:'unit', group:'long-e',
+    groupLabel:'',
+    color:'#4CAF50', emoji:'🧀',
+    title:'Vowel Team: e_e & ie', subtitle:'eve · these · field · chief · piece',
+    rule:'e_e 少见，发 /iː/；ie 在词中（非词末）也发 /iː/。',
+    ipa:'/iː/', pattern:'e_e / ie',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'these',emoji:'👆',ipa:'/ðiːz/',cn:'这些',vowelIdx:1,eIdx:4},
+      {w:'eve',emoji:'🌅',ipa:'/iːv/',cn:'前夕',vowelIdx:0,eIdx:2},
+      {w:'field',emoji:'🌾',ipa:'/fiːld/',cn:'田野',vowelIdx:1,eIdx:-1},
+      {w:'chief',emoji:'👑',ipa:'/tʃiːf/',cn:'首领',vowelIdx:2,eIdx:-1},
+      {w:'piece',emoji:'🧩',ipa:'/piːs/',cn:'片段',vowelIdx:1,eIdx:-1},
+      {w:'grief',emoji:'😢',ipa:'/ɡriːf/',cn:'悲伤',vowelIdx:2,eIdx:-1},
+    ],
+    sentences:[
+      {en:"These pieces are in the field.",cn:"这些碎片在田野里。"},
+      {en:"The chief stands with grief.",cn:"首领悲伤地站着。"},
+    ],
+    chant:`👆 <span class="highlight">These</span>, <span class="highlight">these</span>, what are these?
+🌾 <span class="highlight">Field</span>, <span class="highlight">field</span>, green field!
+🧩 <span class="highlight">Piece</span>, <span class="highlight">piece</span>, a piece!
+📌 ie = long E /iː/`
+  },
+  {
+    id:'U17', type:'unit', group:'long-e',
+    groupLabel:'',
+    color:'#4CAF50', emoji:'🐵',
+    title:'Final y = Long E', subtitle:'baby · funny · happy · sunny · candy',
+    rule:'多音节单词末尾的 y 发长音 /iː/（区别于单音节的 y = /aɪ/）。',
+    ipa:'/iː/', pattern:'y (final)',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'baby',emoji:'👶',ipa:'/ˈbeɪbi/',cn:'婴儿',vowelIdx:3,eIdx:-1},
+      {w:'funny',emoji:'😄',ipa:'/ˈfʌni/',cn:'有趣的',vowelIdx:3,eIdx:-1},
+      {w:'happy',emoji:'😊',ipa:'/ˈhæpi/',cn:'快乐的',vowelIdx:3,eIdx:-1},
+      {w:'sunny',emoji:'☀️',ipa:'/ˈsʌni/',cn:'晴朗的',vowelIdx:3,eIdx:-1},
+      {w:'candy',emoji:'🍬',ipa:'/ˈkændi/',cn:'糖果',vowelIdx:3,eIdx:-1},
+      {w:'party',emoji:'🎉',ipa:'/ˈpɑːrti/',cn:'派对',vowelIdx:3,eIdx:-1},
+    ],
+    sentences:[
+      {en:"The baby is happy and funny.",cn:"宝宝快乐又有趣。"},
+      {en:"It's a sunny party day!",cn:"这是个阳光灿烂的派对日！"},
+    ],
+    chant:`👶 <span class="highlight">Baby</span>, <span class="highlight">baby</span>, cute baby!
+😊 <span class="highlight">Happy</span>, <span class="highlight">happy</span>, I'm happy!
+🍬 <span class="highlight">Candy</span>, <span class="highlight">candy</span>, sweet candy!
+📌 multi-syllable + y at end = /iː/`
+  },
+  {
+    id:'U18', type:'unit', group:'long-e',
+    groupLabel:'',
+    color:'#4CAF50', emoji:'🔑',
+    title:'Vowel Team: ey', subtitle:'key · monkey · turkey · donkey · honey',
+    rule:'ey 在词末时发长音 /iː/。',
+    ipa:'/iː/', pattern:'ey',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'key',emoji:'🔑',ipa:'/kiː/',cn:'钥匙',vowelIdx:1,eIdx:-1},
+      {w:'monkey',emoji:'🐵',ipa:'/ˈmʌŋki/',cn:'猴子',vowelIdx:4,eIdx:-1},
+      {w:'turkey',emoji:'🦃',ipa:'/ˈtɜːrki/',cn:'火鸡',vowelIdx:4,eIdx:-1},
+      {w:'donkey',emoji:'🫏',ipa:'/ˈdɒŋki/',cn:'驴子',vowelIdx:4,eIdx:-1},
+      {w:'honey',emoji:'🍯',ipa:'/ˈhʌni/',cn:'蜂蜜',vowelIdx:3,eIdx:-1},
+      {w:'valley',emoji:'🏞️',ipa:'/ˈvæli/',cn:'山谷',vowelIdx:4,eIdx:-1},
+    ],
+    sentences:[
+      {en:"The monkey found the key to the honey.",cn:"猴子找到了蜂蜜的钥匙。"},
+      {en:"A donkey and a turkey in the valley!",cn:"山谷里有驴子和火鸡！"},
+    ],
+    chant:`🔑 <span class="highlight">Key</span>, <span class="highlight">key</span>, find the key!
+🐵 <span class="highlight">Monkey</span>, <span class="highlight">monkey</span>, funny monkey!
+🍯 <span class="highlight">Honey</span>, <span class="highlight">honey</span>, sweet honey!
+📌 e + <span class="highlight">y</span> at end = /iː/`
+  },
+  {
+    id:'R6', type:'review',
+    color:'#FFD93D', emoji:'⭐',
+    title:'复习 Review 6', subtitle:'Long E: ie · y · ey',
+    rule:'复习：ie、多音节 y 和 ey 都发 /iː/。',
+    words:[
+      {w:'field',emoji:'🌾',ipa:'/fiːld/',cn:'田野',vowelIdx:1,eIdx:-1,group:'long-e'},
+      {w:'piece',emoji:'🧩',ipa:'/piːs/',cn:'片段',vowelIdx:1,eIdx:-1,group:'long-e'},
+      {w:'happy',emoji:'😊',ipa:'/ˈhæpi/',cn:'快乐的',vowelIdx:3,eIdx:-1,group:'long-e'},
+      {w:'baby',emoji:'👶',ipa:'/ˈbeɪbi/',cn:'婴儿',vowelIdx:3,eIdx:-1,group:'long-e'},
+      {w:'key',emoji:'🔑',ipa:'/kiː/',cn:'钥匙',vowelIdx:1,eIdx:-1,group:'long-e'},
+      {w:'monkey',emoji:'🐵',ipa:'/ˈmʌŋki/',cn:'猴子',vowelIdx:4,eIdx:-1,group:'long-e'},
+    ],
+    sentences:[
+      {en:"Review: ie, multi-y, ey all = /iː/",cn:"复习：ie、多音节 y、ey 都 = /iː/"},
+    ],
+    chant:`⭐ Review Long E!
+🌾 f<span class="highlight">ie</span>ld · 😊 happ<span class="highlight">y</span> · 🔑 k<span class="highlight">ey</span>
+📌 All Long E = /iː/!`
+  },
+  // ── GROUP 7: Mixed Vowels ─────────────────────────
+  {
+    id:'U19', type:'unit', group:'mixed',
+    groupLabel:'🌈 Mixed Vowels · 混合元音',
+    color:'#26C6DA', emoji:'🌙',
+    title:'oo sounds', subtitle:'moon · food · book · cook · look',
+    rule:'oo 有两种读音：/uː/（moon, food）和 /ʊ/（book, cook, look）。',
+    ipa:'/uː/ or /ʊ/', pattern:'oo',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'moon',emoji:'🌙',ipa:'/muːn/',cn:'月亮',vowelIdx:1,eIdx:-1},
+      {w:'food',emoji:'🍎',ipa:'/fuːd/',cn:'食物',vowelIdx:1,eIdx:-1},
+      {w:'pool',emoji:'🏊',ipa:'/puːl/',cn:'水池',vowelIdx:1,eIdx:-1},
+      {w:'book',emoji:'📚',ipa:'/bʊk/',cn:'书',vowelIdx:1,eIdx:-1},
+      {w:'cook',emoji:'👨‍🍳',ipa:'/kʊk/',cn:'厨师',vowelIdx:1,eIdx:-1},
+      {w:'look',emoji:'👀',ipa:'/lʊk/',cn:'看',vowelIdx:1,eIdx:-1},
+    ],
+    sentences:[
+      {en:"Look at the moon! Let's read a book.",cn:"看月亮！让我们读一本书。"},
+      {en:"The cook made food by the pool.",cn:"厨师在水池边做食物。"},
+    ],
+    chant:`🌙 <span class="highlight">Moon</span>, <span class="highlight">moon</span>, full moon! /uː/
+📚 <span class="highlight">Book</span>, <span class="highlight">book</span>, good book! /ʊ/
+👨‍🍳 <span class="highlight">Cook</span>, <span class="highlight">cook</span>, yummy food! /ʊ/
+📌 oo = /uː/ (moon) OR /ʊ/ (book)`
+  },
+  {
+    id:'U20', type:'unit', group:'mixed',
+    groupLabel:'',
+    color:'#26C6DA', emoji:'☁️',
+    title:'ou / ow (diphthongs)', subtitle:'cloud · house · cow · town · down',
+    rule:'ou 和 ow 都可以发双元音 /aʊ/（如 cloud, cow）。',
+    ipa:'/aʊ/', pattern:'ou / ow',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'cloud',emoji:'☁️',ipa:'/klaʊd/',cn:'云',vowelIdx:2,eIdx:-1},
+      {w:'house',emoji:'🏡',ipa:'/haʊs/',cn:'房子',vowelIdx:1,eIdx:-1},
+      {w:'mouth',emoji:'👄',ipa:'/maʊθ/',cn:'嘴',vowelIdx:1,eIdx:-1},
+      {w:'cow',emoji:'🐄',ipa:'/kaʊ/',cn:'奶牛',vowelIdx:1,eIdx:-1},
+      {w:'town',emoji:'🏘️',ipa:'/taʊn/',cn:'小镇',vowelIdx:1,eIdx:-1},
+      {w:'down',emoji:'⬇️',ipa:'/daʊn/',cn:'向下',vowelIdx:1,eIdx:-1},
+    ],
+    sentences:[
+      {en:"The cow came down from the cloud.",cn:"奶牛从云端走下来。"},
+      {en:"The house is in the town.",cn:"房子在小镇里。"},
+    ],
+    chant:`☁️ <span class="highlight">Cloud</span>, <span class="highlight">cloud</span>, white cloud!
+🐄 <span class="highlight">Cow</span>, <span class="highlight">cow</span>, moo cow!
+🏡 <span class="highlight">House</span>, <span class="highlight">house</span>, my house!
+📌 ou / ow = /aʊ/ (diphthong)`
+  },
+  {
+    id:'U21', type:'unit', group:'mixed',
+    groupLabel:'',
+    color:'#26C6DA', emoji:'🪙',
+    title:'oi / oy (diphthongs)', subtitle:'oil · coin · boy · toy · joy',
+    rule:'oi 和 oy 都发双元音 /ɔɪ/，oi 在词中间，oy 在词末。',
+    ipa:'/ɔɪ/', pattern:'oi / oy',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'oil',emoji:'🫙',ipa:'/ɔɪl/',cn:'油',vowelIdx:0,eIdx:-1},
+      {w:'coin',emoji:'🪙',ipa:'/kɔɪn/',cn:'硬币',vowelIdx:1,eIdx:-1},
+      {w:'soil',emoji:'🌱',ipa:'/sɔɪl/',cn:'土壤',vowelIdx:1,eIdx:-1},
+      {w:'boy',emoji:'👦',ipa:'/bɔɪ/',cn:'男孩',vowelIdx:1,eIdx:-1},
+      {w:'toy',emoji:'🧸',ipa:'/tɔɪ/',cn:'玩具',vowelIdx:1,eIdx:-1},
+      {w:'joy',emoji:'😄',ipa:'/dʒɔɪ/',cn:'喜悦',vowelIdx:1,eIdx:-1},
+    ],
+    sentences:[
+      {en:"The boy found a coin in the soil.",cn:"男孩在土里找到了硬币。"},
+      {en:"The toy brings joy!",cn:"玩具带来喜悦！"},
+    ],
+    chant:`🪙 <span class="highlight">Coin</span>, <span class="highlight">coin</span>, shiny coin!
+👦 <span class="highlight">Boy</span>, <span class="highlight">boy</span>, happy boy!
+🧸 <span class="highlight">Toy</span>, <span class="highlight">toy</span>, play with toy!
+📌 oi / oy = /ɔɪ/ (diphthong)`
+  },
+  {
+    id:'R7', type:'review',
+    color:'#FFD93D', emoji:'⭐',
+    title:'复习 Review 7', subtitle:'oo · ou/ow · oi/oy',
+    rule:'复习：oo（两种音）；ou/ow = /aʊ/；oi/oy = /ɔɪ/。',
+    words:[
+      {w:'moon',emoji:'🌙',ipa:'/muːn/',cn:'月亮',vowelIdx:1,eIdx:-1,group:'mixed'},
+      {w:'book',emoji:'📚',ipa:'/bʊk/',cn:'书',vowelIdx:1,eIdx:-1,group:'mixed'},
+      {w:'cloud',emoji:'☁️',ipa:'/klaʊd/',cn:'云',vowelIdx:2,eIdx:-1,group:'mixed'},
+      {w:'cow',emoji:'🐄',ipa:'/kaʊ/',cn:'奶牛',vowelIdx:1,eIdx:-1,group:'mixed'},
+      {w:'coin',emoji:'🪙',ipa:'/kɔɪn/',cn:'硬币',vowelIdx:1,eIdx:-1,group:'mixed'},
+      {w:'toy',emoji:'🧸',ipa:'/tɔɪ/',cn:'玩具',vowelIdx:1,eIdx:-1,group:'mixed'},
+    ],
+    sentences:[
+      {en:"Review: oo, ou/ow, oi/oy diphthongs!",cn:"复习：oo、ou/ow、oi/oy 双元音！"},
+    ],
+    chant:`⭐ Review Mixed!
+🌙 m<span class="highlight">oo</span>n · ☁️ cl<span class="highlight">ou</span>d · 🪙 c<span class="highlight">oi</span>n
+📌 Diphthongs and oo!`
+  },
+  // ── GROUP 8: R-controlled ────────────────────────
+  {
+    id:'U22', type:'unit', group:'mixed',
+    groupLabel:'',
+    color:'#8BC34A', emoji:'🚗',
+    title:'R-controlled: ar', subtitle:'car · star · far · barn · farm',
+    rule:'ar 发 /ɑːr/，r 改变了元音的发音，叫做 r-controlled vowel。',
+    ipa:'/ɑːr/', pattern:'ar',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'car',emoji:'🚗',ipa:'/kɑːr/',cn:'汽车',vowelIdx:1,eIdx:-1},
+      {w:'star',emoji:'⭐',ipa:'/stɑːr/',cn:'星星',vowelIdx:2,eIdx:-1},
+      {w:'far',emoji:'🗺️',ipa:'/fɑːr/',cn:'远',vowelIdx:1,eIdx:-1},
+      {w:'barn',emoji:'🏚️',ipa:'/bɑːrn/',cn:'谷仓',vowelIdx:1,eIdx:-1},
+      {w:'farm',emoji:'🚜',ipa:'/fɑːrm/',cn:'农场',vowelIdx:1,eIdx:-1},
+      {w:'bark',emoji:'🐶',ipa:'/bɑːrk/',cn:'树皮/吠',vowelIdx:1,eIdx:-1},
+    ],
+    sentences:[
+      {en:"A star is far from the farm.",cn:"星星离农场很远。"},
+      {en:"The dog barks in the barn.",cn:"狗在谷仓里叫。"},
+    ],
+    chant:`🚗 <span class="highlight">Car</span>, <span class="highlight">car</span>, fast car!
+⭐ <span class="highlight">Star</span>, <span class="highlight">star</span>, twinkling star!
+🚜 <span class="highlight">Farm</span>, <span class="highlight">farm</span>, on the farm!
+📌 a + <span class="highlight">r</span> = /ɑːr/`
+  },
+  {
+    id:'U23', type:'unit', group:'mixed',
+    groupLabel:'',
+    color:'#8BC34A', emoji:'🌽',
+    title:'R-controlled: or', subtitle:'corn · horn · fort · storm · more',
+    rule:'or 发 /ɔːr/，r 控制元音发音。',
+    ipa:'/ɔːr/', pattern:'or',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'corn',emoji:'🌽',ipa:'/kɔːrn/',cn:'玉米',vowelIdx:1,eIdx:-1},
+      {w:'horn',emoji:'📯',ipa:'/hɔːrn/',cn:'号角',vowelIdx:1,eIdx:-1},
+      {w:'fort',emoji:'🏰',ipa:'/fɔːrt/',cn:'堡垒',vowelIdx:1,eIdx:-1},
+      {w:'storm',emoji:'⛈️',ipa:'/stɔːrm/',cn:'暴风雨',vowelIdx:2,eIdx:-1},
+      {w:'more',emoji:'➕',ipa:'/mɔːr/',cn:'更多',vowelIdx:1,eIdx:3},
+      {w:'shore',emoji:'🏝️',ipa:'/ʃɔːr/',cn:'岸边',vowelIdx:2,eIdx:4},
+    ],
+    sentences:[
+      {en:"We need more corn on the shore.",cn:"我们需要在岸边吃更多玉米。"},
+      {en:"The storm hit the fort!",cn:"暴风雨袭击了堡垒！"},
+    ],
+    chant:`🌽 <span class="highlight">Corn</span>, <span class="highlight">corn</span>, yummy corn!
+📯 <span class="highlight">Horn</span>, <span class="highlight">horn</span>, blow the horn!
+⛈️ <span class="highlight">Storm</span>, <span class="highlight">storm</span>, big storm!
+📌 o + <span class="highlight">r</span> = /ɔːr/`
+  },
+  {
+    id:'U24', type:'unit', group:'mixed',
+    groupLabel:'',
+    color:'#8BC34A', emoji:'🐦',
+    title:'R-controlled: er / ir / ur', subtitle:'her · bird · burn · turn · girl',
+    rule:'er、ir、ur 都发相同的音 /ɜːr/，r 控制元音。',
+    ipa:'/ɜːr/', pattern:'er/ir/ur',
+    magicE:false, vowelTeam:true,
+    words:[
+      {w:'her',emoji:'👩',ipa:'/hɜːr/',cn:'她的',vowelIdx:1,eIdx:-1},
+      {w:'bird',emoji:'🐦',ipa:'/bɜːrd/',cn:'鸟',vowelIdx:1,eIdx:-1},
+      {w:'girl',emoji:'👧',ipa:'/ɡɜːrl/',cn:'女孩',vowelIdx:1,eIdx:-1},
+      {w:'burn',emoji:'🔥',ipa:'/bɜːrn/',cn:'燃烧',vowelIdx:1,eIdx:-1},
+      {w:'turn',emoji:'↩️',ipa:'/tɜːrn/',cn:'转弯',vowelIdx:1,eIdx:-1},
+      {w:'nurse',emoji:'👩‍⚕️',ipa:'/nɜːrs/',cn:'护士',vowelIdx:1,eIdx:-1},
+    ],
+    sentences:[
+      {en:"The girl watched the bird turn.",cn:"女孩看着鸟儿转弯。"},
+      {en:"The nurse helped her with the burn.",cn:"护士帮助她处理烧伤。"},
+    ],
+    chant:`🐦 <span class="highlight">Bird</span>, <span class="highlight">bird</span>, little bird!
+👧 <span class="highlight">Girl</span>, <span class="highlight">girl</span>, the girl!
+🔥 <span class="highlight">Burn</span>, <span class="highlight">burn</span>, don't burn!
+📌 er / ir / ur = /ɜːr/`
+  },
+  {
+    id:'R8', type:'review',
+    color:'#FFD93D', emoji:'⭐',
+    title:'复习 Review 8', subtitle:'ar · or · er/ir/ur R-controlled',
+    rule:'大复习：ar=/ɑːr/, or=/ɔːr/, er/ir/ur=/ɜːr/。恭喜完成 Level 3！',
+    words:[
+      {w:'star',emoji:'⭐',ipa:'/stɑːr/',cn:'星星',vowelIdx:2,eIdx:-1,group:'mixed'},
+      {w:'farm',emoji:'🚜',ipa:'/fɑːrm/',cn:'农场',vowelIdx:1,eIdx:-1,group:'mixed'},
+      {w:'corn',emoji:'🌽',ipa:'/kɔːrn/',cn:'玉米',vowelIdx:1,eIdx:-1,group:'mixed'},
+      {w:'storm',emoji:'⛈️',ipa:'/stɔːrm/',cn:'暴风雨',vowelIdx:2,eIdx:-1,group:'mixed'},
+      {w:'bird',emoji:'🐦',ipa:'/bɜːrd/',cn:'鸟',vowelIdx:1,eIdx:-1,group:'mixed'},
+      {w:'girl',emoji:'👧',ipa:'/ɡɜːrl/',cn:'女孩',vowelIdx:1,eIdx:-1,group:'mixed'},
+    ],
+    sentences:[
+      {en:"Congrats! You finished Level 3! 🎉",cn:"恭喜！你完成了 Level 3！🎉"},
+    ],
+    chant:`⭐ Final Review!
+⭐ st<span class="highlight">ar</span> · 🌽 c<span class="highlight">or</span>n · 🐦 b<span class="highlight">ir</span>d
+🎉 Congratulations! Level 3 Complete!`
+  }
+];
+
+// ============================================================
+// RENDER UNITS
+// ============================================================
+function renderUnits() {
+  const container = document.getElementById('units-container');
+  let currentGroupLabel = '';
+  let groupDiv = null;
+
+  UNITS.forEach((unit, idx) => {
+    // New group header
+    if (unit.groupLabel && unit.groupLabel !== currentGroupLabel) {
+      currentGroupLabel = unit.groupLabel;
+      groupDiv = document.createElement('div');
+      groupDiv.className = 'unit-group';
+      const gl = document.createElement('div');
+      gl.className = 'group-label';
+      gl.innerHTML = `<span class="group-title">${unit.groupLabel}</span><div class="group-line"></div>`;
+      groupDiv.appendChild(gl);
+      container.appendChild(groupDiv);
+    } else if (!groupDiv) {
+      groupDiv = document.createElement('div');
+      groupDiv.className = 'unit-group';
+      container.appendChild(groupDiv);
+    }
+
+    const card = document.createElement('div');
+    card.className = 'unit-card' + (unit.type === 'review' ? ' review-card' : '');
+    card.id = 'card-' + unit.id;
+
+    // head gradient
+    let headStyle = '';
+    if (unit.type !== 'review') {
+      headStyle = `background:linear-gradient(135deg,${unit.color},${adjustColor(unit.color,30)})`;
+    }
+
+    const learned = getLearnedCount(unit);
+    const total = unit.words ? unit.words.length : 0;
+
+    card.innerHTML = `
+      <div class="uc-head" style="${headStyle}">
+        <div class="uc-head-emoji">${unit.emoji}</div>
+        <div class="uc-head-info">
+          <div class="uc-unit-num">${unit.type === 'review' ? '📋 REVIEW' : '📘 UNIT ' + unit.id.replace('U','')}</div>
+          <div class="uc-title">${unit.title}</div>
+          <div class="uc-subtitle">${unit.subtitle}</div>
+        </div>
+        ${total > 0 ? `<span style="background:rgba(255,255,255,.25);padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:900;margin-right:8px;">${learned}/${total}</span>` : ''}
+        <button class="uc-toggle" onclick="toggleUnit('${unit.id}')">▼</button>
+      </div>
+      <div class="uc-body" id="body-${unit.id}">
+        ${buildUnitBody(unit)}
+      </div>`;
+    groupDiv.appendChild(card);
+  });
+}
+
+function adjustColor(hex, pct) {
+  // Slightly lighten for gradient
+  return hex + 'cc';
+}
+
+function buildUnitBody(unit) {
+  let html = '';
+
+  // Phonics rule
+  if (unit.rule) {
+    html += `<div class="phonics-box">
+      <h4>📖 拼读规则 <span class="phonics-ipa">${unit.ipa || ''}</span></h4>
+      <p>${unit.rule}</p>
+    </div>`;
+  }
+
+  // Magic-e demo
+  if (unit.magicE && unit.demoFrom && unit.demoTo) {
+    html += `<div class="magic-e-box">
+      <h4>✨ Magic-e 魔法变身</h4>
+      <div class="magic-e-demo">
+        <div class="me-before">${unit.demoFrom} /short/</div>
+        <div class="me-arrow">+e →</div>
+        <div class="me-after">${unit.demoTo.slice(0,-1)}<span class="magic-e">${unit.demoTo.slice(-1)}</span> /long/</div>
+      </div>
+      <div class="me-rule">末尾加 <strong>e</strong>，中间元音变长音！</div>
+    </div>`;
+  }
+
+  // Vowel team box
+  if (unit.vowelTeam && unit.words && unit.words.length > 0) {
+    const chips = unit.words.slice(0,5).map(w => {
+      const wHtml = colorizeWord(w);
+      return `<span class="vt-word-chip" onclick="speakWord('${w.w}')">${wHtml}</span>`;
+    }).join('');
+    html += `<div class="vowel-team-box">
+      <h4>🔤 词族展示 — <strong>${unit.pattern}</strong></h4>
+      <div class="vt-pattern">${unit.pattern}</div>
+      <div class="vt-rule">"${unit.pattern}" → ${unit.ipa}</div>
+      <div class="vt-words-row">${chips}</div>
+    </div>`;
+  }
+
+  // Word cards
+  if (unit.words && unit.words.length > 0) {
+    const cards = unit.words.map(w => {
+      const stored = JSON.parse(localStorage.getItem('opw3_learned') || '{}');
+      const isLearned = stored[w.w];
+      return `<div class="wcard${isLearned?' learned':''}" id="wc-${w.w}" onclick="openTTS('${w.w}','${w.emoji}','${w.ipa}','${w.cn}')">
+        <div class="wcard-emoji">${w.emoji}</div>
+        <div class="wcard-word">${colorizeWord(w)}</div>
+        <div class="wcard-ipa">${w.ipa}</div>
+        <div class="wcard-cn">${w.cn}</div>
+        <button class="wcard-speak" onclick="event.stopPropagation();speakWord('${w.w}')">🔊 发音</button>
+      </div>`;
+    }).join('');
+    html += `<div class="word-cards">${cards}</div>`;
+  }
+
+  // Sentences
+  if (unit.sentences && unit.sentences.length > 0) {
+    const items = unit.sentences.map(s => `
+      <div class="sitem">
+        <div style="flex:1">
+          <div class="sitem-en">${s.en}</div>
+          <div class="sitem-cn">${s.cn}</div>
+        </div>
+        <button class="sitem-speak" onclick="speakWord('${s.en}')">🔊</button>
+      </div>`).join('');
+    html += `<div class="sentences-list">${items}</div>`;
+  }
+
+  // Chant
+  if (unit.chant) {
+    html += `<div class="chant-box">
+      <h4>🎵 拼读童谣</h4>
+      ${unit.chant.split('\n').map(l=>`<div class="chant-line">${l}</div>`).join('')}
+      <button class="chant-play" onclick="speakChant('${unit.id}')">▶ 朗读童谣</button>
+    </div>`;
+  }
+
+  return html;
+}
+
+function colorizeWord(w) {
+  const word = w.w;
+  const vi = w.vowelIdx || 0;
+  const ei = w.eIdx || -1;
+  let result = '';
+  for (let i = 0; i < word.length; i++) {
+    if (i === vi || (i === vi+1 && w.pattern && w.pattern.includes('oo') && i === vi+1)) {
+      // For two-letter vowel teams
+      if (['ai','ay','oa','ow','oo','ou','oi','oy','ea','ee','ue','ew','ie','ey','ar','or','er','ir','ur','igh'].some(vt => word.slice(i,i+2) === vt || word.slice(i,i+3) === vt)) {
+        const vt = ['igh'].find(v=>word.slice(i,i+3)===v) || ['ai','ay','oa','ow','oo','ou','oi','oy','ea','ee','ue','ew','ie','ey','ar','or','er','ir','ur'].find(v=>word.slice(i,i+2)===v);
+        if (vt) {
+          result += `<span class="vowel">${vt}</span>`;
+          i += vt.length - 1;
+          continue;
+        }
+      }
+      result += `<span class="vowel">${word[i]}</span>`;
+    } else if (i === ei) {
+      result += `<span class="magic-e">${word[i]}</span>`;
+    } else {
+      result += word[i];
+    }
+  }
+  return result;
+}
+
+function toggleUnit(id) {
+  const body = document.getElementById('body-' + id);
+  const card = document.getElementById('card-' + id);
+  const btn = card.querySelector('.uc-toggle');
+  if (body.classList.contains('open')) {
+    body.classList.remove('open');
+    btn.textContent = '▼';
+  } else {
+    body.classList.add('open');
+    btn.textContent = '▲';
+  }
+}
+
+// ============================================================
+// VOCAB PANE
+// ============================================================
+function renderVocab(filter = 'all') {
+  const grid = document.getElementById('vocab-grid');
+  const stored = JSON.parse(localStorage.getItem('opw3_learned') || '{}');
+  const words = UNITS.filter(u => u.type === 'unit').flatMap(u =>
+    (u.words || []).map(w => ({...w, group: u.group, unitId: u.id}))
+  );
+  const filtered = filter === 'all' ? words : words.filter(w => w.group === filter);
+  grid.innerHTML = filtered.map(w => `
+    <div class="vc${stored[w.w]?' learned':''}" onclick="openTTS('${w.w}','${w.emoji}','${w.ipa}','${w.cn}')">
+      <div class="vc-unit">${w.unitId}</div>
+      <div class="vc-emoji">${w.emoji}</div>
+      <div class="vc-word">${colorizeWord(w)}</div>
+      <div class="vc-ipa">${w.ipa}</div>
+      <div class="vc-cn">${w.cn}</div>
+      <button class="vc-speak" onclick="event.stopPropagation();speakWord('${w.w}')">🔊</button>
+      <button class="vc-done" onclick="event.stopPropagation();markLearned('${w.w}')">${stored[w.w]?'✅ 已掌握':'⭐ 标记掌握'}</button>
+    </div>`).join('');
+}
+
+function filterVocab(f) {
+  document.querySelectorAll('.vf-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderVocab(f);
+}
+
+// ============================================================
+// SONGS PANE
+// ============================================================
+function renderSongs() {
+  const list = document.getElementById('song-list');
+  const songUnits = UNITS.filter(u => u.type === 'unit' && u.chant);
+  list.innerHTML = songUnits.map(u => `
+    <div class="song-card">
+      <div class="sc-hdr">
+        <div class="sc-emoji">${u.emoji}</div>
+        <div>
+          <div class="sc-title">${u.title} — ${u.pattern}</div>
+          <div class="sc-unit">Unit ${u.id.replace('U','')} · ${u.ipa}</div>
+        </div>
+      </div>
+      <div class="sc-lyrics">${u.chant.split('\n').map(l=>`<div>${l}</div>`).join('')}</div>
+      <div class="sc-ctrl">
+        <button class="sc-btn sc-btn-play" onclick="speakChant('${u.id}')">▶ 朗读</button>
+        <button class="sc-btn sc-btn-stop" onclick="stopSpeech()">⏹ 停止</button>
+      </div>
+    </div>`).join('');
+}
+
+// ============================================================
+// GAMES
+// ============================================================
+const gameWords = UNITS.filter(u=>u.type==='unit').flatMap(u=>(u.words||[]).slice(0,4));
+
+let gameState = {};
+
+function startGame(type) {
+  document.querySelectorAll('.game-area').forEach(a=>a.classList.remove('active'));
+  const area = document.getElementById('game-area');
+  area.classList.add('active');
+  gameState = {type, score:0, total:0, streak:0};
+
+  if (type==='listen') renderListenGame();
+  else if (type==='magic') renderMagicGame();
+  else if (type==='memory') renderMemoryGame();
+  else if (type==='spell') renderSpellGame();
+}
+
+function getRandomWords(n=4) {
+  const arr = [...gameWords].sort(()=>Math.random()-.5).slice(0,n);
+  return arr;
+}
+
+function renderListenGame() {
+  const words = getRandomWords(4);
+  const target = words[Math.floor(Math.random()*words.length)];
+  gameState.target = target;
+  const area = document.getElementById('game-area');
+  area.innerHTML = `
+    <div class="ga-title">🎧 听音选词</div>
+    <div class="quiz-img">${target.emoji}</div>
+    <div class="quiz-word" style="font-size:.8rem;color:#aaa">听发音，选正确的单词</div>
+    <div class="ga-score">得分: ${gameState.score} / ${gameState.total}</div>
+    <div class="quiz-opts" id="quiz-opts">
+      ${words.map(w=>`<button class="qopt" onclick="checkListen('${w.w}','${target.w}')">${colorizeWord(w)}</button>`).join('')}
+    </div>
+    <div class="ga-ctrl">
+      <button class="gabtn gabtn-p" onclick="speakWord('${target.w}')">🔊 再听一次</button>
+      <button class="gabtn gabtn-s" onclick="startGame('listen')">跳过</button>
+    </div>`;
+  setTimeout(()=>speakWord(target.w), 400);
+}
+
+function checkListen(chosen, correct) {
+  gameState.total++;
+  const opts = document.querySelectorAll('.qopt');
+  opts.forEach(b=>{
+    if (b.textContent.trim().replace(/\s+/g,'') === correct || b.innerHTML.includes(correct)) {
+      b.classList.add('correct');
+    }
+    b.disabled = true;
+  });
+  if (chosen === correct) {
+    gameState.score++;
+    showToast('🎉 正确！太棒了！');
+    speakWord(correct);
+    setTimeout(()=>renderListenGame(), 1200);
+  } else {
+    showToast('❌ 再试试！正确答案：' + correct);
+    setTimeout(()=>renderListenGame(), 1500);
+  }
+}
+
+function renderMagicGame() {
+  // Pick magic-e units words
+  const magicWords = UNITS.filter(u=>u.magicE).flatMap(u=>u.words||[]);
+  const picked = [...magicWords].sort(()=>Math.random()-.5).slice(0,5);
+  const area = document.getElementById('game-area');
+  area.innerHTML = `
+    <div class="ga-title">✨ Magic-e 配对</div>
+    <p style="color:#888;font-size:.85rem;margin-bottom:16px;">点击左边短元音词，再点击右边的词，连成长元音词！</p>
+    <div class="ga-score">连对了: <span id="magic-score">0</span> / ${picked.length}</div>
+    <div class="lmatch-board">
+      <div class="lmatch-col" id="magic-left">
+        ${picked.map(w=>`<div class="lm-card" data-word="${w.w}" onclick="selectMagic(this,'left')">${w.w.slice(0,-1)}</div>`).join('')}
+      </div>
+      <div class="lmatch-col" id="magic-right">
+        ${[...picked].sort(()=>Math.random()-.5).map(w=>`<div class="lm-card" data-word="${w.w}" onclick="selectMagic(this,'right')">${w.w.slice(-1)}<span style="color:#aaa;">...</span>🪄</div>`).join('')}
+      </div>
+    </div>
+    <div class="ga-ctrl">
+      <button class="gabtn gabtn-p" onclick="renderMagicGame()">🔄 重新开始</button>
+      <button class="gabtn gabtn-s" onclick="startGame('listen')">其他游戏</button>
+    </div>`;
+  gameState.magicSel = {left:null, right:null};
+  gameState.magicScore = 0;
+}
+
+function selectMagic(el, side) {
+  if (el.classList.contains('matched')) return;
+  document.querySelectorAll(`#magic-${side} .lm-card`).forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  gameState.magicSel[side] = el;
+  const {left, right} = gameState.magicSel;
+  if (left && right) {
+    if (left.dataset.word === right.dataset.word) {
+      left.classList.add('matched'); right.classList.add('matched');
+      left.classList.remove('selected'); right.classList.remove('selected');
+      gameState.magicScore = (gameState.magicScore||0)+1;
+      document.getElementById('magic-score').textContent = gameState.magicScore;
+      showToast('🎉 配对成功！' + left.dataset.word);
+      speakWord(left.dataset.word);
+    } else {
+      left.classList.remove('selected'); right.classList.remove('selected');
+      showToast('❌ 不对，再试试！');
+    }
+    gameState.magicSel = {left:null, right:null};
+  }
+}
+
+function renderMemoryGame() {
+  const words = getRandomWords(8);
+  const pairs = [...words, ...words].sort(()=>Math.random()-.5);
+  const area = document.getElementById('game-area');
+  gameState.memFlipped = []; gameState.memMatched = 0; gameState.memLocked = false;
+  area.innerHTML = `
+    <div class="ga-title">🃏 翻牌记忆</div>
+    <div class="ga-score">已配对: <span id="mem-matched">0</span> / ${words.length}</div>
+    <div class="mem-board" id="mem-board">
+      ${pairs.map((w,i)=>`
+        <div class="mc" data-word="${w.w}" data-idx="${i}" onclick="flipCard(this)">
+          <span class="mc-front">❓</span>
+          <span class="mc-back">${w.emoji}</span>
+        </div>`).join('')}
+    </div>
+    <div class="ga-ctrl">
+      <button class="gabtn gabtn-p" onclick="renderMemoryGame()">🔄 重新开始</button>
+    </div>`;
+}
+
+function flipCard(el) {
+  if (gameState.memLocked || el.classList.contains('flipped') || el.classList.contains('matched')) return;
+  el.classList.add('flipped');
+  gameState.memFlipped.push(el);
+  if (gameState.memFlipped.length === 2) {
+    gameState.memLocked = true;
+    const [a,b] = gameState.memFlipped;
+    if (a.dataset.word === b.dataset.word) {
+      a.classList.add('matched'); b.classList.add('matched');
+      gameState.memMatched++;
+      document.getElementById('mem-matched').textContent = gameState.memMatched;
+      speakWord(a.dataset.word);
+      gameState.memFlipped = [];
+      gameState.memLocked = false;
+      if (gameState.memMatched === 8) showToast('🎉 全部配对！太厉害了！');
+    } else {
+      setTimeout(()=>{
+        a.classList.remove('flipped'); b.classList.remove('flipped');
+        gameState.memFlipped = [];
+        gameState.memLocked = false;
+      }, 900);
+    }
+  }
+}
+
+function renderSpellGame() {
+  const words = getRandomWords(1);
+  const target = words[0];
+  gameState.spellTarget = target.w;
+  gameState.spellInput = [];
+  const letters = [...target.w].sort(()=>Math.random()-.5);
+  const area = document.getElementById('game-area');
+  area.innerHTML = `
+    <div class="ga-title">✏️ 看图拼单词</div>
+    <div class="quiz-img">${target.emoji}</div>
+    <div class="quiz-word">${target.cn}</div>
+    <div class="spell-word" id="spell-display">${'_ '.repeat(target.w.length).trim()}</div>
+    <div class="spell-hint">${target.ipa}</div>
+    <div class="ga-score">得分: ${gameState.score} / ${gameState.total}</div>
+    <div class="letter-keys" id="spell-keys">
+      ${letters.map((l,i)=>`<button class="lkey" data-idx="${i}" onclick="addLetter(this,'${l}')">${l}</button>`).join('')}
+    </div>
+    <div class="ga-ctrl">
+      <button class="gabtn gabtn-p" onclick="checkSpell()">✅ 提交</button>
+      <button class="gabtn gabtn-s" onclick="clearSpell()">🗑️ 清除</button>
+      <button class="gabtn gabtn-s" onclick="renderSpellGame()">跳过</button>
+    </div>`;
+}
+
+function addLetter(btn, letter) {
+  if (btn.disabled) return;
+  btn.disabled = true;
+  gameState.spellInput.push(letter);
+  const display = document.getElementById('spell-display');
+  const cur = gameState.spellInput.join(' ');
+  const blank = '_ '.repeat(gameState.spellTarget.length - gameState.spellInput.length).trim();
+  display.textContent = cur + (blank ? ' ' + blank : '');
+}
+
+function clearSpell() {
+  gameState.spellInput = [];
+  document.querySelectorAll('.lkey').forEach(b=>b.disabled=false);
+  const display = document.getElementById('spell-display');
+  display.textContent = '_ '.repeat(gameState.spellTarget.length).trim();
+}
+
+function checkSpell() {
+  const answer = gameState.spellInput.join('');
+  gameState.total++;
+  if (answer === gameState.spellTarget) {
+    gameState.score++;
+    showToast('🎉 拼写正确！' + answer);
+    speakWord(answer);
+    setTimeout(()=>renderSpellGame(), 1200);
+  } else {
+    showToast(`❌ 正确答案是：${gameState.spellTarget}`);
+    setTimeout(()=>renderSpellGame(), 1500);
+  }
+}
+
+// ============================================================
+// TTS
+// ============================================================
+let ttsWord = '';
+function openTTS(word, emoji, ipa, cn) {
+  ttsWord = word;
+  document.getElementById('tts-emoji').textContent = emoji;
+  document.getElementById('tts-ipa').textContent = ipa;
+  document.getElementById('tts-cn').textContent = cn;
+  const w = UNITS.flatMap(u=>u.words||[]).find(w=>w.w===word);
+  document.getElementById('tts-word').innerHTML = w ? colorizeWord(w) : word;
+  document.getElementById('tts-overlay').classList.add('open');
+  speakTTS(1);
+}
+function speakTTS(rate) { speakWordRate(ttsWord, rate); }
+function speakWordRate(text, rate=1) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-GB'; u.rate = rate; u.pitch = 1.1;
+  window.speechSynthesis.speak(u);
+}
+function speakWord(text) { speakWordRate(text, 1); }
+function closeTTSModal() { document.getElementById('tts-overlay').classList.remove('open'); }
+function closeTTS(e) { if (e.target === document.getElementById('tts-overlay')) closeTTSModal(); }
+
+function speakChant(unitId) {
+  const unit = UNITS.find(u=>u.id===unitId);
+  if (!unit || !unit.chant) return;
+  const text = unit.chant.replace(/<[^>]+>/g,'').replace(/📌.*/,'').trim();
+  speakWordRate(text, 0.85);
+}
+function stopSpeech() { if (window.speechSynthesis) window.speechSynthesis.cancel(); }
+
+// ============================================================
+// LEARNED / PROGRESS
+// ============================================================
+function markLearned(word) {
+  const stored = JSON.parse(localStorage.getItem('opw3_learned') || '{}');
+  stored[word] = !stored[word];
+  localStorage.setItem('opw3_learned', JSON.stringify(stored));
+  showToast(stored[word] ? '⭐ 已标记掌握！' : '取消掌握');
+  renderVocab(document.querySelector('.vf-btn.active')?.onclick?.toString().match(/'(\w+)'/)?.[1] || 'all');
+  updateProgress();
+}
+
+function getLearnedCount(unit) {
+  const stored = JSON.parse(localStorage.getItem('opw3_learned') || '{}');
+  return (unit.words || []).filter(w => stored[w.w]).length;
+}
+
+function updateProgress() {
+  const stored = JSON.parse(localStorage.getItem('opw3_learned') || '{}');
+  const groups = ['long-a','long-i','long-o','long-u','long-e'];
+  const ids = ['a','i','o','u','e'];
+  groups.forEach((g,i) => {
+    const gWords = UNITS.filter(u=>u.group===g&&u.type==='unit').flatMap(u=>u.words||[]);
+    const learned = gWords.filter(w=>stored[w.w]).length;
+    const pct = gWords.length > 0 ? Math.round(learned/gWords.length*100) : 0;
+    const el = document.getElementById('prog-'+ids[i]);
+    const vl = document.getElementById('pv-'+ids[i]);
+    if (el) el.style.width = pct+'%';
+    if (vl) vl.textContent = pct+'%';
+  });
+}
+
+// ============================================================
+// CHECKIN
+// ============================================================
+let calYear, calMonth;
+function initCheckin() {
+  const now = new Date();
+  calYear = now.getFullYear();
+  calMonth = now.getMonth();
+  const streak = JSON.parse(localStorage.getItem('opw3_streak') || '{"count":0,"last":""}');
+  document.getElementById('streak-num').textContent = streak.count;
+  renderCal();
+  updateProgress();
+}
+
+function doCheckin() {
+  const today = new Date().toISOString().split('T')[0];
+  const streak = JSON.parse(localStorage.getItem('opw3_streak') || '{"count":0,"last":""}');
+  const checkins = JSON.parse(localStorage.getItem('opw3_checkins') || '[]');
+  if (checkins.includes(today)) {
+    showToast('✅ 今天已经打卡啦！');
+    document.getElementById('ch-done-msg').textContent = '今天已打卡 ✅';
+    return;
+  }
+  checkins.push(today);
+  localStorage.setItem('opw3_checkins', JSON.stringify(checkins));
+  const yesterday = new Date(Date.now()-86400000).toISOString().split('T')[0];
+  streak.count = streak.last === yesterday ? streak.count + 1 : 1;
+  streak.last = today;
+  localStorage.setItem('opw3_streak', JSON.stringify(streak));
+  document.getElementById('streak-num').textContent = streak.count;
+  document.getElementById('ch-done-msg').textContent = `打卡成功！连续 ${streak.count} 天 🔥`;
+  showToast('🎉 打卡成功！继续加油！');
+  renderCal();
+  confetti();
+}
+
+function renderCal() {
+  const months = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+  document.getElementById('cal-month-label').textContent = `${calYear} 年 ${months[calMonth]}`;
+  const checkins = JSON.parse(localStorage.getItem('opw3_checkins') || '[]');
+  const today = new Date().toISOString().split('T')[0];
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
+  const grid = document.getElementById('cal-grid');
+  let html = ['日','一','二','三','四','五','六'].map(d=>`<div class="cdh">${d}</div>`).join('');
+  for (let i=0;i<firstDay;i++) html+=`<div class="cd empty"></div>`;
+  for (let d=1;d<=daysInMonth;d++) {
+    const ds = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isToday = ds===today, isChecked = checkins.includes(ds);
+    html += `<div class="cd${isToday?' today':isChecked?' checked':''}">${d}${isChecked?'✓':''}</div>`;
+  }
+  grid.innerHTML = html;
+}
+
+function changeMonth(d) { calMonth+=d; if(calMonth<0){calMonth=11;calYear--;}else if(calMonth>11){calMonth=0;calYear++;} renderCal(); }
+
+// ============================================================
+// TABS
+// ============================================================
+function switchTab(tab) {
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('pane-'+tab).classList.add('active');
+  event.target.classList.add('active');
+  if (tab==='vocab') renderVocab();
+  if (tab==='songs') renderSongs();
+  if (tab==='checkin') initCheckin();
+}
+
+// ============================================================
+// TOAST & CONFETTI
+// ============================================================
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+function confetti() {
+  const colors = ['#FF6B9D','#FF9A3C','#FFD93D','#4CAF50','#4D96FF','#9B59B6'];
+  for (let i=0;i<30;i++) {
+    const c = document.createElement('div');
+    c.style.cssText = `position:fixed;top:-20px;left:${Math.random()*100}vw;width:10px;height:10px;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${Math.random()>0.5?'50%':'0'};animation:fall ${1+Math.random()*2}s linear ${Math.random()}s forwards;z-index:9998;pointer-events:none;`;
+    document.body.appendChild(c);
+    c.addEventListener('animationend',()=>c.remove());
+  }
+}
+
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  renderUnits();
+  updateProgress();
+  // Add fall animation for confetti
+  const style = document.createElement('style');
+  style.textContent = `@keyframes fall{from{transform:translateY(-20px) rotate(0deg);opacity:1;}to{transform:translateY(110vh) rotate(720deg);opacity:0;}}`;
+  document.head.appendChild(style);
+});
+</script>
+</body>
+</html>

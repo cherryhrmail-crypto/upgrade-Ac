@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oxford Phonics World · 牛津自然拼读在线学习平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="opw-platform.css">
+<script src="opw-platform.js" defer></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --orange:#FF6B00;
+  --blue:#2B4FC8;
+  --dark:#1a1a2e;
+  --light:#FFF8F0;
+  --gray:#f5f5f5;
+  --l1:#FF6B6B; --l1l:#ffd1d1;
+  --l2:#FF9A3C; --l2l:#ffe3c9;
+  --l3:#27AE60; --l3l:#d7f5e0;
+  --l4:#2B4FC8; --l4l:#d9e2ff;
+  --l5:#9B59B6; --l5l:#e8d9f5;
+  --success:#27AE60;
+  --warning:#FF9A3C;
+  --info:#2B4FC8;
+}
+
+/* ===== 全局样式 ===== */
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--light);
+  color:var(--dark);
+  line-height:1.6;
+  min-height:100vh;
+}
+
+.container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 20px;
+}
+
+.section{
+  padding:60px 0;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:48px;
+}
+
+.section-title h2{
+  font-family:'Fredoka One',cursive;
+  font-size:2.5rem;
+  color:var(--dark);
+  margin-bottom:12px;
+}
+
+.section-title p{
+  color:#666;
+  font-size:1.1rem;
+  max-width:700px;
+  margin:0 auto;
+}
+
+/* ===== 导航栏 ===== */
+.navbar{
+  background:white;
+  box-shadow:0 2px 20px rgba(0,0,0,0.08);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 20px;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+}
+
+.logo-icon{
+  width:40px;
+  height:40px;
+  background:linear-gradient(135deg,var(--orange),var(--blue));
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  color:white;
+  font-weight:800;
+}
+
+.logo-text{
+  display:flex;
+  flex-direction:column;
+}
+
+.logo-title{
+  font-family:'Fredoka One',cursive;
+  font-size:1.4rem;
+  color:var(--dark);
+  line-height:1;
+}
+
+.logo-subtitle{
+  font-size:0.75rem;
+  color:#666;
+  font-weight:600;
+}
+
+.nav-links{
+  display:flex;
+  gap:32px;
+  align-items:center;
+}
+
+.nav-link{
+  text-decoration:none;
+  color:var(--dark);
+  font-weight:600;
+  font-size:0.95rem;
+  transition:color 0.3s;
+  padding:6px 0;
+  position:relative;
+}
+
+.nav-link:hover{
+  color:var(--orange);
+}
+
+.nav-link.active{
+  color:var(--orange);
+}
+
+.nav-link.active::after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:3px;
+  background:var(--orange);
+  border-radius:2px;
+}
+
+.user-area{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.btn{
+  padding:10px 24px;
+  border-radius:12px;
+  font-weight:600;
+  font-size:0.95rem;
+  cursor:pointer;
+  transition:all 0.3s;
+  border:none;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--orange),var(--blue));
+  color:white;
+}
+
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(255,107,0,0.3);
+}
+
+/* ===== 英雄区域 ===== */
+.hero{
+  padding:80px 0;
+  background:linear-gradient(135deg,rgba(255,107,0,0.05),rgba(43,79,200,0.05));
+  position:relative;
+  overflow:hidden;
+}
+
+.hero::before{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  width:300px;
+  height:300px;
+  background:linear-gradient(135deg,rgba(255,107,0,0.1),transparent);
+  border-radius:50%;
+  transform:translate(30%,-30%);
+}
+
+.hero-content{
+  max-width:800px;
+  margin:0 auto;
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:white;
+  padding:8px 20px;
+  border-radius:50px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.1);
+  margin-bottom:20px;
+  font-weight:700;
+  color:var(--orange);
+}
+
+.hero h1{
+  font-family:'Fredoka One',cursive;
+  font-size:3.2rem;
+  line-height:1.2;
+  margin-bottom:20px;
+  background:linear-gradient(135deg,var(--orange),var(--blue));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.hero p{
+  font-size:1.2rem;
+  color:#555;
+  max-width:600px;
+  margin:0 auto 30px;
+}
+
+.hero-stats{
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  flex-wrap:wrap;
+  margin-top:40px;
+}
+
+.stat-item{
+  text-align:center;
+}
+
+.stat-number{
+  font-family:'Fredoka One',cursive;
+  font-size:2.2rem;
+  color:var(--orange);
+  font-weight:800;
+  line-height:1;
+}
+
+.stat-label{
+  font-size:0.9rem;
+  color:#666;
+  font-weight:600;
+  margin-top:6px;
+}
+
+/* ===== 学习路径 ===== */
+.path-section{
+  background:white;
+}
+
+.path-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  margin-bottom:40px;
+}
+
+.path-card{
+  background:var(--gray);
+  border-radius:16px;
+  padding:30px 24px;
+  text-align:center;
+  transition:all 0.3s;
+  cursor:pointer;
+  border:2px solid transparent;
+}
+
+.path-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 12px 30px rgba(0,0,0,0.12);
+  border-color:var(--orange);
+}
+
+.path-number{
+  width:50px;
+  height:50px;
+  background:white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 20px;
+  font-family:'Fredoka One',cursive;
+  font-size:1.4rem;
+  font-weight:800;
+  color:var(--dark);
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.path-card.l1 .path-number{background:var(--l1);color:white;}
+.path-card.l2 .path-number{background:var(--l2);color:white;}
+.path-card.l3 .path-number{background:var(--l3);color:white;}
+.path-card.l4 .path-number{background:var(--l4);color:white;}
+.path-card.l5 .path-number{background:var(--l5);color:white;}
+
+.path-title{
+  font-weight:800;
+  font-size:1.2rem;
+  margin-bottom:8px;
+  color:var(--dark);
+}
+
+.path-desc{
+  font-size:0.9rem;
+  color:#666;
+  margin-bottom:16px;
+}
+
+.path-meta{
+  font-size:0.85rem;
+  color:#888;
+  font-weight:600;
+}
+
+/* ===== 级别卡片 ===== */
+.levels-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:30px;
+  margin-bottom:60px;
+}
+
+.level-card{
+  background:white;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 8px 30px rgba(0,0,0,0.1);
+  transition:all 0.3s;
+  text-decoration:none;
+  color:inherit;
+  display:block;
+}
+
+.level-card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 16px 40px rgba(0,0,0,0.15);
+}
+
+.level-header{
+  padding:32px 28px 24px;
+  color:white;
+  position:relative;
+  overflow:hidden;
+}
+
+.level-header::before{
+  content:'';
+  position:absolute;
+  top:-50px;
+  right:-50px;
+  width:150px;
+  height:150px;
+  background:rgba(255,255,255,0.15);
+  border-radius:50%;
+}
+
+.level-header::after{
+  content:'';
+  position:absolute;
+  bottom:-30px;
+  right:30px;
+  width:80px;
+  height:80px;
+  background:rgba(255,255,255,0.1);
+  border-radius:50%;
+}
+
+.lc1 .level-header{background:linear-gradient(135deg,var(--l1),#ff4040);}
+.lc2 .level-header{background:linear-gradient(135deg,var(--l2),#e07800);}
+.lc3 .level-header{background:linear-gradient(135deg,var(--l3),#1a7a42);}
+.lc4 .level-header{background:linear-gradient(135deg,var(--l4),#1a3398);}
+.lc5 .level-header{background:linear-gradient(135deg,var(--l5),#6c3483);}
+
+.level-num{
+  font-size:0.85rem;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  opacity:0.9;
+  margin-bottom:6px;
+}
+
+.level-title{
+  font-family:'Fredoka One',cursive;
+  font-size:1.8rem;
+  line-height:1.2;
+  margin-bottom:4px;
+}
+
+.level-subtitle{
+  font-size:1rem;
+  opacity:0.85;
+  font-weight:600;
+}
+
+.level-icon{
+  position:absolute;
+  right:28px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:3.5rem;
+  z-index:1;
+}
+
+.level-body{
+  padding:28px;
+}
+
+.level-desc{
+  font-size:0.95rem;
+  color:#555;
+  line-height:1.6;
+  margin-bottom:24px;
+  padding-bottom:24px;
+  border-bottom:1px solid var(--gray);
+}
+
+.level-features{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:20px;
+}
+
+.feature-tag{
+  background:var(--gray);
+  padding:6px 14px;
+  border-radius:20px;
+  font-size:0.8rem;
+  font-weight:600;
+  color:#555;
+}
+
+.lc1 .feature-tag{background:var(--l1l);color:var(--l1);}
+.lc2 .feature-tag{background:var(--l2l);color:var(--l2);}
+.lc3 .feature-tag{background:var(--l3l);color:var(--l3);}
+.lc4 .feature-tag{background:var(--l4l);color:var(--l4);}
+.lc5 .feature-tag{background:var(--l5l);color:var(--l5);}
+
+.level-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  margin-bottom:24px;
+}
+
+.stat-card{
+  background:var(--gray);
+  border-radius:12px;
+  padding:16px 12px;
+  text-align:center;
+}
+
+.stat-value{
+  font-family:'Fredoka One',cursive;
+  font-size:1.4rem;
+  font-weight:800;
+  margin-bottom:4px;
+  color:var(--dark);
+}
+
+.lc1 .stat-value{color:var(--l1);}
+.lc2 .stat-value{color:var(--l2);}
+.lc3 .stat-value{color:var(--l3);}
+.lc4 .stat-value{color:var(--l4);}
+.lc5 .stat-value{color:var(--l5);}
+
+.stat-label-small{
+  font-size:0.75rem;
+  color:#888;
+  font-weight:600;
+}
+
+.level-btn{
+  width:100%;
+  padding:14px;
+  border-radius:16px;
+  font-weight:700;
+  font-size:1rem;
+  cursor:pointer;
+  border:none;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:all 0.3s;
+}
+
+.lc1 .level-btn{background:linear-gradient(135deg,var(--l1),#ff4040);}
+.lc2 .level-btn{background:linear-gradient(135deg,var(--l2),#e07800);}
+.lc3 .level-btn{background:linear-gradient(135deg,var(--l3),#1a7a42);}
+.lc4 .level-btn{background:linear-gradient(135deg,var(--l4),#1a3398);}
+.lc5 .level-btn{background:linear-gradient(135deg,var(--l5),#6c3483);}
+
+.level-btn:hover{
+  opacity:0.9;
+  transform:translateY(-2px);
+}
+
+/* ===== 学习进度 ===== */
+.progress-section{
+  background:linear-gradient(135deg,rgba(255,107,0,0.05),rgba(43,79,200,0.05));
+}
+
+.progress-container{
+  max-width:800px;
+  margin:0 auto;
+  background:white;
+  border-radius:24px;
+  padding:40px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.08);
+}
+
+.progress-header{
+  text-align:center;
+  margin-bottom:32px;
+}
+
+.progress-header h3{
+  font-family:'Fredoka One',cursive;
+  font-size:1.8rem;
+  color:var(--dark);
+  margin-bottom:8px;
+}
+
+.progress-header p{
+  color:#666;
+  font-size:1rem;
+}
+
+.progress-chart{
+  margin-bottom:40px;
+}
+
+.progress-bar{
+  background:var(--gray);
+  border-radius:12px;
+  height:20px;
+  overflow:hidden;
+  margin-bottom:12px;
+}
+
+.progress-fill{
+  height:100%;
+  border-radius:12px;
+  background:linear-gradient(90deg,var(--l1),var(--l2),var(--l3),var(--l4),var(--l5));
+  transition:width 1s ease;
+  width:0%;
+}
+
+.progress-labels{
+  display:flex;
+  justify-content:space-between;
+  font-size:0.85rem;
+  color:#666;
+  font-weight:600;
+}
+
+.progress-details{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:16px;
+  margin-top:32px;
+}
+
+.detail-card{
+  background:var(--gray);
+  border-radius:16px;
+  padding:20px;
+  text-align:center;
+}
+
+.detail-number{
+  font-family:'Fredoka One',cursive;
+  font-size:2rem;
+  color:var(--orange);
+  font-weight:800;
+  line-height:1;
+}
+
+.detail-text{
+  font-size:0.85rem;
+  color:#666;
+  font-weight:600;
+  margin-top:6px;
+}
+
+/* ===== 单元系统 ===== */
+.unit-system-section{
+  background:white;
+}
+
+.unit-system{
+  max-width:1000px;
+  margin:0 auto;
+  background:linear-gradient(135deg,rgba(255,107,0,0.02),rgba(43,79,200,0.02));
+  border-radius:24px;
+  padding:40px;
+  border:2px solid var(--gray);
+}
+
+.unit-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;
+  margin-top:32px;
+}
+
+.unit-card{
+  background:white;
+  border-radius:20px;
+  padding:28px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.05);
+  border:2px solid var(--gray);
+  transition:all 0.3s;
+  position:relative;
+  overflow:hidden;
+}
+
+.unit-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 8px 30px rgba(0,0,0,0.1);
+  border-color:var(--orange);
+}
+
+.unit-card.review{
+  border-style:dashed;
+}
+
+.unit-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:16px;
+}
+
+.unit-icon{
+  width:50px;
+  height:50px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.5rem;
+  font-weight:800;
+  color:white;
+}
+
+.unit-card.l1 .unit-icon{background:var(--l1);}
+.unit-card.l2 .unit-icon{background:var(--l2);}
+.unit-card.l3 .unit-icon{background:var(--l3);}
+.unit-card.l4 .unit-icon{background:var(--l4);}
+.unit-card.l5 .unit-icon{background:var(--l5);}
+
+.unit-card.review .unit-icon{
+  background:var(--warning);
+}
+
+.unit-info h4{
+  font-weight:800;
+  font-size:1.2rem;
+  color:var(--dark);
+  margin-bottom:4px;
+}
+
+.unit-type{
+  font-size:0.8rem;
+  color:#888;
+  font-weight:600;
+}
+
+.unit-content{
+  margin-bottom:20px;
+}
+
+.unit-content p{
+  font-size:0.9rem;
+  color:#666;
+  line-height:1.6;
+  margin-bottom:12px;
+}
+
+.unit-features{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.unit-feature{
+  background:var(--gray);
+  padding:4px 10px;
+  border-radius:12px;
+  font-size:0.75rem;
+  font-weight:600;
+  color:#666;
+}
+
+.unit-card.review .unit-feature{
+  background:rgba(255,154,60,0.1);
+  color:var(--warning);
+}
+
+/* ===== 页脚 ===== */
+.footer{
+  background:var(--dark);
+  color:white;
+  padding:60px 0 40px;
+}
+
+.footer-content{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:40px;
+  margin-bottom:40px;
+}
+
+.footer-section h4{
+  font-family:'Fredoka One',cursive;
+  font-size:1.2rem;
+  margin-bottom:20px;
+  color:white;
+}
+
+.footer-links{
+  list-style:none;
+}
+
+.footer-links li{
+  margin-bottom:12px;
+}
+
+.footer-links a{
+  color:rgba(255,255,255,0.7);
+  text-decoration:none;
+  font-size:0.95rem;
+  transition:color 0.3s;
+}
+
+.footer-links a:hover{
+  color:white;
+}
+
+.footer-bottom{
+  text-align:center;
+  padding-top:30px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.6);
+  font-size:0.9rem;
+}
+
+/* ===== 响应式设计 ===== */
+@media(max-width:768px){
+  .hero h1{
+    font-size:2.5rem;
+  }
+  
+  .hero-stats{
+    gap:20px;
+  }
+  
+  .stat-number{
+    font-size:1.8rem;
+  }
+  
+  .levels-grid{
+    grid-template-columns:1fr;
+  }
+  
+  .nav-links{
+    display:none;
+  }
+  
+  .section{
+    padding:40px 0;
+  }
+  
+  .section-title h2{
+    font-size:2rem;
+  }
+}
+
+@media(max-width:480px){
+  .hero h1{
+    font-size:2rem;
+  }
+  
+  .hero-stats{
+    flex-direction:column;
+    gap:15px;
+  }
+  
+  .path-grid{
+    grid-template-columns:1fr;
+  }
+  
+  .progress-container{
+    padding:24px;
+  }
+  
+  .unit-system{
+    padding:24px;
+  }
+}
+
+/* ===== 动画效果 ===== */
+@keyframes fadeInUp{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.fade-in-up{
+  animation:fadeInUp 0.6s ease forwards;
+}
+
+.delay-1{animation-delay:0.1s;}
+.delay-2{animation-delay:0.2s;}
+.delay-3{animation-delay:0.3s;}
+.delay-4{animation-delay:0.4s;}
+.delay-5{animation-delay:0.5s;}
+</style>
+</head>
+<body>
+
+<!-- 导航栏 -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="#home" class="logo">
+      <div class="logo-icon">OPW</div>
+      <div class="logo-text">
+        <div class="logo-title">Oxford Phonics World</div>
+        <div class="logo-subtitle">牛津自然拼读在线平台</div>
+      </div>
+    </a>
+    
+    <div class="nav-links">
+      <a href="#home" class="nav-link active">主页</a>
+      <a href="#levels" class="nav-link">学习级别</a>
+      <a href="#units" class="nav-link">单元系统</a>
+      <a href="#progress" class="nav-link">学习进度</a>
+      <a href="#resources" class="nav-link">资源中心</a>
+    </div>
+    
+    <div class="user-area">
+      <button class="btn btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        登录/注册
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- 主页 -->
+<section id="home" class="hero">
+  <div class="container">
+    <div class="hero-content fade-in-up">
+      <div class="hero-badge">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#FF6B00">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+        权威英语发音教学系统
+      </div>
+      
+      <h1>Oxford Phonics World<br>在线学习平台</h1>
+      
+      <p>专业的自然拼读学习平台，涵盖5个级别165个学习单元。通过科学的单元系统，帮助学习者系统掌握英语发音规律，提升阅读能力。</p>
+      
+      <a href="#levels" class="btn btn-primary" style="padding:14px 32px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+        开始学习 →
+      </a>
+      
+      <div class="hero-stats fade-in-up delay-1">
+        <div class="stat-item">
+          <div class="stat-number">165</div>
+          <div class="stat-label">学习单元</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5</div>
+          <div class="stat-label">学习级别</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">44</div>
+          <div class="stat-label">发音规则</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3000+</div>
+          <div class="stat-label">核心词汇</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 学习路径 -->
+<section class="path-section section">
+  <div class="container">
+    <div class="section-title fade-in-up">
+      <h2>🎯 五步学习路径</h2>
+      <p>从字母基础到高级拼读，循序渐进的系统学习</p>
+    </div>
+    
+    <div class="path-grid">
+      <div class="path-card l1 fade-in-up delay-1">
+        <div class="path-number">1</div>
+        <h3 class="path-title">字母与发音</h3>
+        <p class="path-desc">掌握26个字母的基本发音，建立音素意识</p>
+        <div class="path-meta">26个学习单元</div>
+      </div>
+      
+      <div class="path-card l2 fade-in-up delay-2">
+        <div class="path-number">2</div>
+        <h3 class="path-title">短元音词族</h3>
+        <p class="path-desc">学习CVC词型拼读，扩展基本词汇量</p>
+        <div class="path-meta">23个学习单元</div>
+      </div>
+      
+      <div class="path-card l3 fade-in-up delay-3">
+        <div class="path-number">3</div>
+        <h3 class="path-title">长元音规则</h3>
+        <p class="path-desc">掌握魔法E和元音组合发音</p>
+        <div class="path-meta">24个学习单元</div>
+      </div>
+      
+      <div class="path-card l4 fade-in-up delay-4">
+        <div class="path-number">4</div>
+        <h3 class="path-title">辅音组合与双元音</h3>
+        <p class="path-desc">学习辅音连缀和双元音发音</p>
+        <div class="path-meta">24个学习单元</div>
+      </div>
+      
+      <div class="path-card l5 fade-in-up delay-5">
+        <div class="path-number">5</div>
+        <h3 class="path-title">高级拼读规则</h3>
+        <p class="path-desc">掌握复杂拼读和拼写变体</p>
+        <div class="path-meta">24个学习单元</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 级别卡片 -->
+<section id="levels" class="section">
+  <div class="container">
+    <div class="section-title fade-in-up">
+      <h2>📚 五个学习级别</h2>
+      <p>每个级别包含完整的单元系统和复习机制</p>
+    </div>
+    
+    <div class="levels-grid">
+      <!-- Level 1 -->
+      <a href="opw-level1-new.html" class="level-card lc1 fade-in-up delay-1">
+        <div class="level-header">
+          <div class="level-num">Level 1</div>
+          <h2 class="level-title">字母启蒙</h2>
+          <div class="level-subtitle">Alphabet & Sounds</div>
+          <div class="level-icon">🔤</div>
+        </div>
+        <div class="level-body">
+          <p class="level-desc">学习26个字母的名称和发音，建立字母-音素对应关系。通过歌谣、动画和互动游戏，培养音素意识。</p>
+          
+          <div class="level-features">
+            <span class="feature-tag">字母发音</span>
+            <span class="feature-tag">字母歌谣</span>
+            <span class="feature-tag">配对游戏</span>
+            <span class="feature-tag">音素意识</span>
+          </div>
+          
+          <div class="level-stats">
+            <div class="stat-card">
+              <div class="stat-value">35</div>
+              <div class="stat-label-small">学习单元</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">26</div>
+              <div class="stat-label-small">字母发音</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">8</div>
+              <div class="stat-label-small">阶段复习</div>
+            </div>
+          </div>
+          
+          <button class="level-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+            进入学习
+          </button>
+        </div>
+      </a>
+      
+      <!-- Level 2 -->
+      <a href="opw-level2-new.html" class="level-card lc2 fade-in-up delay-2">
+        <div class="level-header">
+          <div class="level-num">Level 2</div>
+          <h2 class="level-title">短元音拼读</h2>
+          <div class="level-subtitle">Short Vowels & CVC</div>
+          <div class="level-icon">🐱</div>
+        </div>
+        <div class="level-body">
+          <p class="level-desc">掌握5个短元音发音，学习CVC词型拼读规律。通过拼词练习和阅读游戏，提高拼读能力。</p>
+          
+          <div class="level-features">
+            <span class="feature-tag">短元音</span>
+            <span class="feature-tag">CVC词型</span>
+            <span class="feature-tag">拼词练习</span>
+            <span class="feature-tag">词族学习</span>
+          </div>
+          
+          <div class="level-stats">
+            <div class="stat-card">
+              <div class="stat-value">31</div>
+              <div class="stat-label-small">学习单元</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">23</div>
+              <div class="stat-label-small">教学单元</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">7</div>
+              <div class="stat-label-small">阶段复习</div>
+            </div>
+          </div>
+          
+          <button class="level-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+            进入学习
+          </button>
+        </div>
+      </a>
+      
+      <!-- Level 3 -->
+      <a href="opw-level3-new.html" class="level-card lc3 fade-in-up delay-3">
+        <div class="level-header">
+          <div class="level-num">Level 3</div>
+          <h2 class="level-title">长元音规则</h2>
+          <div class="level-subtitle">Long Vowels & Patterns</div>
+          <div class="level-icon">✨</div>
+        </div>
+        <div class="level-body">
+          <p class="level-desc">学习长元音发音规则，包括魔法E、元音字母组合等。通过故事阅读和句子练习，提升阅读流畅度。</p>
+          
+          <div class="level-features">
+            <span class="feature-tag">魔法E</span>
+            <span class="feature-tag">元音组合</span>
+            <span class="feature-tag">故事阅读</span>
+            <span class="feature-tag">句子练习</span>
+          </div>
+          
+          <div class="level-stats">
+            <div class="stat-card">
+              <div class="stat-value">33</div>
+              <div class="stat-label-small">学习单元</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">24</div>
+              <div class="stat-label-small">教学单元</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">8</div>
+              <div class="stat-label-small">阶段复习</div>
+            </div>
+          </div>
+          
+          <button class="level-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+            进入学习
+          </button>
+        </div>
+      </a>
+      
+      <!-- Level 4 -->
+      <a href="opw-level4-new.html" class="level-card lc4 fade-in-up delay-4">
+        <div class="level-header">
+          <div class="level-num">Level 4</div>
+          <h2 class="level-title">辅音组合与双元音</h2>
+          <div class="level-subtitle">Consonant Blends & Diphthongs</div>
+          <div class="level-icon">🌟</div>
+        </div>
+        <div class="level-body">
+          <p class="level-desc">掌握辅音连缀和双元音发音，学习复杂词型拼读。通过专题学习和综合练习，扩展词汇量。</p>
+          
+          <div class="level-features">
+            <span class="feature-tag">辅音连缀</span>
+            <span class="feature-tag">双元音</span>
+            <span class="feature-tag">专题学习</span>
+            <span class="feature-tag">综合练习</span>
+          </div>
+          
+          <div class="level-stats">
+            <div class="stat-card">
+              <div class="stat-value">33</div>
+              <div class="stat-label-small">学习单元</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">24</div>
+              <div class="stat-label-small">教学单元</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">8</div>
+              <div class="stat-label-small">阶段复习</div>
+            </div>
+          </div>
+          
+          <button class="level-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+            进入学习
+          </button>
+        </div>
+      </a>
+      
+      <!-- Level 5 -->
+      <a href="opw-level5-new.html" class="level-card lc5 fade-in-up delay-5">
+        <div class="level-header">
+          <div class="level-num">Level 5</div>
+          <h2 class="level-title">高级拼读规则</h2>
+          <div class="level-subtitle">Advanced Phonics & Spelling</div>
+          <div class="level-icon">🚀</div>
+        </div>
+        <div class="level-body">
+          <p class="level-desc">学习高级拼读规则和拼写变体，掌握复杂发音规律。通过挑战练习和综合应用，达到自主阅读水平。</p>
+          
+          <div class="level-features">
+            <span class="feature-tag">拼写变体</span>
+            <span class="feature-tag">高级规则</span>
+            <span class="feature-tag">挑战练习</span>
+            <span class="feature-tag">综合应用</span>
+          </div>
+          
+          <div class="level-stats">
+            <div class="stat-card">
+              <div class="stat-value">33</div>
+              <div class="stat-label-small">学习单元</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">24</div>
+              <div class="stat-label-small">教学单元</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">8</div>
+              <div class="stat-label-small">阶段复习</div>
+            </div>
+          </div>
+          
+          <button class="level-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+            进入学习
+          </button>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 学习进度 -->
+<section id="progress" class="progress-section section">
+  <div class="container">
+    <div class="progress-container fade-in-up">
+      <div class="progress-header">
+        <h3>📊 学习进度概览</h3>
+        <p>跟踪你的学习进度，保持学习动力</p>
+      </div>
+      
+      <div class="progress-chart">
+        <div class="progress-bar">
+          <div class="progress-fill" id="overallProgress"></div>
+        </div>
+        <div class="progress-labels">
+          <span>Level 1</span>
+          <span>Level 2</span>
+          <span>Level 3</span>
+          <span>Level 4</span>
+          <span>Level 5</span>
+        </div>
+      </div>
+      
+      <div class="progress-details">
+        <div class="detail-card">
+          <div class="detail-number" id="completedUnits">0</div>
+          <div class="detail-text">已学单元</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-number" id="completedLevels">0</div>
+          <div class="detail-text">完成级别</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-number" id="studyDays">0</div>
+          <div class="detail-text">学习天数</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-number" id="masteredWords">0</div>
+          <div class="detail-text">掌握词汇</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 单元系统 -->
+<section id="units" class="unit-system-section section">
+  <div class="container">
+    <div class="section-title fade-in-up">
+      <h2>📝 单元学习系统</h2>
+      <p>科学的单元编排，每3个教学单元后设置复习单元</p>
+    </div>
+    
+    <div class="unit-system fade-in-up delay-1">
+      <h3 style="text-align:center;margin-bottom:24px;font-size:1.4rem;color:var(--dark);">单元结构示例 (Level 1)</h3>
+      
+      <div class="unit-grid">
+        <!-- 教学单元示例 -->
+        <div class="unit-card l1">
+          <div class="unit-header">
+            <div class="unit-icon">Aa</div>
+            <div class="unit-info">
+              <h4>Unit 1: 字母A</h4>
+              <div class="unit-type">教学单元</div>
+            </div>
+          </div>
+          <div class="unit-content">
+            <p>学习字母A的发音，掌握以A开头的单词发音规律。</p>
+          </div>
+          <div class="unit-features">
+            <span class="unit-feature">字母发音</span>
+            <span class="unit-feature">核心词汇</span>
+            <span class="unit-feature">歌谣</span>
+            <span class="unit-feature">发音练习</span>
+          </div>
+        </div>
+        
+        <div class="unit-card l1">
+          <div class="unit-header">
+            <div class="unit-icon">Bb</div>
+            <div class="unit-info">
+              <h4>Unit 2: 字母B</h4>
+              <div class="unit-type">教学单元</div>
+            </div>
+          </div>
+          <div class="unit-content">
+            <p>学习字母B的发音，掌握以B开头的单词发音规律。</p>
+          </div>
+          <div class="unit-features">
+            <span class="unit-feature">字母发音</span>
+            <span class="unit-feature">核心词汇</span>
+            <span class="unit-feature">歌谣</span>
+            <span class="unit-feature">发音练习</span>
+          </div>
+        </div>
+        
+        <div class="unit-card l1">
+          <div class="unit-header">
+            <div class="unit-icon">Cc</div>
+            <div class="unit-info">
+              <h4>Unit 3: 字母C</h4>
+              <div class="unit-type">教学单元</div>
+            </div>
+          </div>
+          <div class="unit-content">
+            <p>学习字母C的发音，掌握以C开头的单词发音规律。</p>
+          </div>
+          <div class="unit-features">
+            <span class="unit-feature">字母发音</span>
+            <span class="unit-feature">核心词汇</span>
+            <span class="unit-feature">歌谣</span>
+            <span class="unit-feature">发音练习</span>
+          </div>
+        </div>
+        
+        <!-- 复习单元示例 -->
+        <div class="unit-card review">
+          <div class="unit-header">
+            <div class="unit-icon">🔄</div>
+            <div class="unit-info">
+              <h4>Review 1: 单元1-3</h4>
+              <div class="unit-type">复习单元</div>
+            </div>
+          </div>
+          <div class="unit-content">
+            <p>复习字母A、B、C的发音和相关词汇，巩固学习成果。</p>
+          </div>
+          <div class="unit-features">
+            <span class="unit-feature">综合复习</span>
+            <span class="unit-feature">巩固练习</span>
+            <span class="unit-feature">评估测试</span>
+            <span class="unit-feature">发音纠正</span>
+          </div>
+        </div>
+        
+        <!-- 总复习单元示例 -->
+        <div class="unit-card" style="border-color:var(--warning);">
+          <div class="unit-header">
+            <div class="unit-icon" style="background:var(--warning);">🏆</div>
+            <div class="unit-info">
+              <h4>Final Review</h4>
+              <div class="unit-type">总复习单元</div>
+            </div>
+          </div>
+          <div class="unit-content">
+            <p>全面复习Level 1所有内容，检验学习成果，为进入下一级别做好准备。</p>
+          </div>
+          <div class="unit-features">
+            <span class="unit-feature">全面复习</span>
+            <span class="unit-feature">综合评估</span>
+            <span class="unit-feature">学习总结</span>
+            <span class="unit-feature">级别认证</span>
+          </div>
+        </div>
+      </div>
+      
+      <div style="text-align:center;margin-top:32px;color:#666;font-size:0.95rem;">
+        <p>📈 <strong>系统特点：</strong>每3个教学单元后设置复习单元，每个级别结束时设置总复习单元。科学的学习-复习-巩固循环，确保学习效果。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Oxford Phonics World</h4>
+        <p style="color:rgba(255,255,255,0.7);margin-bottom:20px;">专业的英语自然拼读在线学习平台，基于牛津大学出版社权威教材体系。</p>
+      </div>
+      
+      <div class="footer-section">
+        <h4>学习资源</h4>
+        <ul class="footer-links">
+          <li><a href="#levels">学习级别</a></li>
+          <li><a href="#units">单元系统</a></li>
+          <li><a href="#progress">学习进度</a></li>
+          <li><a href="#resources">资源下载</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>平台功能</h4>
+        <ul class="footer-links">
+          <li><a href="#">单元学习</a></li>
+          <li><a href="#">发音练习</a></li>
+          <li><a href="#">进度跟踪</a></li>
+          <li><a href="#">学习报告</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>联系我们</h4>
+        <ul class="footer-links">
+          <li><a href="#">使用帮助</a></li>
+          <li><a href="#">技术支持</a></li>
+          <li><a href="#">建议反馈</a></li>
+          <li><a href="#">合作咨询</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>© 2026 Oxford Phonics World Online Platform. All rights reserved.</p>
+      <p>基于 Oxford Phonics World 教材体系，专为英语发音学习设计的在线平台。</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== 存储管理 =====
+const STORAGE_KEY = 'opw_platform_data';
+
+function getPlatformData() {
+  try {
+    const data = localStorage.getItem(STORAGE_KEY);
+    return data ? JSON.parse(data) : {
+      unitsCompleted: {},
+      levelsProgress: {1:0,2:0,3:0,4:0,5:0},
+      studyDays: [],
+      masteredWords: 0
+    };
+  } catch(e) {
+    return {
+      unitsCompleted: {},
+      levelsProgress: {1:0,2:0,3:0,4:0,5:0},
+      studyDays: [],
+      masteredWords: 0
+    };
+  }
+}
+
+function savePlatformData(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+// ===== 进度计算 =====
+function calculateProgress() {
+  const data = getPlatformData();
+  
+  // 计算总单元数
+  const totalUnits = 35 + 31 + 33 + 33 + 33; // 165个单元
+  
+  // 计算已学单元数
+  let completedUnits = 0;
+  for (let level = 1; level <= 5; level++) {
+    const levelKey = `level${level}`;
+    if (data.unitsCompleted[levelKey]) {
+      completedUnits += Object.keys(data.unitsCompleted[levelKey]).length;
+    }
+  }
+  
+  // 计算级别完成数
+  let completedLevels = 0;
+  for (let level = 1; level <= 5; level++) {
+    const progress = data.levelsProgress[level] || 0;
+    if (progress >= 95) completedLevels++;
+  }
+  
+  // 计算总进度百分比
+  const overallProgress = totalUnits > 0 ? (completedUnits / totalUnits * 100) : 0;
+  
+  // 计算学习天数（去重）
+  const uniqueStudyDays = new Set(data.studyDays).size;
+  
+  // 计算掌握词汇（基于进度估算）
+  const wordCounts = [26, 60, 120, 200, 300];
+  let masteredWords = 0;
+  for (let level = 1; level <= 5; level++) {
+    const progress = data.levelsProgress[level] || 0;
+    const wordCount = wordCounts[level - 1] || 0;
+    masteredWords += Math.round(wordCount * (progress / 100));
+  }
+  
+  return {
+    completedUnits,
+    completedLevels,
+    overallProgress,
+    studyDays: uniqueStudyDays,
+    masteredWords
+  };
+}
+
+// ===== 更新UI =====
+function updateUI() {
+  const progress = calculateProgress();
+  
+  // 更新进度条
+  const progressFill = document.getElementById('overallProgress');
+  if (progressFill) {
+    progressFill.style.width = `${Math.min(progress.overallProgress, 100)}%`;
+  }
+  
+  // 更新统计数据
+  const completedUnitsEl = document.getElementById('completedUnits');
+  const completedLevelsEl = document.getElementById('completedLevels');
+  const studyDaysEl = document.getElementById('studyDays');
+  const masteredWordsEl = document.getElementById('masteredWords');
+  
+  if (completedUnitsEl) completedUnitsEl.textContent = progress.completedUnits;
+  if (completedLevelsEl) completedLevelsEl.textContent = progress.completedLevels;
+  if (studyDaysEl) studyDaysEl.textContent = progress.studyDays;
+  if (masteredWordsEl) masteredWordsEl.textContent = progress.masteredWords;
+  
+  // 模拟一些学习数据（首次使用）
+  const data = getPlatformData();
+  if (data.studyDays.length === 0) {
+    // 模拟一些学习记录
+    const today = new Date();
+    for (let i = 0; i < 5; i++) {
+      const date = new Date(today);
+      date.setDate(date.getDate() - i);
+      data.studyDays.push(date.toISOString().slice(0, 10));
+    }
+    
+    // 模拟一些单元完成
+    if (!data.unitsCompleted.level1) data.unitsCompleted.level1 = {};
+    for (let i = 1; i <= 15; i++) {
+      data.unitsCompleted.level1[`unit${i}`] = true;
+    }
+    
+    // 模拟级别进度
+    data.levelsProgress[1] = 45;
+    data.levelsProgress[2] = 20;
+    data.levelsProgress[3] = 10;
+    data.levelsProgress[4] = 5;
+    data.levelsProgress[5] = 0;
+    
+    // 模拟词汇掌握
+    data.masteredWords = 120;
+    
+    savePlatformData(data);
+    updateUI(); // 重新更新UI
+  }
+}
+
+// ===== 滚动动画 =====
+function setupScrollAnimations() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-in-up');
+      }
+    });
+  }, observerOptions);
+  
+  // 观察所有需要动画的元素
+  document.querySelectorAll('.fade-in-up').forEach(el => {
+    observer.observe(el);
+  });
+}
+
+// ===== 导航滚动 =====
+function setupNavigation() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('section[id]');
+  
+  // 平滑滚动
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').substring(1);
+      const targetSection = document.getElementById(targetId);
+      
+      if (targetSection) {
+        window.scrollTo({
+          top: targetSection.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+  
+  // 高亮当前部分
+  window.addEventListener('scroll', () => {
+    let current = '';
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (scrollY >= sectionTop - 100) {
+        current = section.getAttribute('id');
+      }
+    });
+    
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href').substring(1) === current) {
+        link.classList.add('active');
+      }
+    });
+  });
+}
+
+// ===== 初始化 =====
+document.addEventListener('DOMContentLoaded', () => {
+  updateUI();
+  setupScrollAnimations();
+  setupNavigation();
+  
+  // 为学习按钮添加点击事件
+  document.querySelectorAll('.level-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // 模拟开始学习的效果
+      const card = btn.closest('.level-card');
+      if (card) {
+        const level = card.querySelector('.level-num').textContent;
+        const title = card.querySelector('.level-title').textContent;
+        
+        // 显示开始学习提示
+        btn.innerHTML = '<span style="animation:spin 1s linear infinite">⏳</span> 加载中...';
+        
+        setTimeout(() => {
+          btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg> 进入学习';
+          alert(`开始学习 ${level}：${title}\n\n正在跳转到学习页面...`);
+          
+          // 实际跳转（按钮在链接内，点击链接会自然跳转）
+        }, 800);
+      }
+    });
+  });
+});
+
+// 添加旋转动画
+const style = document.createElement('style');
+style.textContent = `
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+`;
+document.head.appendChild(style);
+
+// 5秒后再次更新UI（确保数据同步）
+setTimeout(updateUI, 100);
+</script>
+</body>
+</html>

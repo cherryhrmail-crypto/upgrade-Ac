@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏆 牛津自然拼读 Level 5 · 高级拼读规则</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#FFC107;--orange:#FF9800;--yellow:#FFEB3B;
+  --green:#4CAF50;--blue:#2196F3;--purple:#9C27B0;
+  --pink:#E91E63;--teal:#009688;--lime:#CDDC39;
+  --cyan:#00BCD4;--indigo:#3F51B5;--bg:#FFF8E1;
+  --white:#fff;--dark:#1a1a2e;--shadow:0 4px 20px rgba(0,0,0,.10);
+}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:#333;min-height:100vh;}
+.topbar{background:linear-gradient(135deg,#FFC107,#FF9800);color:white;}
+.rainbow-bar{height:6px;background:linear-gradient(90deg,#FFC107,#FF9800,#FFEB3B,#4CAF50,#2196F3,#9C27B0,#E91E63);}
+.topbar-inner{display:flex;align-items:center;gap:14px;padding:12px 20px;}
+.back-btn{background:rgba(255,255,255,.22);border:none;color:white;padding:6px 18px;border-radius:20px;font-weight:900;cursor:pointer;font-size:.9rem;text-decoration:none;transition:.2s;}
+.back-btn:hover{background:rgba(255,255,255,.38);}
+.topbar-title{font-family:'Fredoka One',cursive;font-size:1.4rem;}
+.topbar-sub{font-size:.8rem;opacity:.8;margin-left:auto;}
+.hero{background:linear-gradient(135deg,#FFC107,#FF9800);color:white;text-align:center;padding:36px 20px 54px;position:relative;overflow:hidden;}
+.hero::before{content:'🏆';position:absolute;left:-18px;bottom:-18px;font-size:9rem;opacity:.1;pointer-events:none;}
+.hero::after{content:'🎯';position:absolute;right:-14px;top:-10px;font-size:9rem;opacity:.1;pointer-events:none;}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.22);border:1.5px solid rgba(255,255,255,.5);padding:5px 20px;border-radius:30px;font-size:.85rem;font-weight:900;letter-spacing:1px;margin-bottom:10px;}
+.hero-title{font-family:'Fredoka One',cursive;font-size:2.8rem;margin-bottom:4px;text-shadow:2px 2px 8px rgba(0,0,0,.15);}
+.hero-sub{font-size:1rem;opacity:.9;margin-bottom:20px;}
+.hero-stats{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;}
+.hs{background:rgba(255,255,255,.18);border-radius:16px;padding:10px 20px;min-width:86px;}
+.hs-num{font-family:'Fredoka One',cursive;font-size:1.6rem;}
+.hs-label{font-size:.72rem;opacity:.85;}
+.tab-nav{display:flex;overflow-x:auto;background:white;border-bottom:2px solid #f0f0f0;position:sticky;top:0;z-index:99;padding:0 12px;box-shadow:0 2px 16px rgba(0,0,0,.08);}
+.tab-nav::-webkit-scrollbar{height:3px;}
+.tab-nav::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px;}
+.tab-btn{padding:13px 16px;font-weight:900;font-size:.88rem;color:#bbb;border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-2px;transition:.2s;font-family:'Nunito',sans-serif;}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+.tab-btn:hover:not(.active){color:var(--gold);opacity:.7;}
+.pane{display:none;padding:24px 16px;max-width:1000px;margin:0 auto;}
+.pane.active{display:block;}
+.sec-hdr{text-align:center;margin-bottom:28px;}
+.sec-hdr h2{font-family:'Fredoka One',cursive;font-size:1.8rem;color:var(--dark);margin-bottom:5px;}
+.sec-hdr p{color:#888;font-size:.92rem;}
+.units-timeline{display:flex;flex-direction:column;gap:0;}
+.unit-group{margin-bottom:32px;}
+.group-label{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.group-line{flex:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+.group-title{font-family:'Fredoka One',cursive;font-size:1rem;color:var(--gold);white-space:nowrap;}
+.unit-card{background:white;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:14px;transition:transform .2s;}
+.unit-card:hover{transform:translateY(-3px);}
+.unit-card.review-card .uc-head{background:linear-gradient(135deg,#FFEB3B,#FF9800)!important;}
+.unit-card.review-card{border:2.5px solid #FFEB3B;}
+.unit-card.final-review .uc-head{background:linear-gradient(135deg,#9C27B0,#E91E63)!important;}
+.unit-card.final-review{border:3px solid #9C27B0;box-shadow:0 4px 30px rgba(156,39,176,.3);}
+.uc-head{padding:16px 20px;color:white;position:relative;display:flex;align-items:center;gap:14px;}
+.uc-head-emoji{font-size:2.2rem;flex-shrink:0;}
+.uc-head-info{flex:1;}
+.uc-unit-num{font-size:.75rem;font-weight:900;opacity:.85;letter-spacing:1px;}
+.uc-title{font-family:'Fredoka One',cursive;font-size:1.3rem;}
+.uc-subtitle{font-size:.82rem;opacity:.85;margin-top:2px;}
+.uc-toggle{background:rgba(255,255,255,.25);border:none;color:white;width:36px;height:36px;border-radius:50%;font-size:1.1rem;cursor:pointer;transition:.2s;flex-shrink:0;}
+.uc-toggle:hover{background:rgba(255,255,255,.4);}
+.uc-body{display:none;padding:20px;}
+.uc-body.open{display:block;}
+.phonics-box{background:linear-gradient(135deg,#fff8e1,#ffe8a1);border-radius:16px;padding:16px 20px;margin-bottom:18px;border-left:4px solid var(--gold);}
+.phonics-box h4{font-family:'Fredoka One',cursive;color:var(--gold);font-size:1rem;margin-bottom:8px;}
+.phonics-box p{font-size:.88rem;line-height:1.7;color:#444;}
+.phonics-ipa{font-size:1.1rem;color:var(--purple);font-weight:900;cursor:pointer;}
+.phonics-ipa:hover{text-decoration:underline;}
+.rule-display{text-align:center;margin-bottom:18px;}
+.big-rule{font-family:'Fredoka One',cursive;font-size:3rem;color:var(--blue);line-height:1;margin-bottom:10px;}
+.rule-examples{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;}
+.rule-example{background:white;border-radius:12px;padding:10px 15px;font-family:'Fredoka One',cursive;font-size:1.1rem;border:2px solid #eee;cursor:pointer;transition:.2s;}
+.rule-example:hover{border-color:var(--blue);transform:scale(1.05);}
+.word-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:18px;}
+.wcard{background:white;border-radius:16px;padding:14px 10px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.08);transition:.2s;cursor:pointer;border:2px solid transparent;}
+.wcard:hover{transform:translateY(-4px);box-shadow:0 6px 20px rgba(0,0,0,.13);}
+.wcard.learned{border-color:var(--green);background:#f0fff4;}
+.wcard-emoji{font-size:2.2rem;margin-bottom:6px;}
+.wcard-word{font-family:'Fredoka One',cursive;font-size:1.2rem;color:var(--dark);margin-bottom:2px;}
+.wcard-word .pattern{color:var(--orange);font-size:1.3rem;}
+.wcard-ipa{font-size:.75rem;color:#888;}
+.wcard-speak{background:var(--gold);color:white;border:none;border-radius:50%;width:28px;height:28px;font-size:.9rem;cursor:pointer;margin-top:6px;transition:.2s;}
+.wcard-speak:hover{transform:scale(1.15);background:var(--orange);}
+.sentence-box{background:linear-gradient(135deg,#f0f8ff,#fff8f0);border-radius:16px;padding:16px;margin-bottom:18px;border-left:4px solid var(--teal);}
+.sentence-box h4{font-family:'Fredoka One',cursive;color:var(--teal);font-size:.95rem;margin-bottom:10px;}
+.sentence-text{font-size:1.15rem;color:#333;line-height:1.8;font-weight:700;}
+.sentence-text .highlight{color:var(--red);background:linear-gradient(transparent 60%,#ffeb3b 60%);padding:0 2px;}
+.sentence-play{background:var(--teal);color:white;border:none;padding:8px 16px;border-radius:20px;font-size:.85rem;cursor:pointer;margin-top:10px;transition:.2s;}
+.sentence-play:hover{background:var(--green);}
+.song-box{background:linear-gradient(135deg,#fff0f8,#f0fff8);border-radius:16px;padding:16px;margin-bottom:18px;}
+.song-box h4{font-family:'Fredoka One',cursive;color:var(--pink);font-size:.95rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.song-lyrics{font-size:.9rem;line-height:1.9;color:#555;white-space:pre-line;}
+.song-lyrics .phonics{color:var(--red);font-weight:900;}
+.checkin-box{background:linear-gradient(135deg,#e8f5e9,#f1f8e9);border-radius:16px;padding:16px;margin-bottom:18px;text-align:center;}
+.checkin-box h4{font-family:'Fredoka One',cursive;color:var(--green);margin-bottom:12px;}
+.checkin-btn{background:linear-gradient(135deg,var(--green),var(--lime));color:white;border:none;padding:12px 32px;border-radius:25px;font-size:1rem;font-weight:900;cursor:pointer;transition:.2s;box-shadow:0 4px 15px rgba(76,175,80,.3);}
+.checkin-btn:hover{transform:scale(1.05);}
+.checkin-btn.done{background:#ccc;cursor:default;}
+.checkin-stats{margin-top:12px;font-size:.85rem;color:#666;}
+.review-content{background:linear-gradient(135deg,#fff8e1,#fff3e0);border-radius:16px;padding:16px;margin-bottom:18px;}
+.review-content h4{font-family:'Fredoka One',cursive;color:var(--orange);margin-bottom:12px;}
+.review-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;}
+.review-item{background:white;border-radius:12px;padding:12px;text-align:center;border:2px solid #ffc107;cursor:pointer;transition:.2s;}
+.review-item:hover{border-color:var(--orange);background:#fff8f0;transform:scale(1.05);}
+.final-review-content{background:linear-gradient(135deg,#f3e5f5,#fce4ec);border-radius:16px;padding:20px;margin-bottom:18px;}
+.final-review-content h4{font-family:'Fredoka One',cursive;color:var(--purple);margin-bottom:15px;font-size:1.1rem;}
+.level-summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:15px;margin-bottom:20px;}
+.level-card{background:white;border-radius:16px;padding:15px;box-shadow:0 2px 12px rgba(0,0,0,.08);text-align:center;}
+.level-card h5{font-family:'Fredoka One',cursive;color:var(--blue);margin-bottom:8px;font-size:.95rem;}
+.level-card p{font-size:.8rem;color:#666;line-height:1.5;}
+.progress-bar{height:8px;background:#e0e0e0;border-radius:4px;overflow:hidden;margin-top:12px;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--orange),var(--yellow),var(--green),var(--blue),var(--purple));border-radius:4px;transition:width .5s;}
+.footer{text-align:center;padding:30px 20px;background:#f5f5f5;margin-top:40px;}
+.footer-text{font-size:.85rem;color:#888;}
+.footer-stars{font-size:1.5rem;margin-bottom:8px;}
+@media(max-width:600px){
+  .hero-title{font-size:2rem;}
+  .big-rule{font-size:2rem;}
+  .hs{min-width:70px;padding:8px 14px;}
+  .hs-num{font-size:1.3rem;}
+  .word-cards{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-inner">
+    <a href="opw-platform.html" class="back-btn">← 返回主页</a>
+    <div class="topbar-title">Oxford Phonics World</div>
+    <div class="topbar-sub">Level 5 · 高级拼读规则</div>
+  </div>
+</div>
+<div class="rainbow-bar"></div>
+<div class="hero">
+  <div class="hero-badge">🎓 大师级</div>
+  <div class="hero-title">Level 5</div>
+  <div class="hero-sub">高级拼读 · 拼写变体 · 读写综合</div>
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-num">24</div><div class="hs-label">教学单元</div></div>
+    <div class="hs"><div class="hs-num">8</div><div class="hs-label">阶段复习</div></div>
+    <div class="hs"><div class="hs-num">1</div><div class="hs-label">总复习</div></div>
+    <div class="hs"><div class="hs-num">33</div><div class="hs-label">全部单元</div></div>
+  </div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" data-tab="units">📚 课程单元</button>
+  <button class="tab-btn" data-tab="progress">📊 学习进度</button>
+  <button class="tab-btn" data-tab="rules">📖 规则总览</button>
+</div>
+
+<div class="pane active" id="units">
+  <div class="sec-hdr">
+    <h2>🎯 学习路径</h2>
+    <p>按顺序完成每个单元，掌握高级拼读规则</p>
+  </div>
+  <div class="units-timeline" id="units-container"></div>
+</div>
+
+<div class="pane" id="progress">
+  <div class="sec-hdr">
+    <h2>📊 学习进度</h2>
+    <p>记录你的学习旅程</p>
+  </div>
+  <div id="progress-content"></div>
+</div>
+
+<div class="pane" id="rules">
+  <div class="sec-hdr">
+    <h2>📖 Level 5 规则总览</h2>
+    <p>高级拼读与拼写变体</p>
+  </div>
+  <div id="rules-content"></div>
+</div>
+
+<div class="footer">
+  <div class="footer-stars">⭐⭐⭐⭐⭐</div>
+  <div class="footer-text">Oxford Phonics World Level 5 · 高级拼读规则</div>
+</div>
+
+<script>
+const LESSONS = [
+  // Advanced vowel patterns (6 units)
+  { id: 1, group: '高级元音', emoji: '🎂', title: 'a-e / ai / ay', subtitle: 'Magic E / Vowel Teams', vowel: 'a', patterns: ['a_e', 'ai', 'ay'], words: [
+    { emoji: '🎂', word: 'cake', ipa: '/keɪk/' },
+    { emoji: '🌈', word: 'rain', ipa: '/reɪn/' },
+    { emoji: '🎮', word: 'play', ipa: '/pleɪ/' },
+    { emoji: '🐌', word: 'snail', ipa: '/sneɪl/' }
+  ], sentence: 'I play in the rain and eat cake while watching a snail.', song: 'Long a, /eɪ/ /eɪ/ /eɪ/!\nCake and rain, play and say!\nMagic E or AI, AY,\nAll spell /eɪ/, hip hooray!' },
+  
+  { id: 2, group: '高级元音', emoji: '🚲', title: 'e-e / ee / ea', subtitle: 'Long E patterns', vowel: 'e', patterns: ['e_e', 'ee', 'ea'], words: [
+    { emoji: '🚲', word: 'bike', ipa: '/baɪk/' },
+    { emoji: '🐝', word: 'bee', ipa: '/biː/' },
+    { emoji: '🍎', word: 'eat', ipa: '/iːt/' },
+    { emoji: '🧠', word: 'tree', ipa: '/triː/' }
+  ], sentence: 'A bee in a tree eats while I ride my bike.', song: 'Long e, /iː/ /iː/ /iː/!\nBee and tree, eat and see!\nEE or EA, Magic E,\nAll spell /iː/, happy as can be!' },
+  
+  { id: 3, group: '高级元音', emoji: '🥧', title: 'i-e / ie / igh / y', subtitle: 'Long I patterns', vowel: 'i', patterns: ['i_e', 'ie', 'igh', 'y'], words: [
+    { emoji: '🥧', word: 'pie', ipa: '/paɪ/' },
+    { emoji: '✨', word: 'night', ipa: '/naɪt/' },
+    { emoji: '🪁', word: 'fly', ipa: '/flaɪ/' },
+    { emoji: '🚗', word: 'drive', ipa: '/draɪv/' }
+  ], sentence: 'At night, I drive and fly to get pie.', song: 'Long i, /aɪ/ /aɪ/ /aɪ/!\nPie and night, fly so high!\nI_E, IE, IGH or Y,\nAll spell /aɪ/, in the sky!' },
+  
+  { id: 4, group: '高级元音', emoji: '⛵', title: 'o-e / oa / ow', subtitle: 'Long O patterns', vowel: 'o', patterns: ['o_e', 'oa', 'ow'], words: [
+    { emoji: '⛵', word: 'boat', ipa: '/bəʊt/' },
+    { emoji: '❄️', word: 'snow', ipa: '/snəʊ/' },
+    { emoji: '🏠', word: 'home', ipa: '/həʊm/' },
+    { emoji: '🧥', word: 'coat', ipa: '/kəʊt/' }
+  ], sentence: 'I go home in a boat in the snow with my coat.', song: 'Long o, /əʊ/ /əʊ/ /əʊ/!\nBoat and snow, home and coat!\nOA or OW, Magic O,\nAll spell /əʊ/, let it go!' },
+  
+  { id: 5, group: '高级元音', emoji: '🧊', title: 'u-e / ue / ew / oo', subtitle: 'Long U patterns', vowel: 'u', patterns: ['u_e', 'ue', 'ew', 'oo'], words: [
+    { emoji: '🧊', word: 'cube', ipa: '/kjuːb/' },
+    { emoji: '🟦', word: 'blue', ipa: '/bluː/' },
+    { emoji: '🆕', word: 'new', ipa: '/njuː/' },
+    { emoji: '🥄', word: 'spoon', ipa: '/spuːn/' }
+  ], sentence: 'I have a new blue cube spoon.', song: 'Long u, /juː/ /uː/ /uː/!\nCube and blue, new and true!\nUE, EW, OO, Magic U,\nAll spell long u, for me and you!' },
+  
+  { id: 6, group: '高级元音', emoji: '🧩', title: 'Spelling Variations A', subtitle: 'Multiple ways to spell /eɪ/', vowel: 'a', patterns: ['ai', 'ay', 'a_e', 'eigh'], words: [
+    { emoji: '🚂', word: 'train', ipa: '/treɪn/' },
+    { emoji: '☀️', word: 'day', ipa: '/deɪ/' },
+    { emoji: '🧤', word: 'game', ipa: '/ɡeɪm/' },
+    { emoji: '🪨', word: 'eight', ipa: '/eɪt/' }
+  ], sentence: 'Eight days on a train playing a game.', song: '/eɪ/ can be AI or AY,\nMagic E or EIGH today!\nTrain, day, game, eight,\nAll spell /eɪ/, great!' },
+  
+  { id: 7, group: '拼写变体', emoji: '✏️', title: 'Soft C & Soft G', subtitle: '/s/ and /dʒ/ sounds', patterns: ['ce', 'ci', 'cy', 'ge', 'gi', 'gy'], words: [
+    { emoji: '🏛️', word: 'city', ipa: '/ˈsɪti/' },
+    { emoji: '🚲', word: 'bicycle', ipa: '/ˈbaɪsɪkl/' },
+    { emoji: '🦒', word: 'giraffe', ipa: '/dʒɪˈrɑːf/' },
+    { emoji: '⚡', word: 'energy', ipa: '/ˈenədʒi/' }
+  ], sentence: 'A giraffe with energy rides a bicycle in the city.', song: 'Soft c says /s/ /s/ /s/,\nCity, cycle, nice and ice!\nSoft g says /dʒ/ /dʒ/ /dʒ/,\nGiraffe, gym, gentle edge!' },
+  
+  { id: 8, group: '拼写变体', emoji: '🧠', title: '-tion / -sion', subtitle: '/ʃən/ /ʒən/ endings', patterns: ['tion', 'sion'], words: [
+    { emoji: '📚', word: 'education', ipa: '/ˌedʒʊˈkeɪʃən/' },
+    { emoji: '🗣️', word: 'conversation', ipa: '/ˌkɒnvəˈseɪʃən/' },
+    { emoji: '📺', word: 'television', ipa: '/ˈtelɪvɪʒən/' },
+    { emoji: '🤔', word: 'decision', ipa: '/dɪˈsɪʒən/' }
+  ], sentence: 'A television show about education and conversation leads to a good decision.', song: '-TION, /ʃən/ /ʃən/ /ʃən/,\nEducation, conversation!\n-SION, /ʒən/ /ʒən/ /ʒən/,\nTelevision, decision!' },
+  
+  { id: 9, group: '拼写变体', emoji: '🏞️', title: '-ture / -sure', subtitle: '/tʃə/ /ʒə/ endings', patterns: ['ture', 'sure'], words: [
+    { emoji: '🏞️', word: 'picture', ipa: '/ˈpɪktʃə/' },
+    { emoji: '🌡️', word: 'temperature', ipa: '/ˈtemprətʃə/' },
+    { emoji: '📏', word: 'measure', ipa: '/ˈmeʒə/' },
+    { emoji: '⚖️', word: 'pressure', ipa: '/ˈpreʃə/' }
+  ], sentence: 'A picture shows the temperature and how to measure pressure.', song: '-TURE, /tʃə/ /tʃə/ /tʃə/,\nPicture, future, nature!\n-SURE, /ʒə/ /ʒə/ /ʒə/,\nMeasure, pleasure, treasure!' },
+  
+  { id: 10, group: '后缀', emoji: '🔍', title: '-le / -al / -el', subtitle: 'Word endings', patterns: ['le', 'al', 'el'], words: [
+    { emoji: '🧩', word: 'puzzle', ipa: '/ˈpʌzl/' },
+    { emoji: '🐶', word: 'animal', ipa: '/ˈænɪml/' },
+    { emoji: '🍯', word: 'camel', ipa: '/ˈkæml/' },
+    { emoji: '🍎', word: 'apple', ipa: '/ˈæpl/' }
+  ], sentence: 'A camel and other animals eat an apple while doing a puzzle.', song: '-LE, -AL, -EL endings,\nPuzzle, animal, camel!\nSilent letters, tricky sounds,\nIn the word, all around!' },
+  
+  { id: 11, group: '后缀', emoji: '👨‍🏫', title: '-er / -or / -ar', subtitle: 'Agent suffixes', patterns: ['er', 'or', 'ar'], words: [
+    { emoji: '👨‍🏫', word: 'teacher', ipa: '/ˈtiːtʃə/' },
+    { emoji: '🎬', word: 'actor', ipa: '/ˈæktə/' },
+    { emoji: '🚗', word: 'car', ipa: '/kɑː/' },
+    { emoji: '🏃', word: 'runner', ipa: '/ˈrʌnə/' }
+  ], sentence: 'The teacher is an actor who drives a car and is a fast runner.', song: '-ER, -OR, -AR too,\nTeacher, actor, car for you!\nPeople, things, and places all,\nWith these endings, big and small!' },
+  
+  { id: 12, group: '前缀', emoji: '🔁', title: 'un- / re- prefixes', subtitle: 'Opposite / Again', patterns: ['un', 're'], words: [
+    { emoji: '🔓', word: 'unlock', ipa: '/ʌnˈlɒk/' },
+    { emoji: '😊', word: 'happy', ipa: '/ˈhæpi/' },
+    { emoji: '🔄', word: 'redo', ipa: '/ˌriːˈduː/' },
+    { emoji: '✍️', word: 'write', ipa: '/raɪt/' }
+  ], sentence: 'Unlock the door and redo the work to be happy.', song: 'UN- means not or opposite,\nUnlock, unhappy, inexpensive!\nRE- means again or back,\nRedo, rewrite, react!' },
+  
+  { id: 13, group: '后缀', emoji: '🌟', title: '-ly / -ful / -less', subtitle: 'Adverb & Adjective endings', patterns: ['ly', 'ful', 'less'], words: [
+    { emoji: '🐰', word: 'quickly', ipa: '/ˈkwɪkli/' },
+    { emoji: '❤️', word: 'beautiful', ipa: '/ˈbjuːtɪfl/' },
+    { emoji: '🔲', word: 'endless', ipa: '/ˈendləs/' },
+    { emoji: '😊', word: 'cheerful', ipa: '/ˈtʃɪəfl/' }
+  ], sentence: 'The beautiful rabbit runs quickly in an endless and cheerful way.', song: '-LY for how we do things,\nQuickly, slowly, happily sings!\n-FUL means full of something,\nBeautiful, cheerful, wonderful!\n-LESS means without or none,\nEndless, careless, done!' },
+  
+  { id: 14, group: '复数', emoji: '🐶', title: 'Plurals -s / -es', subtitle: 'Making words plural', patterns: ['s', 'es'], words: [
+    { emoji: '🐶', word: 'dogs', ipa: '/dɒɡz/' },
+    { emoji: '🦊', word: 'foxes', ipa: '/ˈfɒksɪz/' },
+    { emoji: '🍎', word: 'apples', ipa: '/ˈæplz/' },
+    { emoji: '✏️', word: 'boxes', ipa: '/ˈbɒksɪz/' }
+  ], sentence: 'Three dogs see two foxes with four apples in five boxes.', song: 'Add S or ES to make more than one,\nDogs, cats, apples, fun!\nIf it ends in S, X, CH, SH,\nAdd ES, make it fresh!' },
+  
+  { id: 15, group: '动词时态', emoji: '⏰', title: 'Past tense -ed', subtitle: 'Regular past tense', patterns: ['ed'], words: [
+    { emoji: '🏃', word: 'walked', ipa: '/wɔːkt/' },
+    { emoji: '📞', word: 'called', ipa: '/kɔːld/' },
+    { emoji: '🧹', word: 'cleaned', ipa: '/kliːnd/' },
+    { emoji: '🎯', word: 'played', ipa: '/pleɪd/' }
+  ], sentence: 'Yesterday I walked, called, cleaned, and played.', song: '-ED for the past, /t/ /d/ /ɪd/,\nWalked, called, wanted, did!\nRegular verbs are easy,\nJust add ED, not queasy!' },
+  
+  { id: 16, group: '动词时态', emoji: '🎨', title: '-ing forms', subtitle: 'Present continuous', patterns: ['ing'], words: [
+    { emoji: '🏊', word: 'swimming', ipa: '/ˈswɪmɪŋ/' },
+    { emoji: '📚', word: 'reading', ipa: '/ˈriːdɪŋ/' },
+    { emoji: '🎮', word: 'playing', ipa: '/ˈpleɪɪŋ/' },
+    { emoji: '🧹', word: 'cleaning', ipa: '/ˈkliːnɪŋ/' }
+  ], sentence: 'I am swimming, reading, playing, and cleaning today.', song: '-ING for right now, happening,\nSwimming, reading, playing, cleaning!\nDouble consonant if vowel's short,\nSwim-swimming, win-winning!' },
+  
+  { id: 17, group: '比较级', emoji: '📏', title: '-er / -est', subtitle: 'Comparatives & Superlatives', patterns: ['er', 'est'], words: [
+    { emoji: '📏', word: 'taller', ipa: '/ˈtɔːlə/' },
+    { emoji: '📏', word: 'tallest', ipa: '/ˈtɔːlɪst/' },
+    { emoji: '🏃', word: 'faster', ipa: '/ˈfɑːstə/' },
+    { emoji: '⚡', word: 'fastest', ipa: '/ˈfɑːstɪst/' }
+  ], sentence: 'She is taller, he is tallest. This is faster, that is fastest.', song: '-ER for comparing two things,\nTaller, faster, with wings!\n-EST for three or more,\nTallest, fastest, best of four!' },
+  
+  { id: 18, group: '同音词', emoji: '🔊', title: 'Homophones 1', subtitle: 'Sound same, spell different', patterns: ['homophones'], words: [
+    { emoji: '👂', word: 'hear', ipa: '/hɪə/' },
+    { emoji: '🐻', word: 'here', ipa: '/hɪə/' },
+    { emoji: '✌️', word: 'two', ipa: '/tuː/' },
+    { emoji: '🍐', word: 'pear', ipa: '/peə/' }
+  ], sentence: 'I hear you are here with two pears.', song: 'Hear and here sound the same,\nTwo and to, what a game!\nPear and pair, which is which?\nHomophones, a tricky stitch!' },
+  
+  { id: 19, group: '同音词', emoji: '🌙', title: 'Homophones 2', subtitle: 'More sound-alike words', patterns: ['homophones'], words: [
+    { emoji: '🌙', word: 'night', ipa: '/naɪt/' },
+    { emoji: '🤴', word: 'knight', ipa: '/naɪt/' },
+    { emoji: '👑', word: 'queen', ipa: '/kwiːn/' },
+    { emoji: '🎬', word: 'scene', ipa: '/siːn/' }
+  ], sentence: 'The knight goes out at night to see the queen in the scene.', song: 'Night and knight, same sound,\nQueen and scene, all around!\nSilent K, silent C,\nHomophones, can you see?' },
+  
+  { id: 20, group: '不规则词', emoji: '📖', title: 'Irregular Words 1', subtitle: 'Common exceptions', patterns: ['irregular'], words: [
+    { emoji: '👥', word: 'people', ipa: '/ˈpiːpl/' },
+    { emoji: '🤔', word: 'thought', ipa: '/θɔːt/' },
+    { emoji: '🦶', word: 'foot', ipa: '/fʊt/' },
+    { emoji: '👣', word: 'feet', ipa: '/fiːt/' }
+  ], sentence: 'Many people thought about one foot and two feet.', song: 'People, thought, foot, feet,\nIrregular, incomplete!\nNo rules to follow here,\nJust memorize, have no fear!' },
+  
+  { id: 21, group: '不规则词', emoji: '🧒', title: 'Irregular Words 2', subtitle: 'More exceptions', patterns: ['irregular'], words: [
+    { emoji: '👦', word: 'child', ipa: '/tʃaɪld/' },
+    { emoji: '👦', word: 'children', ipa: '/ˈtʃɪldrən/' },
+    { emoji: '🐭', word: 'mouse', ipa: '/maʊs/' },
+    { emoji: '🐁', word: 'mice', ipa: '/maɪs/' }
+  ], sentence: 'One child becomes many children; one mouse becomes many mice.', song: 'Child to children, mouse to mice,\nIrregular, not very nice!\nGoose to geese, man to men,\nLearn them now, then again!' },
+  
+  { id: 22, group: '读写综合', emoji: '📝', title: 'Reading Practice 1', subtitle: 'Short paragraphs', patterns: ['reading'], words: [
+    { emoji: '📖', word: 'paragraph', ipa: '/ˈpærəɡrɑːf/' },
+    { emoji: '🤔', word: 'comprehension', ipa: '/ˌkɒmprɪˈhenʃən/' },
+    { emoji: '✍️', word: 'fluency', ipa: '/ˈfluːənsi/' },
+    { emoji: '🔤', word: 'vocabulary', ipa: '/vəˈkæbjələri/' }
+  ], sentence: 'Reading a paragraph helps with comprehension, fluency, and vocabulary.', song: 'Read, read, read every day,\nParagraphs, books, come what may!\nComprehension, fluency too,\nVocabulary, for me and you!' },
+  
+  { id: 23, group: '读写综合', emoji: '✍️', title: 'Writing Practice 1', subtitle: 'Simple sentences', patterns: ['writing'], words: [
+    { emoji: '✍️', word: 'capital', ipa: '/ˈkæpɪtl/' },
+    { emoji: '.', word: 'period', ipa: '/ˈpɪəriəd/' },
+    { emoji: '🔤', word: 'spelling', ipa: '/ˈspelɪŋ/' },
+    { emoji: '⚖️', word: 'grammar', ipa: '/ˈɡræmə/' }
+  ], sentence: 'Start with a capital and end with a period. Check your spelling and grammar.', song: 'Capital letter at the start,\nPeriod at the end, that's smart!\nSpelling and grammar, get them right,\nWriting is a skill, day and night!' },
+  
+  { id: 24, group: '读写综合', emoji: '🏆', title: 'Review & Consolidation', subtitle: 'All patterns combined', patterns: ['review'], words: [
+    { emoji: '🎉', word: 'celebration', ipa: '/ˌselɪˈbreɪʃən/' },
+    { emoji: '💡', word: 'knowledge', ipa: '/ˈnɒlɪdʒ/' },
+    { emoji: '🌟', word: 'achievement', ipa: '/əˈtʃiːvmənt/' },
+    { emoji: '🚀', word: 'progress', ipa: '/ˈprəʊɡres/' }
+  ], sentence: 'This celebration shows your knowledge, achievement, and progress in phonics!', song: 'Celebrate your knowledge today,\nAchievement in every way!\nProgress made, you are the best,\nPhonics master, pass the test!' }
+];
+
+// Build UNITS with reviews (every 3 lessons)
+const UNITS = [];
+let reviewCount = 1;
+for (let i = 0; i < LESSONS.length; i++) {
+  UNITS.push(LESSONS[i]);
+  // Add review after every 3 units (except after the last one)
+  if ((i + 1) % 3 === 0 && i < LESSONS.length - 1) {
+    UNITS.push({
+      id: `R${reviewCount}`,
+      type: 'review',
+      group: `复习 ${reviewCount}`,
+      emoji: '🔄',
+      title: `复习 Units ${i-1}-${i+1}`,
+      subtitle: 'Review Advanced Phonics',
+      reviewUnits: [i-1, i, i+1].map(n => LESSONS[n].id)
+    });
+    reviewCount++;
+  }
+}
+// Add final review
+UNITS.push({
+  id: 'FINAL',
+  type: 'final-review',
+  group: '🏆 总复习',
+  emoji: '🏆',
+  title: 'Level 1-5 综合总复习',
+  subtitle: '恭喜完成全部课程！'
+});
+
+let progress = JSON.parse(localStorage.getItem('opw-level5-progress') || '{}');
+
+// Tab switching
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    if (btn.dataset.tab === 'progress') renderProgress();
+    if (btn.dataset.tab === 'rules') renderRules();
+  });
+});
+
+function getUnitColor(unit) {
+  if (unit.type === 'final-review') return 'linear-gradient(135deg,#9C27B0,#E91E63)';
+  if (unit.type === 'review') return 'linear-gradient(135deg,#FFEB3B,#FF9800)';
+  const colors = [
+    'linear-gradient(135deg,#FFC107,#FF9800)',
+    'linear-gradient(135deg,#FF9800,#FF5722)',
+    'linear-gradient(135deg,#4CAF50,#009688)',
+    'linear-gradient(135deg,#2196F3,#3F51B5)',
+    'linear-gradient(135deg,#9C27B0,#E91E63)',
+    'linear-gradient(135deg,#E91E63,#FF5722)'
+  ];
+  return colors[(unit.id - 1) % colors.length];
+}
+
+function renderUnits() {
+  const container = document.getElementById('units-container');
+  let currentGroup = '';
+  let html = '';
+  
+  UNITS.forEach((unit, idx) => {
+    if (unit.group !== currentGroup) {
+      currentGroup = unit.group;
+      html += `<div class="unit-group">
+        <div class="group-label">
+          <span class="group-title">${currentGroup}</span>
+          <div class="group-line"></div>
+        </div>`;
+    }
+    
+    const isLearned = progress[unit.id]?.learned;
+    const cardClass = unit.type === 'review' ? 'review-card' : (unit.type === 'final-review' ? 'final-review' : '');
+    
+    html += `
+      <div class="unit-card ${cardClass}" data-id="${unit.id}">
+        <div class="uc-head" style="background:${getUnitColor(unit)}">
+          <div class="uc-head-emoji">${unit.emoji}</div>
+          <div class="uc-head-info">
+            <div class="uc-unit-num">${unit.type === 'final-review' ? '🏆 FINAL' : (unit.type === 'review' ? `复习 ${unit.id.toString().replace('R','')}` : `Unit ${unit.id}`)}</div>
+            <div class="uc-title">${unit.title}</div>
+            <div class="uc-subtitle">${unit.subtitle}</div>
+          </div>
+          <button class="uc-toggle" onclick="toggleUnit('${unit.id}')">${isLearned ? '✓' : '▼'}</button>
+        </div>
+        <div class="uc-body" id="body-${unit.id}">
+          ${renderUnitContent(unit)}
+        </div>
+      </div>`;
+    
+    if (idx === UNITS.length - 1 || UNITS[idx + 1].group !== currentGroup) {
+      html += `</div>`;
+    }
+  });
+  
+  container.innerHTML = html;
+}
+
+function renderUnitContent(unit) {
+  if (unit.type === 'review') return renderReviewContent(unit);
+  if (unit.type === 'final-review') return renderFinalReviewContent(unit);
+  
+  let html = '';
+  
+  // Phonics rule
+  html += `
+    <div class="phonics-box">
+      <h4>📖 高级拼读规则</h4>
+      <p>${unit.subtitle}</p>
+      ${unit.vowel ? `<p>长元音 <strong>${unit.vowel.toUpperCase()}</strong> 有多种拼写方式</p>` : ''}
+    </div>`;
+  
+  // Rule display
+  if (unit.patterns) {
+    html += `
+      <div class="rule-display">
+        <div class="big-rule">${unit.patterns.join(' · ')}</div>
+        <div class="rule-examples">
+          ${unit.patterns.map(p => `<span class="rule-example" onclick="speak('${p}', 'en')">${p}</span>`).join('')}
+        </div>
+      </div>`;
+  }
+  
+  // Word cards
+  html += `
+    <h4 style="font-family:'Fredoka One',cursive;color:var(--dark);margin:16px 0 12px;">📝 核心词汇</h4>
+    <div class="word-cards">
+      ${unit.words.map(w => `
+        <div class="wcard ${progress[unit.id]?.words?.includes(w.word) ? 'learned' : ''}" onclick="toggleWord('${unit.id}', '${w.word}')">
+          <div class="wcard-emoji">${w.emoji}</div>
+          <div class="wcard-word">${highlightPattern(w.word, unit.patterns)}</div>
+          <div class="wcard-ipa">${w.ipa}</div>
+          <button class="wcard-speak" onclick="event.stopPropagation();speak('${w.word}', 'en')">🔊</button>
+        </div>
+      `).join('')}
+    </div>`;
+  
+  // Sentence
+  html += `
+    <div class="sentence-box">
+      <h4>💬 核心句子</h4>
+      <div class="sentence-text">${highlightSentence(unit.sentence, unit.words)}</div>
+      <button class="sentence-play" onclick="speak('${unit.sentence.replace(/'/g, "\\'")}', 'en')">🔊 朗读句子</button>
+    </div>`;
+  
+  // Song
+  html += `
+    <div class="song-box">
+      <h4>🎵 歌谣</h4>
+      <div class="song-lyrics">${unit.song}</div>
+      <button class="sentence-play" onclick="speak(\`${unit.song.replace(/'/g, "\\'")}\`, 'en')">🎵 朗读歌谣</button>
+    </div>`;
+  
+  // Check-in
+  html += `
+    <div class="checkin-box">
+      <h4>✅ 打卡完成</h4>
+      <button class="checkin-btn ${progress[unit.id]?.learned ? 'done' : ''}" onclick="checkin('${unit.id}')">
+        ${progress[unit.id]?.learned ? '✓ 已完成' : '完成学习'}
+      </button>
+      <div class="checkin-stats">${getCheckinStats(unit.id)}</div>
+    </div>`;
+  
+  return html;
+}
+
+function highlightPattern(word, patterns) {
+  if (!patterns) return word;
+  let result = word;
+  patterns.forEach(p => {
+    if (p.length > 1 && word.includes(p)) {
+      const regex = new RegExp(p, 'gi');
+      result = result.replace(regex, `<span class="pattern">${p}</span>`);
+    }
+  });
+  return result;
+}
+
+function highlightSentence(sentence, words) {
+  let result = sentence;
+  words.forEach(w => {
+    const regex = new RegExp(`\\b${w.word}\\b`, 'gi');
+    result = result.replace(regex, `<span class="highlight">${w.word}</span>`);
+  });
+  return result;
+}
+
+function renderReviewContent(unit) {
+  const reviewLessons = unit.reviewUnits.map(id => LESSONS.find(l => l.id === id)).filter(Boolean);
+  const allWords = reviewLessons.flatMap(l => l.words.slice(0, 2));
+  
+  return `
+    <div class="review-content">
+      <h4>🔄 复习高级拼读规则</h4>
+      <p style="margin-bottom:15px;color:#666;">巩固 ${reviewLessons.map(l => l.title).join(' / ')}</p>
+      <div class="review-grid">
+        ${allWords.map(w => `
+          <div class="review-item" onclick="speak('${w.word}', 'en')">
+            <div style="font-size:1.5rem">${w.emoji}</div>
+            <div style="font-family:'Fredoka One',cursive;margin-top:4px">${w.word}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="checkin-box" style="margin-top:20px;background:transparent;border:none;">
+        <button class="checkin-btn ${progress[unit.id]?.learned ? 'done' : ''}" onclick="checkin('${unit.id}')">
+          ${progress[unit.id]?.learned ? '✓ 已完成' : '完成复习'}
+        </button>
+      </div>
+    </div>`;
+}
+
+function renderFinalReviewContent(unit) {
+  return `
+    <div class="final-review-content">
+      <h4>🏆 恭喜完成 Oxford Phonics World 全部课程！</h4>
+      <p style="margin-bottom:20px;color:#666;">你已经掌握了自然拼读的完整体系！</p>
+      
+      <div class="level-summary">
+        <div class="level-card">
+          <h5>📚 Level 1</h5>
+          <p>26个字母及发音</p>
+          <p style="color:var(--green);font-size:1.2rem;">🌱 启蒙</p>
+        </div>
+        <div class="level-card">
+          <h5>📚 Level 2</h5>
+          <p>短元音词族</p>
+          <p style="color:var(--blue);font-size:1.2rem;">📖 基础</p>
+        </div>
+        <div class="level-card">
+          <h5>📚 Level 3</h5>
+          <p>长元音与组合</p>
+          <p style="color:var(--purple);font-size:1.2rem;">🌟 进阶</p>
+        </div>
+        <div class="level-card">
+          <h5>📚 Level 4</h5>
+          <p>辅音组合与双元音</p>
+          <p style="color:var(--red);font-size:1.2rem;">🔥 强化</p>
+        </div>
+        <div class="level-card">
+          <h5>📚 Level 5</h5>
+          <p>高级拼读与拼写</p>
+          <p style="color:var(--gold);font-size:1.2rem;">🏆 大师</p>
+        </div>
+      </div>
+      
+      <div style="text-align:center;padding:20px;">
+        <div style="font-size:4rem;margin-bottom:15px">🎉🏆🎉</div>
+        <p style="font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--purple);">You are a Phonics Master!</p>
+        <p style="color:#666;margin-top:8px;">Now you can read and spell thousands of English words!</p>
+      </div>
+      
+      <div style="background:white;border-radius:16px;padding:20px;margin-top:20px;">
+        <h5 style="font-family:'Fredoka One',cursive;color:var(--blue);margin-bottom:15px;">📊 学习成果总结</h5>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">
+          <div style="background:#f0f8ff;border-radius:12px;padding:12px;text-align:center;flex:1;min-width:100px;">
+            <div style="font-size:1.8rem">🔤</div>
+            <div style="font-family:'Fredoka One',cursive;font-size:1.5rem;margin:5px 0;">26</div>
+            <div style="font-size:.8rem;color:#888;">字母</div>
+          </div>
+          <div style="background:#f0fff8;border-radius:12px;padding:12px;text-align:center;flex:1;min-width:100px;">
+            <div style="font-size:1.8rem">📝</div>
+            <div style="font-family:'Fredoka One',cursive;font-size:1.5rem;margin:5px 0;">200+</div>
+            <div style="font-size:.8rem;color:#888;">单词</div>
+          </div>
+          <div style="background:#fff8f0;border-radius:12px;padding:12px;text-align:center;flex:1;min-width:100px;">
+            <div style="font-size:1.8rem">📖</div>
+            <div style="font-family:'Fredoka One',cursive;font-size:1.5rem;margin:5px 0;">44</div>
+            <div style="font-size:.8rem;color:#888;">发音规则</div>
+          </div>
+          <div style="background:#f8f0ff;border-radius:12px;padding:12px;text-align:center;flex:1;min-width:100px;">
+            <div style="font-size:1.8rem">🏆</div>
+            <div style="font-family:'Fredoka One',cursive;font-size:1.5rem;margin:5px 0;">165</div>
+            <div style="font-size:.8rem;color:#888;">学习单元</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="checkin-box" style="margin-top:20px;background:transparent;border:none;">
+        <button class="checkin-btn ${progress[unit.id]?.learned ? 'done' : ''}" onclick="checkin('${unit.id}')" style="background:linear-gradient(135deg,#9C27B0,#E91E63);font-size:1.1rem;">
+          ${progress[unit.id]?.learned ? '🎓 课程已完成' : '🎓 完成全部课程'}
+        </button>
+      </div>
+    </div>`;
+}
+
+function toggleUnit(id) {
+  const body = document.getElementById(`body-${id}`);
+  body.classList.toggle('open');
+}
+
+function toggleWord(unitId, word) {
+  if (!progress[unitId]) progress[unitId] = { words: [] };
+  if (!progress[unitId].words) progress[unitId].words = [];
+  const idx = progress[unitId].words.indexOf(word);
+  if (idx === -1) progress[unitId].words.push(word);
+  else progress[unitId].words.splice(idx, 1);
+  saveProgress();
+  renderUnits();
+}
+
+function checkin(id) {
+  if (!progress[id]) progress[id] = {};
+  progress[id].learned = true;
+  progress[id].timestamp = Date.now();
+  saveProgress();
+  renderUnits();
+}
+
+function getCheckinStats(unitId) {
+  const p = progress[unitId];
+  if (!p || !p.learned) return '';
+  return `完成于 ${new Date(p.timestamp).toLocaleDateString('zh-CN')}`;
+}
+
+function saveProgress() {
+  localStorage.setItem('opw-level5-progress', JSON.stringify(progress));
+}
+
+function renderProgress() {
+  const total = UNITS.length;
+  const learned = Object.values(progress).filter(p => p.learned).length;
+  const percent = Math.round(learned / total * 100);
+  let totalWords = 0, learnedWords = 0;
+  UNITS.forEach(u => {
+    if (u.words) {
+      totalWords += u.words.length;
+      if (progress[u.id]?.words) learnedWords += progress[u.id].words.length;
+    }
+  });
+  
+  document.getElementById('progress-content').innerHTML = `
+    <div style="text-align:center;padding:30px;background:white;border-radius:20px;box-shadow:var(--shadow);margin-bottom:20px;">
+      <div style="font-family:'Fredoka One',cursive;font-size:2.5rem;color:var(--gold);">${learned}/${total}</div>
+      <div style="color:#888;margin:8px 0;">单元完成</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${percent}%"></div></div>
+      <div style="margin-top:10px;font-size:.9rem;color:#666;">完成度 ${percent}%</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;">
+      <div style="background:white;border-radius:16px;padding:20px;text-align:center;box-shadow:var(--shadow);">
+        <div style="font-size:2rem">📚</div>
+        <div style="font-family:'Fredoka One',cursive;font-size:1.8rem;color:var(--blue);margin:8px 0;">${learned}</div>
+        <div style="color:#888;font-size:.85rem;">单元完成</div>
+      </div>
+      <div style="background:white;border-radius:16px;padding:20px;text-align:center;box-shadow:var(--shadow);">
+        <div style="font-size:2rem">📝</div>
+        <div style="font-family:'Fredoka One',cursive;font-size:1.8rem;color:var(--green);margin:8px 0;">${learnedWords}/${totalWords}</div>
+        <div style="color:#888;font-size:.85rem;">词汇学习</div>
+      </div>
+      <div style="background:white;border-radius:16px;padding:20px;text-align:center;box-shadow:var(--shadow);">
+        <div style="font-size:2rem">🎓</div>
+        <div style="font-family:'Fredoka One',cursive;font-size:1.8rem;color:var(--gold);margin:8px 0;">Level 5</div>
+        <div style="color:#888;font-size:.85rem;">当前级别</div>
+      </div>
+    </div>
+    ${percent === 100 ? '<div style="text-align:center;padding:30px;background:linear-gradient(135deg,#9C27B0,#E91E63);border-radius:20px;margin-top:20px;color:white;"><div style="font-size:3rem;margin-bottom:10px;">🎉🏆🎉</div><div style="font-family:\'Fredoka One\',cursive;font-size:1.5rem;">Phonics Master!</div></div>' : ''}
+  `;
+}
+
+function renderRules() {
+  document.getElementById('rules-content').innerHTML = `
+    <div style="background:white;border-radius:20px;padding:25px;box-shadow:var(--shadow);">
+      <h3 style="font-family:'Fredoka One',cursive;color:var(--gold);margin-bottom:20px;">📖 Level 5 规则总览</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:15px;">
+        <div style="background:#fff8e1;border-radius:16px;padding:15px;">
+          <h4 style="font-family:'Fredoka One',cursive;color:var(--orange);margin-bottom:8px;">🔤 高级元音</h4>
+          <ul style="font-size:.85rem;color:#666;padding-left:18px;">
+            <li>a_e, ai, ay → /eɪ/</li>
+            <li>e_e, ee, ea → /iː/</li>
+            <li>i_e, ie, igh, y → /aɪ/</li>
+            <li>o_e, oa, ow → /əʊ/</li>
+            <li>u_e, ue, ew, oo → /juː/ /uː/</li>
+          </ul>
+        </div>
+        <div style="background:#f0fff8;border-radius:16px;padding:15px;">
+          <h4 style="font-family:'Fredoka One',cursive;color:var(--green);margin-bottom:8px;">🔤 拼写变体</h4>
+          <ul style="font-size:.85rem;color:#666;padding-left:18px;">
+            <li>Soft C: ce, ci, cy → /s/</li>
+            <li>Soft G: ge, gi, gy → /dʒ/</li>
+            <li>-tion, -sion → /ʃən/ /ʒən/</li>
+            <li>-ture, -sure → /tʃə/ /ʒə/</li>
+          </ul>
+        </div>
+        <div style="background:#f0f8ff;border-radius:16px;padding:15px;">
+          <h4 style="font-family:'Fredoka One',cursive;color:var(--blue);margin-bottom:8px;">🔤 前后缀</h4>
+          <ul style="font-size:.85rem;color:#666;padding-left:18px;">
+            <li>un-: opposite (unlock)</li>
+            <li>re-: again (redo)</li>
+            <li>-ly: adverb (quickly)</li>
+            <li>-ful: full of (beautiful)</li>
+            <li>-less: without (endless)</li>
+          </ul>
+        </div>
+        <div style="background:#f8f0ff;border-radius:16px;padding:15px;">
+          <h4 style="font-family:'Fredoka One',cursive;color:var(--purple);margin-bottom:8px;">🔤 语法规则</h4>
+          <ul style="font-size:.85rem;color:#666;padding-left:18px;">
+            <li>Plurals: -s, -es</li>
+            <li>Past tense: -ed</li>
+            <li>Present: -ing</li>
+            <li>Comparatives: -er, -est</li>
+            <li>Homophones</li>
+            <li>Irregular words</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function speak(text, lang) {
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = lang === 'en' ? 'en-US' : 'zh-CN';
+  utterance.rate = 0.85;
+  speechSynthesis.speak(utterance);
+}
+
+// Initialize
+renderUnits();
+</script>
+</body>
+</html>
